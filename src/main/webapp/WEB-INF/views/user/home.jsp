@@ -4,7 +4,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <!-- home 스타일 설정을 위한 css -->
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/home.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/home.css">
 
 <%-- home.jsp의 중앙내용 --%>
 <div>
