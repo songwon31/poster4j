@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+#main-poster{
+	height: 100vh !important;
+}
+
 #frame{
 	position: absolute;
     top: 50%;
@@ -9,6 +13,14 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    background-image: url("//postershop.kr/web/product/medium/202106/ca652c60857299dcbeb554c77a0f07c3.png");
+    /* background-image: url("//postershop.kr/web/product/medium/202106/ca652c60857299dcbeb554c77a0f07c3.png"); */
     box-shadow: rgba(0, 0, 0, 0.3) 11px 35px 21px 0px;
+}
+
+#wrap{
+	position: relative;
+    top: 50%;
+    display: block;
+    max-width: 1080px;
+    margin: 0 auto;
 }
