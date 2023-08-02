@@ -11,13 +11,13 @@
 	<div>
 	
 		<!-- 메인 포스터 -->
-		<div id="main-poster" class="container-fluid" style="background-color: #F4F4F4; height: 1084px;" >
+		<div id="main-poster" class="container-fluid" style="background-color: #F4F4F4; min-height: 1084px;" >
 			<div id="frame" style="background-image: url('//postershop.kr/web/product/medium/202106/ca652c60857299dcbeb554c77a0f07c3.png');">
 				<img alt="프레임" src="${pageContext.request.contextPath}/resources/images/frame.png" width="450px" height="630px";>
 			</div>
 		</div>
 		<!-- 감성 글귀-->
-		<div style="height: 1084px">
+		<div style="min-height: 1084px">
 			<div id="wrap" >
 				<span class="mb-3" style="display: block; font-size: 72px; font-weight: 600; line-height: 1.1">poster</span>
 				<span class="mb-3" style="display: block; font-size: 72px">the most beautiful tool</span>
@@ -32,44 +32,82 @@
 				<span style="display: block; font-weight: 500">in my room</span>
 			</h2>
 		</div>
-	<%-- 	<div style="display: flex; flex-direction:column; flex-wrap: wrap; width:1080px; height: 2000px; margin: 0 auto" >
-			<div style="width: 351.1px; margin: 0 auto">
-				<div>
-					<img alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg" width="351.1px">
+		<!-- 포스터 목록 -->
+		<div id="poster-list" style="display: flex; flex-direction:column; flex-wrap: wrap; max-width:1080px; margin: 0 auto" >
+			<div class="poster-item">
+				<div style="width: 330px;">
+					<img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg">
 				</div>
-				<div> 포스터 이름 </div>
+				<div class="mt-3"> 포스터 이름 </div>
 			</div>
-		</div> --%>
-		<ul class="" style="display: flex; flex-direction:column; flex-wrap: wrap; width:1080px; height: 2000px; margin: 0 auto">
-			<li class="" style= "width: 351.1px">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg" width="330px">
-				<div> 포스터 이름 </div>
-			</li>
-			<li class="" style= "width: 351.1px">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg" width="330px">
-				<div> 포스터 이름 </div>
-			</li>
-			<li class="" style= "width: 351.1px">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg" width="330px">
-				<div> 포스터 이름 </div>
-			</li>
-			<li class="" style= "width: 351.1px">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg" width="330px">
-				<div> 포스터 이름 </div>
-			</li>
-			<li class="" style= "width: 351.1px">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg" width="330px">
-				<div> 포스터 이름 </div>
-			</li>
-			<li class="" style= "width: 351.1px">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg" width="330px">
-				<div> 포스터 이름 </div>
-			</li>
-			<li class="" style= "width: 351.1px">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg" width="330px">
-				<div> 포스터 이름 </div>
-			</li>
-		</ul>
+			<div class="poster-item">
+				<div style="width: 330px;">
+					<img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster2.jpg">
+				</div>
+				<div class="mt-3"> 포스터 이름 </div>
+			</div>
+			<div class="poster-item">
+				<div style="width: 330px;">
+					<img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg">
+				</div>
+				<div class="mt-3"> 포스터 이름 </div>
+			</div>
+			<div class="poster-item">
+				<div style="width: 330px;">
+					<img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg">
+				</div>
+				<div class="mt-3"> 포스터 이름 </div>
+			</div>
+			<div class="poster-item">
+				<div style="width: 330px;">
+					<img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster2.jpg">
+				</div>
+				<div class="mt-3"> 포스터 이름 </div>
+			</div>
+			<div class="poster-item">
+				<div style="width: 330px;">
+					<img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster2.jpg">
+				</div>
+				<div class="mt-3"> 포스터 이름 </div>
+			</div>
+			<div class="poster-item">
+				<div style="width: 330px;">
+					<img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg">
+				</div>
+				<div class="mt-3"> 포스터 이름 </div>
+			</div>
+			<div class="poster-item">
+				<div style="width: 330px;">
+					<img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg">
+				</div>
+				<div class="mt-3"> 포스터 이름 </div>
+			</div>
+			<div class="poster-item">
+				<div style="width: 330px;">
+					<img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg">
+				</div>
+				<div class="mt-3"> 포스터 이름 </div>
+			</div>
+			<div class="poster-item">
+				<div style="width: 330px;">
+					<img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster2.jpg">
+				</div>
+				<div class="mt-3"> 포스터 이름 </div>
+			</div>
+			<div class="poster-item">
+				<div style="width: 330px;">
+					<img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg">
+				</div>
+				<div class="mt-3"> 포스터 이름 </div>
+			</div>
+			<div class="poster-item">
+				<div style="width: 330px;">
+					<img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg">
+				</div>
+				<div class="mt-3"> 포스터 이름 </div>
+			</div>
+			
+		</div>
 	</div>
 </div>
 

@@ -38,3 +38,36 @@ li{
 	z-index: 10px;
 }
 
+#poster-list{
+		height: 2000px;
+	}
+@media (max-width:1080px){
+	#poster-list{
+		height: 3000px;
+	}
+}
+@media (max-width:1080px){
+	.poster-image{
+		width: 350px;
+	}
+}
+
+@media (max-width:800px){
+	#poster-list{
+		height: auto;
+	}
+}
+@media (max-width:800px){
+	.poster-image{
+		width: auto;
+	}
+}
+.poster-item{
+	margin: 0 auto 30px;
+}
+
+.poster-image{
+	max-width: 100%;
+	height: auto;
+}
+
