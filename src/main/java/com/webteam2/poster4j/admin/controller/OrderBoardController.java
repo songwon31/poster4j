@@ -10,7 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/admin")
 public class OrderBoardController {
 	@RequestMapping("/orderBoard")
-	public String home() {
+	public String orderBoard() {
+		
 		return "admin/orderBoard";
 	}
 }
