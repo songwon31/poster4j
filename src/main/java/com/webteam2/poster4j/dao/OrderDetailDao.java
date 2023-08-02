@@ -9,6 +9,6 @@ import com.webteam2.poster4j.dto.Pager;
 
 @Mapper
 public interface OrderDetailDao {
-	public int insert(OrderDetail orderDetail);
 	public List<OrderDetail> selectByPage(Pager pager);
+	public int count();
 }

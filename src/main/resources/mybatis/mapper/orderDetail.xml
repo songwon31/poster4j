@@ -3,17 +3,22 @@
 <mapper namespace="com.webteam2.poster4j.dao.OrderDetailDao">
 	<select id="selectByPage" parameterType="Pager" resultType="OrderDetail">
 		<![CDATA[
-		select order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		select rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
 		from (
 		    select rownum as rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
 		    from (
 		        select order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
-		        from board
-		        order by bno desc
+		        from order_detail
+		        order by order_id desc
 		    )
 		    where rownum <= #{endRowNo}
 		)
 		where rnum >= #{startRowNo}
 		]]>
 	</select> 
+	
+	<select id="count" resultType="int">
+		select count(*) from order_detail
+	</select>
+	
 </mapper>

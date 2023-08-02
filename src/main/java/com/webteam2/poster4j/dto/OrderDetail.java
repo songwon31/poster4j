@@ -9,9 +9,9 @@ import lombok.Data;
 @Data
 public class OrderDetail {
 	private int orderId;
-	private String productId;
+	private int productId;
 	private int orderDetailQuantity;
 	private String orderDetailStatus;
-	@DateTimeFormat(pattern="yyyy-MM-dd HH-mm")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date OrderDlCmptnDate;
 }

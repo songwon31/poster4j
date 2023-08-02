@@ -17,18 +17,19 @@
 					<th scope="col">주문 날짜</th>
 					<th scope="col">상태</th>
 				</tr>
-				<%-- 
-				<c:forEach var="order_detail" items="order_details" varStatus="status">
+				
+				<c:forEach var="orderDetail" items="${orderDetails}" varStatus="status">
 					<tr>
-						<td scope="row">${order_detail.order_id}</td>
-						<td>${order_detail.product_id}</a></td>
-						<td>${order_detail.order_detail_quantity}</td>
-						<td>${order_costs[status.index]}</td>
-						<td><fmt:formatDate value="${order_dates[status.index]}" pattern="yyyy-MM-dd"/></td>
-						<td>${order_detail.order_detail_status}</td>
+						<td scope="row">${orderDetail.orderId}</td>
+						<td>${orderDetail.productId}</td>
+						<td>${orderDetail.orderDetailQuantity}</td>
+						<td>1</td>
+						<td>1</td>
+						<%-- <td><fmt:formatDate value="${order_dates[status.index]}" pattern="yyyy-MM-dd"/></td> --%>
+						<td>${orderDetail.orderDetailStatus}</td>
 					</tr>
 				</c:forEach>
-				 --%>
+				
 			</thead>
 		</table>
 	</div>
