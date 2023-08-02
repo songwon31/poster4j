@@ -1,1 +1,19 @@
-@charset "UTF-8";
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.loginContent {
+	margin: 400px 0px;
+	font-size: 13px;
+}
+
+.btnGroup {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.joinBtn {
+	border: 1px solid black;
+}

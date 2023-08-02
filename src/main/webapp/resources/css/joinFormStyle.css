@@ -1,1 +1,46 @@
-@charset "UTF-8";
+* {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+.joinContent {
+	margin: 200px 0px;
+	font-size: 13px;
+}
+
+.joinBtn {
+	text-align: center;
+}
+
+.joinInputTable {
+	margin-bottom: 80px;
+}
+
+.joinInputGroup input::placeholder {
+	font-size: 13px;
+}
+
+.agreement {
+	margin-bottom: 30px;
+}
+
+.agreementContent {
+	width: 431.76px;
+	height: 200px;
+	overflow: auto;
+	overscroll-behavior: contain;
+	border-top: solid black 1px;
+	border-bottom: solid black 1px;
+}
+
+.agreementTitle {
+	text-align: center;
+}
+
+.agreeLayout {
+	display: flex;
+	justify-content: space-between;
+}
