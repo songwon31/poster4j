@@ -5,8 +5,8 @@
 
 <%-- index.jsp의 중앙내용 --%>
 <div>
-	<div style = "font-family: neue-haas-grotesk-display,'Noto Sans KR',sans-serif;">
-		home, 안녕하세요. 
+	<div>
+		안녕하세요.
 	</div>
 </div>
 
