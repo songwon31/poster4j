@@ -1,6 +1,7 @@
 package com.webteam2.poster4j.admin.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webteam2.poster4j.admin.service.OrderDetailService;
+import com.webteam2.poster4j.admin.service.OrderTService;
 import com.webteam2.poster4j.admin.service.ProductService;
 import com.webteam2.poster4j.dto.OrderDetail;
 import com.webteam2.poster4j.dto.Pager;
@@ -25,6 +27,8 @@ public class OrderBoardController {
 	OrderDetailService orderDetailService;
 	@Resource
 	ProductService productService;
+	@Resource
+	OrderTService orderTService;
 	
 	@RequestMapping("/orderBoard")
 	public String orderBoard(String pageNo, Model model, HttpSession session) {
@@ -56,6 +60,12 @@ public class OrderBoardController {
 			orderDetailPriceList.add(productService.getPriceById(orderDetail.getProductId()) * orderDetail.getOrderDetailQuantity());
 		}
 		model.addAttribute("orderDetailPriceList", orderDetailPriceList);
+		
+		List<Date> orderDateList = new ArrayList<>();
+		for (OrderDetail orderDetail : orderDetailList) {
+			orderDateList.add(orderTService.getOrderTById(orderDetail.getOrderId()).getOrderDate());
+		}
+		model.addAttribute("orderDateList", orderDateList);
 		
 		return "admin/orderBoard";
 	}

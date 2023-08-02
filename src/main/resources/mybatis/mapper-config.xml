@@ -9,6 +9,7 @@
 	<typeAliases>
 		<typeAlias alias="OrderDetail" type="com.webteam2.poster4j.dto.OrderDetail" />
 		<typeAlias alias="Product" type="com.webteam2.poster4j.dto.Product" />
+		<typeAlias alias="OrderT" type="com.webteam2.poster4j.dto.OrderT" />
 		<typeAlias alias="Pager" type="com.webteam2.poster4j.dto.Pager" />
 	</typeAliases>
 </configuration>

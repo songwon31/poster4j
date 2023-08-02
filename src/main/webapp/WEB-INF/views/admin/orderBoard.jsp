@@ -24,8 +24,7 @@
 						<td>${orderDetail.productId}</td>
 						<td>${orderDetail.orderDetailQuantity}</td>
 						<td>${orderDetailPriceList[status.index].intValue()}</td>
-						<td>1</td>
-						<%-- <td><fmt:formatDate value="${orderDateList[status.index]}" pattern="yyyy-MM-dd"/></td> --%>
+						<td><fmt:formatDate value="${orderDateList[status.index]}" pattern="yyyy-MM-dd"/></td>
 						<td>${orderDetail.orderDetailStatus}</td>
 					</tr>
 				</c:forEach>
