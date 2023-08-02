@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+li{
+	list-style: none;
+	margin-top: 30px;
+}
+
 #main-poster{
 	height: 100vh !important;
 }
@@ -24,3 +29,12 @@
     max-width: 1080px;
     margin: 0 auto;
 }
+#slogan{
+	position: sticky;
+	top: 0;
+    left: 0;
+    width: 100%;
+	background-image: linear-gradient(to bottom,#fff 45%,rgba(255,255,255,0.001) 90%);
+	z-index: 10px;
+}
+

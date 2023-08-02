@@ -17,15 +17,14 @@
 		
 		<!-- 공통 스타일 설정을 위한 css -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
-		<!-- home 스타일 설정을 위한 css -->
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/home.css">
+		
 	</head>
 	<body>
-
-		<div class="d-flex flex-column vh-100">
-			<nav class="navbar navbar-dark bg-dark text-white font-weight-bold">
-				<a class="navbar-brand" href="${pageContext.request.contextPath}"> 
-					poster4j
+		<div class="d-flex flex-column vh-100" >
+			<nav class="navbar" style="position: fixed; z-index: 99; left: 0; top: 0; width: 100%;">
+				<a class="" href="${pageContext.request.contextPath}"> 
+					<img alt="" src="${pageContext.request.contextPath}/resources/images/poster4j.png" width="20px">
+					<span style="font-size: 20px; font-weight: 600; color: #212529">poster4j <span>&copy;</span></span>
 				</a>
 				<div>
 					<%-- Ch08
