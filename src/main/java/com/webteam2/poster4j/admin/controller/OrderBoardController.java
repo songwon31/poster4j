@@ -39,20 +39,17 @@ public class OrderBoardController {
 		int intPageNo = Integer.parseInt(pageNo);
 		//세션에 pageNo를 저장
 		session.setAttribute("pageNo", String.valueOf(pageNo));
-		log.info("pageNo: " + pageNo);
 		
 			
 		int totalOrderDetailNum = orderDetailService.getTotalOrderDetailNum();
-		log.info("Number of orderDetail: " + totalOrderDetailNum);
 		Pager pager = new Pager(10, 5, totalOrderDetailNum, intPageNo);
 		
-		log.info("startRowNo: " + pager.getStartRowNo());
-		log.info("endRowNo: " + pager.getEndRowNo());
-
 		model.addAttribute("pager", pager);
-		List<OrderDetail> list = orderDetailService.getList(pager);
-		log.info("list: " + list);
-		model.addAttribute("orderDetails", list);
+		List<OrderDetail> orderDetailList = orderDetailService.getList(pager);
+		model.addAttribute("orderDetails", orderDetailList);
+		
+		
+		
 		
 		return "admin/orderBoard";
 	}

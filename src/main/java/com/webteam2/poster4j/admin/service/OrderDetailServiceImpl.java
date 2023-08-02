@@ -21,7 +21,6 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	@Override
 	public List<OrderDetail> getList(Pager pager) {
 		List<OrderDetail> orderDetailList = orderDetailDao.selectByPage(pager);
-		log.info("list0: " + orderDetailList);
 		return orderDetailList;
 	}
 	
