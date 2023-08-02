@@ -9,12 +9,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webteam2.poster4j.admin.service.OrderDetailService;
 import com.webteam2.poster4j.admin.service.OrderTService;
 import com.webteam2.poster4j.admin.service.ProductService;
 import com.webteam2.poster4j.dto.OrderDetail;
+import com.webteam2.poster4j.dto.OrderDetailSearch;
 import com.webteam2.poster4j.dto.Pager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -68,5 +70,12 @@ public class OrderBoardController {
 		model.addAttribute("orderDateList", orderDateList);
 		
 		return "admin/orderBoard";
+	}
+	
+	@GetMapping("/search")
+	public String search(OrderDetailSearch orderDetailSearch) {
+		log.info("category: " + orderDetailSearch.getCategory());
+		log.info("content: " + orderDetailSearch.getContent());
+		return null;
 	}
 }

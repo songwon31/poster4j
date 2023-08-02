@@ -4,9 +4,28 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-<div class="container-fluid flex-grow-1">
+<div class="container-fluid flex-grow-1" style="margin-top:80px;">
 	<div class="row">
-		<div class="py-2 px-4" style="font-size:20;">주문 목록</div>
+		<div class="py-2 px-4">
+			<div style="font-size: 20px">주문 목록</div>
+			<div class="mt-1">
+				<form class="form-inline justify-content-end" method="get" action="search">
+					<div class="form-group">
+						<label for="category"></label> 
+						<select class="form-control-sm" id="category" name="category">
+							<option value="orderId" selected>주문 번호</option>
+							<option value="productId">상품 번호</option>
+						</select>
+					</div>
+					<div class="form-group px-2">
+						<label for="content"></label>
+						<input type="text" class="form-control-sm" id="content" name="content"/>
+					</div>
+					<button type="submit" class="btn btn-success btn-sm">검색</button>
+				</form>
+			</div>
+		</div>
+		
 		<table class="table">
 			<thead>
 				<tr>
