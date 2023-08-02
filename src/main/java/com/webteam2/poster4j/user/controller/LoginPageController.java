@@ -8,9 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class LoginPageController {
-	@RequestMapping("/")
-	public String home() {
+	@RequestMapping("/login")
+	public String login() {
 		log.info("실행777");
-		return "user/home";
+		return "user/loginForm";
 	}
 }

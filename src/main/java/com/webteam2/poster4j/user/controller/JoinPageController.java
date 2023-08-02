@@ -8,9 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class JoinPageController {
-	@RequestMapping("/")
-	public String home() {
+	@RequestMapping("/join")
+	public String join() {
 		log.info("실행777");
-		return "user/home";
+		return "user/joinForm";
 	}
 }

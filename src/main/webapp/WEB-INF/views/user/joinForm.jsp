@@ -1,3 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
-<div>Home3</div>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+
+<div class="card m-2">
+   <div class="card-header">
+      joinForm
+   </div>
+   <div class="card-body">
+   </div>
+</div>
+
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>
