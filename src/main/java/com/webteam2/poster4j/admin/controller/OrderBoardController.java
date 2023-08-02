@@ -1,5 +1,6 @@
 package com.webteam2.poster4j.admin.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webteam2.poster4j.admin.service.OrderDetailService;
+import com.webteam2.poster4j.admin.service.ProductService;
 import com.webteam2.poster4j.dto.OrderDetail;
 import com.webteam2.poster4j.dto.Pager;
 
@@ -19,9 +21,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/admin")
 public class OrderBoardController {
-	
 	@Resource
 	OrderDetailService orderDetailService;
+	@Resource
+	ProductService productService;
 	
 	@RequestMapping("/orderBoard")
 	public String orderBoard(String pageNo, Model model, HttpSession session) {
@@ -43,13 +46,16 @@ public class OrderBoardController {
 			
 		int totalOrderDetailNum = orderDetailService.getTotalOrderDetailNum();
 		Pager pager = new Pager(10, 5, totalOrderDetailNum, intPageNo);
-		
 		model.addAttribute("pager", pager);
+		
 		List<OrderDetail> orderDetailList = orderDetailService.getList(pager);
-		model.addAttribute("orderDetails", orderDetailList);
+		model.addAttribute("orderDetailList", orderDetailList);
 		
-		
-		
+		List<Integer> orderDetailPriceList = new ArrayList<>();
+		for (OrderDetail orderDetail : orderDetailList) {
+			orderDetailPriceList.add(productService.getPriceById(orderDetail.getProductId()) * orderDetail.getOrderDetailQuantity());
+		}
+		model.addAttribute("orderDetailPriceList", orderDetailPriceList);
 		
 		return "admin/orderBoard";
 	}

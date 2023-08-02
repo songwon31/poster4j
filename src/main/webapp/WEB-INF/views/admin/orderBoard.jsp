@@ -18,14 +18,14 @@
 					<th scope="col">상태</th>
 				</tr>
 				
-				<c:forEach var="orderDetail" items="${orderDetails}" varStatus="status">
+				<c:forEach var="orderDetail" items="${orderDetailList}" varStatus="status">
 					<tr>
 						<td scope="row">${orderDetail.orderId}</td>
 						<td>${orderDetail.productId}</td>
 						<td>${orderDetail.orderDetailQuantity}</td>
+						<td>${orderDetailPriceList[status.index].intValue()}</td>
 						<td>1</td>
-						<td>1</td>
-						<%-- <td><fmt:formatDate value="${order_dates[status.index]}" pattern="yyyy-MM-dd"/></td> --%>
+						<%-- <td><fmt:formatDate value="${orderDateList[status.index]}" pattern="yyyy-MM-dd"/></td> --%>
 						<td>${orderDetail.orderDetailStatus}</td>
 					</tr>
 				</c:forEach>

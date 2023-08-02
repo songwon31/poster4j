@@ -8,7 +8,7 @@
 	</select> 
 	
 	<select id="count" resultType="int">
-		select count(*) from order_detail
+		select count(*) from order
 	</select>
 	
 </mapper>
