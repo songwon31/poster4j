@@ -9,7 +9,6 @@
 <%-- home.jsp의 중앙내용 --%>
 <div>
 	<div>
-	
 		<!-- 메인 포스터 -->
 		<div id="main-poster" class="container-fluid" style="background-color: #F4F4F4; min-height: 1084px;" >
 			<div id="frame" style="background-image: url('//postershop.kr/web/product/medium/202106/ca652c60857299dcbeb554c77a0f07c3.png');">
@@ -17,7 +16,7 @@
 			</div>
 		</div>
 		<!-- 감성 글귀-->
-		<div style="min-height: 1084px">
+		<div style="min-height: 1084px; display:flex;">
 			<div id="wrap" >
 				<span class="mb-3" style="display: block; font-size: 72px; font-weight: 600; line-height: 1.1">poster</span>
 				<span class="mb-3" style="display: block; font-size: 72px">the most beautiful tool</span>
@@ -35,7 +34,7 @@
 		<!-- 포스터 목록 -->
 		<div id="poster-list" style="display: flex; flex-direction:column; flex-wrap: wrap; max-width:1080px; margin: 0 auto" >
 			<div class="poster-item">
-				<div style="width: 330px;">
+				<div class="poster" style="width: 330px;">
 					<img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg">
 				</div>
 				<div class="mt-3"> 포스터 이름 </div>

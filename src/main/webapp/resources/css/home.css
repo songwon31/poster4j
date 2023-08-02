@@ -23,12 +23,12 @@ li{
 }
 
 #wrap{
-	position: relative;
-    top: 50%;
-    display: block;
+	padding: 50% 0;	
     max-width: 1080px;
+    width: 100%;
     margin: 0 auto;
 }
+
 #slogan{
 	position: sticky;
 	top: 0;
@@ -47,8 +47,8 @@ li{
 	}
 }
 @media (max-width:1080px){
-	.poster-image{
-		width: 350px;
+	.poster{
+		width: 700px;
 	}
 }
 
