@@ -45,6 +45,7 @@
 						<img src="${pageContext.request.contextPath}/resources/images/face/member07.png" width="30" height="30"/>
 						<a href="${pageContext.request.contextPath}/ch13/logout" class="btn btn-success btn-sm">로그아웃</a>
 					</c:if>
+					<a href="${pageContext.request.contextPath}/admin/menu" class="btn btn-success btn-sm">메뉴</a>
 				</div>
 			</nav>
 	
