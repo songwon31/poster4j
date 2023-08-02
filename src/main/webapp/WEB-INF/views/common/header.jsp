@@ -7,20 +7,25 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="icon" href="${pageContext.request.contextPath}/resources/images/poster4j.ico" type="image/x-icon">
-		<title>Insert Title Here</title>
+		<title>poster4j</title>
 		
 		<!-- BootStrap을 사용하기 위한 외부 라이브러리 가져오기 -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+		
+		<!-- 공통 스타일 설정을 위한 css -->
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+		<!-- home 스타일 설정을 위한 css -->
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/home.css">
 	</head>
 	<body>
 
 		<div class="d-flex flex-column vh-100">
 			<nav class="navbar navbar-dark bg-dark text-white font-weight-bold">
 				<a class="navbar-brand" href="${pageContext.request.contextPath}"> 
-					postershop
+					poster4j
 				</a>
 				<div>
 					<%-- Ch08

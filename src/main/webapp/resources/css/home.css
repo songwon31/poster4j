@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+#frame{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transform-origin: left top;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-image: url("//postershop.kr/web/product/medium/202106/ca652c60857299dcbeb554c77a0f07c3.png");
+    box-shadow: rgba(0, 0, 0, 0.3) 11px 35px 21px 0px;
+}
