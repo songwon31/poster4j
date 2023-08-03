@@ -162,7 +162,7 @@
 				</ul>
 			</div>
 			<div class="joinBtn">
-				<input class=" btn btn-dark btn-sm mt-3" type="submit" value="join"/>
+				<input class=" btn btn-dark btn-sm mt-3" type="submit" value="Join"/>
 			</div>
 		</form>
 	</div>

@@ -26,7 +26,7 @@
 				</tr>
 			</table>
 			<div class="btnGroup d-flex row">
-				<a class="btn btn-sm btn-dark col" href="login">Login</a>
+				<input class="btn btn-sm btn-dark col" type="submit" value="Login"/>
 				<a class="joinBtn btn btn-sm col" href="join">Join</a>
 			</div>
 		</form>

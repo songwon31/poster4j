@@ -38,5 +38,21 @@ public class CustomerServiceImpl implements CustomerService {
 		return JoinResult.SUCCESS;
 	}
 
+	@Override
+	public LoginResult login(Customer customer) {
+		Customer dbCustomer = customerDao.selectById(customer.getCustomerId());
+		if(dbCustomer == null) {
+			return LoginResult.FAIL_MID;
+		}
+		
+		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		//비밀번호 일치여부 확인
+		if(passwordEncoder.matches(customer.getCustomerPassword(), dbCustomer.getCustomerPassword())) {
+			return LoginResult.SUCCESS;
+		} else {
+			return LoginResult.FAIL_MPASSWORD;
+		}
+	}
+
 	
 }
