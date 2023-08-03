@@ -47,7 +47,7 @@
 			</div>
 			<div class="poster-item">
 				<div class="poster" style="width: 330px;">
-					<a href="#"><img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg"></a>
+					<a href="#"><img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster3.jpg"></a>
 				</div>
 				<div class="mt-3"> 포스터 이름 </div>
 			</div>
@@ -59,7 +59,7 @@
 			</div>
 			<div class="poster-item">
 				<div class="poster" style="width: 330px;">
-					<a href="#"><img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg"></a>
+					<a href="#"><img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster3.jpg"></a>
 				</div>
 				<div class="mt-3"> 포스터 이름 </div>
 			</div>
@@ -71,7 +71,7 @@
 			</div>
 			<div class="poster-item">
 				<div class="poster" style="width: 330px;">
-					<a href="#"><img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg"></a>
+					<a href="#"><img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster2.jpg"></a>
 				</div>
 				<div class="mt-3"> 포스터 이름 </div>
 			</div>
@@ -83,13 +83,13 @@
 			</div>
 			<div class="poster-item">
 				<div class="poster" style="width: 330px;">
-					<a href="#"><img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg"></a>
+					<a href="#"><img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster3.jpg"></a>
 				</div>
 				<div class="mt-3"> 포스터 이름 </div>
 			</div>
 			<div class="poster-item">
 				<div class="poster" style="width: 330px;">
-					<a href="#"><img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster1.jpg"></a>
+					<a href="#"><img class="poster-image" alt="" src="${pageContext.request.contextPath}/resources/images/poster2.jpg"></a>
 				</div>
 				<div class="mt-3"> 포스터 이름 </div>
 			</div>

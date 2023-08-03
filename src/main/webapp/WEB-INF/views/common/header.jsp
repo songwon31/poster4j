@@ -45,7 +45,7 @@
 							<a href="${pageContext.request.contextPath}/">
 								<img alt="" src="${pageContext.request.contextPath}/resources/images/search.png" width="25px;"/>
 							</a>
-							<a href="${pageContext.request.contextPath}/">
+							<a href="${pageContext.request.contextPath}/login">
 								<img alt="" src="${pageContext.request.contextPath}/resources/images/login.png" width="25px;"/>
 							</a>
 							<a href="${pageContext.request.contextPath}/">

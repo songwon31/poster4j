@@ -61,8 +61,7 @@
 				주문 상품
 			</div>
 			<div>
-				
-				<img alt="" src="">
+				<img alt="" src="data:${productImage.productImageType};base64, ${base64Img}">
 			</div>
 		</div>
 		
