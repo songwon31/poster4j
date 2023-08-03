@@ -7,4 +7,5 @@ import com.webteam2.poster4j.dto.Customer;
 @Mapper
 public interface CustomerDao {
 	public Customer selectById(String customerId);
+	public int insert(Customer customer);
 }

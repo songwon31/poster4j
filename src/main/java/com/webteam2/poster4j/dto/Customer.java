@@ -9,5 +9,8 @@ public class Customer {
 	private String customerName;
 	private String customerTelNo;
 	private String customerEmail;
-	private int customerAdApprove;
+	private int customerTermAgree;
+	private int customerInfoAgree;
+	private int customerSmsAgree;
+	private int customerEmailAgree;
 }

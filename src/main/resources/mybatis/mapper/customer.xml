@@ -6,5 +6,9 @@
 		from customer
 		where customer_id = #{customerId}
 	</select>
+	<insert id="insert" parameterType="Customer">
+		insert into customer (customer_id, customer_password, customer_name, customer_telno, customer_email, customer_term_agree, customer_info_agree, customer_sms_agree, customer_email_agree)
+		values(#{customerId}, #{customerPassword}, #{customerName}, #{customerTelNo}, #{customerEmail}, #{customerTermAgree}, #{customerInfoAgree}, #{customerSmsAgree}, #{customerEmailAgree})
+	</insert>
 </mapper>
 

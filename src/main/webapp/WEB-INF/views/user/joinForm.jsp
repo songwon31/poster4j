@@ -131,8 +131,8 @@
 				<div class="agreeLayout">
 					<span>개인정보 수집 및 이용에 동의하십니까?</span>
 					<span>
-						<input id="personalInfoAgree" name="personalInfoAgree" type="checkbox" value="true"/>
-						<label for="personalInfoAgree">동의함</label>
+						<input id="infoAgree" name="infoAgree" type="checkbox" value="true"/>
+						<label for="infoAgree">동의함</label>
 					</span>
 				</div>
 			</div>
