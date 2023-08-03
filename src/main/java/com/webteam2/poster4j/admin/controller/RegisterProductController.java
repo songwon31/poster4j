@@ -37,6 +37,8 @@ public class RegisterProductController {
 		productService.registerProduct(product);
 		
 		
+		
+		
 		return "redirect:/admin/productBoard";
 	}
 	
