@@ -1,12 +1,15 @@
 package com.webteam2.poster4j.user.controller;
 
+import java.util.Base64;
+
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.webteam2.poster4j.dto.ProductImage;
 import com.webteam2.poster4j.user.service.ProductImageService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,9 +27,15 @@ public class HomeController {
 	}
 	
 	@GetMapping("/")
-	public String getPosterImage(HttpSession session) {
-		String productImageSrcRoute = productImageService.getSrcRoute(1);
-		session.setAttribute("productRoute", productImageSrcRoute);
+	public String getPosterImage(Model model) {
+		ProductImage productImage = productImageService.getImage(1);
+		model.addAttribute("productImage", productImage);
+
+		if (productImage.getProductImage() != null) {
+			// 0과 1로 구성된 바이너리 데이터를 base64 문자로 변환
+			String base64Img = Base64.getEncoder().encodeToString(productImage.getProductImage());
+			model.addAttribute("base64Img", base64Img);
+		}
 		return "user/home";
 	}
 }

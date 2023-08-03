@@ -16,9 +16,8 @@ public class ProductImageServiceImpl implements ProductImageService {
 	ProductImageDao productImageDao;
 
 	@Override
-	public String getSrcRoute(int productId) {
-		// TODO Auto-generated method stub
-		return productImageDao.selectProductImageRouteById(productId);
+	public ProductImage getImage(int productId) {
+		return productImageDao.selectProductImageById(productId);
 	}
 	
 	

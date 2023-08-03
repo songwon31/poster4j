@@ -35,7 +35,7 @@
 		<div id="poster-list" style="display: flex; flex-direction:column; flex-wrap: wrap; max-width:1080px; margin: 0 auto" >
 			<div class="poster-item">
 				<div class="poster" style="width: 330px;">
-					<a href="#"><img class="poster-image" alt="123" src="${productRoute}"></a>
+					<a href="#"><img class="poster-image" alt="123" src="data:${productImage.productImageType};base64, ${base64Img}"></a>
 				</div>
 				<div class="mt-3"> 포스터 이름 </div>
 			</div>
