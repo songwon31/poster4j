@@ -9,4 +9,5 @@ public class ProductImage {
 	private byte[] productImage;
 	private int productId;
 	private String productImageType;
+	private String productImageName;
 }
