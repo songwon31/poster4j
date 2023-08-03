@@ -12,7 +12,7 @@
 		<table>
 			<tr>
 				<th>받는사람</th>
-				<td><input type="text" value="01058"></td>
+				<td><input type="text" value="${orderCustomer.customerName}"></td>
 			</tr>
 			<tr>
 				<th>주소</th>
