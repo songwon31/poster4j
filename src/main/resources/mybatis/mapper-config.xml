@@ -12,5 +12,6 @@
 		<typeAlias alias="OrderT" type="com.webteam2.poster4j.dto.OrderT" />
 		<typeAlias alias="Pager" type="com.webteam2.poster4j.dto.Pager" />
 		<typeAlias alias="Customer" type="com.webteam2.poster4j.dto.Customer" />
+		<typeAlias alias="ProductImage" type="com.webteam2.poster4j.dto.ProductImage" />
 	</typeAliases>
 </configuration>

@@ -1,9 +1,6 @@
 @charset "UTF-8";
 
-li{
-	list-style: none;
-	margin-top: 30px;
-}
+
 
 #main-poster{
 	height: 100vh !important;
@@ -71,3 +68,6 @@ li{
 	height: auto;
 }
 
+.poster-image:hover{
+	
+}

@@ -24,7 +24,7 @@
 			<nav class="navbar" style="position: fixed; z-index: 99; left: 0; top: 0; width: 100%;">
 				<a class="" href="${pageContext.request.contextPath}"> 
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/poster4j.png" width="20px">
-					<span style="font-size: 20px; font-weight: 600; color: #212529">poster4j <span>&copy;</span></span>
+					<span style="font-size: 20px; font-weight: 600; color: #212529">poster4j</span>
 				</a>
 				<div>
 					<%-- Ch08
@@ -41,15 +41,23 @@
 					 
 					<%-- Ch13 --%>
 					<c:if test="${ch13Login == null}">
-						<div>
-							<a href="${pageContext.request.contextPath}/ch13/content" class="btn btn-success btn-sm">로그인</a>
+						<div style="margin-top: 17px" >
+							<a href="${pageContext.request.contextPath}/">
+								<img alt="" src="${pageContext.request.contextPath}/resources/images/search.png" width="25px;"/>
+							</a>
+							<a href="${pageContext.request.contextPath}/">
+								<img alt="" src="${pageContext.request.contextPath}/resources/images/login.png" width="25px;"/>
+							</a>
+							<a href="${pageContext.request.contextPath}/">
+								<img alt="" src="${pageContext.request.contextPath}/resources/images/menu.png" width="25px;"/>
+							</a>
 						</div>
 					</c:if>
 					<c:if test="${ch13Login != null}">
-						<img src="${pageContext.request.contextPath}/resources/images/face/member07.png" width="30" height="30"/>
+						<img src="${pageContext.request.contextPath}/resources/images/face/member07.png" width="30" height="30";/>
 						<a href="${pageContext.request.contextPath}/ch13/logout" class="btn btn-success btn-sm">로그아웃</a>
 					</c:if>
-					<a href="${pageContext.request.contextPath}/admin/menu" class="btn btn-success btn-sm">메뉴</a>
+					<a href="${pageContext.request.contextPath}/admin/menu"><img alt="" src=""></a>
 				</div>
 			</nav>
 	
