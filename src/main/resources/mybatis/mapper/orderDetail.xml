@@ -63,5 +63,10 @@
 		select count(*) from order_detail where product_id = #{productId}
 	</select>
 	
+	<update id="updateOrderStatus" parameterType="map">
+		update order_detail set order_detail_status = #{orderStatus}
+		where order_id=#{orderId} and product_id=#{productId}
+	</update>
+	
 	
 </mapper>

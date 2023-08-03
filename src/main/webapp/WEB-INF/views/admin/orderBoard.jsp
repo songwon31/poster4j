@@ -47,7 +47,26 @@
 						<td>${orderDetail.orderDetailQuantity}</td>
 						<td>${orderDetailPriceList[status.index].intValue()}</td>
 						<td><fmt:formatDate value="${orderDateList[status.index]}" pattern="yyyy-MM-dd"/></td>
-						<td>${orderDetail.orderDetailStatus}</td>
+						<td>
+							<form class="form-inline" method="get" action="changeOrderStatus">
+								<input hidden name="orderId" value="${orderDetail.orderId}"/>
+								<input hidden name="productId" value="${orderDetail.productId}"/>
+								<select class="form-control-sm" id="orderStatus" name="orderStatus">
+									<c:if test='${orderDetail.orderDetailStatus == "결제완료"}'><option value="결제완료" selected>결제완료</option></c:if>
+									<c:if test='${orderDetail.orderDetailStatus != "결제완료"}'><option value="결제완료">결제완료</option></c:if>
+									<c:if test='${orderDetail.orderDetailStatus == "상품준비중"}'><option value="상품준비중" selected>상품준비중</option></c:if>
+									<c:if test='${orderDetail.orderDetailStatus != "상품준비중"}'><option value="상품준비중">상품준비중</option></c:if>
+									<c:if test='${orderDetail.orderDetailStatus == "배송시작"}'><option value="배송시작" selected>배송시작</option></c:if>
+									<c:if test='${orderDetail.orderDetailStatus != "배송시작"}'><option value="배송시작">배송시작</option></c:if>
+									<c:if test='${orderDetail.orderDetailStatus == "배송중"}'><option value="배송중" selected>배송중</option></c:if>
+									<c:if test='${orderDetail.orderDetailStatus != "배송중"}'><option value="배송중">배송중</option></c:if>
+									<c:if test='${orderDetail.orderDetailStatus == "배송완료"}'><option value="배송완료" selected>배송완료</option></c:if>
+									<c:if test='${orderDetail.orderDetailStatus != "배송완료"}'><option value="배송완료">배송완료</option></c:if>
+								</select>
+								<button type="submit" class="btn btn-success btn-sm ml-2">등록</button>
+							</form>
+							
+						</td>
 					</tr>
 				</c:forEach>
 				

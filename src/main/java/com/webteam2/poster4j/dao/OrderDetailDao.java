@@ -16,4 +16,5 @@ public interface OrderDetailDao {
 	public int countAll();
 	public int countByOrderId(int orderId);
 	public int countByProductId(int productId);
+	public int updateOrderStatus(@Param("orderId")int orderId, @Param("productId")int productId, @Param("orderStatus")String orderStatus);
 }

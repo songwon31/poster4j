@@ -51,5 +51,10 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	public int getOrderDetailNumByProductId(int productId) {
 		return orderDetailDao.countByProductId(productId);
 	}
+	
+	@Override
+	public int changeOrderDetailStatus(int orderId, int productId, String orderStatus) {
+		return orderDetailDao.updateOrderStatus(orderId, productId, orderStatus);
+	}
 
 }
