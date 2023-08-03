@@ -45,7 +45,7 @@ public class RegisterProductController {
 		productService.registerProduct(newProduct);
 		*/
 		productImage.setProductId(26);
-		MultipartFile mf = productImage.getProductImageSource();
+		MultipartFile mf = productImage.getPattach();
 		if (!mf.isEmpty()) {
 			productImage.setProductImageName(mf.getOriginalFilename());
 			productImage.setProductImageType(mf.getContentType());

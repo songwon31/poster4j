@@ -22,7 +22,7 @@
 					
 					<div class="input-group">
 						<div class="input-group-prepend"><span class="input-group-text">파일</span></div>
-						<input id="productImageSource" type="file" name="productImageSource" class="form-control">
+						<input id="pattach" type="file" name="pattach" class="form-control">
 					</div>
 					
 					<button class="btn btn-info btn-sm">등록</button>
