@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.webteam2.poster4j.admin.service.OrderDetailService;
-import com.webteam2.poster4j.admin.service.OrderTService;
-import com.webteam2.poster4j.admin.service.ProductService;
 import com.webteam2.poster4j.dto.OrderDetail;
 import com.webteam2.poster4j.dto.Pager;
+import com.webteam2.poster4j.service.OrderDetailService;
+import com.webteam2.poster4j.service.OrderTService;
+import com.webteam2.poster4j.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -183,7 +183,6 @@ public class OrderBoardController {
 	@GetMapping("/changeOrderStatus")
 	public String changeOrderStatus (int orderId, int productId, String orderStatus) {
 		orderDetailService.changeOrderDetailStatus(orderId, productId, orderStatus);
-		
 		return "redirect:/admin/orderBoard";
 	}
 	

@@ -1,4 +1,4 @@
-package com.webteam2.poster4j.user.service;
+package com.webteam2.poster4j.service;
 
 import javax.annotation.Resource;
 

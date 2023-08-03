@@ -7,7 +7,7 @@ public class Product {
 	private int productId;
 	private String productName;
 	private int productPrice;
-	private int discountRate;
+	private int productDiscountRate;
 	private String productTheme;
 	private String productArtist;
 	private String productTexture;

@@ -1,4 +1,4 @@
-package com.webteam2.poster4j.admin.service;
+package com.webteam2.poster4j.service;
 
 public interface ProductService {
 	public int getPriceById(int productId);

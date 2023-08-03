@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webteam2.poster4j.dto.Customer;
-import com.webteam2.poster4j.user.service.CustomerService;
+import com.webteam2.poster4j.service.CustomerService;
 
 import lombok.extern.slf4j.Slf4j;
 

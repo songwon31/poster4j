@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webteam2.poster4j.dto.ProductImage;
-import com.webteam2.poster4j.user.service.ProductImageService;
+import com.webteam2.poster4j.service.ProductImageService;
 
 import lombok.extern.slf4j.Slf4j;
 
