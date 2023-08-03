@@ -7,10 +7,10 @@ public class Customer {
 	private String customerId;
 	private String customerPassword;
 	private String customerName;
-	private String customerTelNo;
+	private String customerTelno;
 	private String customerEmail;
-	private int customerTermAgree;
-	private int customerInfoAgree;
-	private int customerSmsAgree;
-	private int customerEmailAgree;
+	private String customerTermAgree;
+	private String customerInfoAgree;
+	private String customerSmsAgree;
+	private String customerEmailAgree;
 }

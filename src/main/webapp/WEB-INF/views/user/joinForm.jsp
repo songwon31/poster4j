@@ -110,8 +110,8 @@
 				<div class="agreeLayout">
 					<span>이용약관에 동의하십니까?</span>
 					<span>
-						<input id="termAgree" name="personalInfoAgree" type="checkbox" value="true"/>
-						<label for="termAgree">동의함</label>
+						<input id="customerTermAgree" name="customerTermAgree" type="checkbox" value="true"/>
+						<label for="customerTermAgree">동의함</label>
 					</span>
 				</div>
 			</div>
@@ -131,8 +131,8 @@
 				<div class="agreeLayout">
 					<span>개인정보 수집 및 이용에 동의하십니까?</span>
 					<span>
-						<input id="infoAgree" name="infoAgree" type="checkbox" value="true"/>
-						<label for="infoAgree">동의함</label>
+						<input id="customerInfoAgree" name="customerInfoAgree" type="checkbox" value="true"/>
+						<label for="customerInfoAgree">동의함</label>
 					</span>
 				</div>
 			</div>
@@ -148,21 +148,21 @@
 					<li class="agreeLayout">
 						<span>SMS 수신을 동의하십니까?</span>
 						<span>
-							<input id="smsAgree" name="smsAgree" type="checkbox" value="true"/>
-							<label for="smsAgree">동의함</label>
+							<input id="customerSmsAgree" name="customerSmsAgree" type="checkbox" value="true"/>
+							<label for="customerSmsAgree">동의함</label>
 						</span>
 					</li>
 					<li class="agreeLayout">
 						<span>이메일 수신을 동의하십니까?</span>
 						<span>
-							<input id="emailAgree" name="emailAgree" type="checkbox" value="true"/>
-							<label for="emailAgree">동의함</label>
+							<input id="customerEmailAgree" name="customerEmailAgree" type="checkbox" value="true"/>
+							<label for="customerEmailAgree">동의함</label>
 						</span>
 					</li>
 				</ul>
 			</div>
 			<div class="joinBtn">
-				<a class=" btn btn-dark btn-sm mt-3" type="submit">Join</a>
+				<input class=" btn btn-dark btn-sm mt-3" type="submit" value="join"/>
 			</div>
 		</form>
 	</div>
