@@ -7,5 +7,9 @@ import com.webteam2.poster4j.dto.Pager;
 
 public interface OrderDetailService {
 	public List<OrderDetail> getList(Pager pager);
+	public List<OrderDetail> getListByOrderId(int orderId, int endRowNo, int startRowNo);
+	public List<OrderDetail> getListByProductId(int productId, int endRowNo, int startRowNo);
 	public int getTotalOrderDetailNum();
+	public int getOrderDetailNumByOrderId(int orderId);
+	public int getOrderDetailNumByProductId(int productId);
 }

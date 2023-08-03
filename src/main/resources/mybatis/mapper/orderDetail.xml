@@ -15,10 +15,53 @@
 		)
 		where rnum >= #{startRowNo}
 		]]>
+	</select>
+	
+	<select id="selectPageByOrderId" parameterType="map" resultType="OrderDetail">
+		<![CDATA[
+		select rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		from (
+		    select rownum as rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		    from (
+		        select order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		        from order_detail
+		        where order_id = #{orderId}
+		        order by order_id desc
+		    )
+		    where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
 	</select> 
 	
-	<select id="count" resultType="int">
+	<select id="selectPageByProductId" parameterType="map" resultType="OrderDetail">
+		<![CDATA[
+		select rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		from (
+		    select rownum as rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		    from (
+		        select order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		        from order_detail
+		        where product_id = #{productId}
+		        order by order_id desc
+		    )
+		    where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
+	</select> 
+	
+	<select id="countAll" resultType="int">
 		select count(*) from order_detail
 	</select>
+	
+	<select id="countByOrderId" parameterType="int" resultType="int">
+		select count(*) from order_detail where order_id = #{orderId}
+	</select>
+	
+	<select id="countByProductId" parameterType="int" resultType="int">
+		select count(*) from order_detail where product_id = #{productId}
+	</select>
+	
 	
 </mapper>

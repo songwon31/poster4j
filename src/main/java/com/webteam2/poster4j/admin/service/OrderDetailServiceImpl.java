@@ -25,9 +25,31 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	}
 	
 	@Override
+	public List<OrderDetail> getListByOrderId(int orderId, int endRowNo, int startRowNo) {
+		List<OrderDetail> orderDetailList = orderDetailDao.selectPageByOrderId(orderId, endRowNo, startRowNo);
+		return orderDetailList;
+	}
+	
+	@Override
+	public List<OrderDetail> getListByProductId(int productId, int endRowNo, int startRowNo) {
+		List<OrderDetail> productDetailList = orderDetailDao.selectPageByProductId(productId, endRowNo, startRowNo);
+		return productDetailList;
+	}
+	
+	@Override
 	public int getTotalOrderDetailNum() {
-		int totalOrderDetailNum = orderDetailDao.count();
+		int totalOrderDetailNum = orderDetailDao.countAll();
 		return totalOrderDetailNum;
+	}
+	
+	@Override
+	public int getOrderDetailNumByOrderId(int orderId) {
+		return orderDetailDao.countByOrderId(orderId);
+	}
+	
+	@Override
+	public int getOrderDetailNumByProductId(int productId) {
+		return orderDetailDao.countByProductId(productId);
 	}
 
 }

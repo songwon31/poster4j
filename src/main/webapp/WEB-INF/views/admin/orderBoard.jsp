@@ -9,17 +9,20 @@
 		<div class="py-2 px-4">
 			<div style="font-size: 20px">주문 목록</div>
 			<div class="mt-1">
-				<form class="form-inline justify-content-end" method="get" action="search">
+				<form class="form-inline" method="get" action="orderBoard">
 					<div class="form-group">
 						<label for="category"></label> 
 						<select class="form-control-sm" id="category" name="category">
-							<option value="orderId" selected>주문 번호</option>
-							<option value="productId">상품 번호</option>
+							<option value="">선택하세요</option>
+							<c:if test='${orderDetailSearchCategory == "orderId"}'><option value="orderId" selected>주문 번호</option></c:if>
+							<c:if test='${orderDetailSearchCategory != "orderId"}'><option value="orderId">주문 번호</option></c:if>
+							<c:if test='${orderDetailSearchCategory == "productId"}'><option value="productId" selected>상품 번호</option></c:if>
+							<c:if test='${orderDetailSearchCategory != "productId"}'><option value="productId">상품 번호</option></c:if>
 						</select>
 					</div>
 					<div class="form-group px-2">
 						<label for="content"></label>
-						<input type="text" class="form-control-sm" id="content" name="content"/>
+						<input type="text" class="form-control-sm" id="content" name="content" value="${orderDetailSearchContent}"/>
 					</div>
 					<button type="submit" class="btn btn-success btn-sm">검색</button>
 				</form>
@@ -48,6 +51,31 @@
 					</tr>
 				</c:forEach>
 				
+				<tr>
+					<td colspan="6" class="text-center">
+						<div>
+							<a class="btn btn-outline-primary btn-sm" href="orderBoard?category=${orderDetailSearchCategory}&content=${orderDetailSearchContent}&pageNo=1">처음</a>
+							<c:if test="${pager.groupNo>1}">
+								<a class="btn btn-outline-info btn-sm" href="orderBoard?category=${orderDetailSearchCategory}&content=${orderDetailSearchContent}&pageNo=${pager.startPageNo-1}">이전</a>
+							</c:if>
+							
+							<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+								<c:if test="${pager.pageNo != i}">
+									<a class="btn btn-outline-success btn-sm" href="orderBoard?category=${orderDetailSearchCategory}&content=${orderDetailSearchContent}&pageNo=${i}">${i}</a>
+								</c:if>
+								<c:if test="${pager.pageNo == i}">
+									<a class="btn btn-danger btn-sm" href="orderBoard?category=${orderDetailSearchCategory}&content=${orderDetailSearchContent}&pageNo=${i}">${i}</a>
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${pager.groupNo<pager.totalGroupNo}">
+								<a class="btn btn-outline-info btn-sm" href="orderBoard?category=${orderDetailSearchCategory}&content=${orderDetailSearchContent}&pageNo=${pager.endPageNo+1}">다음</a>
+							</c:if>
+							<a class="btn btn-outline-primary btn-sm" href="orderBoard?category=${orderDetailSearchCategory}&content=${orderDetailSearchContent}&pageNo=${pager.totalPageNo}">맨끝</a>
+						</div>
+					</td>
+				</tr>
+			
 			</thead>
 		</table>
 	</div>
