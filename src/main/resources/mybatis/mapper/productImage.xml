@@ -6,4 +6,11 @@
 		from product_image
 		where product_id = #{productId}
 	</select>
+	
+	<insert id="insertProductImage" parameterType="ProductImage">
+		<!-- null이 들어갈 수 있는 컬럼값은 반드시 jdbcType을 명시해야 함 -->
+		insert into product_image (product_image_id, product_image_ctgry, product_id,
+								   product_image_source, product_image_type, product_image_name)
+		values(#{productImageId}, #{productImageCtgry}, #{productId}, #{productImageSource}, #{productImageType}, #{productImageName})
+	</insert>
 </mapper>

@@ -6,7 +6,7 @@ import lombok.Data;
 public class ProductImage {
 	private int productImageId;
 	private String productImageCtgry;
-	private byte[] productImage;
+	private byte[] productImageSource;
 	private int productId;
 	private String productImageType;
 	private String productImageName;

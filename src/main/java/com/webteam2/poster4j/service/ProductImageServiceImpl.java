@@ -20,5 +20,9 @@ public class ProductImageServiceImpl implements ProductImageService {
 		return productImageDao.selectProductImageById(productId);
 	}
 	
+	@Override
+	public int register(ProductImage productImage) {
+		return productImageDao.insertProductImage(productImage);
+	}
 	
 }

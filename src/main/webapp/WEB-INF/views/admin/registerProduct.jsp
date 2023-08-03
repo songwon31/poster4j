@@ -9,7 +9,22 @@
 		<div class="py-2 px-4">
 			<div style="font-size: 20px">상품 등록</div>
 			<div class="mt-2">
-				<form method="get" action="register">
+				<form id="registerProductForm" method="post" action="register" enctype="multipart/form-data">
+					<div class="input-group">
+						<div class="input-group-prepend"><span class="input-group-text">ID</span></div>
+						<input id="productImageId" type="text" name="productImageId" class="form-control">
+					</div>
+					
+					<div class="input-group">
+						<div class="input-group-prepend"><span class="input-group-text">카테고리</span></div>
+						<input id="productImageCtgry" name="productImageCtgry" class="form-control"></input>
+					</div>
+					
+					<div class="input-group">
+						<div class="input-group-prepend"><span class="input-group-text">파일</span></div>
+						<input id="productImageSource" type="file" name="productImageSource" class="form-control">
+					</div>
+					
 					<button class="btn btn-info btn-sm">등록</button>
 				</form>
 			</div>

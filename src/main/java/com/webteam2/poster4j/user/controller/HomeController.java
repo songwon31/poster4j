@@ -31,9 +31,9 @@ public class HomeController {
 		ProductImage productImage = productImageService.getImage(1);
 		model.addAttribute("productImage", productImage);
 
-		if (productImage.getProductImage() != null) {
+		if (productImage.getProductImageSource() != null) {
 			// 0과 1로 구성된 바이너리 데이터를 base64 문자로 변환
-			String base64Img = Base64.getEncoder().encodeToString(productImage.getProductImage());
+			String base64Img = Base64.getEncoder().encodeToString(productImage.getProductImageSource());
 			model.addAttribute("base64Img", base64Img);
 		}
 		return "user/home";
