@@ -11,4 +11,12 @@
 		select count(*) from order
 	</select>
 	
+	<insert id="insertProduct" parameterType="Product">
+		<!-- null이 들어갈 수 있는 컬럼값은 반드시 jdbcType을 명시해야 함 -->
+		insert into product (product_id, product_name, product_price, product_discount_rate, 
+							 product_theme, product_artist, product_texture, product_stock)
+		values(#{productId}, #{productName}, #{productPrice}, #{productDiscountRate}, #{productTheme}, 
+			   #{productArtist}, #{productTexture}, #{productStock, jdbcType=DECIMAL})
+	</insert>
+	
 </mapper>

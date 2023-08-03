@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.webteam2.poster4j.dao.ProductDao;
 import com.webteam2.poster4j.dto.OrderDetail;
 import com.webteam2.poster4j.dto.Pager;
+import com.webteam2.poster4j.dto.Product;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,6 +27,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int getTotalProductNum() {
 		return productDao.count();
+	}
+	
+	@Override
+	public int registerProduct(Product product) {
+		return productDao.insertProduct(product);
 	}
 
 }
