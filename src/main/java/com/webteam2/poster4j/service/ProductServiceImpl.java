@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.webteam2.poster4j.dao.ProductDao;
-import com.webteam2.poster4j.dto.OrderDetail;
 import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Product;
 
@@ -18,6 +17,11 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductServiceImpl implements ProductService {
 	@Resource
 	ProductDao productDao;
+	
+	@Override
+	public List<Product> getList(Pager pager) {
+		return productDao.selectByPage(pager);
+	}
 	
 	@Override
 	public int getPriceById(int productId) {
@@ -37,5 +41,10 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product getMainPageProduct(int productId) {
 		return productDao.selectAllById(productId);
+	}
+	
+	@Override
+	public int deleteById(int productId) {
+		return productDao.deleteById(productId);
 	}
 }

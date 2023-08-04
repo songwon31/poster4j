@@ -71,7 +71,7 @@
 				</c:forEach>
 				
 				<tr>
-					<td colspan="6" class="text-center">
+					<td colspan="12" class="text-center">
 						<div>
 							<a class="btn btn-outline-primary btn-sm" href="orderBoard?category=${orderDetailSearchCategory}&content=${orderDetailSearchContent}&pageNo=1">처음</a>
 							<c:if test="${pager.groupNo>1}">

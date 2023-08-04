@@ -39,11 +39,7 @@ public class OrderBoardController {
 			String pageNo, 
 			Model model, 
 			HttpSession session) 
-	{
-		log.info("category: " + category);
-		log.info("content: " + content);
-		log.info("pageNo: " + pageNo);
-		
+	{	
 		String pastCategory = (String) session.getAttribute("orderDetailSearchCategory");
 		// category 검색이 없다가 생긴 경우
 		if ((category != null) && (pastCategory == null)) {
@@ -106,7 +102,6 @@ public class OrderBoardController {
 				pageNo = "1";
 			}
 		}
-		
 		// 문자열을 정수로 전환
 		int intPageNo = Integer.parseInt(pageNo);
 		//세션에 pageNo를 저장

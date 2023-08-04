@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.webteam2.poster4j.dao.ProductDao">
+	<select id="selectByPage" parameterType="Pager" resultType="Product">
+		<![CDATA[
+		select rnum, product_id, product_name, product_price, product_discount_rate, 
+			   product_theme, product_artist, product_texture, product_stock
+		from (
+		    select rownum as rnum, product_id, product_name, product_price, product_discount_rate, 
+		    	   product_theme, product_artist, product_texture, product_stock
+		    from (
+		        select product_id, product_name, product_price, product_discount_rate, 
+		    		   product_theme, product_artist, product_texture, product_stock
+		        from product
+		        order by product_id desc
+		    )
+		    where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
+	</select>
 	<select id="selectAllById" parameterType="int" resultType="Product">
 		select *
 		from product
@@ -14,7 +32,7 @@
 	</select> 
 	
 	<select id="count" resultType="int">
-		select count(*) from order
+		select count(*) from product
 	</select>
 	
 	<insert id="insertProduct" parameterType="Product">
@@ -27,5 +45,9 @@
 		values(#{productId}, #{productName}, #{productPrice}, #{productDiscountRate}, #{productTheme}, 
 			   #{productArtist}, #{productTexture}, #{productStock, jdbcType=DECIMAL})
 	</insert>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from product where product_id=#{productId}
+	</delete>
 	
 </mapper>
