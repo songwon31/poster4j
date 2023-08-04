@@ -19,6 +19,7 @@
 		where rnum >= #{startRowNo}
 		]]>
 	</select>
+	
 	<select id="selectAllById" parameterType="int" resultType="Product">
 		select *
 		from product

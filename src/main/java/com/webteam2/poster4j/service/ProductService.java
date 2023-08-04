@@ -7,6 +7,7 @@ import com.webteam2.poster4j.dto.Product;
 
 public interface ProductService {
 	public List<Product> getList(Pager pager);
+	public Product getOneProduct(int productId);
 	public int getPriceById(int productId);
 	public int getTotalProductNum();
 	public int registerProduct(Product product);

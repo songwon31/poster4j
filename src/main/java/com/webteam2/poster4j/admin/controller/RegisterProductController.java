@@ -66,7 +66,6 @@ public class RegisterProductController {
 		productImage.setProductImageName(mf.getOriginalFilename());
 		productImage.setProductImageType(mf.getContentType());
 		productImage.setProductImageSource(mf.getBytes());
-		
 		productImageService.register(productImage);
 		
 		for (MultipartFile mfd : detailImages) {
