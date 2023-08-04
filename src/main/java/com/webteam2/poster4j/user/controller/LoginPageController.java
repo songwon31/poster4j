@@ -35,9 +35,17 @@ public class LoginPageController {
 	         error = "MPASSWORD가 틀립니다.";
 	      }else {
 	    	  Customer dbCustomer = customerService.getList(customer.getCustomerId());
-	          session.setAttribute("cutomerLogin", dbCustomer);
-	          log.info("login success");
-	          return "redirect:/";
+	    	  session.setAttribute("cutomerLogin", dbCustomer);
+	    	  log.info(customer.getCustomerId());
+	    	  if(customer.getCustomerId().equals("admin")) {
+	    		  //관리자 로그인
+	    		  log.info("admin login success");
+	    		  return "redirect:/admin/orderBoard";
+	    	  } else {
+	    		  //사용자 로그인
+	    		  log.info("user login success");
+	    		  return "redirect:/";
+	    	  }
 	      }
 	      
 	      model.addAttribute("error", error);
