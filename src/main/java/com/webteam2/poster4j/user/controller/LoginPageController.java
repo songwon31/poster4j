@@ -37,7 +37,7 @@ public class LoginPageController {
 	    	  Customer dbCustomer = customerService.getList(customer.getCustomerId());
 	          session.setAttribute("cutomerLogin", dbCustomer);
 	          log.info("login success");
-	          return "user/home";
+	          return "redirect:/";
 	      }
 	      
 	      model.addAttribute("error", error);

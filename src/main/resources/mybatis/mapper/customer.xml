@@ -9,7 +9,7 @@
 	<insert id="insert" parameterType="Customer">
 		insert into customer (customer_id, customer_password, customer_name, customer_telno, customer_email, customer_term_agree, customer_info_agree, customer_sms_agree, customer_email_agree)
 		values(#{customerId}, #{customerPassword}, #{customerName}, #{customerTelno}, #{customerEmail}, 
-		#{customerTermAgree ,jdbcType=VARCHAR}, #{customerInfoAgree, jdbcType=VARCHAR}, #{customerSmsAgree ,jdbcType=VARCHAR}, #{customerEmailAgree ,jdbcType=VARCHAR})
+		#{customerTermAgree, jdbcType=VARCHAR}, #{customerInfoAgree, jdbcType=VARCHAR}, #{customerSmsAgree ,jdbcType=VARCHAR}, #{customerEmailAgree ,jdbcType=VARCHAR})
 	</insert>
 </mapper>
 

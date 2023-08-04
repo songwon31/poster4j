@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webteam2.poster4j.dao.ReceiverDao">
+	<select id="selectById" parameterType="String" resultType="Receiver">
+		select receiver_id, customer_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_demand, receiver_address_type
+		from receiver
+		where receiver_id = #{receiverId}
+	</select>
+	<insert id="insert" parameterType="Receiver">
+		insert into receiver (receiver_id, customer_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_demand, receiver_address_type)
+		values(#{receiverId}, #{customerId}, #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, #{receiverDemand}, #{receiverAddressType})
+	</insert>
+</mapper>
+

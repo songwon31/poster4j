@@ -34,7 +34,7 @@ public class JoinPageController {
 		} else {
 			customerService.join(customer);
 			log.info("join success");
-			return "user/home";
+			return "redirect:/user/loginForm";
 		}
 	}
 }
