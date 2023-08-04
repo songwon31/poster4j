@@ -7,7 +7,7 @@
 <div class="container-fluid flex-grow-1" style="margin-top:80px;">
 	<div class="row">
 		<div class="py-2 px-4">
-			<div style="font-size: 20px">상품 등록</div>
+			<div style="font-size: 20px">상품 수정</div>
 			<div class="mt-2">
 				<form id="updateProductForm" method="post" action="update" enctype="multipart/form-data">
 					<input hidden id="productId" type="text" name="productId" value="${product.productId}"/>
