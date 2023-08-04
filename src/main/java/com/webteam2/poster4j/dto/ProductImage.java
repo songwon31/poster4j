@@ -8,8 +8,8 @@ import lombok.Data;
 public class ProductImage {
 	private int productImageId;
 	private String productImageCtgry;
-	// Client -> Controller
-	private MultipartFile pattach;
+/*	// Client -> Controller
+	private MultipartFile pattach;*/
 	private byte[] productImageSource;
 	private int productId;
 	private String productImageType;

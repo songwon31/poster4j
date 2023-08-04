@@ -1,5 +1,7 @@
 package com.webteam2.poster4j.admin.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -42,7 +44,7 @@ public class RegisterProductController {
 			@RequestParam(value="productTexture")String productTexture,
 			@RequestParam(value="productStock", required=false)String productStock,
 			@RequestParam(value="productImageCtgry")String productImageCtgry,
-			@RequestParam(value="pattach")MultipartFile pattach
+			@RequestParam(value="pattach")List<MultipartFile> pattach
 			) throws Exception 
 		{
 		Product newProduct = new Product();
@@ -62,6 +64,9 @@ public class RegisterProductController {
 		
 		ProductImage productImage = new ProductImage();
 		productImage.setProductId(newProduct.getProductId());
+		
+		List<MultipartFile> fileList = pattach;
+		
 		productImage.setProductImageCtgry(productImageCtgry);
 		MultipartFile mf = pattach;
 		if (!mf.isEmpty()) {

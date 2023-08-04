@@ -53,7 +53,7 @@
 					
 					<div class="input-group" style="width:100%;">
 						<div class="input-group-addon" style="width:35%; text-align:left;"><span class="input-group-text">이미지 파일</span></div>
-						<input id="pattach" type="file" name="pattach" class="form-control" style="width:65%;">
+						<input multiple required id="pattach" type="file" name="pattach" class="form-control" style="width:65%;">
 					</div>
 					
 					<button class="btn btn-info btn-sm">등록</button>
