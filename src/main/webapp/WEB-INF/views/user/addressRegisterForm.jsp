@@ -13,7 +13,7 @@
 						<label for="shipAddressName" class="mr-4">배송지명</label>
 					</td>
 					<td>
-						<input type="text" name="customerName" class="form-control" value="" style="width: 270px;">
+						<input type="text" name="receiverName" class="form-control" value="" style="width: 270px;">
 					</td>
 				</tr>	
 				<tr class="addressRegisterInputGroup">
@@ -39,7 +39,7 @@
 						<label for="customerTelno" class="mr-4">휴대전화</label>
 					</td>
 					<td>
-						<input type="text" name="customerTelno" class="form-control" value="">
+						<input type="text" name="receiverTelno" class="form-control" value="">
 					</td>
 				</tr>
 			</table>

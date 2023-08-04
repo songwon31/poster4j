@@ -10,5 +10,9 @@
 		insert into receiver (receiver_id, customer_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_demand, receiver_address_type)
 		values(#{receiverId}, #{customerId}, #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, #{receiverDemand}, 'DEFAULT')
 	</insert>
+	<insert id="insertAddress" parameterType="Receiver">
+		insert into receiver (RECEIVER_ID, CUSTOMER_ID, RECEIVER_NAME, RECEIVER_ZIP, RECEIVER_ADDRESS, RECEIVER_ADDRESS_DETAIL, RECEIVER_TELNO, RECEIVER_DEMAND, RECEIVER_ADDRESS_TYPE)
+		values(receiver_seq.nextval, 'safd', #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, '변경 전', 'DEFAULT')
+	</insert>
 </mapper>
 

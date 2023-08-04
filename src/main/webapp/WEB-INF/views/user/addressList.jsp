@@ -35,7 +35,7 @@
 		</table>
 		<div style="text-align: center;">
 			<span><a class="btn btn-dark">선택 주소록 삭제</a></span>
-			<span><a class="btn btn-dark">배송지등록</a></span>
+			<span><a class="btn btn-dark" href="${pageContext.request.contextPath}/addressRegister">배송지등록</a></span>
 		</div>
 	</div>
 
