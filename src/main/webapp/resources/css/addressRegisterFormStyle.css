@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.form-control{
+	font-size: 13px;
+	font-weight: 500;
+}
+
+
+input[type=text]{
+	border: none;
+	border-bottom: 1.3px solid #000000;
+	border-radius: 0;
+}
