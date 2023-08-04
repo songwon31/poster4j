@@ -9,4 +9,5 @@ public interface ProductDao {
 	public int selectPriceById(int productId);
 	public int count();
 	public int insertProduct(Product product);
+	public Product selectAllById(int productId);
 }

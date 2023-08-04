@@ -1,23 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
+<!-- OrderForm 스타일 설정을 위한 css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderFormStyle.css">
 
-<div style="margin: 0 auto">
+<div id="orderForm" style="margin: 0 auto; min-width: 360px">
 	<form action="" style= "margin: 300px 0">
-		<div>배송지</div>
-		<label><input type="checkbox"><span>회원정보와 동일</span> </label>
-		<label><input type="checkbox" checked="checked"><span>회원정보와 동일</span> </label>
+		<div style="text-align: center">배송지</div>
+		<div>
+			<label><input type="checkbox"><span>회원정보와 동일</span> </label>
+			<label><input type="checkbox" checked="checked"><span>새로운 배송지</span> </label>
+		</div>
 		<table>
-			<tr>
+			<tr >
 				<th>받는사람</th>
-				<td><input type="text" value="${orderCustomer.customerName}"></td>
+				<td>
+					<input type="text" value="${orderCustomer.customerName}" style="width: 100%">
+				</td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td><input type="text" value="서울특별시 강북구"></td>
-				<td><input type="text" value="상세주소"></td>
+				<td style="display: inline-block; width: 100%">
+					<div style="width: 100%">
+						<input type="text" value="서울특별시 강북구" style="width: 70%"><button style="width: 50x;">Search</button>
+					</div>
+					<div>
+						<input type="text" value="상세주소" style="width: 100%">
+					</div>
+				</td>
 			</tr>
 			<tr>
 				<th>휴대전화</th>
@@ -27,13 +38,13 @@
 						<option>011</option>
 						<option>016</option>
 					</select>
-					<input type="text" value="휴대폰 번호 앞자리 "><input type="text" value="휴대폰 번호 뒷자리">
+					<input type="text" value="0000" style="width: 70px"><input type="text" value="0000" style="width:70px">
 				</td>
 			</tr>
 			<tr>
 				<th>이메일 필수</th>
 				<td>
-					<input type="text" value="이메일 앞">@<input type="text" value="이메일 뒤">
+					<input type="text" value="poster4j" style="width: 120px">@<input type="text" value="poster.kr" style="width: 120px;">
 				</td>
 			</tr>
 		</table>
@@ -60,11 +71,23 @@
 			<div>
 				주문 상품
 			</div>
-			<div>
-				<img alt="" src="data:${productImage.productImageType};base64, ${base64Img}">
+			<div style="display: flex">
+				<img alt="주문할 상품 이미지" src="${pageContext.request.contextPath}/resources/images/poster1.jpg" width="200px">
+				<div>
+					<div><a>주문할 상품명</a></div>
+					<div>수량: n개</div>
+					<div><span>KRW  00,000</span></div>
+					<button>삭제</button>
+				</div>
 			</div>
 		</div>
-		
+		<!-- 할인/부가 결제 -->
+		<div>
+			<div>할인/부가 결제 </div>
+			<div>KRW 00,000원</div>
+		</div>
+		<hr>
+		<!-- 적용 금액 -->
 	</form>
 </div>
 

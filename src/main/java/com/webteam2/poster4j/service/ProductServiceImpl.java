@@ -33,5 +33,9 @@ public class ProductServiceImpl implements ProductService {
 	public int registerProduct(Product product) {
 		return productDao.insertProduct(product);
 	}
-
+	
+	@Override
+	public Product getMainPageProduct(int productId) {
+		return productDao.selectAllById(productId);
+	}
 }

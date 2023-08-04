@@ -11,8 +11,8 @@
 	<div>
 		<!-- 메인 포스터 -->
 		<div id="main-poster" class="container-fluid" style="background-color: #F4F4F4; min-height: 1084px;" >
-			<div id="frame" style="background-image: url('//postershop.kr/web/product/medium/202106/ca652c60857299dcbeb554c77a0f07c3.png');">
-				<img alt="프레임" src="${pageContext.request.contextPath}/resources/images/frame.png" width="450px" height="630px";>
+			<div id="frame" style="background-image: url('${pageContext.request.contextPath}/resources/images/poster3.jpg');">
+				<img id="frame-image" alt="프레임" src="${pageContext.request.contextPath}/resources/images/frame.png" width="450px" height="630px";>
 			</div>
 		</div>
 		<!-- 감성 글귀-->
@@ -37,7 +37,7 @@
 				<div class="poster" style="width: 330px;">
 					<a href="#"><img class="poster-image" alt="123" src="data:${productImage.productImageType};base64, ${base64Img}"></a>
 				</div>
-				<div class="mt-3"> 포스터 이름 </div>
+				<div class="mt-3">${productName}</div>
 			</div>
 			<div class="poster-item">
 				<div class="poster" style="width: 330px;">
