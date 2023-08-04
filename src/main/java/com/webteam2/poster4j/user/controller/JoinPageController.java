@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.webteam2.poster4j.dto.Customer;
+import com.webteam2.poster4j.dto.Receiver;
 import com.webteam2.poster4j.service.CustomerService;
 import com.webteam2.poster4j.service.CustomerService.JoinResult;
 

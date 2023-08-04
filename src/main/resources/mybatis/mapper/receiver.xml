@@ -8,7 +8,7 @@
 	</select>
 	<insert id="insert" parameterType="Receiver">
 		insert into receiver (receiver_id, customer_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_demand, receiver_address_type)
-		values(#{receiverId}, #{customerId}, #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, #{receiverDemand}, #{receiverAddressType})
+		values(#{receiverId}, #{customerId}, #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, #{receiverDemand}, 'DEFAULT')
 	</insert>
 </mapper>
 

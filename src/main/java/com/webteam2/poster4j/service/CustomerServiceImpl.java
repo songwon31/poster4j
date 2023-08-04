@@ -7,7 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.webteam2.poster4j.dao.CustomerDao;
+import com.webteam2.poster4j.dao.ReceiverDao;
 import com.webteam2.poster4j.dto.Customer;
+import com.webteam2.poster4j.dto.Receiver;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,6 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomerServiceImpl implements CustomerService {
 	@Resource
 	CustomerDao customerDao;
+	
+	@Resource
+	ReceiverDao receiverDao;
 	
 	@Override
 	public Customer getList(String customerId) {
