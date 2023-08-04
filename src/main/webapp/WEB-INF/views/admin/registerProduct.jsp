@@ -47,13 +47,13 @@
 					</div>
 					
 					<div class="input-group" style="width:100%;">
-						<div class="input-group-addon" style="width:35%; text-align:left;"><span class="input-group-text">이미지 카테고리</span></div>
-						<input id="productImageCtgry" name="productImageCtgry" class="form-control" style="width:65%;"></input>
+						<div class="input-group-addon" style="width:35%; text-align:left;"><span class="input-group-text">대표 이미지</span></div>
+						<input required id="pattach" type="file" name="representImage" class="form-control" style="width:65%;">
 					</div>
 					
 					<div class="input-group" style="width:100%;">
-						<div class="input-group-addon" style="width:35%; text-align:left;"><span class="input-group-text">이미지 파일</span></div>
-						<input multiple required id="pattach" type="file" name="pattach" class="form-control" style="width:65%;">
+						<div class="input-group-addon" style="width:35%; text-align:left;"><span class="input-group-text">상세 이미지</span></div>
+						<input multiple id="pattach" type="file" name="detailImages" class="form-control" style="width:65%;">
 					</div>
 					
 					<button class="btn btn-info btn-sm">등록</button>

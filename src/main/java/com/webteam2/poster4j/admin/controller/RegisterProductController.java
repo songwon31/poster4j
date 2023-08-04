@@ -43,8 +43,8 @@ public class RegisterProductController {
 			@RequestParam(value="productArtist")String productArtist,
 			@RequestParam(value="productTexture")String productTexture,
 			@RequestParam(value="productStock", required=false)String productStock,
-			@RequestParam(value="productImageCtgry")String productImageCtgry,
-			@RequestParam(value="pattach")List<MultipartFile> pattach
+			@RequestParam(value="representImage")MultipartFile representImage,
+			@RequestParam(value="detailImages")List<MultipartFile> detailImages
 			) throws Exception 
 		{
 		Product newProduct = new Product();
@@ -57,26 +57,27 @@ public class RegisterProductController {
 		if (productStock != null && !productStock.equals("")) {
 			newProduct.setProductStock(Integer.parseInt(productStock));
 		}
-		
-		log.info("product: " + newProduct);
-		
 		productService.registerProduct(newProduct);
 		
 		ProductImage productImage = new ProductImage();
 		productImage.setProductId(newProduct.getProductId());
+		productImage.setProductImageCtgry("represent");
+		MultipartFile mf = representImage;
+		productImage.setProductImageName(mf.getOriginalFilename());
+		productImage.setProductImageType(mf.getContentType());
+		productImage.setProductImageSource(mf.getBytes());
 		
-		List<MultipartFile> fileList = pattach;
-		
-		productImage.setProductImageCtgry(productImageCtgry);
-		MultipartFile mf = pattach;
-		if (!mf.isEmpty()) {
-			productImage.setProductImageName(mf.getOriginalFilename());
-			productImage.setProductImageType(mf.getContentType());
-			productImage.setProductImageSource(mf.getBytes());
-		}
 		productImageService.register(productImage);
 		
-		log.info("productImage: " + productImage);
+		for (MultipartFile mfd : detailImages) {
+			ProductImage detailProductImage = new ProductImage();
+			detailProductImage.setProductId(newProduct.getProductId());
+			detailProductImage.setProductImageCtgry("detail");
+			detailProductImage.setProductImageName(mfd.getOriginalFilename());
+			detailProductImage.setProductImageType(mfd.getContentType());
+			detailProductImage.setProductImageSource(mfd.getBytes());
+			productImageService.register(detailProductImage);
+		}
 		
 		return "redirect:/admin/productBoard";
 	}
