@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.webteam2.poster4j.dao.CustomerDao">
 	<select id="selectById" parameterType="String" resultType="Customer">
-		select customer_id, customer_name, customer_telno
+		select customer_id, customer_name, customer_password, customer_telno
 		from customer
 		where customer_id = #{customerId}
 	</select>
