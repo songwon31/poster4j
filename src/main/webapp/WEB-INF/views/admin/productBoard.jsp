@@ -35,7 +35,7 @@
 						<td>${product.productTexture}</td>
 						<td>${product.productStock}</td>
 						<td>
-							<form method="get" action="updateProduct">
+							<form method="get" action="${pageContext.request.contextPath}/admin/updateProductForm">
 								<input hidden name="productId" value="${product.productId}"/>
 								<button class="btn btn-primary btn-sm">상품 수정<buttton>
 							</form>

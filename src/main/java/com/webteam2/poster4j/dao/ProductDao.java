@@ -14,5 +14,6 @@ public interface ProductDao {
 	public int count();
 	public int insertProduct(Product product);
 	public Product selectAllById(int productId);
+	public int updateProduct(Product product);
 	public int deleteById(int productId);
 }

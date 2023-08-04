@@ -47,6 +47,13 @@
 			   #{productArtist}, #{productTexture}, #{productStock, jdbcType=DECIMAL})
 	</insert>
 	
+	<update id="updateProduct" parameterType="Product">
+		update product set product_name=#{productName}, product_price=#{productPrice}, product_discount_rate=#{productDiscountRate},
+						 product_theme=#{productTheme}, product_artist=#{productArtist}, product_texture=#{productTexture},
+						 product_stock=#{productStock} 
+		where product_id=#{productId}
+	</update>
+	
 	<delete id="deleteById" parameterType="int">
 		delete from product where product_id=#{productId}
 	</delete>

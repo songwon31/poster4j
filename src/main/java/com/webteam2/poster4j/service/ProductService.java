@@ -12,5 +12,6 @@ public interface ProductService {
 	public int getTotalProductNum();
 	public int registerProduct(Product product);
 	public Product getMainPageProduct(int productId);
+	public int updateProduct(Product product);
 	public int deleteById(int productId);
 }

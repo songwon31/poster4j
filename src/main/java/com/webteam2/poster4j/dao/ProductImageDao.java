@@ -14,4 +14,5 @@ public interface ProductImageDao {
 	//public List<ProductImage> selectProductImageListById(int productId);
 	//상품 이미지 삽입
 	public int insertProductImage(ProductImage productImage);
+	public int deleteByProductId(int productId);
 }

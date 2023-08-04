@@ -16,4 +16,8 @@
 								   product_image_source, product_image_type, product_image_name)
 		values(product_image_seq.nextval, #{productImageCtgry}, #{productId}, #{productImageSource}, #{productImageType}, #{productImageName})
 	</insert>
+	
+	<delete id="deleteByProductId" parameterType="int">
+		delete from product_image where product_id=#{productId}
+	</delete>
 </mapper>
