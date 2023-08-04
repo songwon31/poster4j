@@ -27,15 +27,15 @@
 					<td>[00000][서울특별시 종로구 창경궁로 254] [402호]</td>
 					<td>
 						<form class="form-inline" method="get" action="changeAddress">
-							<button type="submit" class="btn btn-success btn-sm ml-2">수정</button>
+							<button type="submit" class="btn btn-dark btn-sm ml-2">수정</button>
 						</form>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		<div style="text-align: center;">
-			<span><a class="btn btn-info">선택 주소록 삭제</a></span>
-			<span><a class="btn btn-success">배송지등록</a></span>
+			<span><a class="btn btn-dark">선택 주소록 삭제</a></span>
+			<span><a class="btn btn-dark">배송지등록</a></span>
 		</div>
 	</div>
 

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
@@ -19,20 +19,20 @@
 		<div style="min-height: 542px; display:flex;">
 			<div id="wrap" >
 				<span class="mb-3" style="display: block; font-size: 72px; font-weight: 600; line-height: 1.1">poster</span>
-				<span class="mb-3" style="display: block; font-size: 72px">the most beautiful tool</span>
-				<span class="mb-3" style="display: block; font-size: 72px">to start a journey</span>
+				<span class="mb-3" style="display: block; font-size: 72px; word-spacing: -10px;">the most beautiful tool</span>
+				<span class="mb-3" style="display: block; font-size: 72px; word-spacing: -10px;">to start a journey</span>
 				<span class="mb-3" style="display: block; font-size: 72px; text-align: right;">&copy;2023</span>
 			</div>
 		</div>
 		<!-- 슬로건 -->
 		<div id="slogan" style="padding: 42px 13px 100px;">
-			<h2 style="text-align: center; font-size: 17px;">
-				<span style="display: block; font-weight: 600">Journey</span>
-				<span style="display: block; font-weight: 500">in my room</span>
+			<h2 style="text-align: center; ">
+				<span style="display: block; font-weight: 600; font-size: 17px; ">Journey</span>
+				<span style="display: block; font-weight: 500; font-size: 17px; word-spacing: -3px;">in my room</span>
 			</h2>
 		</div>
 		<!-- 포스터 목록 -->
-		<div id="poster-list" style="display: flex; flex-direction:column; flex-wrap: wrap; max-width:1080px; margin: 0 auto" >
+		<div id="poster-list" style="display: flex; flex-direction:column; flex-wrap: wrap; max-width:1080px; margin: 0 auto;">
 			<div class="poster-item">
 				<div class="poster" style="width: 330px;">
 					<a href="#"><img class="poster-image" alt="123" src="data:${productImage.productImageType};base64, ${base64Img}"></a>

@@ -24,7 +24,7 @@
 			<nav class="navbar" style="position: fixed; z-index: 99; left: 0; top: 0; width: 100%;">
 				<a class="" href="${pageContext.request.contextPath}"> 
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/poster4j.png" width="20px">
-					<span style="font-size: 20px; font-weight: 600; color: #212529">poster4j</span>
+					<span style="font-size: 20px; font-weight: 500; color: #212529">poster4j</span>
 				</a>
 				<div>
 					<%-- Ch08
