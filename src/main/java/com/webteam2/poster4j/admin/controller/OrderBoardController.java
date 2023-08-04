@@ -41,57 +41,20 @@ public class OrderBoardController {
 			HttpSession session) 
 	{	
 		String pastCategory = (String) session.getAttribute("orderDetailSearchCategory");
-		// category 검색이 없다가 생긴 경우
-		if ((category != null) && (pastCategory == null)) {
-			// 세션에 현재 검색 카테고리 저장
-			session.setAttribute("orderDetailSearchCategory", category);
-			// pageNo 1로 초기화
-			pageNo = "1";
-		} 
-		// category 검색이 있다가 사라진 경우
-		else if ((category == null) && (pastCategory != null)) {
-			// 세션에서 검색 카테고리 삭제
-			session.removeAttribute("orderDetailSearchCategory");
-			// pageNo 1로 초기화
-			pageNo = "1";
-		}
-		// category 검색이 있었고, 지금도 있는 경우
-		else if ((category != null) && (pastCategory != null)) {
-			// 이전 검색 category와 현재 검색 category가 다르다면 페이지 번호 초기화
-			if (!category.equals(pastCategory)) {
-				// 세션에 현재 검색 카테고리로 교체
-				session.setAttribute("orderDetailSearchCategory", category);
-				// pageNo 1로 초기화
-				pageNo = "1";
-			}
-		}
-		
 		String pastContent = (String) session.getAttribute("orderDetailSearchContent");
-		// content 검색이 없다가 생긴 경우
-		if ((content != null) && (pastContent == null)) {
-			// 세션에 현재 검색 카테고리 저장
-			session.setAttribute("orderDetailSearchContent", content);
-			// pageNo 1로 초기화
-			pageNo = "1";
-		} 
-		// content 검색이 있다가 사라진 경우
-		else if ((content == null) && (pastContent != null)) {
-			// 세션에서 검색 카테고리 삭제
-			session.removeAttribute("orderDetailSearchContent");
-			// pageNo 1로 초기화
-			pageNo = "1";
-		}
-		// content 검색이 있었고, 지금도 있는 경우
-		else if ((content != null) && (pastContent != null)) {
-			// 이전 검색 category와 현재 검색 content가 다르다면 페이지 번호 초기화
-			if (!content.equals(pastContent)) {
-				// 세션에 현재 검색 카테고리로 교체
+		if ((category!=null && !category.equals("")) && (content!=null && !content.equals(""))) {
+			if (!category.equals(pastCategory) || !content.equals(pastContent)) {
+				session.setAttribute("orderDetailSearchCategory", category);
 				session.setAttribute("orderDetailSearchContent", content);
-				// pageNo 1로 초기화
 				pageNo = "1";
 			}
+		} else {
+			if (pastCategory != null) {
+				pageNo = "1";
+			}
+			session.removeAttribute("orderDetailSearchCategory");
+			session.removeAttribute("orderDetailSearchContent");
 		}
-
 		
 		// 브라우저에서 pageNo가 넘어오지 않았을 경우
 		if (pageNo == null) {
