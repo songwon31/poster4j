@@ -10,19 +10,57 @@
 			<div style="font-size: 20px">상품 등록</div>
 			<div class="mt-2">
 				<form id="registerProductForm" method="post" action="register" enctype="multipart/form-data">
-					<div class="input-group">
-						<div class="input-group-prepend"><span class="input-group-text">ID</span></div>
-						<input id="productImageId" type="text" name="productImageId" class="form-control">
+				
+					<div class="input-group" style="width:100%;">
+						<div class="input-group-addon" style="width:30%; text-align:left;"><span class="input-group-text">상품명</span></div>
+						<input id="productName" type="text" name="productName" class="form-control" style="width:70%;">
 					</div>
 					
-					<div class="input-group">
-						<div class="input-group-prepend"><span class="input-group-text">카테고리</span></div>
-						<input id="productImageCtgry" name="productImageCtgry" class="form-control"></input>
+					<div class="input-group" style="width:100%;">
+						<div class="input-group-addon" style="width:30%; text-align:left;"><span class="input-group-text">가격</span></div>
+						<input id="productPrice" type="text" name="productPrice" class="form-control" style="width:70%;">
 					</div>
 					
-					<div class="input-group">
-						<div class="input-group-prepend"><span class="input-group-text">파일</span></div>
-						<input id="pattach" type="file" name="pattach" class="form-control">
+					<div class="input-group" style="width:100%;">
+						<div class="input-group-addon" style="width:30%; text-align:left;"><span class="input-group-text">할인율(%)</span></div>
+						<input id="productDiscountRate" type="text" name="productDiscountRate" class="form-control" style="width:70%;">
+					</div>
+					
+					<div class="input-group" style="width:100%;">
+						<div class="input-group-addon" style="width:30%; text-align:left;"><span class="input-group-text">테마</span></div>
+						<input id="productTheme" type="text" name="productTheme" class="form-control" style="width:70%;">
+					</div>
+					
+					<div class="input-group" style="width:100%;">
+						<div class="input-group-addon" style="width:30%; text-align:left;"><span class="input-group-text">아티스트</span></div>
+						<input id="productArtist" type="text" name="productArtist" class="form-control" style="width:70%;">
+					</div>
+					
+					<div class="input-group" style="width:100%;">
+						<div class="input-group-addon" style="width:30%; text-align:left;"><span class="input-group-text">텍스처</span></div>
+						<input id="productTexture" type="text" name="productTexture" class="form-control" style="width:70%;">
+					</div>
+					
+					<div class="input-group" style="width:100%;">
+						<div class="input-group-addon" style="width:30%; text-align:left;"><span class="input-group-text">재고(옵션)</span></div>
+						<input id="productTexture" type="text" name="productTexture" class="form-control" style="width:70%;">
+					</div>
+					
+					
+					
+					<div class="input-group" style="width:100%;">
+						<div class="input-group-addon" style="width:30%; text-align:left;"><span class="input-group-text">ID</span></div>
+						<input id="productImageId" type="text" name="productImageId" class="form-control" style="width:70%;">
+					</div>
+					
+					<div class="input-group" style="width:100%;">
+						<div class="input-group-addon" style="width:30%; text-align:left;"><span class="input-group-text">카테고리</span></div>
+						<input id="productImageCtgry" name="productImageCtgry" class="form-control" style="width:70%;"></input>
+					</div>
+					
+					<div class="input-group" style="width:100%;">
+						<div class="input-group-addon" style="width:30%; text-align:left;"><span class="input-group-text">파일</span></div>
+						<input id="pattach" type="file" name="pattach" class="form-control" style="width:70%;">
 					</div>
 					
 					<button class="btn btn-info btn-sm">등록</button>

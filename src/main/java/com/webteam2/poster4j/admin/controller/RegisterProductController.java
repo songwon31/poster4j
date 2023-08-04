@@ -32,7 +32,7 @@ public class RegisterProductController {
 	
 	@PostMapping("/register") 
 	public String register(ProductImage productImage, HttpSession session) throws Exception {
-		/*
+		
 		Product newProduct = new Product();
 		newProduct.setProductId(27);
 		newProduct.setProductName("poster27");
@@ -43,7 +43,7 @@ public class RegisterProductController {
 		newProduct.setProductTexture("normal");
 		
 		productService.registerProduct(newProduct);
-		*/
+		
 		productImage.setProductId(26);
 		MultipartFile mf = productImage.getPattach();
 		if (!mf.isEmpty()) {

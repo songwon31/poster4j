@@ -8,6 +8,9 @@
 	</select>
 	
 	<insert id="insertProductImage" parameterType="ProductImage">
+		<selectKey keyProperty="productImageId" resultType="int" order="BEFORE">
+			select product_image_seq.nextval from dual
+		</selectKey>
 		<!-- null이 들어갈 수 있는 컬럼값은 반드시 jdbcType을 명시해야 함 -->
 		insert into product_image (product_image_id, product_image_ctgry, product_id,
 								   product_image_source, product_image_type, product_image_name)
