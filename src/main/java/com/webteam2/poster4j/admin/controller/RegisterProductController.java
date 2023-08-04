@@ -1,11 +1,13 @@
 package com.webteam2.poster4j.admin.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.webteam2.poster4j.dto.Product;
@@ -31,21 +33,37 @@ public class RegisterProductController {
 	}
 	
 	@PostMapping("/register") 
-	public String register(ProductImage productImage, HttpSession session) throws Exception {
-		
+	public String register(HttpServletRequest request, HttpSession session,
+			@RequestParam(value="productName")String productName,
+			@RequestParam(value="productPrice")int productPrice,
+			@RequestParam(value="productDiscountRate")int productDiscountRate,
+			@RequestParam(value="productTheme")String productTheme,
+			@RequestParam(value="productArtist")String productArtist,
+			@RequestParam(value="productTexture")String productTexture,
+			@RequestParam(value="productStock", required=false)String productStock,
+			@RequestParam(value="productImageCtgry")String productImageCtgry,
+			@RequestParam(value="pattach")MultipartFile pattach
+			) throws Exception 
+		{
 		Product newProduct = new Product();
-		newProduct.setProductId(27);
-		newProduct.setProductName("poster27");
-		newProduct.setProductPrice(10000);
-		newProduct.setProductDiscountRate(0);
-		newProduct.setProductTheme("wave");
-		newProduct.setProductArtist("songwon");
-		newProduct.setProductTexture("normal");
+		newProduct.setProductName(productName);
+		newProduct.setProductPrice(productPrice);
+		newProduct.setProductDiscountRate(productDiscountRate);
+		newProduct.setProductTheme(productTheme);
+		newProduct.setProductArtist(productArtist);
+		newProduct.setProductTexture(productTexture);
+		if (productStock != null && !productStock.equals("")) {
+			newProduct.setProductStock(Integer.parseInt(productStock));
+		}
+		
+		log.info("product: " + newProduct);
 		
 		productService.registerProduct(newProduct);
 		
-		productImage.setProductId(26);
-		MultipartFile mf = productImage.getPattach();
+		ProductImage productImage = new ProductImage();
+		productImage.setProductId(newProduct.getProductId());
+		productImage.setProductImageCtgry(productImageCtgry);
+		MultipartFile mf = pattach;
 		if (!mf.isEmpty()) {
 			productImage.setProductImageName(mf.getOriginalFilename());
 			productImage.setProductImageType(mf.getContentType());
@@ -53,7 +71,7 @@ public class RegisterProductController {
 		}
 		productImageService.register(productImage);
 		
-		
+		log.info("productImage: " + productImage);
 		
 		return "redirect:/admin/productBoard";
 	}
