@@ -17,20 +17,33 @@
 					<div class="input-group row justify-content-center mb-2" style="width: 100%">
 						<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">ID</span>
 						<input type="text" id="productId" name="productId" class="form-control-sm" style="width:80%;" 
-							   placeholder="상품ID를 입력하세요" value=""/>
+							   placeholder="상품ID를 입력하세요" value="${productSearchId}"/>
 					</div>
 					
 					<div class="input-group row justify-content-center mb-2" style="width: 100%">
 						<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">상품명</span>
 						<input type="text" id="productName" name="productName" class="form-control-sm" style="width:80%;" 
-							   placeholder="상품명을 입력하세요"/>
+							   placeholder="상품명을 입력하세요" value="${productSearchName}"/>
 					</div>
 					
 					<div class="input-group row justify-content-center mb-2" style="width: 100%">
 						<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">판매가</span>
-						<input type="text" id="productPriceStart" name="productPriceStart" class="form-control-sm" style="width:30%;"/>
-						<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">~</span>
-						<input type="text" id="productPriceEnd" name="productPriceEnd" class="form-control-sm" style="width:30%;"/>
+						<input type="text" id="productPriceStart" name="productPriceStart" class="form-control-sm" style="width:30%;"
+							   value="${productSearchPriceStart}"/>
+						<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 5%"> </span>
+						<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 15%">~</span>
+						<input type="text" id="productPriceEnd" name="productPriceEnd" class="form-control-sm" style="width:30%;"
+									 value="${productSearchPriceEnd}"/>
+					</div>
+					
+					<div class="input-group row justify-content-center mb-2" style="width: 100%">
+						<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">할인율</span>
+						<input type="text" id="productDiscountRateStart" name="productDiscountRateStart" class="form-control-sm" style="width:30%;"
+							   value="${productSearchDiscountRateStart}"/>
+						<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 5%"> </span>
+						<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 15%">~</span>
+						<input type="text" id="productDiscountRateEnd" name="productDiscountRateEnd" class="form-control-sm" style="width:30%;"
+							   value="${productSearchDiscountRateEnd}"/>
 					</div>
 					
 					<div class="input-group row justify-content-center mb-2" style="width: 100%">
@@ -76,7 +89,17 @@
 						</select>
 					</div>
 					
-					<button class="btn btn-dark btn-sm">검색</button>
+					<div class="input-group row justify-content-center mb-2" style="width: 100%">
+						<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">재고</span>
+						<input type="text" id="productStockStart" name="productStockStart" class="form-control-sm" style="width:30%;"
+							   value="${productSearchStockStart}"/>
+						<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 5%"> </span>
+						<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 15%">~</span>
+						<input type="text" id="productStockEnd" name="productStockEnd" class="form-control-sm" style="width:30%;"
+							   value="${productSearchStockEnd}"/>
+					</div>
+					
+					<button class="btn btn-dark btn-sm mt-3">검색</button>
 				</form>
 			</div>
 			<div class="d-flex justify-content-end px-2 pt-1 pb-3">

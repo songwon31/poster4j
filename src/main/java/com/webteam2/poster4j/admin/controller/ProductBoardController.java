@@ -9,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Product;
+import com.webteam2.poster4j.dto.ProductBoardSearch;
 import com.webteam2.poster4j.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +26,14 @@ public class ProductBoardController {
 	ProductService productService;
 	
 	@RequestMapping("/productBoard")
-	public String productBoard(String pageNo, Model model, HttpSession session) {
+	public String productBoard(ProductBoardSearch productBoardSearch, String pageNo, Model model, HttpSession session) 
+	{
+		ProductBoardSearch pastProductBoardSearch = (ProductBoardSearch)session.getAttribute("productBoardSearch");
+		if (!productBoardSearch.equals(pastProductBoardSearch)) {
+			session.setAttribute("productBoardSearch", productBoardSearch);
+			pageNo = "1";
+		}
+		
 		// 브라우저에서 pageNo가 넘어오지 않았을 경우
 		if (pageNo == null) {
 			// 세션에 저장된 페이지 번호가 있는지 확인
