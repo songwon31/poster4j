@@ -31,12 +31,12 @@ public class ProductBoardController {
 		productBoardSearch.makeEmptyToNull();
 		
 		ProductBoardSearch pastProductBoardSearch = (ProductBoardSearch)session.getAttribute("productBoardSearch");
-		
+		/*
 		log.info("productBoardSearch: " + productBoardSearch);
 		log.info("pastProductBoardSearch: " + pastProductBoardSearch);
 		log.info("isEqual: " + productBoardSearch.equals(pastProductBoardSearch));
 		log.info("");
-		
+		*/
 		if (!productBoardSearch.equals(pastProductBoardSearch)) {
 			session.setAttribute("productBoardSearch", productBoardSearch);
 			pageNo = "1";
@@ -59,17 +59,19 @@ public class ProductBoardController {
 		
 		
 		int totalSearchedProductNum = productService.getTotalSearchedProductNum(productBoardSearch);
-		log.info("totalSearchedProductNum: " + totalSearchedProductNum);
 		Pager pager = new Pager(10, 5, totalSearchedProductNum, intPageNo);
 		model.addAttribute("pager", pager);
 		
 		List<Product> productList = productService.getSearchedProductList(productBoardSearch, pager);
 		model.addAttribute("productList", productList);
-	
-		
-		
 		
 		return "admin/productBoard";
+	}
+	
+	@GetMapping("/removeSearch")
+	public String removeSearch(HttpSession session) {
+		session.removeAttribute("productBoardSearch");
+		return "redirect:/admin/productBoard";
 	}
 	
 	@GetMapping("/deleteProduct")
