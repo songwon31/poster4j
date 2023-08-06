@@ -40,7 +40,7 @@ public class AddressListController {
 		session.setAttribute("pageNo", String.valueOf(pageNo));
 		
 		int totalReceiverNum = receiverService.getTotalReceiverNum();
-		Pager pager = new Pager(10, 5, totalReceiverNum, intPageNo);
+		Pager pager = new Pager(5, 5, totalReceiverNum, intPageNo);
 		
 		List<Receiver> list = receiverService.getList(pager);
 		

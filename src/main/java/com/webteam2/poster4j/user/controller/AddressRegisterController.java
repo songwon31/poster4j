@@ -28,10 +28,7 @@ public class AddressRegisterController {
 	@PostMapping("/addressRegister")
 	public String AddressRegister(Receiver receiver, HttpSession session) {
 		log.info("배송지 등록 폼 전송");
-		
 		receiverService.register(receiver);
-		
-		
 		return "redirect:/addressList";
 	}
 }

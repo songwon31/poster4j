@@ -9,4 +9,6 @@ public interface ReceiverService {
 	public void register(Receiver receiver);
 	public List<Receiver> getList(Pager pager);
 	public int getTotalReceiverNum();
+	public Receiver getBoard(int receiverId);
+	public void modify(Receiver receiver);
 }

@@ -43,4 +43,14 @@ public class ReceiverServiceImpl implements ReceiverService {
 		return totalReceiverNum;
 	}
 	
+	@Override
+	public Receiver getBoard(int receiverId) {
+		Receiver receiver = receiverDao.selectById(receiverId);
+		return receiver;
+	}
+	
+	@Override
+	public void modify(Receiver receiver) {
+		receiverDao.updateById(receiver);
+	}
 }

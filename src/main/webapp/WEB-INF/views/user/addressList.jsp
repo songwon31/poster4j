@@ -28,7 +28,7 @@
 						<td>[${receiver.receiverZip}][${receiver.receiverAddress}] [${receiver.receiverAddressDetail}]</td>
 						<td>
 							<form class="form-inline" method="get" action="changeAddress">
-								<button type="submit" class="btn btn-dark btn-sm ml-2">수정</button>
+								<a type="submit" class="btn btn-dark btn-sm ml-2" href="updateAddressRegister?receiverId=${receiver.receiverId}">수정</a>
 							</form>
 						</td>
 					</tr>
@@ -37,24 +37,24 @@
 				<tr>
 					<td colspan="4" class="text-center">
 						<div>
-							<a class="btn btn-outline-primary btn-sm" href="getBoardList?pageNo=1">처음</a>
+							<a class="btn btn-outline-primary btn-sm" href="addressList?pageNo=1">처음</a>
 							<c:if test="${pager.groupNo>1}">
-								<a class="btn btn-outline-info btn-sm" href="getBoardList?pageNo=${pager.startPageNo-1}">이전</a>
+								<a class="btn btn-outline-info btn-sm" href="addressList?pageNo=${pager.startPageNo-1}">이전</a>
 							</c:if>
 					
 							<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 								<c:if test="${pager.pageNo != i}">
-									<a class="btn btn-outline-success btn-sm" href="getBoardList?pageNo=${i}">${i}</a>
+									<a class="btn btn-outline-success btn-sm" href="addressList?pageNo=${i}">${i}</a>
 								</c:if>
 								<c:if test="${pager.pageNo == i}">
-									<a class="btn btn-danger btn-sm" href="getBoardList?pageNo=${i}">${i}</a>
+									<a class="btn btn-danger btn-sm" href="addressList?pageNo=${i}">${i}</a>
 								</c:if>
 							</c:forEach>
 					
 							<c:if test="${pager.groupNo<pager.totalGroupNo}">
-								<a class="btn btn-outline-info btn-sm" href="getBoardList?pageNo=${pager.endPageNo+1}">다음</a>
+								<a class="btn btn-outline-info btn-sm" href="addressListt?pageNo=${pager.endPageNo+1}">다음</a>
 							</c:if>
-							<a class="btn btn-outline-primary btn-sm" href="getBoardList?pageNo=${pager.totalPageNo}">맨끝</a>
+							<a class="btn btn-outline-primary btn-sm" href="addressList?pageNo=${pager.totalPageNo}">맨끝</a>
 						</div>
 					</td>
 				</tr>
