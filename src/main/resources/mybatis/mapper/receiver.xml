@@ -14,5 +14,24 @@
 		insert into receiver (RECEIVER_ID, CUSTOMER_ID, RECEIVER_NAME, RECEIVER_ZIP, RECEIVER_ADDRESS, RECEIVER_ADDRESS_DETAIL, RECEIVER_TELNO, RECEIVER_DEMAND, RECEIVER_ADDRESS_TYPE)
 		values(receiver_seq.nextval, 'safd', #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, '변경 전', 'DEFAULT')
 	</insert>
+	
+	<select id="selectByPage" parameterType="Pager"  resultType="Receiver">
+		<![CDATA[
+		select rnum, receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno
+		from (
+			 select rownum as rnum, receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno
+			 from (
+			 	select receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno
+			 	from receiver
+			 	order by receiver_id desc
+			 )
+			 where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
+	</select> 
+	<select id="count" resultType="int">
+		select count(*) from receiver
+	</select>
 </mapper>
 

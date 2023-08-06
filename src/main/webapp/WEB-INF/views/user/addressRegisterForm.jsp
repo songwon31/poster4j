@@ -29,8 +29,8 @@
 						<label for="receiverAddress" class="mr-4">주소</label>
 					</td>
 					<td>
-						<input type="text" id="postcode" name="receiverZip" class="form-control" placeholder="우편번호" value="" style="font-size: 13px;">
-						<input class="btn btn-dark btn-sm" type="button" onclick="execDaumPostcode()" value="Search"><br>
+						<input type="text" id="postcode" name="receiverZip" class="form-control" placeholder="우편번호" value="" style="font-size: 13px; width:200px; display: inline;">
+						<input class="btn" type="button" onclick="execDaumPostcode()" value="Search" style="border: 1px solid; border-radius: 0"><br>
 						<input type="text" id="address" name="receiverAddress" class="form-control" placeholder="기본주소" value="">
 						<input type="text" id="detailAddress" name="receiverAddressDetail" class="form-control" placeholder="나머지 주소(선택 입력 가능)" value="">
 					</td>
