@@ -29,6 +29,12 @@ public class ProductBoardController {
 	public String productBoard(ProductBoardSearch productBoardSearch, String pageNo, Model model, HttpSession session) 
 	{
 		ProductBoardSearch pastProductBoardSearch = (ProductBoardSearch)session.getAttribute("productBoardSearch");
+		
+		log.info("productBoardSearch: " + productBoardSearch);
+		log.info("PastProductBoardSearch: " + pastProductBoardSearch);
+		log.info("isEqual: " + productBoardSearch.equals(pastProductBoardSearch));
+		log.info("");
+
 		if (!productBoardSearch.equals(pastProductBoardSearch)) {
 			session.setAttribute("productBoardSearch", productBoardSearch);
 			pageNo = "1";
