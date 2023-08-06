@@ -3,9 +3,11 @@ package com.webteam2.poster4j.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Product;
+import com.webteam2.poster4j.dto.ProductBoardSearch;
 
 @Mapper
 public interface ProductDao {
@@ -16,4 +18,8 @@ public interface ProductDao {
 	public Product selectAllById(int productId);
 	public int updateProduct(Product product);
 	public int deleteById(int productId);
+	
+	public int countSearchedProductNum(ProductBoardSearch productBoardSearch);
+	public List<Product> selectSearchedProductByPage(@Param("productBoardSearch") ProductBoardSearch productBoardSearch, 
+													 @Param("pager") Pager pager);
 }

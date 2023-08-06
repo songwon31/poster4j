@@ -14,5 +14,6 @@
 		<typeAlias alias="Customer" type="com.webteam2.poster4j.dto.Customer" />
 		<typeAlias alias="ProductImage" type="com.webteam2.poster4j.dto.ProductImage" />
 		<typeAlias alias="Receiver" type="com.webteam2.poster4j.dto.Receiver" />
+		<typeAlias alias="ProductBoardSearch" type="com.webteam2.poster4j.dto.ProductBoardSearch" />
 	</typeAliases>
 </configuration>

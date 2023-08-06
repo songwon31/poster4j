@@ -58,4 +58,193 @@
 		delete from product where product_id=#{productId}
 	</delete>
 	
+	<select id="countSearchedProductNum" parameterType="ProductBoardSearch">
+		select count(*)
+		from product
+		<where>
+			<if test="productId!=null and !productId.equals('')">
+				product_id = #{productId}
+			</if>
+			
+			<if test="productName!=null">
+				and product_name = #{productName}
+			</if>
+			
+			<!-- 가격 범위 계산 -->
+			<!-- 시작값, 끝값 모두 제공됐을 경우 -->
+			<if test="(productPriceStart!=null and !productPriceStart.equals('')) and 
+					  (productPriceEnd!=null and !productPriceEnd.equals(''))">
+				and product_price between #{productPriceStart} and #{productPriceEnd}
+			</if>
+			<!-- 시작값만 제공됐을 경우 -->
+			<if test="(productPriceStart!=null and !productPriceStart.equals('')) and 
+					  (productPriceEnd==null or productPriceEnd.equals(''))">
+				<![CDATA[
+				and product_price >= #{productPriceStart}
+				]]>
+			</if>
+			<!-- 끝값만 제공됐을 경우 -->
+			<if test="(productPriceStart==null or productPriceStart.equals('')) and 
+					  (productPriceEnd!=null and !productPriceEnd.equals(''))">
+				<![CDATA[
+				and product_price <= #{productPriceEnd}
+				]]>
+			</if>
+			
+			<!-- 할인 범위 계산 -->
+			<!-- 시작값, 끝값 모두 제공됐을 경우 -->
+			<if test="(productDiscountRateStart!=null and !productDiscountRateStart.equals('')) and 
+					  (productDiscountRateEnd!=null and !productDiscountRateEnd.equals(''))">
+				and product_discount_rate between #{productDiscountRateStart} and #{productDiscountRateEnd}
+			</if>
+			<!-- 시작값만 제공됐을 경우 -->
+			<if test="(productDiscountRateStart!=null and !productDiscountRateStart.equals('')) and 
+					  (productDiscountRateEnd==null or productDiscountRateEnd.equals(''))">
+				<![CDATA[
+				and product_discount_rate >= #{productDiscountRateStart}
+				]]>
+			</if>
+			<!-- 끝값만 제공됐을 경우 -->
+			<if test="(productDiscountRateStart==null or productDiscountRateStart.equals('')) and 
+					  (productDiscountRateEnd!=null and !productDiscountRateEnd.equals(''))">
+				<![CDATA[
+				and product_discount_rate <= #{productDiscountRateEnd}
+				]]>
+			</if>
+			
+			<if test="productTheme!=null">
+				and product_theme = #{productTheme}
+			</if>
+			<if test="productArtist!=null">
+				and product_artist = #{productArtist}
+			</if>
+			<if test="productTexture!=null">
+				and product_texture = #{productTexture}
+			</if>
+			
+			<!-- 가격 범위 계산 -->
+			<!-- 시작값, 끝값 모두 제공됐을 경우 -->
+			<if test="(productStockStart!=null and !productStockStart.equals('')) and 
+					  (productStockEnd!=null and !productStockEnd.equals(''))">
+				and product_stock between #{productStockStart} and #{productStockEnd}
+			</if>
+			<!-- 시작값만 제공됐을 경우 -->
+			<if test="(productStockStart!=null and !productStockStart.equals('')) and 
+					  (productStockEnd==null or productStockEnd.equals(''))">
+				<![CDATA[
+				and product_stock >= #{productStockStart}
+				]]>
+			</if>
+			<!-- 끝값만 제공됐을 경우 -->
+			<if test="(productStockStart==null or productStockStart.equals('')) and 
+					  (productStockEnd!=null and !productStockEnd.equals(''))">
+				<![CDATA[
+				and product_stock <= #{productStockEnd}
+				]]>
+			</if>
+			
+		</where>
+	</select>
+	
+	<select id="selectSearchedProductByPage" parameterType="map" resultType="Product">
+		select rnum, product_id, product_name, product_price, product_discount_rate, 
+			   product_theme, product_artist, product_texture, product_stock
+		from (
+		    select rownum as rnum, product_id, product_name, product_price, product_discount_rate, 
+		    	   product_theme, product_artist, product_texture, product_stock
+		    from (
+		        select product_id, product_name, product_price, product_discount_rate, 
+		    		   product_theme, product_artist, product_texture, product_stock
+		        from product
+		        <where>
+					<if test="productBoardSearch.productId!=null and !productBoardSearch.productId.equals('')">
+						product_id = #{productBoardSearch.productId}
+					</if>
+					
+					<if test="productBoardSearch.productName!=null">
+						and product_name = #{productBoardSearch.productName}
+					</if>
+					
+					<!-- 가격 범위 계산 -->
+					<!-- 시작값, 끝값 모두 제공됐을 경우 -->
+					<if test="(productBoardSearch.productPriceStart!=null and !productBoardSearch.productPriceStart.equals('')) and 
+							  (productBoardSearch.productPriceEnd!=null and !productBoardSearch.productPriceEnd.equals(''))">
+						and product_price between #{productBoardSearch.productPriceStart} and #{productBoardSearch.productPriceEnd}
+					</if>
+					<!-- 시작값만 제공됐을 경우 -->
+					<if test="(productBoardSearch.productPriceStart!=null and !productBoardSearch.productPriceStart.equals('')) and 
+							  (productBoardSearch.productPriceEnd==null or productBoardSearch.productPriceEnd.equals(''))">
+						<![CDATA[
+						and product_price >= #{productBoardSearch.productPriceStart}
+						]]>
+					</if>
+					<!-- 끝값만 제공됐을 경우 -->
+					<if test="(productBoardSearch.productPriceStart==null or productBoardSearch.productPriceStart.equals('')) and 
+							  (productBoardSearch.productPriceEnd!=null and !productBoardSearch.productPriceEnd.equals(''))">
+						<![CDATA[
+						and product_price <= #{productBoardSearch.productPriceEnd}
+						]]>
+					</if>
+					
+					<!-- 할인 범위 계산 -->
+					<!-- 시작값, 끝값 모두 제공됐을 경우 -->
+					<if test="(productBoardSearch.productDiscountRateStart!=null and !productBoardSearch.productDiscountRateStart.equals('')) and 
+							  (productBoardSearch.productDiscountRateEnd!=null and !productBoardSearch.productDiscountRateEnd.equals(''))">
+						and product_discount_rate between #{productBoardSearch.productDiscountRateStart} and #{productBoardSearch.productDiscountRateEnd}
+					</if>
+					<!-- 시작값만 제공됐을 경우 -->
+					<if test="(productBoardSearch.productDiscountRateStart!=null and !productBoardSearch.productDiscountRateStart.equals('')) and 
+							  (productBoardSearch.productDiscountRateEnd==null or productBoardSearch.productDiscountRateEnd.equals(''))">
+						<![CDATA[
+						and product_discount_rate >= #{productBoardSearch.productDiscountRateStart}
+						]]>
+					</if>
+					<!-- 끝값만 제공됐을 경우 -->
+					<if test="(productBoardSearch.productDiscountRateStart==null or productBoardSearch.productDiscountRateStart.equals('')) and 
+							  (productBoardSearch.productDiscountRateEnd!=null and !productBoardSearch.productDiscountRateEnd.equals(''))">
+						<![CDATA[
+						and product_discount_rate <= #{productBoardSearch.productDiscountRateEnd}
+						]]>
+					</if>
+					
+					<if test="productBoardSearch.productTheme!=null">
+						and product_theme = #{productBoardSearch.productTheme}
+					</if>
+					<if test="productBoardSearch.productArtist!=null">
+						and product_artist = #{productBoardSearch.productArtist}
+					</if>
+					<if test="productBoardSearch.productTexture!=null">
+						and product_texture = #{productBoardSearch.productTexture}
+					</if>
+					
+					<!-- 가격 범위 계산 -->
+					<!-- 시작값, 끝값 모두 제공됐을 경우 -->
+					<if test="(productBoardSearch.productStockStart!=null and !productBoardSearch.productStockStart.equals('')) and 
+							  (productBoardSearch.productStockEnd!=null and !productBoardSearch.productStockEnd.equals(''))">
+						and product_stock between #{productBoardSearch.productStockStart} and #{productBoardSearch.productStockEnd}
+					</if>
+					<!-- 시작값만 제공됐을 경우 -->
+					<if test="(productBoardSearch.productStockStart!=null and !productBoardSearch.productStockStart.equals('')) and 
+							  (productBoardSearch.productStockEnd==null or productBoardSearch.productStockEnd.equals(''))">
+						<![CDATA[
+						and product_stock >= #{productBoardSearch.productStockStart}
+						]]>
+					</if>
+					<!-- 끝값만 제공됐을 경우 -->
+					<if test="(productBoardSearch.productStockStart==null or productBoardSearch.productStockStart.equals('')) and 
+							  (productBoardSearch.productStockEnd!=null and !productBoardSearch.productStockEnd.equals(''))">
+						<![CDATA[
+						and product_stock <= #{productBoardSearch.productStockEnd}
+						]]>
+					</if>
+					
+				</where>
+		        order by product_id desc
+		    )
+		    where rownum <![CDATA[<=]]> #{pager.endRowNo}
+		)
+		where rnum <![CDATA[>=]]> #{pager.startRowNo}
+	</select>
+	
+	
 </mapper>

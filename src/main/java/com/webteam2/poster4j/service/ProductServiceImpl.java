@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.webteam2.poster4j.dao.ProductDao;
 import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Product;
+import com.webteam2.poster4j.dto.ProductBoardSearch;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -56,5 +57,15 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int deleteById(int productId) {
 		return productDao.deleteById(productId);
+	}
+	
+	@Override
+	public int getTotalSearchedProductNum(ProductBoardSearch productBoardSearch) {
+		return productDao.countSearchedProductNum(productBoardSearch);
+	}
+	
+	@Override
+	public List<Product> getSearchedProductList(ProductBoardSearch productBoardSearch, Pager pager) {
+		return productDao.selectSearchedProductByPage(productBoardSearch, pager);
 	}
 }

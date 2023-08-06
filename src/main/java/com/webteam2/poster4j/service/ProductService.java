@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Product;
+import com.webteam2.poster4j.dto.ProductBoardSearch;
 
 public interface ProductService {
 	public List<Product> getList(Pager pager);
@@ -14,4 +15,7 @@ public interface ProductService {
 	public Product getMainPageProduct(int productId);
 	public int updateProduct(Product product);
 	public int deleteById(int productId);
+	
+	public int getTotalSearchedProductNum(ProductBoardSearch productBoardSearch);
+	public List<Product> getSearchedProductList(ProductBoardSearch productBoardSearch, Pager pager);
 }
