@@ -21,9 +21,9 @@
 		
 	</head>
 	<body>
-		<div class="d-flex flex-column vh-100" >
+		<div class="d-flex flex-column vh-100">
 			<div class="container-fluid flex-grow-1">
-				<div class="row">
+				<div class="col">
 					<div class="py-2 px-4">
 						<div style="font-size: 20px" class="d-flex justify-content-center mb-2">상품 수정</div>
 						<div class="mt-2">

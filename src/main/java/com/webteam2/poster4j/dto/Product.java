@@ -12,4 +12,5 @@ public class Product {
 	private String productArtist;
 	private String productTexture;
 	private int productStock;
+	private String productDetail;
 }

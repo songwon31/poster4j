@@ -38,6 +38,7 @@
 					<th scope="col"><span class="d-flex justify-content-center">금액</span></th>
 					<th scope="col"><span class="d-flex justify-content-center">주문 날짜</span></th>
 					<th scope="col"><span class="d-flex justify-content-center">상태</span></th>
+					<th scope="col"><span class="d-flex justify-content-center"></span>
 				</tr>
 			</thead>
 			<tbody>	
@@ -67,14 +68,24 @@
 									</select>
 									<button type="submit" class="btn btn-success btn-sm ml-2">등록</button>
 								</form>
-								<form>
-								
-								</form>
 							</div>
+						</td>
+						<td style="width:30px;">
+							<span class="d-flex justify-content-center"><a href="#" onClick="updateProduct(${orderDetail.orderId}); return false;" class="btn btn-danger btn-sm">취소</a></span>
 						</td>
 					</tr>
 				</c:forEach>
-				
+				<script>
+					function updateProduct(orderId) {
+						var popupWidth = 600;
+						var popupHeight = 300;
+						var popupX = (window.screen.width/2) - (popupWidth/2);
+						var popupY= (window.screen.height/2) - (popupHeight/2);
+						
+						let options = "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY";
+						window.open("adminCancelOrderForm?orderId=" + orderId, "_blank", "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height="+popupHeight+", width="+popupWidth+", left="+popupX+", top="+popupY);
+					}
+				</script>
 				<tr>
 					<td colspan="12" class="text-center">
 						<div>
