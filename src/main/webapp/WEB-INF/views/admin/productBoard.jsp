@@ -139,42 +139,55 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">ID</th>
-					<th scope="col">상품명</th>
-					<th scope="col">가격</th>
-					<th scope="col">할인율</th>
-					<th scope="col">테마</th>
-					<th scope="col">아티스트</th>
-					<th scope="col">텍스처</th>
-					<th scope="col">재고</th>
-					<th scope="col">수정</th>
-					<th scope="col">삭제</th>
+					<th scope="col"><span class="d-flex justify-content-center">ID</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">상품명</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">가격</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">할인율</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">테마</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">아티스트</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">텍스처</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">재고</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">수정</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">삭제</span></th>
 				</tr>
-				
+			</thead>
+			<tbody>
 				<c:forEach var="product" items="${productList}" varStatus="status">
 					<tr>
-						<td scope="row">${product.productId}</td>
-						<td>${product.productName}</td>
-						<td>${product.productPrice}</td>
-						<td>${product.productDiscountRate}</td>
-						<td>${product.productTheme}</td>
-						<td>${product.productArtist}</td>
-						<td>${product.productTexture}</td>
-						<td>${product.productStock}</td>
-						<td>
-							<form method="get" action="${pageContext.request.contextPath}/admin/updateProductForm">
+						<td scope="row" style="width:10px;"><span class="d-flex justify-content-center">${product.productId}</span></td>
+						<td style="width:30px;"><span class="d-flex justify-content-center">${product.productName}</span></td>
+						<td style="width:30px;"><span class="d-flex justify-content-center">${product.productPrice}</span></td>
+						<td style="width:50px;"><span class="d-flex justify-content-center">${product.productDiscountRate}</span></td>
+						<td style="width:30px;"><span class="d-flex justify-content-center">${product.productTheme}</span></td>
+						<td style="width:30px;"><span class="d-flex justify-content-center">${product.productArtist}</span></td>
+						<td style="width:30px;"><span class="d-flex justify-content-center">${product.productTexture}</span></td>
+						<td style="width:30px;"><span class="d-flex justify-content-center">${product.productStock}</span></td>
+						<td style="width:30px;">
+							<form method="get" action="${pageContext.request.contextPath}/admin/updateProductForm" class="d-flex justify-content-center">
 								<input hidden name="productId" value="${product.productId}"/>
-								<button class="btn btn-primary btn-sm">상품 수정<buttton>
+								<a id="updateProductButton" href="#" onClick="updateProduct(${product.productId}); return false;" class="btn btn-primary btn-sm">수정</a>
 							</form>
 						</td>
-						<td>
-							<form method="get" action="deleteProduct">
+						
+						<td style="width:30px;">
+							<form method="get" action="deleteProduct" class="d-flex justify-content-center">
 								<input hidden name="productId" value="${product.productId}"/>
-								<button class="btn btn-danger btn-sm">상품 삭제<buttton>
+								<button class="btn btn-danger btn-sm">삭제<buttton>
 							</form>
 						</td>
 					</tr>
 				</c:forEach>
+				<script>
+					function updateProduct(productId) {
+						var popupWidth = 350;
+						var popupHeight = 350;
+						var popupX = (window.screen.width / 2) - (popupWidth / 2);
+						var popupY= (window.screen.height / 2) - (popupHeight / 2);
+						
+						let options = "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY";
+						window.open("updateProductForm?productId=" + productId, "_blank", "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height="+popupHeight+", width="+popupWidth+", left="+popupX+", top="+popupY);
+					}
+				</script>
 				
 				<tr>
 					<td colspan="12" class="text-center">
@@ -267,7 +280,7 @@
 					</td>
 				</tr>
 			
-			</thead>
+			</tbody>
 		</table>
 	</div>
 </div>
