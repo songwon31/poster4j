@@ -18,10 +18,10 @@
 				</tr>	
 				<tr class="addressRegisterInputGroup">
 					<td>
-						<label for="customerName" class="mr-4">성명</label>
+						<label for="receiverPersonName" class="mr-4">성명</label>
 					</td>
 					<td>
-						<input type="text" name="customerName" class="form-control" value="">
+						<input type="text" name="receiverPersonName" class="form-control" value="">
 					</td>
 				</tr>
 				<tr class="addressRegisterInputGroup">

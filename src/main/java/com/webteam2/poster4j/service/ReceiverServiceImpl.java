@@ -33,7 +33,6 @@ public class ReceiverServiceImpl implements ReceiverService {
 	@Override
 	public List<Receiver> getList(Pager pager) {
 		List<Receiver> receiverList = receiverDao.selectByPage(pager);
-		//List<Ch13Board> boardList = boardDaoOld.selectByPage(pager);
 		return receiverList;
 	}
 	
@@ -52,5 +51,10 @@ public class ReceiverServiceImpl implements ReceiverService {
 	@Override
 	public void modify(Receiver receiver) {
 		receiverDao.updateById(receiver);
+	}
+	
+	@Override
+	public void delete(int receiverId) {
+		receiverDao.delete(receiverId);
 	}
 }

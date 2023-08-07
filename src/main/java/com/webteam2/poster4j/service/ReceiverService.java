@@ -11,4 +11,5 @@ public interface ReceiverService {
 	public int getTotalReceiverNum();
 	public Receiver getBoard(int receiverId);
 	public void modify(Receiver receiver);
+	public void delete(int receiverId);
 }

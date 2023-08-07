@@ -1,11 +1,12 @@
 package com.webteam2.poster4j.user.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webteam2.poster4j.dto.Receiver;
@@ -19,18 +20,18 @@ public class UpdateAddressRegisterController {
 	@Resource
 	private ReceiverService receiverService;
 	
-	@RequestMapping("/updateAddressRegister")
+	@GetMapping("/updateAddressRegister")
 	public String UpdateAddressRegister(@RequestParam(defaultValue = "0") int receiverId, Model model) {
 		Receiver receiver = receiverService.getBoard(receiverId);
-		
+		log.info(""+receiver.getReceiverPersonName());
 		model.addAttribute("receiver", receiver);
 		return "user/updateAddressRegisterForm";
 		
 		
 	}
 	@PostMapping("/updateAddressRegister")
-	public String updateBoard(Receiver receiver, Model model) {
+	public String updateBoard(Receiver receiver) {
 		receiverService.modify(receiver);
-		return "redirect:/user/addressList";
+		return "redirect:/addressList";
 	}
 }

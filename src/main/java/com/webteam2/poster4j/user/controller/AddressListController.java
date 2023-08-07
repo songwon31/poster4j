@@ -3,10 +3,12 @@ package com.webteam2.poster4j.user.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webteam2.poster4j.dto.Pager;
@@ -45,8 +47,23 @@ public class AddressListController {
 		List<Receiver> list = receiverService.getList(pager);
 		
 		
+		
 		model.addAttribute("pager", pager);
+		
 		model.addAttribute("receivers", list);
 		return "user/addressList";
+	}
+	
+	@PostMapping("/delete")
+	public String ajaxTest(HttpServletRequest request) {
+		String[] ajaxMsg = request.getParameterValues("checkboxArr");
+		int size = ajaxMsg.length;
+		for(int i=0; i<size; i++) {
+			//log.info(ajaxMsg[i]);
+			int receiverId = Integer.parseInt(ajaxMsg[i]);
+			log.info(""+receiverId);
+			receiverService.delete(receiverId);
+		}
+		return "redirect:/addressList";
 	}
 }

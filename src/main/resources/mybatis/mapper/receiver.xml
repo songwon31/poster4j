@@ -3,27 +3,29 @@
 <mapper namespace="com.webteam2.poster4j.dao.ReceiverDao">
 
 	<select id="selectById" parameterType="int" resultType="Receiver">
-		select receiver_id, customer_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_demand, receiver_address_type
+		select receiver_id, customer_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_demand, receiver_address_type, RECEIVER_PERSON_NAME
 		from receiver
 		where receiver_id = #{receiverId}
 	</select>
 	<insert id="insert" parameterType="Receiver">
-		insert into receiver (receiver_id, customer_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_demand, receiver_address_type)
-		values(#{receiverId}, #{customerId}, #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, #{receiverDemand}, 'DEFAULT')
+		insert into receiver (receiver_id, customer_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_demand, receiver_address_type, receiver_enabled)
+		values(#{receiverId}, #{customerId}, #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, #{receiverDemand}, 'DEFAULT', 'TRUE')
 	</insert>
 	<insert id="insertAddress" parameterType="Receiver">
-		insert into receiver (RECEIVER_ID, CUSTOMER_ID, RECEIVER_NAME, RECEIVER_ZIP, RECEIVER_ADDRESS, RECEIVER_ADDRESS_DETAIL, RECEIVER_TELNO, RECEIVER_DEMAND, RECEIVER_ADDRESS_TYPE)
-		values(receiver_seq.nextval, 'safd', #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, '변경 전', 'DEFAULT')
+		insert into receiver (RECEIVER_ID, CUSTOMER_ID, RECEIVER_NAME, RECEIVER_ZIP, RECEIVER_ADDRESS, RECEIVER_ADDRESS_DETAIL, RECEIVER_TELNO, RECEIVER_DEMAND, RECEIVER_ADDRESS_TYPE, RECEIVER_ENABLED, RECEIVER_PERSON_NAME)
+		values(receiver_seq.nextval, 'kimcheol', #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, '변경 전', 'DEFAULT', 'TRUE', #{receiverPersonName})
 	</insert>
 	
+	<!-- DB에서 receiver_enabled가 true인 값 가져옴 -->
 	<select id="selectByPage" parameterType="Pager"  resultType="Receiver">
 		<![CDATA[
-		select rnum, receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno
+		select rnum, receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_enabled, receiver_person_name
 		from (
-			 select rownum as rnum, receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno
+			 select rownum as rnum, receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_enabled, receiver_person_name
 			 from (
-			 	select receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno
+			 	select receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_enabled, receiver_person_name
 			 	from receiver
+			 	where receiver_enabled = 'TRUE'
 			 	order by receiver_id desc
 			 )
 			 where rownum <= #{endRowNo}
@@ -33,12 +35,25 @@
 	</select> 
 	
 	<select id="count" resultType="int">
-		select count(*) from receiver
+		select count(*) 
+		from receiver
+		where receiver_enabled = 'TRUE'
+		
 	</select>
 	
 	<update id="updateById" parameterType="Receiver">
-		update receiver set receiver_name=#{receiverName}, receiver_zip=#{receiverZip}, receiver_address=#{receiverAddress}, receiver_address_detail=#{receiverAddressDetail}, receiver_telno=#{receiverTelno}
+		update receiver set receiver_name=#{receiverName}, receiver_zip=#{receiverZip}, receiver_address=#{receiverAddress}, receiver_address_detail=#{receiverAddressDetail}, receiver_telno=#{receiverTelno}, receiver_person_name=#{receiverPersonName}
 		where receiver_id=#{receiverId}
 	</update>
+	
+	<!-- <delete id="delete">
+		delete from receiver where receiver_id=#{receiverId}
+	</delete> -->
+	
+	<update id="delete" parameterType="Receiver">
+		update receiver set receiver_enabled= 'FALSE'
+		where receiver_id=#{receiverId}
+	</update>
+	
 </mapper>
 

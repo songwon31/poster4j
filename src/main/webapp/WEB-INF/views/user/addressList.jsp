@@ -10,7 +10,7 @@
 		<table class="table">
 			<thead class="border">
 				<tr>
-					<th scope="col"><input type="checkbox" ></th>
+					<th scope="col"><input id="selectAll" type="checkbox"></th>
 					<th scope="col">배송지명</th>
 					<th scope="col">수령인</th>
 					<th scope="col">휴대전화</th>
@@ -29,7 +29,7 @@
 							
 						</th>
 						<td scope="row">${receiver.receiverName}</td>
-						<td>${receiver.receiverName}</td>
+						<td>${receiver.receiverPersonName}</td>
 						<td>${receiver.receiverTelno}</td>
 						<td>[${receiver.receiverZip}][${receiver.receiverAddress}] [${receiver.receiverAddressDetail}]</td>
 						<td>
@@ -75,13 +75,64 @@
 </div>
 
 <script>
-	function deleteValue(){
-		  var checkBoxArr = []; 
-		  $("input:checkbox[name='checkbox']:checked").each(function() {
-		  checkBoxArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
-		})
-		 console.log(checkBoxArr);
+$(function(){
+    //전체선택 체크박스 클릭
+	$("#selectAll").click(function(){
+		//만약 전체 선택 체크박스가 체크된상태일경우
+		if($("#selectAll").prop("checked")) {
+			//해당화면에 전체 checkbox들을 체크해준다
+			$("input[type=checkbox]").prop("checked",true);
+		// 전체선택 체크박스가 해제된 경우
+		} else {
+			//해당화면에 모든 checkbox들의 체크를해제시킨다.
+			$("input[type=checkbox]").prop("checked",false);
+		}
+	})
+})
+
+
+function deleteValue(){
+	var url = "delete"; //Controller로 보내고자 하는 URL
+	var checkboxArr = new Array();
+	var list = $("input[name='checkbox']");
+	for (var i = 0; i < list.length; i++){
+		if(list[i].checked){ //선택되어 있으면 배열에 값을 저장
+			checkboxArr.push(list[i].value);
+		
+		}
 	}
+	console.log(checkboxArr);
+	if(checkboxArr.length == 0){
+		alert("선택된 값이 없습니다.");
+	}
+	else{
+		var check = confirm("정말 삭제하시겠습니까?");
+	}
+	$.ajax({
+		url: url,
+		type : 'POST',
+		traditional : true,
+		data : {
+			checkboxArr : checkboxArr
+		},
+		success: function(data){
+			if(data = 1){
+				alert("삭제 성공");
+				location.replace("${pageContext.request.contextPath}/addressList");
+			}
+			else{
+				alert("삭제 실패");
+			}
+		}
+	})
+	
+	
+	/* var checkBoxArr = []; 
+	$("input:checkbox[name='checkbox']:checked").each(function() {
+		checkBoxArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
+	})
+		console.log(checkBoxArr); */
+}
 
 </script>
 

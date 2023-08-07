@@ -6,7 +6,7 @@
 
 <div class="wrapper" style="margin: 0 auto; width: 350px; font-size: 13px;">
 	<div style="margin-top: 200px;">
-		<form method="post" action="addressRegister" style="font-size: 13px;">
+		<form method="post" action="updateAddressRegister" style="font-size: 13px;">
 			<input type="hidden" name="receiverId" value="${receiver.receiverId}"/>
 			<table class="getInputTable">
 				<tr class="addressRegisterInputGroup">
@@ -19,10 +19,10 @@
 				</tr>	
 				<tr class="addressRegisterInputGroup">
 					<td>
-						<label for="customerName" class="mr-4">성명</label>
+						<label for="receiverPersonName" class="mr-4">성명</label>
 					</td>
 					<td>
-						<input type="text" name="customerName" class="form-control" value="${receiver.receiverName}">
+						<input type="text" name="receiverPersonName" class="form-control" value="${receiver.receiverPersonName}">
 					</td>
 				</tr>
 				<tr class="addressRegisterInputGroup">

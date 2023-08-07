@@ -13,4 +13,6 @@ public class Receiver {
 	private String receiverTelno;
 	private String receiverDemand;
 	private String receiverAddressType;
+	private String receiverEnabled;
+	private String receiverPersonName;
 }

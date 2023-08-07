@@ -14,6 +14,6 @@ public interface ReceiverDao {
 	public int insertAddress(Receiver receiver);
 	public List<Receiver> selectByPage(Pager pager);
 	public int updateById(Receiver receiver);
-	
 	public int count();
+	public int delete(int receiverId);
 }
