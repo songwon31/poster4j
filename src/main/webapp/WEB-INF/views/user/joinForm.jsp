@@ -47,9 +47,12 @@
 						<label for="receiverAddress" class="mr-4">Address</label>
 					</td>
 					<td>
-						<input type="text" name="receiverZip" class="form-control" placeholder="우편번호" value="">
-						<input type="text" name="receiverAddress" class="form-control" placeholder="기본주소" value="">
-						<input type="text" name="receiverAddressDetail" class="form-control" placeholder="나머지 주소(선택 입력 가능)" value="">
+						<div class="zipGroup row no-gutters" >
+							<input type="text" id="joinPostcode" name="receiverZip" class="col-9" placeholder="우편번호" value="">
+							<input class="btn btn-sm btn-dark col-3" onclick="execDaumPostcode()" value="우편번호 찾기"/>
+						</div>
+						<input type="text" id="joinAddress" name="receiverAddress" class="form-control" placeholder="기본주소" value="">
+						<input type="text" id="joinDetailAddress" name="receiverAddressDetail" class="form-control" placeholder="나머지 주소(선택 입력 가능)" value="">
 					</td>
 				</tr>
 				<tr class="joinInputGroup">
@@ -57,7 +60,7 @@
 						<label for="customerTelno" class="mr-4">Tel</label>
 					</td>
 					<td>
-					<input type="text" name="customerTelno" class="form-control" value="">
+						<input type="text" name="customerTelno" class="form-control" value="">
 					</td>
 				</tr>
 				<tr class="joinInputGroup">
@@ -110,7 +113,7 @@
 				<div class="agreeLayout">
 					<span>이용약관에 동의하십니까?</span>
 					<span>
-						<input id="customerTermAgree" name="customerTermAgree" type="checkbox" value="true"/>
+						<input type="checkbox" id="customerTermAgree" name="customerTermAgree" value="TRUE"/>
 						<label for="customerTermAgree">동의함</label>
 					</span>
 				</div>
@@ -131,7 +134,7 @@
 				<div class="agreeLayout">
 					<span>개인정보 수집 및 이용에 동의하십니까?</span>
 					<span>
-						<input id="customerInfoAgree" name="customerInfoAgree" type="checkbox" value="true"/>
+						<input type="checkbox" id="customerInfoAgree" name="customerInfoAgree" value="TRUE"/>
 						<label for="customerInfoAgree">동의함</label>
 					</span>
 				</div>
@@ -148,24 +151,75 @@
 					<li class="agreeLayout">
 						<span>SMS 수신을 동의하십니까?</span>
 						<span>
-							<input id="customerSmsAgree" name="customerSmsAgree" type="checkbox" value="true"/>
+							<input type="checkbox" id="customerSmsAgree" name="customerSmsAgree" value="TRUE"/>
 							<label for="customerSmsAgree">동의함</label>
 						</span>
 					</li>
 					<li class="agreeLayout">
 						<span>이메일 수신을 동의하십니까?</span>
 						<span>
-							<input id="customerEmailAgree" name="customerEmailAgree" type="checkbox" value="true"/>
+							<input type="checkbox" id="customerEmailAgree" name="customerEmailAgree" value="TRUE"/>
 							<label for="customerEmailAgree">동의함</label>
 						</span>
 					</li>
 				</ul>
 			</div>
 			<div class="joinBtn">
-				<input class=" btn btn-dark btn-sm mt-3" type="submit" value="Join"/>
+				<input class=" btn btn-dark btn-sm mt-3 px-4" type="submit" value="Join"/>
 			</div>
 		</form>
 	</div>
 </div>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraAddr = ''; // 참고항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    // 조합된 참고항목을 해당 필드에 넣는다.
+                    //document.getElementById("extraAddress").value = extraAddr;
+                
+                } else {
+                   // document.getElementById("extraAddress").value = '';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById("joinPostcode").value = data.zonecode;
+                document.getElementById("joinAddress").value = addr;
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("joinDetailAddress").focus();
+            }
+        }).open();
+    }
+</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

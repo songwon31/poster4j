@@ -6,9 +6,22 @@
 li {
 	list-style: none;
 }
+
 .joinContent {
 	margin: 200px 0px;
 	font-size: 13px;
+}
+
+.btn-sm {
+	border-radius: 0;
+}
+
+.zipGroup {
+	width: 100%;
+}
+
+.joinPostcode {
+
 }
 
 .joinBtn {

@@ -8,12 +8,15 @@
 	font-size: 13px;
 }
 
+a:hover{
+	text-decoration: none;
+}
+
 input[type=text], input[type=password]{
 	border: none;
 	border-bottom: 1.3px solid #000000;
 	border-radius: 0;
 }
-
 
 #footer li{
 	list-style: none;

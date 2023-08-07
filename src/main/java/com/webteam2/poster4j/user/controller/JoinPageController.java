@@ -27,7 +27,23 @@ public class JoinPageController {
 	
 	@PostMapping("/join")
 	public String join(Customer customer, Model model) {
+		
+		if(customer.getCustomerTermAgree() == null) {
+			customer.setCustomerTermAgree("FALSE");
+		}
+		if(customer.getCustomerInfoAgree() == null) {
+			customer.setCustomerInfoAgree("FALSE");
+		}
+		if(customer.getCustomerSmsAgree() == null) {
+			customer.setCustomerSmsAgree("FALSE");
+		}
+		if(customer.getCustomerEmailAgree() == null) {
+			customer.setCustomerEmailAgree("FALSE");
+		}
+		
 		JoinResult result = customerService.join(customer);
+		
+		
 		if(result == JoinResult.FAIL_DUPLICATED_MID) {
 			String error = "이미 사용중인 아이디입니다.";
 			model.addAttribute("error", error);
@@ -35,7 +51,7 @@ public class JoinPageController {
 		} else {
 			customerService.join(customer);
 			log.info("join success");
-			return "redirect:/user/loginForm";
+			return "user/loginForm";
 		}
 	}
 }
