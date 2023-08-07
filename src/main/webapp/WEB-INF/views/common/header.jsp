@@ -27,20 +27,7 @@
 					<span style="font-size: 20px; font-weight: 500; color: #212529">poster4j</span>
 				</a>
 				<div>
-					<%-- Ch08
-					<c:if test="${login == null}">
-						<div>
-							<a href="${pageContext.request.contextPath}/ch08/content" class="btn btn-success btn-sm">로그인</a>
-						</div>
-					</c:if>
-					<c:if test="${login != null}">
-						<img src="${pageContext.request.contextPath}/resources/images/face/${login.mid}.png" width="30" height="30"/>
-						<a href="${pageContext.request.contextPath}/ch08/logout" class="btn btn-success btn-sm">로그아웃</a>
-					</c:if>
-					 --%>
-					 
-					<%-- Ch13 --%>
-					<c:if test="${ch13Login == null}">
+					<c:if test="${customerLogin == null}">
 						<div style="margin-top: 17px" >
 							<a href="${pageContext.request.contextPath}/">
 								<img alt="" src="${pageContext.request.contextPath}/resources/images/search.png" width="25px;"/>
@@ -53,24 +40,22 @@
 							</a>
 						</div>
 					</c:if>
-					<c:if test="${ch13Login != null}">
-						<img src="${pageContext.request.contextPath}/resources/images/face/member07.png" width="30" height="30";/>
-						<a href="${pageContext.request.contextPath}/ch13/logout" class="btn btn-success btn-sm">로그아웃</a>
+					<c:if test="${customerLogin != null}">
+						<a href="${pageContext.request.contextPath}/">
+							<img alt="" src="${pageContext.request.contextPath}/resources/images/search.png" width="25px;"/>
+						</a>
+						<a href="${pageContext.request.contextPath}/mypage">
+							<img alt="" src="${pageContext.request.contextPath}/resources/images/login.png" width="25px;"/>
+						</a>
+						<a href="${pageContext.request.contextPath}/">
+							<img alt="" src="${pageContext.request.contextPath}/resources/images/menu.png" width="25px;"/>
+						</a>
 					</c:if>
-					<a href="${pageContext.request.contextPath}/admin/menu"><img alt="" src=""></a>
+					<%-- admin menu --%>
+					<%--
+						<c:if test="${customerLogin.customerId == 'admin'}">
+							<a href="${pageContext.request.contextPath}/admin/menu"><img alt="" src=""></a>
+						</c:if>
+					--%>
 				</div>
 			</nav>
-	
-		<%-- 	<div class="flex-grow-1 container-fluid">
-				<div class="row h-100">
-					<div class="col-md-4 p-3 bg-dark">
-						<div class="h-100 d-flex flex-column">
-							<div class="flex-grow-1" style="height: 0px; overflow-y: auto; overflow-x: hidden;">
-								<%@ include file="/WEB-INF/views/common/menu.jsp"%>
-							</div>
-						</div>
-					</div>
-	
-					<div class="col-md-8 p-3">
-						<div class=" h-100 d-flex flex-column">
-							<div class="flex-grow-1 overflow-auto pr-3" style="height: 0px"> --%>

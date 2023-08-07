@@ -58,6 +58,11 @@ public class CustomerServiceImpl implements CustomerService {
 			return LoginResult.FAIL_MPASSWORD;
 		}
 	}
+	
+	@Override
+	public void logout(String customerId) {
+		//만약 DB에 로그인 정보가 저장되어 있다면, 삭제하는 코드를 작성
+	}
 
 	
 }

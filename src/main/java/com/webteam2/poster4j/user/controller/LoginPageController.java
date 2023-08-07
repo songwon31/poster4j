@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.webteam2.poster4j.dto.Customer;
+import com.webteam2.poster4j.interceptor.Login;
 import com.webteam2.poster4j.service.CustomerService;
 import com.webteam2.poster4j.service.CustomerService.LoginResult;
 
@@ -35,8 +36,7 @@ public class LoginPageController {
 	         error = "MPASSWORD가 틀립니다.";
 	      }else {
 	    	  Customer dbCustomer = customerService.getList(customer.getCustomerId());
-	    	  session.setAttribute("cutomerLogin", dbCustomer);
-	    	  log.info(customer.getCustomerId());
+	    	  session.setAttribute("customerLogin", dbCustomer);
 	    	  if(customer.getCustomerId().equals("admin")) {
 	    		  //관리자 로그인
 	    		  log.info("admin login success");

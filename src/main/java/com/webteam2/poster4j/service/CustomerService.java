@@ -18,5 +18,6 @@ public interface CustomerService {
 	public Customer getList(String customerId);
 	public JoinResult join(Customer customer);
 	public LoginResult login(Customer customer);
+	public void logout(String customerId);
 
 }

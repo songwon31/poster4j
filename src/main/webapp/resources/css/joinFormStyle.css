@@ -20,8 +20,8 @@ li {
 	width: 100%;
 }
 
-.joinPostcode {
-
+#joinPostcode {
+	padding: 4.875px 9.75px;
 }
 
 .joinBtn {
