@@ -154,22 +154,22 @@
 			<tbody>
 				<c:forEach var="product" items="${productList}" varStatus="status">
 					<tr>
-						<td scope="row" style="width:10px;"><span class="d-flex justify-content-center">${product.productId}</span></td>
-						<td style="width:30px;"><span class="d-flex justify-content-center">${product.productName}</span></td>
-						<td style="width:30px;"><span class="d-flex justify-content-center">${product.productPrice}</span></td>
-						<td style="width:50px;"><span class="d-flex justify-content-center">${product.productDiscountRate}</span></td>
-						<td style="width:30px;"><span class="d-flex justify-content-center">${product.productTheme}</span></td>
-						<td style="width:30px;"><span class="d-flex justify-content-center">${product.productArtist}</span></td>
-						<td style="width:30px;"><span class="d-flex justify-content-center">${product.productTexture}</span></td>
-						<td style="width:30px;"><span class="d-flex justify-content-center">${product.productStock}</span></td>
-						<td style="width:30px;">
+						<td class="align-middle" scope="row" style="width:10px;"><span class="d-flex justify-content-center">${product.productId}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${product.productName}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${product.productPrice}</span></td>
+						<td class="align-middle" style="width:50px;"><span class="d-flex justify-content-center">${product.productDiscountRate}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${product.productTheme}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${product.productArtist}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${product.productTexture}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${product.productStock}</span></td>
+						<td class="align-middle" style="width:30px;">
 							<form method="get" action="${pageContext.request.contextPath}/admin/updateProductForm" class="d-flex justify-content-center">
 								<input hidden name="productId" value="${product.productId}"/>
 								<a id="updateProductButton" href="#" onClick="updateProduct(${product.productId}); return false;" class="btn btn-primary btn-sm">수정</a>
 							</form>
 						</td>
 						
-						<td style="width:30px;">
+						<td class="align-middle" style="width:30px;">
 							<form method="get" action="deleteProduct" class="d-flex justify-content-center">
 								<input hidden name="productId" value="${product.productId}"/>
 								<button class="btn btn-danger btn-sm">삭제<buttton>

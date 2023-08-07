@@ -1,5 +1,7 @@
 package com.webteam2.poster4j.admin.controller;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.webteam2.poster4j.dto.OrderCancel;
 import com.webteam2.poster4j.service.OrderCancelService;
 import com.webteam2.poster4j.service.OrderDetailService;
 
@@ -36,8 +39,19 @@ public class AdminCancelOrderController {
 			@RequestParam("cancelCategory") String cancelCategory,
 			@RequestParam(value="cancelReason", required=false) String cancelReason) 
 	{
+		orderDetailService.changeOrderDetailStatus(orderId, productId, "취소됨");
 		
-		return null;
+		OrderCancel orderCancel = new OrderCancel();
+		orderCancel.setOrderId(orderId);
+		orderCancel.setProductId(productId);
+		orderCancel.setOrderCancelCategory(cancelCategory);
+		if (cancelReason != null && !cancelReason.equals("")) {
+			orderCancel.setOrderCancelReason(cancelReason);
+		}
+		orderCancel.setOrderCancelReqDate(new Date());
+		orderCancelSerivce.cancelOrder(orderCancel);
+		
+		return "redirect:/admin/orderBoard";
 	}
 	
 	

@@ -1,10 +1,7 @@
 package com.webteam2.poster4j.service;
 
-import java.util.List;
-
-import com.webteam2.poster4j.dto.OrderDetail;
-import com.webteam2.poster4j.dto.Pager;
+import com.webteam2.poster4j.dto.OrderCancel;
 
 public interface OrderCancelService {
-	
+	public int cancelOrder(OrderCancel orderCancel);
 }

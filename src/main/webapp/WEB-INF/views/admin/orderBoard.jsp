@@ -44,12 +44,12 @@
 			<tbody>	
 				<c:forEach var="orderDetail" items="${orderDetailList}" varStatus="status">
 					<tr>
-						<td scope="row" style="width:30px;"><span class="d-flex justify-content-center">${orderDetail.orderId}</span></td>
-						<td style="width:30px;"><span class="d-flex justify-content-center">${orderDetail.productId}</span></td>
-						<td style="width:30px;"><span class="d-flex justify-content-center">${orderDetail.orderDetailQuantity}</span></td>
-						<td style="width:30px;"><span class="d-flex justify-content-center">${orderDetailPriceList[status.index].intValue()}</span></td>
-						<td style="width:30px;"><span class="d-flex justify-content-center"><fmt:formatDate value="${orderDateList[status.index]}" pattern="yyyy-MM-dd"/></span></td>
-						<td style="width:30px;">
+						<td class="align-middle" scope="row" style="width:30px;"><span class="d-flex justify-content-center">${orderDetail.orderId}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${orderDetail.productId}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center align-self-center">${orderDetail.orderDetailQuantity}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center align-self-center">${orderDetailPriceList[status.index].intValue()}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center align-self-center"><fmt:formatDate value="${orderDateList[status.index]}" pattern="yyyy-MM-dd"/></span></td>
+						<td class="align-middle" style="width:30px;">
 							<div class="d-flex justify-content-center">
 								<form class="form-inline" method="get" action="changeOrderStatus">
 									<input hidden name="orderId" value="${orderDetail.orderId}"/>
@@ -70,20 +70,20 @@
 								</form>
 							</div>
 						</td>
-						<td style="width:30px;">
-							<span class="d-flex justify-content-center"><a href="#" onClick="updateProduct(${orderDetail.orderId}); return false;" class="btn btn-danger btn-sm">취소</a></span>
+						<td class="align-middle" style="width:30px;">
+							<span class="d-flex justify-content-center"><a href="#" onClick="updateProduct(${orderDetail.orderId}, ${orderDetail.productId}); return false;" class="btn btn-danger btn-sm">취소</a></span>
 						</td>
 					</tr>
 				</c:forEach>
 				<script>
-					function updateProduct(orderId) {
+					function updateProduct(orderId, productId) {
 						var popupWidth = 600;
 						var popupHeight = 300;
 						var popupX = (window.screen.width/2) - (popupWidth/2);
 						var popupY= (window.screen.height/2) - (popupHeight/2);
 						
 						let options = "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY";
-						window.open("adminCancelOrderForm?orderId=" + orderId, "_blank", "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height="+popupHeight+", width="+popupWidth+", left="+popupX+", top="+popupY);
+						window.open("adminCancelOrderForm?orderId="+orderId+"&productId="+productId, "_blank", "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height="+popupHeight+", width="+popupWidth+", left="+popupX+", top="+popupY);
 					}
 				</script>
 				<tr>
