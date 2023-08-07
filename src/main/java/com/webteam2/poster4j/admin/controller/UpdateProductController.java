@@ -31,8 +31,12 @@ public class UpdateProductController {
 	
 	@RequestMapping("/updateProductForm")
 	public String updateProductForm (int productId, Model model) {
-		Product product = productService.getOneProduct(productId);
-		model.addAttribute("product", product);
+		if (productId != -1) {
+			Product product = productService.getOneProduct(productId);
+			model.addAttribute("product", product);
+		} else {
+			model.addAttribute("productId", productId);
+		}
 		
 		return "admin/updateProduct";
 	}
@@ -86,7 +90,7 @@ public class UpdateProductController {
 			productImageService.register(detailProductImage);
 		}
 		
-		return "redirect:/admin/productBoard";
+		return "redirect:/admin/updateProductForm?productId=-1";
 	}
 	
 }

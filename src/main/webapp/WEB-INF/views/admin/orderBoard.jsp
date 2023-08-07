@@ -38,7 +38,7 @@
 					<th scope="col"><span class="d-flex justify-content-center">금액</span></th>
 					<th scope="col"><span class="d-flex justify-content-center">주문 날짜</span></th>
 					<th scope="col"><span class="d-flex justify-content-center">상태</span></th>
-					<th scope="col"><span class="d-flex justify-content-center"></span>
+					<th scope="col"><span class="d-flex justify-content-center">주문 취소</span>
 				</tr>
 			</thead>
 			<tbody>	

@@ -19,6 +19,16 @@
 		<!-- 공통 스타일 설정을 위한 css -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 		
+		<script>
+			$(init);
+			
+			function init() {
+				if ('${productId}' == -1) {
+					opener.parent.location.reload();
+					window.close();
+				}
+			}
+		</script>
 	</head>
 	<body>
 		<div class="d-flex flex-column vh-100">

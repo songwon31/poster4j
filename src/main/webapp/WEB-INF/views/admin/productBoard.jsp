@@ -188,9 +188,26 @@
 						window.open("updateProductForm?productId=" + productId, "_blank", "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height="+popupHeight+", width="+popupWidth+", left="+popupX+", top="+popupY);
 					}
 				</script>
-				
 				<tr>
-					<td colspan="12" class="text-center">
+					<td colspan="12">
+						<span class="d-flex justify-content-end">
+							<a href="#" onClick="registerProduct(); return false;" class="btn btn-success btn-sm">상품 등록</a>
+						</span>
+					</td>
+				</tr>
+				<script>
+					function registerProduct() {
+						var popupWidth = 400;
+						var popupHeight = 350;
+						var popupX = (window.screen.width/2)-(popupWidth/2);
+						var popupY= (window.screen.height/2)-(popupHeight/2);
+						
+						let options = "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY";
+						window.open("registerProductForm", "_blank", "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height="+popupHeight+", width="+popupWidth+", left="+popupX+", top="+popupY);
+					}
+				</script>
+				<tr>
+					<td colspan="12" class="text-center" style="border:none;">
 						<div>
 							<a class="btn btn-outline-primary btn-sm" href="productBoard?productId=${productBoardSearch.productId}&
 																			productName=${productBoardSearch.productName}&

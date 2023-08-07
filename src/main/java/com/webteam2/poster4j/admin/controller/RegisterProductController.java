@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,8 +30,10 @@ public class RegisterProductController {
 	ProductImageService productImageService;
 	
 	@RequestMapping("/registerProductForm")
-	public String registerProductForm () {
-		
+	public String registerProductForm (@RequestParam(value="quit", required=false, defaultValue="0") int quit, Model model) {
+		if (quit == -1) {
+			model.addAttribute("quit", quit);
+		}
 		return "admin/registerProduct";
 	}
 	
@@ -78,7 +81,7 @@ public class RegisterProductController {
 			productImageService.register(detailProductImage);
 		}
 		
-		return "redirect:/admin/productBoard";
+		return "redirect:/admin/registerProductForm?quit=-1";
 	}
 	
 }

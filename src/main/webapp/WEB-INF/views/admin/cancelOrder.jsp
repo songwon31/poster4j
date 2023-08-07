@@ -46,6 +46,15 @@
 								<div class="d-flex justify-content-end mt-2">
 									<button class="btn btn-danger btn-sm">주문 취소</button>
 								</div>
+								<script>
+									$(init);
+									function init() {
+										if ('${orderId}' == -1 && '${productId}' == -1) {
+											opener.parent.location.reload();
+											window.close();
+										}
+									}
+								</script>
 							</form>
 						</div>
 					</div>

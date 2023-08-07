@@ -51,7 +51,7 @@ public class AdminCancelOrderController {
 		orderCancel.setOrderCancelReqDate(new Date());
 		orderCancelSerivce.cancelOrder(orderCancel);
 		
-		return "redirect:/admin/orderBoard";
+		return "redirect:/admin/adminCancelOrderForm?orderId=-1&productId=-1";
 	}
 	
 	
