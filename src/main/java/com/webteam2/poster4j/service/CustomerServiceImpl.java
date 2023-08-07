@@ -17,10 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CustomerServiceImpl implements CustomerService {
 	@Resource
-	CustomerDao customerDao;
-	
-	@Resource
-	ReceiverDao receiverDao;
+	private CustomerDao customerDao;
 	
 	@Override
 	public Customer getList(String customerId) {

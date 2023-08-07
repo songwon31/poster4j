@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.webteam2.poster4j.dao.ReceiverDao;
+import com.webteam2.poster4j.dto.Customer;
 import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Receiver;
 
@@ -56,5 +57,11 @@ public class ReceiverServiceImpl implements ReceiverService {
 	@Override
 	public void delete(int receiverId) {
 		receiverDao.delete(receiverId);
+	}
+
+	@Override
+	public void firstRegister(Receiver receiver) {
+		Receiver firstReceiver = receiverDao.selectById(receiver.getReceiverId());
+		receiverDao.insert(firstReceiver);
 	}
 }
