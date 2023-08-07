@@ -10,7 +10,7 @@
 		<table class="table">
 			<thead class="border">
 				<tr>
-					<th scope="col"><input type="checkbox"></th>
+					<th scope="col"><input type="checkbox" ></th>
 					<th scope="col">배송지명</th>
 					<th scope="col">수령인</th>
 					<th scope="col">휴대전화</th>
@@ -21,7 +21,13 @@
 			<tbody>
 				<c:forEach var="receiver" items="${receivers}">
 					<tr>
-						<th scope="col"><input type="checkbox"></th>
+						<th scope="row">
+							<form action="">
+								<%-- <input type="hidden" name="receiverId" value="${receiver.receiverId}"/> --%>
+								<input type="checkbox" name="checkbox" value="${receiver.receiverId}">
+							</form>
+							
+						</th>
 						<td scope="row">${receiver.receiverName}</td>
 						<td>${receiver.receiverName}</td>
 						<td>${receiver.receiverTelno}</td>
@@ -61,13 +67,23 @@
 			</tbody>
 		</table>
 		<div style="text-align: center;">
-			<span><a class="btn btn-dark">선택 주소록 삭제</a></span>
+			<span><a class="btn btn-dark" onclick="deleteValue()">선택 주소록 삭제</a></span>
 			<span><a class="btn btn-dark" href="${pageContext.request.contextPath}/addressRegister">배송지등록</a></span>
 		</div>
 	</div>
 
 </div>
 
+<script>
+	function deleteValue(){
+		  var checkBoxArr = []; 
+		  $("input:checkbox[name='checkbox']:checked").each(function() {
+		  checkBoxArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
+		})
+		 console.log(checkBoxArr);
+	}
+
+</script>
 
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
