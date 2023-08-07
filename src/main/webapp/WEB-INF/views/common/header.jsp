@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<html>
+<html style="width:100%; height:100%;">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,10 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 		
 	</head>
-	<body>
+	<body style="width:100%; height:100%;">
+		<div id="menu" style="width:100%; height:100%; background:white; position:fixed; z-index:50; display:none;">
+			
+		</div>
 		<div class="d-flex flex-column vh-100" >
 			<nav class="navbar" style="position: fixed; z-index: 99; left: 0; top: 0; width: 100%;">
 				<a class="" href="${pageContext.request.contextPath}"> 
@@ -35,7 +38,7 @@
 							<a href="${pageContext.request.contextPath}/login">
 								<img alt="" src="${pageContext.request.contextPath}/resources/images/login.png" width="25px;"/>
 							</a>
-							<a href="${pageContext.request.contextPath}/">
+							<a id="menuButton" href="#">
 								<img alt="" src="${pageContext.request.contextPath}/resources/images/menu.png" width="25px;"/>
 							</a>
 						</div>
@@ -51,6 +54,18 @@
 							<img alt="" src="${pageContext.request.contextPath}/resources/images/menu.png" width="25px;"/>
 						</a>
 					</c:if>
+					<script>
+						$(init);
+						function init() {
+							$("#menuButton").click(function() {
+								if ($("#menu").css("opacity") == 1) {
+									$("#menu").fadeTo(200, 0);
+								} else if ($("#menu").css("opacity") == 0) {
+									$("#menu").fadeTo(200, 1);
+								}
+							});
+						}
+					</script>
 					<%-- admin menu --%>
 					<%--
 						<c:if test="${customerLogin.customerId == 'admin'}">
