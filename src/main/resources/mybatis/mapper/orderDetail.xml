@@ -9,6 +9,7 @@
 		    from (
 		        select order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
 		        from order_detail
+		        where order_detail_status != '취소됨'
 		        order by order_id desc
 		    )
 		    where rownum <= #{endRowNo}
@@ -25,7 +26,7 @@
 		    from (
 		        select order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
 		        from order_detail
-		        where order_id = #{orderId}
+		        where order_id = #{orderId} and order_detail_status != '취소됨'
 		        order by order_id desc
 		    )
 		    where rownum <= #{endRowNo}
@@ -42,7 +43,7 @@
 		    from (
 		        select order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
 		        from order_detail
-		        where product_id = #{productId}
+		        where product_id = #{productId} and order_detail_status != '취소됨'
 		        order by order_id desc
 		    )
 		    where rownum <= #{endRowNo}
@@ -52,20 +53,20 @@
 	</select> 
 	
 	<select id="countAll" resultType="int">
-		select count(*) from order_detail
+		select count(*) from order_detail where order_detail_status != '취소됨'
 	</select>
 	
 	<select id="countByOrderId" parameterType="int" resultType="int">
-		select count(*) from order_detail where order_id = #{orderId}
+		select count(*) from order_detail where order_id = #{orderId} and order_detail_status != '취소됨'
 	</select>
 	
 	<select id="countByProductId" parameterType="int" resultType="int">
-		select count(*) from order_detail where product_id = #{productId}
+		select count(*) from order_detail where product_id = #{productId} and order_detail_status != '취소됨'
 	</select>
 	
 	<update id="updateOrderStatus" parameterType="map">
 		update order_detail set order_detail_status = #{orderStatus}
-		where order_id=#{orderId} and product_id=#{productId}
+		where order_id=#{orderId} and product_id=#{productId} and order_detail_status != '취소됨'
 	</update>
 	
 	
