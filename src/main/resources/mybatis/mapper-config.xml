@@ -18,5 +18,8 @@
 		<typeAlias alias="ProductBoardSearch" type="com.webteam2.poster4j.dto.ProductBoardSearch" />
 		<typeAlias alias="OrderInquiry" type="com.webteam2.poster4j.dto.OrderInquiry" />
 		<typeAlias alias="OrderInquiryAnswer" type="com.webteam2.poster4j.dto.OrderInquiryAnswer" />
+		<typeAlias alias="OrderInquiryImage" type="com.webteam2.poster4j.dto.OrderInquiryImage" />
+		<typeAlias alias="ProductInquiry" type="com.webteam2.poster4j.dto.ProductInquiry" />
+		<typeAlias alias="ProductInquiryAnswer" type="com.webteam2.poster4j.dto.ProductInquiryAnswer" />
 	</typeAliases>
 </configuration>

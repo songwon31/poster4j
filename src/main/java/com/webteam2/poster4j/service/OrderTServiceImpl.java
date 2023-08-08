@@ -15,9 +15,12 @@ public class OrderTServiceImpl implements OrderTService {
 	@Resource
 	OrderTDao orderTDao;
 	
+	@Override
 	public OrderT getOrderTById(int orderId) {
 		return orderTDao.selectOrderTById(orderId);
 	}
+	
+	@Override
 	public int getTotalOrderTNum() {
 		return orderTDao.count();
 	}
