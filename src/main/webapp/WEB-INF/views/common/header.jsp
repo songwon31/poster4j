@@ -20,8 +20,29 @@
 		
 	</head>
 	<body style="width:100%; height:100%;">
-		<div id="menu" style="width:100%; height:100%; background:white; position:fixed; z-index:50; display:none;">
-			
+		<div id="headerMenu" class="d-flex justify-content-center align-items-center">
+			<ul id="headerMenuList" class="list-group list-group-flush">
+				<li class="list-group-item border-bottom border-dark">
+					<a href="${pageContext.request.contextPath}/admin/orderBoard" 
+					   class="text-decoration-none text-dark">주문 목록</a>
+				</li>
+				<li class="list-group-item border-bottom border-dark">
+					<a href="${pageContext.request.contextPath}/admin/productBoard" 
+					   class="text-decoration-none text-dark">상품 목록</a>
+				</li>
+				<li class="list-group-item border-bottom border-dark">
+					<a href="${pageContext.request.contextPath}/admin/orderBoard" 
+					   class="text-decoration-none text-dark">취소/교환/반품 목록</a>
+				</li>
+				<li class="list-group-item border-bottom border-dark">
+					<a href="${pageContext.request.contextPath}/admin/orderBoard" 
+					   class="text-decoration-none text-dark">배송 문의 목록</a>
+				</li>
+				<li class="list-group-item border-bottom border-dark">
+					<a href="${pageContext.request.contextPath}/admin/orderBoard" 
+					   class="text-decoration-none text-dark">상품 문의 목록</a>
+				</li>
+			</ul>
 		</div>
 		<div class="d-flex flex-column vh-100" >
 			<nav class="navbar" style="position: fixed; z-index: 99; left: 0; top: 0; width: 100%;">
@@ -38,7 +59,7 @@
 							<a href="${pageContext.request.contextPath}/login">
 								<img alt="" src="${pageContext.request.contextPath}/resources/images/login.png" width="25px;"/>
 							</a>
-							<a id="menuButton" href="#">
+							<a id="headerMenuButton" href="#">
 								<img alt="" src="${pageContext.request.contextPath}/resources/images/menu.png" width="25px;"/>
 							</a>
 						</div>
@@ -57,11 +78,20 @@
 					<script>
 						$(init);
 						function init() {
-							$("#menuButton").click(function() {
-								if ($("#menu").css("opacity") == 1) {
-									$("#menu").fadeTo(200, 0);
-								} else if ($("#menu").css("opacity") == 0) {
-									$("#menu").fadeTo(200, 1);
+							if ($("#headerMenu").css("z-index") == 50) {
+								$("#headerMenu").css("z-index", -1);
+							}
+							if ($("#headerMenu").css("opacity") == 1) {
+								$("#headerMenu").fadeTo(1, 0);
+							}
+							
+							$("#headerMenuButton").click(function() {
+								if ($("#headerMenu").css("opacity") == 1) {
+									$("#headerMenu").fadeTo(100, 0);
+									$("#headerMenu").css("z-index", -1);
+								} else if ($("#headerMenu").css("opacity") == 0) {
+									$("#headerMenu").fadeTo(100, 1);
+									$("#headerMenu").css("z-index", 50);
 								}
 							});
 						}
