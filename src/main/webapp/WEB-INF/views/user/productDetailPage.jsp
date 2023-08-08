@@ -8,7 +8,7 @@
 <div class="wrapper">
 	<div class="productDetailContent d-flex flex-column align-items-center">
 		<h2 id="productTitle">${product.productName}</h2>
-		<img id="productImage" src="${pageContext.request.contextPath}/resources/images/${productImage.productImageSource}.png"/>
+		<img id="productImage" src="${pageContext.request.contextPath}/resources/images/${convertedImage}.png"/>
 		<h3 id="productName">${product.productName}</h3>
 		<table class="productDetailTable mb-3">
 			<tr class="priceGroup">
@@ -22,9 +22,9 @@
 				<th>Discounted Price</th>
 				<td>
 					<span>KRW</span>
-					<span>${product.productDiscountRate}</span>
+					<span>${0.85*product.productPrice}</span>
 					<span>(KRW</span>
-					<span>${product.productDiscountRate}</span>
+					<span>${0.15*product.productPrice}</span>
 					<span>할인)</span>
 				</td>
 			</tr>
@@ -33,7 +33,9 @@
 				<td>
 					<select>
 						<option>--옵션을 선택해주세요--</option>
-						<option>Long size - 1350*2000mm</option>
+						<option>297 x 420mm</option>
+						<option>420 x 594mm</option>
+						<option>500 x 700mm</option>
 					</select>
 				</td>
 			</tr>

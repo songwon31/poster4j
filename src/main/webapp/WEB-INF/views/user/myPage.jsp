@@ -6,9 +6,12 @@
 
 <div class="wrapper">
 	<div class="myPageContent d-flex justify-content-center">
-		<ul class="myPageList d-flex row">
+		<ul class="myPageList d-flex flex-column align-items-center">
 			<li>
 				<a class="logoutLink" href="logout">Logout</a>
+			</li>
+			<li>
+				<a class="addressLink" href="addressList">Address</a>
 			</li>
 		</ul>
 	</div>
