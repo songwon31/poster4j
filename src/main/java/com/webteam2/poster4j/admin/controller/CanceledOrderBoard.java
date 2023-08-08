@@ -1,6 +1,5 @@
 package com.webteam2.poster4j.admin.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,21 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.webteam2.poster4j.dto.OrderInquiry;
+import com.webteam2.poster4j.dto.CanceledOrder;
 import com.webteam2.poster4j.dto.Pager;
-import com.webteam2.poster4j.dto.ProductBoardSearch;
-import com.webteam2.poster4j.service.OrderInquiryService;
+import com.webteam2.poster4j.service.CanceledOrderService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 @RequestMapping("/admin")
-public class OrderInquiryBoardController {
+public class CanceledOrderBoard {
 	@Resource
-	OrderInquiryService orderInquiryService;
+	CanceledOrderService canceledOrderService;
 	
-	@RequestMapping("/orderInquiryBoard")
+	@RequestMapping("/canceledOrderBoard")
 	public String productBoard(String pageNo, Model model, HttpSession session) 
 	{
 		// 브라우저에서 pageNo가 넘어오지 않았을 경우
@@ -41,13 +39,13 @@ public class OrderInquiryBoardController {
 		//세션에 pageNo를 저장
 		session.setAttribute("pageNo", String.valueOf(pageNo));
 		
-		int totalOrderInquiryNum = orderInquiryService.getTotalOrderInquiryNum();
-		Pager pager = new Pager(10, 5, totalOrderInquiryNum, intPageNo);
+		int totalCanceledOrderNum = canceledOrderService.getTotalCanceledOrderNum();
+		Pager pager = new Pager(10, 5, totalCanceledOrderNum, intPageNo);
 		model.addAttribute("pager", pager);
 		
-		List<OrderInquiry> orderInquiryList = orderInquiryService.getListWithPager(pager);
-		model.addAttribute("orderInquiryList", orderInquiryList);
+		List<CanceledOrder> canceledOrderList = canceledOrderService.getListWithPager(pager);
+		model.addAttribute("canceledOrderList", canceledOrderList);
 		
-		return "admin/orderInquiryBoard";
+		return "admin/canceledOrderBoard";
 	}
 }

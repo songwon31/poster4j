@@ -31,15 +31,15 @@
 					   class="text-decoration-none text-dark">상품 목록</a>
 				</li>
 				<li class="list-group-item border-bottom border-dark">
-					<a href="${pageContext.request.contextPath}/admin/orderBoard" 
+					<a href="${pageContext.request.contextPath}/admin/canceledOrderBoard" 
 					   class="text-decoration-none text-dark">취소/교환/반품 목록</a>
 				</li>
 				<li class="list-group-item border-bottom border-dark">
-					<a href="${pageContext.request.contextPath}/admin/orderBoard" 
+					<a href="${pageContext.request.contextPath}/admin/orderInquiryBoard" 
 					   class="text-decoration-none text-dark">배송 문의 목록</a>
 				</li>
 				<li class="list-group-item border-bottom border-dark">
-					<a href="${pageContext.request.contextPath}/admin/orderBoard" 
+					<a href="${pageContext.request.contextPath}/admin/productInquiryBoard" 
 					   class="text-decoration-none text-dark">상품 문의 목록</a>
 				</li>
 			</ul>

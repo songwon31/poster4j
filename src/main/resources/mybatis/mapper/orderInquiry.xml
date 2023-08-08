@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.webteam2.poster4j.dao.OrderInquiryDao">
+	<select id="countTotalOrderInquiry" resultType="int">
+		select count(*) from order_inquiry
+	</select>
 	
+	<select id="selectWithPager" parameterType="Pager" resultType="OrderInquiry">
+		<![CDATA[
+		select rnum, order_inquiry_id, order_inquiry_content, order_inquiry_date, order_id, order_inquiry_answered
+		from (
+		    select rownum as rnum, order_inquiry_id, order_inquiry_content, order_inquiry_date, order_id, order_inquiry_answered
+		    from (
+		        select order_inquiry_id, order_inquiry_content, order_inquiry_date, order_id, order_inquiry_answered
+		        from order_inquiry
+		        order by order_inquiry_id desc
+		    )
+		    where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
+	</select>
 </mapper>

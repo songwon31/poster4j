@@ -21,5 +21,6 @@
 		<typeAlias alias="OrderInquiryImage" type="com.webteam2.poster4j.dto.OrderInquiryImage" />
 		<typeAlias alias="ProductInquiry" type="com.webteam2.poster4j.dto.ProductInquiry" />
 		<typeAlias alias="ProductInquiryAnswer" type="com.webteam2.poster4j.dto.ProductInquiryAnswer" />
+		<typeAlias alias="CanceledOrder" type="com.webteam2.poster4j.dto.CanceledOrder" />
 	</typeAliases>
 </configuration>

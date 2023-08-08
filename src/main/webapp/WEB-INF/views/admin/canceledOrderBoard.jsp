@@ -7,24 +7,26 @@
 <div class="container-fluid flex-grow-1" style="margin-top:80px;">
 	<div class="col">
 		<div class="py-2 px-4">
-			<div style="font-size: 20px">주문 문의</div>
+			<div style="font-size: 20px">취소/교환/반품/환불 관리</div>
 		</div>
 		<table class="table">
 			<thead>
 				<tr>
 					<th scope="col"><span class="d-flex justify-content-center">주문ID</span></th>
-					<th scope="col"><span class="d-flex justify-content-center">문의 내용</span></th>
-					<th scope="col"><span class="d-flex justify-content-center">문의 날짜</span></th>
-					<th scope="col"><span class="d-flex justify-content-center">답변 여부</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">상품ID</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">카테고리</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">사유</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">접수 날짜</span></th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="orderInquiry" items="${orderInquiryList}" varStatus="status">
+				<c:forEach var="canceledOrder" items="${canceledOrderList}" varStatus="status">
 					<tr>
-						<td class="align-middle" scope="row" style="width:10px;"><span class="d-flex justify-content-center">${orderInquiry.orderId}</span></td>
-						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${orderInquiry.orderInquiryContent}</span></td>
-						<td class="align-middle" style="width:50px;"><span class="d-flex justify-content-center">${orderInquiry.orderInquiryDate}</span></td>
-						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${orderInquiry.orderInquiryAnswered}</span></td>
+						<td class="align-middle" scope="row" style="width:10px;"><span class="d-flex justify-content-center">${canceledOrder.orderId}</span></td>
+						<td class="align-middle" style="width:10px;"><span class="d-flex justify-content-center">${canceledOrder.productId}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${canceledOrder.canceledOrderCategory}</span></td>
+						<td class="align-middle" style="width:50px;"><span class="d-flex justify-content-center">${canceledOrder.canceledOrderReason}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${canceledOrder.canceledOrderReqDate}</span></td>
 					</tr>
 				</c:forEach>
 				<tr>

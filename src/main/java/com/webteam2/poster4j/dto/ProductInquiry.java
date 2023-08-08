@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class ProductInquiry {
 	private int productInquiryId;
-	private int customerId;
+	private String customerId;
 	private int productId;
 	private String productInquiryContent;
 	@DateTimeFormat(pattern="yyyy-MM-dd")

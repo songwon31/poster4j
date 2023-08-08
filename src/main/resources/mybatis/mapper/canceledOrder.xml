@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webteam2.poster4j.dao.CanceledOrderDao">
+	<select id="countTotalCanceledOrder" resultType="int">
+		select count(*) from canceled_order
+	</select>
+	
+	<select id="selectWithPager" parameterType="Pager" resultType="CanceledOrder">
+		<![CDATA[
+		select rnum, order_id, product_id, canceled_order_category, canceled_order_reason, canceled_order_req_date, canceled_order_cmptn_date
+		from (
+		    select rownum as rnum, order_id, product_id, canceled_order_category, canceled_order_reason, canceled_order_req_date, canceled_order_cmptn_date
+		    from (
+		        select order_id, product_id, canceled_order_category, canceled_order_reason, canceled_order_req_date, canceled_order_cmptn_date
+		        from canceled_order
+		        order by order_id desc
+		    )
+		    where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
+	</select>
+</mapper>
