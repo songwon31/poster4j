@@ -8,4 +8,5 @@ import com.webteam2.poster4j.dto.Pager;
 public interface OrderInquiryService {
 	public int getTotalOrderInquiryNum();
 	public List<OrderInquiry> getListWithPager(Pager pager);
+	public int setAnsweredTrue(int orderInquiryId);
 }

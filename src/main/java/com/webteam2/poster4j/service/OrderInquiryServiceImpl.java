@@ -27,4 +27,9 @@ public class OrderInquiryServiceImpl implements OrderInquiryService {
 	public List<OrderInquiry> getListWithPager(Pager pager) {
 		return orderInquiryDao.selectWithPager(pager);
 	}
+	
+	@Override
+	public int setAnsweredTrue(int orderInquiryId) {
+		return orderInquiryDao.updateAnsweredToTrue(orderInquiryId);
+	}
 }

@@ -15,7 +15,7 @@
 					<th scope="col"><span class="d-flex justify-content-center">주문ID</span></th>
 					<th scope="col"><span class="d-flex justify-content-center">문의 내용</span></th>
 					<th scope="col"><span class="d-flex justify-content-center">문의 날짜</span></th>
-					<th scope="col"><span class="d-flex justify-content-center">답변 여부</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">상태</span></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -24,9 +24,44 @@
 						<td class="align-middle" scope="row" style="width:10px;"><span class="d-flex justify-content-center">${orderInquiry.orderId}</span></td>
 						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${orderInquiry.orderInquiryContent}</span></td>
 						<td class="align-middle" style="width:50px;"><span class="d-flex justify-content-center">${orderInquiry.orderInquiryDate}</span></td>
-						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${orderInquiry.orderInquiryAnswered}</span></td>
+						<c:if test='${orderInquiry.orderInquiryAnswered == "false"}'>
+							<td class="align-middle" style="width:30px;">
+								<span class="d-flex justify-content-center">
+									<a href="#" onClick='answerOrderInquiry(${orderInquiry.orderInquiryId}, "${orderInquiry.orderInquiryContent}"); return false;' class="btn btn-warning btn-sm">응답 대기</a>
+								</span>
+							</td>
+						</c:if>
+						<c:if test='${orderInquiry.orderInquiryAnswered == "true"}'>
+							<td class="align-middle" style="width:30px;">
+								<span class="d-flex justify-content-center">
+									<a href="#" onClick="editOrderInquiry(${orderInquiry.orderInquiryId}); return false;" class="btn btn-success btn-sm">응답 완료</a>
+								</span>
+							</td>
+						</c:if>
 					</tr>
 				</c:forEach>
+				<script>
+					function answerOrderInquiry(orderInquiryId, orderInquiryContent) {
+						var popupWidth = 600;
+						var popupHeight = 300;
+						var popupX = (window.screen.width/2) - (popupWidth/2);
+						var popupY= (window.screen.height/2) - (popupHeight/2);
+						console.log("1");
+						
+						let options = "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY";
+						window.open("orderInquiryAnswerForm?orderInquiryId="+orderInquiryId+"&orderInquiryContent="+orderInquiryContent, "_blank", "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height="+popupHeight+", width="+popupWidth+", left="+popupX+", top="+popupY);
+					}
+					
+					function editOrderInquiry(orderInquiryId) {
+						var popupWidth = 600;
+						var popupHeight = 300;
+						var popupX = (window.screen.width/2) - (popupWidth/2);
+						var popupY= (window.screen.height/2) - (popupHeight/2);
+						
+						let options = "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY";
+						window.open("orderInquiryAnswerUpdateForm?orderInquiryId="+orderInquiryId, "_blank", "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height="+popupHeight+", width="+popupWidth+", left="+popupX+", top="+popupY);
+					}
+				</script>
 				<tr>
 					<td colspan="12" class="text-center">
 						<div>

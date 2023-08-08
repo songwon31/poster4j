@@ -20,4 +20,9 @@
 		where rnum >= #{startRowNo}
 		]]>
 	</select>
+	
+	<update id="updateAnsweredToTrue" parameterType="int">
+		update order_inquiry set order_inquiry_answered = 'true' 
+		where order_inquiry_id=#{orderInquiryId}
+	</update>
 </mapper>

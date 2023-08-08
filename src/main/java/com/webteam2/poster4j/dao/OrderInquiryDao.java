@@ -11,4 +11,5 @@ import com.webteam2.poster4j.dto.Pager;
 public interface OrderInquiryDao {
 	public int countTotalOrderInquiry();
 	public List<OrderInquiry> selectWithPager(Pager pager);
+	public int updateAnsweredToTrue(int orderInquiryId);
 }
