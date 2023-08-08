@@ -13,7 +13,7 @@
 	</insert>
 	<insert id="insertAddress" parameterType="Receiver">
 		insert into receiver (RECEIVER_ID, CUSTOMER_ID, RECEIVER_NAME, RECEIVER_ZIP, RECEIVER_ADDRESS, RECEIVER_ADDRESS_DETAIL, RECEIVER_TELNO, RECEIVER_DEMAND, RECEIVER_ADDRESS_TYPE, RECEIVER_ENABLED, RECEIVER_PERSON_NAME)
-		values(receiver_seq.nextval, #{customerId}, #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, '변경 전', 'DEFAULT', 'TRUE', #{receiverPersonName})
+		values(receiver_seq.nextval, #{customerId}, #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, '변경 전', 'OTHER', 'TRUE', #{receiverPersonName})
 	</insert>
 	
 	<!-- DB에서 receiver_enabled가 true인 값 가져옴 -->
