@@ -1,5 +1,7 @@
 package com.webteam2.poster4j.user.controller;
 
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,7 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webteam2.poster4j.dto.Customer;
+import com.webteam2.poster4j.dto.Product;
+import com.webteam2.poster4j.dto.ProductImage;
 import com.webteam2.poster4j.dto.Receiver;
+import com.webteam2.poster4j.service.ProductImageService;
+import com.webteam2.poster4j.service.ProductService;
 import com.webteam2.poster4j.service.ReceiverService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +26,14 @@ import lombok.extern.slf4j.Slf4j;
 public class OrderPageController {
 	@Resource
 	ReceiverService receiverService;
+	@Resource
+	ProductImageService productImageService;
+	@Resource
+	ProductService productService;
+	
 	
 	@RequestMapping("/order")
-	public String order(HttpSession session, Model model) {
+	public String order(HttpSession session, Model model, Product product) {
 		//세션에 저장된 customer 정보
 		Customer customer = (Customer)session.getAttribute("customerLogin");
 		if (customer == null) {
@@ -39,6 +50,27 @@ public class OrderPageController {
 		model.addAttribute("defaultReceiver", defaultReceiver);
 		model.addAttribute("receivers", list);
 		
+		
+		//List<ProductImage> productImages = productImageService.getOrderProductImageList(product.getProductId());
+		List<ProductImage> productImages = productImageService.getOrderProductImageList(1);
+		List<String> convertedImages = new ArrayList<String>();
+		List<Product> productList = new ArrayList<Product>();
+		
+		for (ProductImage image : productImages) {
+			String base64Img = Base64.getEncoder().encodeToString(image.getProductImageSource());
+			//image.setBase64Data(base64Img);
+			
+			convertedImages.add(base64Img);
+			product = productService.getOneProduct(image.getProductId());
+			productList.add(product);
+			
+		}
+		
+		model.addAttribute("convertedImages", convertedImages);
+		model.addAttribute("productList", productList);
+		
 		return "user/orderForm";
+		
+		
 	}
 }

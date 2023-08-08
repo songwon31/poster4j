@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <!-- OrderForm 스타일 설정을 위한 css -->
@@ -108,21 +108,22 @@
 		<hr>
 		
 		<!-- 주문 상품 내용  -->
-		
-		<div>
+		<c:forEach var="image" items="${convertedImages}" varStatus="status">
 			<div>
-				주문 상품
-			</div>
-			<div style="display: flex">
-				<img alt="주문할 상품 이미지" src="${pageContext.request.contextPath}/resources/images/poster1.jpg" width="200px">
 				<div>
-					<div><a>주문할 상품명</a></div>
-					<div>수량: n개</div>
-					<div><span>KRW  00,000</span></div>
-					<a class="btn btn-light btn-sm" href="${pageContext.request.contextPath}">삭제</a>
+					주문 상품
+				</div>
+				<div style="display: flex">
+					<img alt="주문할 상품 이미지" src="data:image/jpeg;base64, ${image}" width="200px">
+					<div>
+						<div><a>${productList[status.index].productName}</a></div>
+						<div>수량: n개</div>
+						<div><span>KRW ${productList[status.index].productPrice}</span></div>
+						<a class="btn btn-light btn-sm" href="${pageContext.request.contextPath}">삭제</a>
+					</div>
 				</div>
 			</div>
-		</div>
+		</c:forEach>
 		<!-- 할인/부가 결제 -->
 		<div>
 			<div>할인/부가 결제 </div>

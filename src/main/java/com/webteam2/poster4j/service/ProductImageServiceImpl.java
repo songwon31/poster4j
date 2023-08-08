@@ -36,4 +36,9 @@ public class ProductImageServiceImpl implements ProductImageService {
 	public List<ProductImage> getList() {
 		 return productImageDao.selectAll();
 	}
+	
+	@Override
+	public List<ProductImage> getOrderProductImageList(int productId) {
+		return productImageDao.selectListById(productId);
+	}
 }
