@@ -32,8 +32,8 @@ public class ReceiverServiceImpl implements ReceiverService {
 	}
 	
 	@Override
-	public List<Receiver> getList(Pager pager) {
-		List<Receiver> receiverList = receiverDao.selectByPage(pager);
+	public List<Receiver> getList(Pager pager, String customerId) {
+		List<Receiver> receiverList = receiverDao.selectByPage(pager, customerId);
 		return receiverList;
 	}
 	

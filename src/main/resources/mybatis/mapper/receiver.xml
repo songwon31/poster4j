@@ -17,7 +17,7 @@
 	</insert>
 	
 	<!-- DB에서 receiver_enabled가 true인 값 가져옴 -->
-	<select id="selectByPage" parameterType="Pager"  resultType="Receiver">
+	<select id="selectByPage" parameterType="map"  resultType="Receiver">
 		<![CDATA[
 		select rnum, receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_enabled, receiver_person_name
 		from (
@@ -25,12 +25,12 @@
 			 from (
 			 	select receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_enabled, receiver_person_name
 			 	from receiver
-			 	where receiver_enabled = 'TRUE'
+			 	where customer_id = #{customerId} and receiver_enabled = 'TRUE'
 			 	order by receiver_id desc
 			 )
-			 where rownum <= #{endRowNo}
+			 where rownum <= #{pager.endRowNo}
 		)
-		where rnum >= #{startRowNo}
+		where rnum >= #{pager.startRowNo}
 		]]>
 	</select> 
 	
