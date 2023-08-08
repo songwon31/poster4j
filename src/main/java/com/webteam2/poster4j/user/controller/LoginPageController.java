@@ -31,9 +31,9 @@ public class LoginPageController {
 		LoginResult result = customerService.login(customer);
 	      String error = "";
 	      if(result == LoginResult.FAIL_MID) {
-	         error = "MID가 없습니다.";
+	         error = "존재하지 않는 ID 입니다.";
 	      }else if(result == LoginResult.FAIL_MPASSWORD) {
-	         error = "MPASSWORD가 틀립니다.";
+	         error = "PASSWORD가 틀립니다.";
 	      }else {
 	    	  Customer dbCustomer = customerService.getList(customer.getCustomerId());
 	    	  session.setAttribute("customerLogin", dbCustomer);
