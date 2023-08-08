@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderFormStyle.css">
 
 <div id="orderForm" style="margin: 0 auto; min-width: 360px">
-	<form action="" style= "margin: 300px 0">
+	<form action="post" style= "margin: 300px 0">
 		<div style="text-align: center">배송지</div>
 		<div>
 			<!-- 배송지 정보 (배송지 목록 버튼 클릭시 안보임)-->

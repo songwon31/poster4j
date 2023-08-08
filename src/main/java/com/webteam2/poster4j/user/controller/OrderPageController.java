@@ -1,6 +1,7 @@
 package com.webteam2.poster4j.user.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
@@ -50,21 +51,25 @@ public class OrderPageController {
 		model.addAttribute("defaultReceiver", defaultReceiver);
 		model.addAttribute("receivers", list);
 		
+		List<Integer> productIds = Arrays.asList(1, 2, 3);
 		
 		//List<ProductImage> productImages = productImageService.getOrderProductImageList(product.getProductId());
-		List<ProductImage> productImages = productImageService.getOrderProductImageList(1);
 		List<String> convertedImages = new ArrayList<String>();
 		List<Product> productList = new ArrayList<Product>();
 		
-		for (ProductImage image : productImages) {
-			String base64Img = Base64.getEncoder().encodeToString(image.getProductImageSource());
-			//image.setBase64Data(base64Img);
-			
-			convertedImages.add(base64Img);
-			product = productService.getOneProduct(image.getProductId());
-			productList.add(product);
-			
+		for (Integer productId : productIds) {
+			List<ProductImage> productImages = productImageService.getOrderProductImageList(productId);
+			for (ProductImage image : productImages) {
+				String base64Img = Base64.getEncoder().encodeToString(image.getProductImageSource());
+				//image.setBase64Data(base64Img);
+				
+				convertedImages.add(base64Img);
+				product = productService.getOneProduct(image.getProductId());
+				productList.add(product);
+				
+			}
 		}
+		
 		
 		model.addAttribute("convertedImages", convertedImages);
 		model.addAttribute("productList", productList);

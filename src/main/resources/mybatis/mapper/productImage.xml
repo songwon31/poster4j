@@ -30,6 +30,6 @@
 	<select id="selectListById" parameterType="int" resultType="ProductImage">
 		select *
 		from product_image
-		where product_id = #{productId}
+		where product_id = #{productId} and product_image_ctgry = 'represent'
 	</select>
 </mapper>
