@@ -246,5 +246,9 @@
 		where rnum <![CDATA[>=]]> #{pager.startRowNo}
 	</select>
 	
+	<select id="selectAll" resultType="Product">
+		select *
+		from product
+	</select>
 	
 </mapper>

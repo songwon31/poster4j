@@ -1,6 +1,8 @@
 package com.webteam2.poster4j.user.controller;
 
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -23,33 +25,34 @@ public class HomeController {
 	ProductService productService;
 	@Resource
 	ProductImageService productImageService;
-	
-	
+
 	@RequestMapping("/")
 	public String home() {
 		log.info("home 실행");
 		return "user/home";
 	}
-	
+
 	@GetMapping("/")
 	public String getPosterImage(Model model) {
-		//해당 상품Id에 해당하는 상품명 가져오기
-		Product product = productService.getMainPageProduct(1);
 		
-		model.addAttribute("productName", product.getProductName());
-		model.addAttribute("productPrice", product.getProductPrice());
-		
-		
-		// 해당 상품Id에 해당하는 상품 이미지 가져오기
-		ProductImage productImage = productImageService.getImage(1);
-		model.addAttribute("productImage", productImage);
-		
-		
-		if (productImage.getProductImageSource() != null) {
-			// 0과 1로 구성된 바이너리 데이터를 base64 문자로 변환
-			String base64Img = Base64.getEncoder().encodeToString(productImage.getProductImageSource());
-			model.addAttribute("base64Img", base64Img);
+		List<ProductImage> productImages = productImageService.getList();
+		List<String> convertedImages = new ArrayList<String>();
+		List<Product> productList = new ArrayList<Product>();
+		for (ProductImage image : productImages) {
+			String base64Img = Base64.getEncoder().encodeToString(image.getProductImageSource());
+			//image.setBase64Data(base64Img);
+			
+			convertedImages.add(base64Img);
+			
+			Product product = productService.getOneProduct(image.getProductId());
+			productList.add(product);
 		}
+		
+		model.addAttribute("convertedImages", convertedImages);
+		model.addAttribute("productList", productList);
+		
+		
 		return "user/home";
+		
 	}
 }

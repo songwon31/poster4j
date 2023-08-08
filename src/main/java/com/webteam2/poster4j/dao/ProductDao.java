@@ -22,4 +22,5 @@ public interface ProductDao {
 	public int countSearchedProductNum(ProductBoardSearch productBoardSearch);
 	public List<Product> selectSearchedProductByPage(@Param("productBoardSearch") ProductBoardSearch productBoardSearch, 
 													 @Param("pager") Pager pager);
+	public List<Product> selectAll();
 }

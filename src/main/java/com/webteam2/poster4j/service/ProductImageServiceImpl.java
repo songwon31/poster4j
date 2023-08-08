@@ -1,5 +1,7 @@
 package com.webteam2.poster4j.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -30,4 +32,8 @@ public class ProductImageServiceImpl implements ProductImageService {
 		return productImageDao.deleteByProductId(productId);
 	}
 	
+	@Override
+	public List<ProductImage> getList() {
+		 return productImageDao.selectAll();
+	}
 }

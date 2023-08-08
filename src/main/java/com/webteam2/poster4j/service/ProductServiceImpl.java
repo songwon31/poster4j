@@ -68,4 +68,8 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getSearchedProductList(ProductBoardSearch productBoardSearch, Pager pager) {
 		return productDao.selectSearchedProductByPage(productBoardSearch, pager);
 	}
+	@Override
+	public List<Product> getList() {
+		return productDao.selectAll();
+	}
 }

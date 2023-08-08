@@ -20,4 +20,9 @@
 	<delete id="deleteByProductId" parameterType="int">
 		delete from product_image where product_id=#{productId}
 	</delete>
+	
+	<select id="selectAll" resultType="ProductImage">
+		select *
+		from product_image
+	</select>
 </mapper>
