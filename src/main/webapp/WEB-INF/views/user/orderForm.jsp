@@ -9,43 +9,90 @@
 	<form action="" style= "margin: 300px 0">
 		<div style="text-align: center">배송지</div>
 		<div>
-			<label><input type="radio" name="shipping" checked="checked"><span>회원정보와 동일</span> </label>
-			<label><input type="radio" name="shipping"><span>새로운 배송지</span> </label>
+			<!-- 배송지 정보 (배송지 목록 버튼 클릭시 안보임)-->
+			<div id="receiverInfo" style="display: block;">
+				<div style="font-weight: bold">
+					${defaultReceiver.receiverPersonName}
+				</div>
+				<div>
+					[${defaultReceiver.receiverZip}] ${defaultReceiver.receiverAddress} ${defaultReceiver.receiverAddressDetail}
+				</div>
+				<div>
+					휴대전화
+				</div>
+				<div>
+					${defaultReceiver.receiverTelno}
+				</div>
+				<hr>
+			</div>
+			<!-- 배송지 목록(버튼 클릭시 보임) -->
+			<div id="receiverList" style="display: none;">
+				<c:forEach var="receiver" items="${receivers}">
+					<div id="${receiver.receiverId}" style="display: block;">
+						<div style="font-weight: bold">
+							${receiver.receiverPersonName}
+						</div>
+						<div>
+							[${receiver.receiverZip}] ${receiver.receiverAddress} ${receiver.receiverAddressDetail}
+						</div>
+						<div>
+							휴대전화
+						</div>
+						<div>
+							${receiver.receiverTelno}
+						</div>
+						<div id="receiverBtn">
+							<a id="modifyReceiverBtn" class="btn btn-dark btn-sm" onclick="getModifyForm()">수정</a>
+							<a id="selectReceiverBtn" class="btn btn-dark btn-sm" onclick="selectReceiver(${receiver.receiverId})" >선택</a>
+						</div>
+						<hr>
+					</div>
+				</c:forEach>
+			</div>
+			<div id="newReceiver">
+			
+			</div>
+			<div id="showReceiverList">
+				<button class="btn btn-dark btn-sm" type="button" onclick="showReceiverList()">배송지 목록</button>
+			</div>
+			<div id="hideReceiverList" style="display: none;">
+				<button class="btn btn-primary btn-sm" type="button" onclick="hideReceiverList()">닫기</button>
+			</div>
 		</div>
-		<table>
-			<tr >
-				<th>받는사람</th>
-				<td>
-					<input type="text" value="${orderCustomer.customerName}" style="width: 100%">
-				</td>
-			</tr>
-			<tr>
-				<th>주소</th>
-				<td style="display: inline-block; width: 100%">
-					<div style="width: 100%">
-						<input type="text" value="우편번호" style="width: 70%"><button style="width: 50x;">Search</button>
-					</div>
-					<div>
-						<input type="text" value="주소" style="width: 100%">
-					</div>
-					<div>
-						<input type="text" value="상세주소" style="width: 100%">
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>휴대전화</th>
-				<td>
-					<input type="text" value="010-0000-0000" style="width: 100%">
-				</td>
-			</tr>
-			<tr>
-				<th>이메일 필수</th>
-				<td>
-					<input type="text" value="poster4j" style="width: 120px">@<input type="text" value="poster.kr" style="width: 120px;">
-				</td>
-			</tr>
-		</table>
+		<script type="text/javascript">
+		
+			function showReceiverList(){
+				$("#receiverInfo").hide();
+				$("#receiverList").show();
+				$("#showReceiverList").hide();
+				$("#hideReceiverList").show();
+			}
+			
+			function hideReceiverList(){
+				$("#receiverInfo").show();
+				$("#receiverList").hide();
+				$("#showReceiverList").show();
+				$("#hideReceiverList").hide();
+			}
+			
+			function selectReceiver(receiverId){
+				var queryString = "#" + receiverId;
+				var selectedReceiverInfo = $(queryString).html();
+				console.log(selectedReceiverInfo);
+				
+				$("#receiverInfo").html(selectedReceiverInfo);
+				$("#receiverList").hide();
+				$("#receiverInfo").show();
+				$("#hideReceiverList").hide();
+				$("#showReceiverList").show();
+				$("#receiverBtn").hide();
+			}
+			
+			function getModifyForm(){
+			}
+		</script>
+		
+		
 		<!-- 메시지 선택(선택사항) -->
 		<div>
 			<select>
@@ -56,12 +103,7 @@
 				<option value="빠른 배송 부탁드립니다.">빠른 배송 부탁드립니다.</option>
 				<option value="택배함에 보관해주세요.">택배함에 보관해주세요.</option>
 				<option value="직접 입력">직접 입력</option>
-				<script>
-				</script>
 			</select>
-		</div>
-		<div>
-			<label><input type="radio"><span>기본 배송지로 저장</span></label>
 		</div>
 		<hr>
 		

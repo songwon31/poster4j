@@ -2,14 +2,19 @@ package com.webteam2.poster4j.user.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.webteam2.poster4j.dto.Customer;
 import com.webteam2.poster4j.dto.Receiver;
 import com.webteam2.poster4j.service.ReceiverService;
+import com.webteam2.poster4j.validator.ReceiverValidator;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,8 +31,14 @@ public class AddressRegisterController {
 		return "user/addressRegisterForm";
 	}
 	
+	@InitBinder("/addressRegister")
+	public void ReceiverValidator(WebDataBinder binder) {
+		binder.setValidator(new ReceiverValidator());
+	}
+	
+	
 	@PostMapping("/addressRegister")
-	public String AddressRegister(Receiver receiver, HttpSession session) {
+	public String AddressRegister(@Valid Receiver receiver, HttpSession session, Errors errors) {
 		log.info("배송지 등록 폼 전송");
 		
 		Customer customer = (Customer)session.getAttribute("customerLogin");
@@ -35,6 +46,12 @@ public class AddressRegisterController {
 			// 로그인 정보가 없으면 로그인 페이지로 이동하거나 필요한 처리를 수행
 			return "redirect:/login"; // 로그인 페이지로 리다이렉트
 		}
+		
+		// errors.rejectValue(...)가 한 번이라도 호출되었다면 hasErrors()는 true를 리턴
+		if (errors.hasErrors()) {
+			return "user/addressRegisterForm";
+		}
+		
 		receiver.setCustomerId(customer.getCustomerId());
 		
 		receiverService.register(receiver);

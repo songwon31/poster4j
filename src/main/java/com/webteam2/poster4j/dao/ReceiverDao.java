@@ -17,4 +17,6 @@ public interface ReceiverDao {
 	public int updateById(Receiver receiver);
 	public int count();
 	public int delete(int receiverId);
+	public Receiver selectByCustomerId(String customerId);
+	public List<Receiver> selectListByCustomerId(String customerId);
 }

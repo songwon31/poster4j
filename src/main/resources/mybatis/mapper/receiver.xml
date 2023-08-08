@@ -55,5 +55,18 @@
 		where receiver_id=#{receiverId}
 	</update>
 	
+	<!-- customerId로 고객의 기본 배송지 가져오기 -->
+	<select id="selectByCustomerId" parameterType="String" resultType="Receiver">
+		select *
+		from receiver
+		where customer_id = #{customerId} and receiver_enabled = 'TRUE' and receiver_address_type = 'DEFAULT'
+	</select>
+	
+	<!-- customerId로 고객의 모든 배송지 가져오기 (페이징 x) -->
+	<select id="selectListByCustomerId" parameterType="String" resultType="Receiver">
+		select *
+		from receiver
+		where customer_id = #{customerId} and receiver_enabled = 'TRUE'
+	</select>
 </mapper>
 

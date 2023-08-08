@@ -13,4 +13,6 @@ public interface ReceiverService {
 	public Receiver getBoard(int receiverId);
 	public void modify(Receiver receiver);
 	public void delete(int receiverId);
+	public Receiver getDefaultReceiver(String customerId);
+	public List<Receiver> getListByCustomerId(String customerId);
 }

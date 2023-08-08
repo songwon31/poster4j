@@ -14,6 +14,7 @@
 					</td>
 					<td>
 						<input type="text" name="receiverName" class="form-control" value="" style="width: 270px;">
+						<form:errors cssClass="text-danger" path="receiver.receiverName" />
 					</td>
 				</tr>	
 				<tr class="addressRegisterInputGroup">
