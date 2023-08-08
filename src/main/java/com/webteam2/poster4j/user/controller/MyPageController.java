@@ -24,7 +24,7 @@ public class MyPageController {
 	@GetMapping("/mypage")
 	@Login
 	public String mypage() {
-		return "user/myPage";
+		return "redirect:/user/myPage";
 	}
 	
 	@GetMapping("/logout")

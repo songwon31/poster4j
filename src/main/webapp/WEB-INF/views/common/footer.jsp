@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-		<div style="margin: 200px 0 ;">
+		<div style="margin: 20px 0 ;">
 			<div id="footer" style="margin: 0 auto; max-width: 1080px;" >
 				<div style="text-align: center; font-weight: bold; margin-bottom: 5px"><a href="https://www.instagram.com/poster4j"><img alt="" src="${pageContext.request.contextPath}/resources/images/instagram-logo.png" width="20px"></a></div>
 				<div style="text-align: center; font-weight: bold; margin-bottom: 5px">poster4J</div>

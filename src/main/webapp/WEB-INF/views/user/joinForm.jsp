@@ -48,11 +48,11 @@
 					</td>
 					<td>
 						<div class="zipGroup row no-gutters" >
-							<input type="text" id="joinPostcode" name="receiverZip" class="col-9" placeholder="우편번호" value="">
+							<input type="text" id="receiverZip" name="receiverZip" class="col-9" placeholder="우편번호" value="">
 							<input class="btn btn-sm btn-dark col-3" onclick="execDaumPostcode()" value="우편번호 찾기"/>
 						</div>
-						<input type="text" id="joinAddress" name="receiverAddress" class="form-control" placeholder="기본주소" value="">
-						<input type="text" id="joinDetailAddress" name="receiverAddressDetail" class="form-control" placeholder="나머지 주소(선택 입력 가능)" value="">
+						<input type="text" id="receiverAddress" name="receiverAddress" class="form-control" placeholder="기본주소" value="">
+						<input type="text" id="receiverAddressDetail" name="receiverAddressDetail" class="form-control" placeholder="나머지 주소(선택 입력 가능)" value="">
 					</td>
 				</tr>
 				<tr class="joinInputGroup">
@@ -213,10 +213,10 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("joinPostcode").value = data.zonecode;
-                document.getElementById("joinAddress").value = addr;
+                document.getElementById("receiverZip").value = data.zonecode;
+                document.getElementById("receiverAddress").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("joinDetailAddress").focus();
+                document.getElementById("receiverAddressDetail").focus();
             }
         }).open();
     }

@@ -8,12 +8,12 @@
 		where receiver_id = #{receiverId}
 	</select>
 	<insert id="insert" parameterType="Receiver">
-		insert into receiver (receiver_id, customer_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_demand, receiver_address_type, receiver_enabled)
-		values(#{receiverId}, #{customerId}, #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, #{receiverDemand}, 'DEFAULT', 'TRUE')
+		insert into receiver (receiver_id, customer_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_demand, receiver_address_type, receiver_enabled, RECEIVER_PERSON_NAME)
+		values(receiver_seq.nextval, #{customerId}, #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, '변경 전', 'DEFAULT', 'TRUE', #{receiverName})
 	</insert>
 	<insert id="insertAddress" parameterType="Receiver">
 		insert into receiver (RECEIVER_ID, CUSTOMER_ID, RECEIVER_NAME, RECEIVER_ZIP, RECEIVER_ADDRESS, RECEIVER_ADDRESS_DETAIL, RECEIVER_TELNO, RECEIVER_DEMAND, RECEIVER_ADDRESS_TYPE, RECEIVER_ENABLED, RECEIVER_PERSON_NAME)
-		values(receiver_seq.nextval, 'kimcheol', #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, '변경 전', 'DEFAULT', 'TRUE', #{receiverPersonName})
+		values(receiver_seq.nextval, #{customerId}, #{receiverName}, #{receiverZip}, #{receiverAddress}, #{receiverAddressDetail}, #{receiverTelno}, '변경 전', 'DEFAULT', 'TRUE', #{receiverPersonName})
 	</insert>
 	
 	<!-- DB에서 receiver_enabled가 true인 값 가져옴 -->

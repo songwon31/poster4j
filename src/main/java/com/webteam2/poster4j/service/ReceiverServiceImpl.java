@@ -61,7 +61,6 @@ public class ReceiverServiceImpl implements ReceiverService {
 
 	@Override
 	public void firstRegister(Receiver receiver) {
-		Receiver firstReceiver = receiverDao.selectById(receiver.getReceiverId());
-		receiverDao.insert(firstReceiver);
+		receiverDao.insert(receiver);
 	}
 }
