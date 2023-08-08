@@ -8,4 +8,5 @@ import com.webteam2.poster4j.dto.Pager;
 public interface CanceledOrderService {
 	public int getTotalCanceledOrderNum();
 	public List<CanceledOrder> getListWithPager(Pager pager);
+	public int cancelOrder(CanceledOrder canceledOrder);
 }

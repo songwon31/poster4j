@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.webteam2.poster4j.dto.OrderCancel;
-import com.webteam2.poster4j.service.OrderCancelService;
+import com.webteam2.poster4j.dto.CanceledOrder;
+import com.webteam2.poster4j.service.CanceledOrderService;
 import com.webteam2.poster4j.service.OrderDetailService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ public class AdminCancelOrderController {
 	@Resource
 	OrderDetailService orderDetailService;
 	@Resource
-	OrderCancelService orderCancelSerivce;
+	CanceledOrderService canceledOrderService;
 	
 	@RequestMapping("/adminCancelOrderForm")
 	public String updateProductForm (int orderId, int productId, Model model) {
@@ -41,15 +41,16 @@ public class AdminCancelOrderController {
 	{
 		orderDetailService.changeOrderDetailStatus(orderId, productId, "취소됨");
 		
-		OrderCancel orderCancel = new OrderCancel();
-		orderCancel.setOrderId(orderId);
-		orderCancel.setProductId(productId);
-		orderCancel.setOrderCancelCategory(cancelCategory);
+		CanceledOrder canceledOrder = new CanceledOrder();
+		canceledOrder.setOrderId(orderId);
+		canceledOrder.setProductId(productId);
+		canceledOrder.setCanceledOrderCategory(cancelCategory);
+		log.info("cancelReason: " + cancelReason);
 		if (cancelReason != null && !cancelReason.equals("")) {
-			orderCancel.setOrderCancelReason(cancelReason);
+			canceledOrder.setCanceledOrderReason(cancelReason);
 		}
-		orderCancel.setOrderCancelReqDate(new Date());
-		orderCancelSerivce.cancelOrder(orderCancel);
+		canceledOrder.setCanceledOrderReqDate(new Date());
+		canceledOrderService.cancelOrder(canceledOrder);
 		
 		return "redirect:/admin/adminCancelOrderForm?orderId=-1&productId=-1";
 	}

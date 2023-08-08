@@ -27,4 +27,9 @@ public class CanceledOrderServiceImpl implements CanceledOrderService {
 	public List<CanceledOrder> getListWithPager(Pager pager) {
 		return canceledOrderDao.selectWithPager(pager);
 	}
+	
+	@Override
+	public int cancelOrder(CanceledOrder canceledOrder) {
+		return canceledOrderDao.insertCanceledOrder(canceledOrder);
+	}
 }

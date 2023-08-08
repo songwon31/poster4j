@@ -11,4 +11,5 @@ import com.webteam2.poster4j.dto.Pager;
 public interface CanceledOrderDao {
 	public int countTotalCanceledOrder();
 	public List<CanceledOrder> selectWithPager(Pager pager);
+	public int insertCanceledOrder(CanceledOrder canceledOrder);
 }
