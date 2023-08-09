@@ -34,7 +34,7 @@ public class OrderPageController {
 	
 	
 	@RequestMapping("/order")
-	public String order(HttpSession session, Model model, Product product) {
+	public String order(HttpSession session, Model model, Product product ) {
 		//세션에 저장된 customer 정보
 		Customer customer = (Customer)session.getAttribute("customerLogin");
 		if (customer == null) {
@@ -51,6 +51,7 @@ public class OrderPageController {
 		model.addAttribute("defaultReceiver", defaultReceiver);
 		model.addAttribute("receivers", list);
 		
+		//넘겨받은 product id를 리스트로 저장
 		List<Integer> productIds = Arrays.asList(1, 2, 3);
 		
 		//List<ProductImage> productImages = productImageService.getOrderProductImageList(product.getProductId());

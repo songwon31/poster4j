@@ -18,3 +18,31 @@ th{
 
 input {
 }
+
+.title{
+	font-size: 17px;
+	font-weight: bold;
+	text-align: center;
+	margin: 20px 0;
+}
+.orderItems{
+	margin-bottom: 15px;
+}
+.orderItemImage{
+	margin-right: 5px;
+}
+
+#paymentInfo td{
+	padding: 8px 90px 8px 0;
+	text-align: left;
+}
+
+#orderForm div{
+	margin-top: 8px;
+}
+
+
+#accumulationBenefits td{
+	padding: 6px 90px 6px 0;
+	text-align: left;
+}
