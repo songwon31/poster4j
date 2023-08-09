@@ -45,14 +45,15 @@
 			</ul>
 		</div>
 		<div class="d-flex flex-column vh-100" >
-			<nav class="navbar" style="position: fixed; z-index: 99; left: 0; top: 0; width: 100%;">
+			<nav class="navbar" style="position: fixed; z-index: 99; left: 0; top: 0; width: 100%;
+				 background: linear-gradient(to bottom, rgba(255,255,255,1) 80%, rgba(255, 255, 255, 0) 100%);">
 				<a class="" href="${pageContext.request.contextPath}"> 
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/poster4j.png" width="20px">
 					<span style="font-size: 20px; font-weight: 500; color: #212529">poster4j</span>
 				</a>
 				<div>
 					<c:if test="${customerLogin == null}">
-						<div style="margin-top: 17px" >
+						<div style="padding-top:10px; padding-bottom:10px">
 							<a href="${pageContext.request.contextPath}/search">
 								<img alt="" src="${pageContext.request.contextPath}/resources/images/search.png" width="25px;"/>
 							</a>
