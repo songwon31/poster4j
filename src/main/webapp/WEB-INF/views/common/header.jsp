@@ -53,7 +53,7 @@
 				<div>
 					<c:if test="${customerLogin == null}">
 						<div style="margin-top: 17px" >
-							<a href="${pageContext.request.contextPath}/">
+							<a href="${pageContext.request.contextPath}/search">
 								<img alt="" src="${pageContext.request.contextPath}/resources/images/search.png" width="25px;"/>
 							</a>
 							<a href="${pageContext.request.contextPath}/login">
