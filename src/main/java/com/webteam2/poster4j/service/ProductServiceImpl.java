@@ -72,4 +72,9 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getList() {
 		return productDao.selectAll();
 	}
+	
+	@Override
+	public List<Integer> getAllProductId() {
+		return productDao.selectAllProductId();
+	}
 }

@@ -23,4 +23,5 @@ public interface ProductDao {
 	public List<Product> selectSearchedProductByPage(@Param("productBoardSearch") ProductBoardSearch productBoardSearch, 
 													 @Param("pager") Pager pager);
 	public List<Product> selectAll();
+	public List<Integer> selectAllProductId();
 }

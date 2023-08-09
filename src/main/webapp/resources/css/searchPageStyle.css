@@ -1,18 +1,48 @@
 * {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 
-li {
+#contents {
+    font-weight: 500;
+    line-height: 1.7;
+    box-sizing: border-box;
+    padding: 0;
+    border: none;
+    max-width: 1080px;
+    min-height: calc(100vh - 393px);
+    margin: 0 auto;
+    margin-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#productList {
 	list-style: none;
+    vertical-align: top;
+    column-count: 3;
+    column-gap: 13px;
+    padding: 0 30px;
 }
 
-.myPageContent {
-	margin: 400px 0px;
-	font-size: 13px;
+#productList > li {
+	position: relative;
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    perspective: 1000px;
 }
 
-.myPageList li a {
-	color: black;
-	font-size: 36px;
+.thumbnail {
+	transition-duration: 750ms;
+}
+
+.imgOnList {
+	max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    width: 100%;
 }
