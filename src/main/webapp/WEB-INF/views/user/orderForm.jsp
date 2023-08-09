@@ -7,7 +7,7 @@
 
 <div id="orderForm" style="margin: 0 auto; min-width: 360px">
 	<form action="post" style= "margin: 300px 0">
-		<div style="text-align: center">배송지</div>
+		<div class="title" style="text-align: center">배송지</div>
 		<div>
 			<!-- 배송지 정보 (배송지 목록 버튼 클릭시 안보임)-->
 			<div id="receiverInfo" style="display: block;">
@@ -110,7 +110,7 @@
 		<!-- 주문 상품 내용  -->
 		<c:forEach var="image" items="${convertedImages}" varStatus="status">
 			<div>
-				<div>
+				<div class="title">
 					주문 상품
 				</div>
 				<div style="display: flex">
@@ -126,18 +126,18 @@
 		</c:forEach>
 		<!-- 할인/부가 결제 -->
 		<div>
-			<div>할인/부가 결제 </div>
+			<div class="title">할인/부가 결제 </div>
 			<div>KRW 00,000원</div>
 		</div>
 		<hr>
 		<!-- 적용 금액 -->
 		<div>
-			<div>적용금액</div>
+			<div class="title">적용금액</div>
 			<div>-KRW 00,000</div>
 		</div>
 		<!-- 결제 정보 -->
 		<div>
-			<div>결제 정보</div>
+			<div class="title">결제 정보</div>
 			<div>
 				<div>
 					<span>주문 상품</span>
@@ -164,7 +164,7 @@
 		<hr>
 		<!-- 결제 수단 -->
 		<div>
-			<div>결제 수단</div>
+			<div class="title">결제 수단</div>
 			<div>
 				<div><input type="radio" checked="checked" disabled="disabled">결제수단 선택</div>
 				<div>
@@ -179,7 +179,9 @@
 						<label><input type="checkbox"><span>결제 수단과 입력정보를 다음에도 사용</span></label>
 					</div>
 				</c:if>
-				
+				<div>
+					<button class="btn btn-sm btn-dark">결제</button>
+				</div>
 			</div>
 		</div>
 	</form>
