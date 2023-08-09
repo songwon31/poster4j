@@ -36,8 +36,7 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	background-image: linear-gradient(to bottom, #fff 45%, rgba(255, 255, 255, 0.001)
-		90%);
+	background-image: linear-gradient(to bottom, #fff 45%, rgba(255, 255, 255, 0.001) 90%);
 	z-index: 10px;
 }
 

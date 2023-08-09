@@ -21,7 +21,7 @@
 	</head>
 	<body style="width:100%; height:100%;">
 		<div id="headerMenu" class="d-flex justify-content-center align-items-center">
-			<ul id="headerMenuList" class="list-group list-group-flush">
+			<ul id="headerMenuList" class="list-group list-group-flush" style="padding: 0 30px;">
 				<li class="list-group-item border-bottom border-dark">
 					<a href="${pageContext.request.contextPath}/admin/orderBoard" 
 					   class="text-decoration-none text-dark">주문 목록</a>
