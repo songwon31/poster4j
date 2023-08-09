@@ -35,6 +35,13 @@ public class productDetailPageController {
 		model.addAttribute("convertedImage", convertedImage);
 		model.addAttribute("product", product);
 		
+		//할인된 상품가격 계산
+		double discountedPrice = product.getProductPrice() * (1.0 - product.getProductDiscountRate());
+		double discountAmount = product.getProductPrice() * product.getProductDiscountRate();
+		
+		model.addAttribute("discountedPrice", discountedPrice);
+		model.addAttribute("discountAmount", discountAmount);
+		
 		return "user/productDetailPage";
 	}
 
