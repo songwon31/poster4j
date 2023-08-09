@@ -54,12 +54,12 @@
 		<div>
 			<div id="contents" >
 				<ul id="productList">
-					<c:forEach var="image" items="${convertedImages}" varStatus="status">
+					<c:forEach var="image" items="${convertedImages}" varStatus="status" begin="0" end="10">
 						<li class="poster">
 							<div class="thumbnail">
 								<a href="productDetail?productId=${productList[status.index].productId}">
 									<img class="imgOnList" alt="123" src="data:image/jpeg;base64, ${image}">
-									<div class="mt-3" style="margin-bottom: 30px; color: black;">${productList[status.index].productName}</div>
+									<div class="mt-3" style="margin-bottom: 30px; color: black;">[${productList[status.index].productTheme}] ${productList[status.index].productName}</div>
 								</a>
 							</div>
 						</li>

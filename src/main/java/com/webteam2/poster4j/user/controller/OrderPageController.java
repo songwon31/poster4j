@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webteam2.poster4j.dto.Customer;
+import com.webteam2.poster4j.dto.OrderItem;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
 import com.webteam2.poster4j.dto.Receiver;
@@ -34,7 +35,7 @@ public class OrderPageController {
 	
 	
 	@RequestMapping("/order")
-	public String order(HttpSession session, Model model, Product product ) {
+	public String order(HttpSession session, Model model, List<OrderItem> orderItems ) {
 		//세션에 저장된 customer 정보
 		Customer customer = (Customer)session.getAttribute("customerLogin");
 		if (customer == null) {
@@ -51,8 +52,10 @@ public class OrderPageController {
 		model.addAttribute("defaultReceiver", defaultReceiver);
 		model.addAttribute("receivers", list);
 		
+		
+		
 		//넘겨받은 product id를 리스트로 저장
-		List<Integer> productIds = Arrays.asList(1, 2, 3);
+		/*List<Integer> productIds = Arrays.asList(1, 2, 3);
 		
 		//List<ProductImage> productImages = productImageService.getOrderProductImageList(product.getProductId());
 		List<String> convertedImages = new ArrayList<String>();
@@ -73,7 +76,7 @@ public class OrderPageController {
 		
 		
 		model.addAttribute("convertedImages", convertedImages);
-		model.addAttribute("productList", productList);
+		model.addAttribute("productList", productList);*/
 		
 		return "user/orderForm";
 		

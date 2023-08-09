@@ -48,7 +48,7 @@ public class HomeController {
 			Product product = productService.getOneProduct(image.getProductId());
 			productList.add(product);
 		}
-		
+		//랜덤으로 이미지 불러오기
 		int randomIndex = new Random().nextInt(convertedImages.size());
 		String randomProductImage = convertedImages.get(randomIndex);
 		
