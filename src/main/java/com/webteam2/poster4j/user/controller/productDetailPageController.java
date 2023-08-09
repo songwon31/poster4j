@@ -25,7 +25,7 @@ public class productDetailPageController {
 	ProductImageService productImageService;
 	
 	@GetMapping("/productDetail")
-	public String productDetail(@RequestParam(defaultValue="1")int productId, Model model) {
+	public String productDetail(@RequestParam(defaultValue="1", value="productId")int productId, Model model) {
 		ProductImage productImage = productImageService.getImage(productId);
 		Product product = new Product();
 
@@ -44,5 +44,4 @@ public class productDetailPageController {
 		
 		return "user/productDetailPage";
 	}
-
 }
