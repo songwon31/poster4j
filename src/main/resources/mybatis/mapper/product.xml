@@ -162,6 +162,7 @@
 						product_id = #{productBoardSearch.productId}
 					</if>
 					
+					<!-- mybatis oracle like문 사용법 -->
 					<if test="productBoardSearch.productName!=null">
 						and product_name like '%'||#{productBoardSearch.productName}||'%'
 					</if>

@@ -10,16 +10,7 @@
 	$(init);
 	
 	function init() {
-		if (window.name != null) {
-			$('#productSearchDiv').css('display', window.name);
-			if (window.name == "block") {
-				$('#toggleSearchButton').html('검색창 닫기');
-			} else if (window.name == "none") {
-				$('#toggleSearchButton').html('검색창 열기');
-			}
-		}
-		
-		$(window).resize(function() {
+		function setColumnCounts() {
 			var innerWidth = window.innerWidth;
 			var productList = $("#productList");
 			if (innerWidth > 1024) {
@@ -29,7 +20,20 @@
 			} else {
 				productList.css("column-count", 1);
 			}
-		});
+		}
+		
+		setColumnCounts();
+		
+		if (window.name != null) {
+			$('#productSearchDiv').css('display', window.name);
+			if (window.name == "block") {
+				$('#toggleSearchButton').html('검색창 닫기');
+			} else if (window.name == "none") {
+				$('#toggleSearchButton').html('검색창 열기');
+			}
+		}
+		
+		$(window).resize(setColumnCounts);
 		
 		$('#toggleSearchButton').click(function(){
 			if ($('#productSearchDiv').css('display') === "block") {
@@ -143,11 +147,109 @@
 					<c:forEach var="image" items="${convertedImages}" varStatus="status">
 						<li>
 							<div class="thumbnail">
-								<a href="#"><img class="imgOnList" src="data:image/jpeg;base64, ${image}"></a>
+								<a href="#">
+									<img class="imgOnList mb-3" src="data:image/jpeg;base64, ${image}">
+									<span>
+										<span>[${productList[status.index].productTheme}] </span>
+										<span>${productList[status.index].productName}</span>
+									</span>
+								</a>
 							</div>
 						</li>
 					</c:forEach>
 				</ul>
+			</div>
+			<div class="d-flex justify-content-center">
+				<a class="text-dark mr-2" style="font-weight:600;" 
+				   href="search?productId=${productBoardSearch.productId}&
+						productName=${productBoardSearch.productName}&
+						productPriceStart=${productBoardSearch.productPriceStart}&
+						productPriceEnd=${productBoardSearch.productPriceEnd}&
+						productDiscountRateStart=${productBoardSearch.productDiscountRateStart}&
+						productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
+						productTheme=${productBoardSearch.productTheme}&
+						productArtist=${productBoardSearch.productArtist}&
+						productTexture=${productBoardSearch.productTexture}&
+						productStockStart=${productBoardSearch.productStockStart}&
+						productStockEnd=${productBoardSearch.productStockEnd}&
+						pageNo=1">first</a>
+				<c:if test="${pager.groupNo>1}">
+					<a class="text-dark mr-2" style="font-weight:600;" 
+					   href="search?productId=${productBoardSearch.productId}&
+							productName=${productBoardSearch.productName}&
+							productPriceStart=${productBoardSearch.productPriceStart}&
+							productPriceEnd=${productBoardSearch.productPriceEnd}&
+							productDiscountRateStart=${productBoardSearch.productDiscountRateStart}&
+							productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
+							productTheme=${productBoardSearch.productTheme}&
+							productArtist=${productBoardSearch.productArtist}&
+							productTexture=${productBoardSearch.productTexture}&
+							productStockStart=${productBoardSearch.productStockStart}&
+							productStockEnd=${productBoardSearch.productStockEnd}&
+							pageNo=${pager.startPageNo-1}">prev</a>
+				</c:if>
+				
+				<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+					<c:if test="${pager.pageNo != i}">
+						<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px;" 
+						   href="search?productId=${productBoardSearch.productId}&
+								productName=${productBoardSearch.productName}&
+								productPriceStart=${productBoardSearch.productPriceStart}&
+								productPriceEnd=${productBoardSearch.productPriceEnd}&
+								productDiscountRateStart=${productBoardSearch.productDiscountRateStart}&
+								productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
+								productTheme=${productBoardSearch.productTheme}&
+								productArtist=${productBoardSearch.productArtist}&
+								productTexture=${productBoardSearch.productTexture}&
+								productStockStart=${productBoardSearch.productStockStart}&
+								productStockEnd=${productBoardSearch.productStockEnd}&
+								pageNo=${i}">${i}</a>
+					</c:if>
+					<c:if test="${pager.pageNo == i}">
+						<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px; text-decoration:underline;" 
+						   href="search?productId=${productBoardSearch.productId}&
+								productName=${productBoardSearch.productName}&
+								productPriceStart=${productBoardSearch.productPriceStart}&
+								productPriceEnd=${productBoardSearch.productPriceEnd}&
+								productDiscountRateStart=${productBoardSearch.productDiscountRateStart}&
+								productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
+								productTheme=${productBoardSearch.productTheme}&
+								productArtist=${productBoardSearch.productArtist}&
+								productTexture=${productBoardSearch.productTexture}&
+								productStockStart=${productBoardSearch.productStockStart}&
+								productStockEnd=${productBoardSearch.productStockEnd}&
+								pageNo=${i}">${i}</a>
+					</c:if>
+				</c:forEach>
+							
+				<c:if test="${pager.groupNo<pager.totalGroupNo}">
+					<a class="text-dark ml-2" style="font-weight:600;" 
+					   href="search?productId=${productBoardSearch.productId}&
+							productName=${productBoardSearch.productName}&
+							productPriceStart=${productBoardSearch.productPriceStart}&
+							productPriceEnd=${productBoardSearch.productPriceEnd}&
+							productDiscountRateStart=${productBoardSearch.productDiscountRateStart}&
+							productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
+							productTheme=${productBoardSearch.productTheme}&
+							productArtist=${productBoardSearch.productArtist}&
+							productTexture=${productBoardSearch.productTexture}&
+							productStockStart=${productBoardSearch.productStockStart}&
+							productStockEnd=${productBoardSearch.productStockEnd}&
+							pageNo=${pager.endPageNo+1}">next</a>
+				</c:if>
+				<a class="text-dark ml-2" style="font-weight:600;" 
+				   href="search?productId=${productBoardSearch.productId}&
+						productName=${productBoardSearch.productName}&
+						productPriceStart=${productBoardSearch.productPriceStart}&
+						productPriceEnd=${productBoardSearch.productPriceEnd}&
+						productDiscountRateStart=${productBoardSearch.productDiscountRateStart}&
+						productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
+						productTheme=${productBoardSearch.productTheme}&
+						productArtist=${productBoardSearch.productArtist}&
+						productTexture=${productBoardSearch.productTexture}&
+						productStockStart=${productBoardSearch.productStockStart}&
+						productStockEnd=${productBoardSearch.productStockEnd}&
+						pageNo=${pager.totalPageNo}">last</a>
 			</div>
 		</div>
 	</div>

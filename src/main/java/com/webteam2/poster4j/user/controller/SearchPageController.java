@@ -31,8 +31,15 @@ public class SearchPageController {
 
 	@GetMapping("/search")
 	public String search(ProductBoardSearch productBoardSearch, String pageNo, Model model, HttpSession session) {
+		log.info("productBoardSearch: " + productBoardSearch);
 		productBoardSearch.makeEmptyToNull();
 		ProductBoardSearch pastProductBoardSearch = (ProductBoardSearch)session.getAttribute("productBoardSearch");
+		/*
+		log.info("productBoardSearch: " + productBoardSearch);
+		log.info("pastProductBoardSearch: " + pastProductBoardSearch);
+		log.info("isEqual: " + productBoardSearch.equals(pastProductBoardSearch));
+		log.info("");
+		*/
 		if (!productBoardSearch.equals(pastProductBoardSearch)) {
 			session.setAttribute("productBoardSearch", productBoardSearch);
 			pageNo = "1";
@@ -53,24 +60,28 @@ public class SearchPageController {
 		
 		List<Product> productList = productService.getSearchedProductList(productBoardSearch, pager);
 		model.addAttribute("productList", productList);
-		
-		
-		
-		
-		List<Integer> productIds = productService.getAllProductId();
+
+		List<Integer> productIds = new ArrayList<Integer>();
+		for (Product product : productList) {
+			productIds.add(product.getProductId());
+		}
 		
 		List<String> convertedImages = new ArrayList<String>();
 		for (Integer productId : productIds) {
 			List<ProductImage> productImages = productImageService.getOrderProductImageList(productId);
 			for (ProductImage image : productImages) {
 				String base64Img = Base64.getEncoder().encodeToString(image.getProductImageSource());
-				//image.setBase64Data(base64Img);
 				convertedImages.add(base64Img);
 			}
 		}
 		model.addAttribute("convertedImages", convertedImages);
 		
-		
 		return "user/searchPage";
+	}
+	
+	@GetMapping("/removeSearch")
+	public String removeSearch(HttpSession session) {
+		session.removeAttribute("productBoardSearch");
+		return "redirect:/search";
 	}
 }
