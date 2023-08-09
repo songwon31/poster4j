@@ -30,7 +30,7 @@
 	<div id="container">
 		<!-- 메인 포스터 -->
 		<div id="main-poster" class="container-fluid" style="background-color: #F4F4F4; min-height: 1084px;" >
-			<div id="frame" style="background-image: url('${pageContext.request.contextPath}/resources/images/poster3.jpg');">
+			<div id="frame" style="background-image: url('data:image/jpeg;base64, ${randomImage}');">
 				<img id="frame-image" alt="프레임" src="${pageContext.request.contextPath}/resources/images/frame.png" width="450px" height="630px";>
 			</div>
 		</div>

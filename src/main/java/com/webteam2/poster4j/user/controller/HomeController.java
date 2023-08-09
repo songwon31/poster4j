@@ -3,6 +3,7 @@ package com.webteam2.poster4j.user.controller;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Resource;
 
@@ -47,6 +48,11 @@ public class HomeController {
 			Product product = productService.getOneProduct(image.getProductId());
 			productList.add(product);
 		}
+		
+		int randomIndex = new Random().nextInt(convertedImages.size());
+		String randomProductImage = convertedImages.get(randomIndex);
+		
+		model.addAttribute("randomImage", randomProductImage);
 		
 		model.addAttribute("convertedImages", convertedImages);
 		model.addAttribute("productList", productList);
