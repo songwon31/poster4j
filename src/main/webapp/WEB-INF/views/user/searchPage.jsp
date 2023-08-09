@@ -10,6 +10,15 @@
 	$(init);
 	
 	function init() {
+		if (window.name != null) {
+			$('#productSearchDiv').css('display', window.name);
+			if (window.name == "block") {
+				$('#toggleSearchButton').html('검색창 닫기');
+			} else if (window.name == "none") {
+				$('#toggleSearchButton').html('검색창 열기');
+			}
+		}
+		
 		$(window).resize(function() {
 			var innerWidth = window.innerWidth;
 			var productList = $("#productList");
@@ -21,12 +30,114 @@
 				productList.css("column-count", 1);
 			}
 		});
+		
+		$('#toggleSearchButton').click(function(){
+			if ($('#productSearchDiv').css('display') === "block") {
+				$('#productSearchDiv').css('display','none');
+				$('#toggleSearchButton').html('검색창 열기');
+			} else {
+				$('#productSearchDiv').css('display','block');
+				$('#toggleSearchButton').html('검색창 닫기');
+			}
+			window.name = $('#productSearchDiv').css('display');
+		});
 	}
 </script>
 
 <div class="wrapper">
 	<div id="container">
 		<div id="contents">
+			<%-- 검색창 --%>
+			<div style="height:60px;"></div>
+			<div id="productSearchDiv" style="display: block; padding: 0 30px;">
+				<div class="d-flex flex-column justify-content-center">
+					<div class="d-flex justify-content-center py-4" style="font-weight:bold; font-size: 15px;">상품 검색</div>
+					<div class="d-flex justify-content-center py-3" style="border: 5px solid #e8e8e8;">
+						<form method="get" action="search" class="row justify-content-center" style="width: 300px">
+						
+							<div class="input-group row justify-content-center mb-2" style="width: 100%">
+								<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">상품명</span>
+								<input type="text" id="productName" name="productName" class="form-control-sm" style="width:80%;" 
+									   placeholder="상품명을 입력하세요" value="${productBoardSearch.productName}"/>
+							</div>
+							
+							<div class="input-group row justify-content-center mb-2" style="width: 100%">
+								<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">판매가</span>
+								<input type="text" id="productPriceStart" name="productPriceStart" class="form-control-sm" style="width:30%;"
+									   value="${productBoardSearch.productPriceStart}"/>
+								<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 5%"> </span>
+								<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 15%">~</span>
+								<input type="text" id="productPriceEnd" name="productPriceEnd" class="form-control-sm" style="width:30%;"
+											 value="${productBoardSearch.productPriceEnd}"/>
+							</div>
+							
+							<div class="input-group row justify-content-center mb-2" style="width: 100%">
+								<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">할인율</span>
+								<input type="text" id="productDiscountRateStart" name="productDiscountRateStart" class="form-control-sm" style="width:30%;"
+									   value="${productBoardSearch.productDiscountRateStart}"/>
+								<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 5%"> </span>
+								<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 15%">~</span>
+								<input type="text" id="productDiscountRateEnd" name="productDiscountRateEnd" class="form-control-sm" style="width:30%;"
+									   value="${productBoardSearch.productDiscountRateEnd}"/>
+							</div>
+							
+							<div class="input-group row justify-content-center mb-2" style="width: 100%">
+								<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">테마</span>
+								<select id="productTheme" name="productTheme" class="form-control-sm" style="width:80%">
+									<option value="">테마 선택</option>
+									<c:if test='${productBoardSearch.productTheme == "wave"}'><option value="wave" selected>wave</option></c:if>
+									<c:if test='${productBoardSearch.productTheme != "wave"}'><option value="wave">wave</option></c:if>
+									<c:if test='${productBoardSearch.productTheme == "tree"}'><option value="tree" selected>tree</option></c:if>
+									<c:if test='${productBoardSearch.productTheme != "tree"}'><option value="tree">tree</option></c:if>
+									<c:if test='${productBoardSearch.productTheme == "house"}'><option value="house" selected>house</option></c:if>
+									<c:if test='${productBoardSearch.productTheme != "house"}'><option value="house">house</option></c:if>
+									<c:if test='${productBoardSearch.productTheme == "street"}'><option value="street" selected>street</option></c:if>
+									<c:if test='${productBoardSearch.productTheme != "street"}'><option value="street">street</option></c:if>
+									<c:if test='${productBoardSearch.productTheme == "other"}'><option value="other" selected>other</option></c:if>
+									<c:if test='${productBoardSearch.productTheme != "other"}'><option value="other">other</option></c:if>
+								</select>
+							</div>
+							
+							<div class="input-group row justify-content-center mb-2" style="width: 100%">
+								<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">작가</span>
+								<select id="productArtist" name="productArtist" class="form-control-sm" style="width:80%">
+									<option value="">아티스트 선택</option>
+									<c:if test='${productBoardSearch.productArtist == "songwon"}'><option value="songwon" selected>songwon</option></c:if>
+									<c:if test='${productBoardSearch.productArtist != "songwon"}'><option value="songwon">songwon</option></c:if>
+									<c:if test='${productBoardSearch.productArtist == "kimfefe"}'><option value="kimfefe" selected>kimfefe</option></c:if>
+									<c:if test='${productBoardSearch.productArtist != "kimfefe"}'><option value="kimfefe">kimfefe</option></c:if>
+									<c:if test='${productBoardSearch.productArtist == "hyeonjulee"}'><option value="hyeonjulee" selected>hyeonjulee</option></c:if>
+									<c:if test='${productBoardSearch.productArtist != "hyeonjulee"}'><option value="hyeonjulee">hyeonjulee</option></c:if>
+									<c:if test='${productBoardSearch.productArtist == "other"}'><option value="other" selected>other</option></c:if>
+									<c:if test='${productBoardSearch.productArtist != "other"}'><option value="other">other</option></c:if>
+								</select>
+							</div>
+							
+							<div class="input-group row justify-content-center mb-2" style="width: 100%">
+								<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">텍스처</span>
+								<select id="productTexture" name="productTexture" class="form-control-sm" style="width:80%">
+									<option value="">텍스처 선택</option>
+									<c:if test='${productBoardSearch.productTexture == "normal"}'><option value="normal" selected>normal</option></c:if>
+									<c:if test='${productBoardSearch.productTexture != "normal"}'><option value="normal">normal</option></c:if>
+									<c:if test='${productBoardSearch.productTexture == "fabric"}'><option value="fabric" selected>fabric</option></c:if>
+									<c:if test='${productBoardSearch.productTexture != "fabric"}'><option value="fabric">fabric</option></c:if>
+								</select>
+							</div>
+							
+							<button class="btn btn-dark btn-sm mt-3">검색</button>
+						</form>
+					</div>
+					<div class="d-flex justify-content-end px-2 pt-1 pb-2">
+						<a href="removeSearch" class="btn btn-secondary btn-sm" style="color: white;">검색 초기화</a>
+					</div>
+				</div>
+			</div>
+			<div style="padding: 0 30px;">
+				<div class="d-flex justify-content-end px-2 pb-3">
+					<a id="toggleSearchButton" href="#" class="btn btn-dark btn-sm" style="color: white;">검색창 닫기</a>
+				</div>
+			</div>
+			<%-- 상품 리스트 --%>
 			<div style="position:relative;">
 				<ul id="productList">
 					<c:forEach var="image" items="${convertedImages}" varStatus="status">

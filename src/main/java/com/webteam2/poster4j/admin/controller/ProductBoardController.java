@@ -26,8 +26,7 @@ public class ProductBoardController {
 	ProductService productService;
 	
 	@RequestMapping("/productBoard")
-	public String productBoard(ProductBoardSearch productBoardSearch, String pageNo, Model model, HttpSession session) 
-	{
+	public String productBoard(ProductBoardSearch productBoardSearch, String pageNo, Model model, HttpSession session) {
 		productBoardSearch.makeEmptyToNull();
 		
 		ProductBoardSearch pastProductBoardSearch = (ProductBoardSearch)session.getAttribute("productBoardSearch");
