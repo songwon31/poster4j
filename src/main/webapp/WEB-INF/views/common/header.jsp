@@ -18,6 +18,9 @@
 		<!-- 공통 스타일 설정을 위한 css -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 		
+		<!-- 아이콘 라이브러리  -->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		
 	</head>
 	<body style="width:100%; height:100%;">
 		<div id="headerMenu" class="d-flex justify-content-center align-items-center">
@@ -55,13 +58,13 @@
 					<c:if test="${customerLogin == null}">
 						<div style="padding-top:10px; padding-bottom:10px">
 							<a href="${pageContext.request.contextPath}/search">
-								<img alt="" src="${pageContext.request.contextPath}/resources/images/search.png" width="25px;"/>
+								<i class="material-icons">search</i>
 							</a>
 							<a href="${pageContext.request.contextPath}/login">
-								<img alt="" src="${pageContext.request.contextPath}/resources/images/login.png" width="25px;"/>
+								<i class="material-icons">person_outline</i>
 							</a>
 							<a id="headerMenuButton" href="#">
-								<img alt="" src="${pageContext.request.contextPath}/resources/images/menu.png" width="25px;"/>
+								<i class="material-icons">menu</i>
 							</a>
 						</div>
 					</c:if>
