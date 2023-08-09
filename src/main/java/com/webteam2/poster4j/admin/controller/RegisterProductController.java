@@ -41,7 +41,7 @@ public class RegisterProductController {
 	public String register(HttpServletRequest request, HttpSession session,
 			@RequestParam(value="productName")String productName,
 			@RequestParam(value="productPrice")int productPrice,
-			@RequestParam(value="productDiscountRate")int productDiscountRate,
+			@RequestParam(value="productDiscountRate")double productDiscountRate,
 			@RequestParam(value="productTheme")String productTheme,
 			@RequestParam(value="productArtist")String productArtist,
 			@RequestParam(value="productTexture")String productTexture,

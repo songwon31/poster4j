@@ -36,7 +36,20 @@
 						</c:if>
 						<td class="align-middle" style="width:50px;"><span class="d-flex justify-content-center">${canceledOrder.canceledOrderReason}</span></td>
 						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center"><fmt:formatDate value="${canceledOrder.canceledOrderReqDate}" pattern="yyyy-MM-dd"/></span></td>
-						
+						<c:if test="${canceledOrder.canceledOrderCmptnDate == null}">
+							<td class="align-middle" style="width:30px;">
+								<span class="d-flex justify-content-center">
+									<form method="get" action="processCanceledOrder">
+										<input hidden type=text name="orderId" value="${canceledOrder.orderId}"/>
+										<input hidden type=text name="productId" value="${canceledOrder.productId}"/>
+										<button class="btn btn-danger btn-sm">처리</button>
+									</form>
+								</span>
+							</td>
+						</c:if>
+						<c:if test="${canceledOrder.canceledOrderCmptnDate != null}">
+							<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">완료: <fmt:formatDate value="${canceledOrder.canceledOrderCmptnDate}" pattern="yyyy-MM-dd"/></span></td>
+						</c:if>
 					</tr>
 				</c:forEach>
 				<tr>

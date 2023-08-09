@@ -1,5 +1,6 @@
 package com.webteam2.poster4j.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -31,5 +32,10 @@ public class CanceledOrderServiceImpl implements CanceledOrderService {
 	@Override
 	public int cancelOrder(CanceledOrder canceledOrder) {
 		return canceledOrderDao.insertCanceledOrder(canceledOrder);
+	}
+	
+	@Override
+	public int registerCmptnDate(int orderId, int productId, Date date) {
+		return canceledOrderDao.updateCmptnDate(orderId, productId, date);
 	}
 }

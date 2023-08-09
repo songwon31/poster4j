@@ -28,4 +28,9 @@
 		values(#{orderId}, #{productId}, #{canceledOrderCategory},
 			   #{canceledOrderReason, jdbcType=VARCHAR}, #{canceledOrderReqDate})
 	</insert>
+	
+	<update id="updateCmptnDate" parameterType="map">
+		update canceled_order set canceled_order_cmptn_date = #{date}
+		where order_id=#{orderId} and product_id=#{productId}
+	</update>
 </mapper>

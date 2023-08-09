@@ -1,5 +1,6 @@
 package com.webteam2.poster4j.admin.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -47,5 +48,12 @@ public class CanceledOrderBoardController {
 		model.addAttribute("canceledOrderList", canceledOrderList);
 		
 		return "admin/canceledOrderBoard";
+	}
+	
+	@RequestMapping("processCanceledOrder")
+	public String processCanceledOrder(int orderId, int productId) {
+		canceledOrderService.registerCmptnDate(orderId, productId, new Date());
+		
+		return "redirect:/admin/canceledOrderBoard";
 	}
 }

@@ -37,7 +37,7 @@
 					<div class="py-2 px-4">
 						<div style="font-size: 20px">상품 등록</div>
 						<div class="mt-2">
-							<form id="registerProductForm" method="post" action="register" enctype="multipart/form-data">
+							<form id="register" method="post" action="register" enctype="multipart/form-data">
 							
 								<div class="input-group" style="width:100%;">
 									<div class="input-group-addon" style="width:35%; text-align:left;"><span class="input-group-text">상품명</span></div>
