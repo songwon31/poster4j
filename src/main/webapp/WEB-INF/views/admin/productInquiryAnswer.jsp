@@ -25,17 +25,17 @@
 			<div class="container-fluid flex-grow-1">
 				<div class="col">
 					<div class="py-2 px-4">
-						<div style="font-size: 20px" class="d-flex justify-content-center mb-2">주문 문의 답변 수정</div>
+						<div style="font-size: 20px" class="d-flex justify-content-center mb-2">상품 문의 답변</div>
 						<div class="mt-2">
-							<form method="post" action="orderInquiryAnswerUpdate">
-								<input hidden id="orderInquiryId" type="text" name="orderInquiryId" value="${orderInquiryId}"/>
+							<form method="post" action="productInquiryAnswer">
+								<input hidden id="productInquiryId" type="text" name="productInquiryId" value="${productInquiryId}"/>
 								<div class="mt-2" style="width:100%;">
 									<div style="font-weight:600;">문의 내용</div>
-									<div class="mt-1">${orderInquiryContent}</div>
+									<div class="mt-1">${productInquiryContent}</div>
 								</div>
 								<div class="input-group" style="width:100%;">
 									<div class="mt-3 mb-1" style="width:20%; text-align:left;"><span style="font-weight:600;">응답 작성</span></div>
-									<textarea rows="10" cols="100" name="orderInquiryAnsContent">${originalAnswer}</textarea>
+									<textarea rows="10" cols="100" name="answer"></textarea>
 								</div>
 								<div class="d-flex justify-content-end mt-2">
 									<button class="btn btn-success btn-sm">응답</button>
@@ -43,7 +43,7 @@
 								<script>
 									$(init);
 									function init() {
-										if ('${orderInquiryId}' == -1) {
+										if ('${productInquiryId}' == -1) {
 											opener.parent.location.reload();
 											window.close();
 										}

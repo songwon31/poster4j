@@ -17,6 +17,7 @@
 					<th scope="col"><span class="d-flex justify-content-center">카테고리</span></th>
 					<th scope="col"><span class="d-flex justify-content-center">사유</span></th>
 					<th scope="col"><span class="d-flex justify-content-center">접수 날짜</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">처리</span></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -24,9 +25,18 @@
 					<tr>
 						<td class="align-middle" scope="row" style="width:10px;"><span class="d-flex justify-content-center">${canceledOrder.orderId}</span></td>
 						<td class="align-middle" style="width:10px;"><span class="d-flex justify-content-center">${canceledOrder.productId}</span></td>
-						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${canceledOrder.canceledOrderCategory}</span></td>
+						<c:if test='${canceledOrder.canceledOrderCategory == "cancelBeforeSend"}'>
+							<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">취소</span></td>
+						</c:if>
+						<c:if test='${canceledOrder.canceledOrderCategory == "exchange"}'>
+							<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">교환</span></td>
+						</c:if>
+						<c:if test='${canceledOrder.canceledOrderCategory == "return"}'>
+							<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">반품</span></td>
+						</c:if>
 						<td class="align-middle" style="width:50px;"><span class="d-flex justify-content-center">${canceledOrder.canceledOrderReason}</span></td>
-						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${canceledOrder.canceledOrderReqDate}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center"><fmt:formatDate value="${canceledOrder.canceledOrderReqDate}" pattern="yyyy-MM-dd"/></span></td>
+						
 					</tr>
 				</c:forEach>
 				<tr>

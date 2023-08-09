@@ -12,4 +12,5 @@ public interface OrderInquiryDao {
 	public int countTotalOrderInquiry();
 	public List<OrderInquiry> selectWithPager(Pager pager);
 	public int updateAnsweredToTrue(int orderInquiryId);
+	public String selectContentById(int orderInquiryId);
 }

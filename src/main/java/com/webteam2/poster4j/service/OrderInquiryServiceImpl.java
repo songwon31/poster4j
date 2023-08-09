@@ -32,4 +32,9 @@ public class OrderInquiryServiceImpl implements OrderInquiryService {
 	public int setAnsweredTrue(int orderInquiryId) {
 		return orderInquiryDao.updateAnsweredToTrue(orderInquiryId);
 	}
+	
+	@Override
+	public String getContentById(int orderInquiryId) {
+		return orderInquiryDao.selectContentById(orderInquiryId);
+	}
 }

@@ -11,4 +11,6 @@ import com.webteam2.poster4j.dto.ProductInquiry;
 public interface ProductInquiryDao {
 	public int countTotalProductInquiry();
 	public List<ProductInquiry> selectWithPager(Pager pager);
+	public int updateAnsweredToTrue(int productInquiryId);
+	public String selectContentById(int productInquiryId);
 }

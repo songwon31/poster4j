@@ -5,4 +5,15 @@
 		insert into order_inquiry_answer (order_inquiry_id, order_inquiry_ans_content, order_inquiry_ans_date)
 		values(#{orderInquiryId}, #{orderInquiryAnsContent}, #{orderInquiryAnsDate})
 	</insert>
+	
+	<select id="selectAnswerById" parameterType="int">
+		select order_inquiry_ans_content
+		from order_inquiry_answer
+		where order_inquiry_id = #{orderInquiryId}
+	</select>
+	
+	<update id="updateAnswer" parameterType="OrderInquiryAnswer">
+		update order_inquiry_answer set order_inquiry_ans_content=#{orderInquiryAnsContent}, order_inquiry_ans_date=#{orderInquiryAnsDate}
+		where order_inquiry_id=#{orderInquiryId}
+	</update>
 </mapper>

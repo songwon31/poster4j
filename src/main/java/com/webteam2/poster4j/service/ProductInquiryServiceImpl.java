@@ -25,7 +25,16 @@ public class ProductInquiryServiceImpl implements ProductInquiryService {
 	
 	@Override
 	public List<ProductInquiry> getListWithPager(Pager pager) {
-		// TODO Auto-generated method stub
 		return productInquiryDao.selectWithPager(pager);
+	}
+	
+	@Override
+	public int setAnsweredTrue(int productInquiryId) {
+		return productInquiryDao.updateAnsweredToTrue(productInquiryId);
+	}
+	
+	@Override
+	public String getContentById(int productInquiryId) {
+		return productInquiryDao.selectContentById(productInquiryId);
 	}
 }

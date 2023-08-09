@@ -8,4 +8,6 @@ import com.webteam2.poster4j.dto.ProductInquiry;
 public interface ProductInquiryService {
 	public int getTotalProductInquiryNum();
 	public List<ProductInquiry> getListWithPager(Pager pager);
+	public int setAnsweredTrue(int productInquiryId);
+	public String getContentById(int productInquiryId);
 }

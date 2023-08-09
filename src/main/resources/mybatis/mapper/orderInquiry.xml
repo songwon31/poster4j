@@ -25,4 +25,10 @@
 		update order_inquiry set order_inquiry_answered = 'true' 
 		where order_inquiry_id=#{orderInquiryId}
 	</update>
+	
+	<select id="selectContentById" parameterType="int">
+		select order_inquiry_content
+		from order_inquiry
+		where order_inquiry_id = #{orderInquiryId}
+	</select>
 </mapper>

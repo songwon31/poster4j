@@ -9,4 +9,5 @@ public interface OrderInquiryService {
 	public int getTotalOrderInquiryNum();
 	public List<OrderInquiry> getListWithPager(Pager pager);
 	public int setAnsweredTrue(int orderInquiryId);
+	public String getContentById(int orderInquiryId);
 }
