@@ -24,5 +24,9 @@ public class OrderTServiceImpl implements OrderTService {
 	public int getTotalOrderTNum() {
 		return orderTDao.count();
 	}
-
+	
+	@Override
+	public void saveOrder(OrderT order) {
+		orderTDao.insert(order);
+	}
 }

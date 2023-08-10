@@ -11,7 +11,7 @@ public class OrderT {
 	private int orderId;
 	private String customerId;
 	private int receiverId;
-	private int couponId;
+	private Integer couponId;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date orderDate;
 	private String orderSettlementMethod;

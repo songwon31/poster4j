@@ -13,5 +13,7 @@ public class OrderDetail {
 	private int orderDetailQuantity;
 	private String orderDetailStatus;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date OrderDlCmptnDate;
+	private Date orderDlCmptnDate;
+	private String optionSize;
+	private String optionFrame;
 }

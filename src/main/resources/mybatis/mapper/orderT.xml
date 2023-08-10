@@ -11,4 +11,8 @@
 		select count(*) from order
 	</select>
 	
+	<select id="insert" parameterType="OrderT">
+		insert into order_t (order_id, customer_id, receiver_id, coupon_id, order_date, order_settlement_method)
+		values (order_t_seq.nextval, #{customerId}, #{receiverId}, #{couponId, jdbcType=DECIMAL }, #{orderDate}, #{orderSettlementMethod})
+	</select>
 </mapper>

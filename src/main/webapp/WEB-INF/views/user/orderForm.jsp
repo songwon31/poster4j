@@ -7,16 +7,25 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderFormStyle.css">
 
 <script type="text/javascript">
+	var totalPrice = 0;
+	var shipFee = 0;
 	$(init);
 
 	function init(){
 		getFinalTotalPrice();
-		
-		
+		getTotalPrice();	
+		getShipFee();
 	}
-
-
-
+	function getShipFee(){
+		if(totalPrice == 0){
+			shipFee = 0;
+		}else if(totalPrice < 50000){
+			shipFee = 3000;
+		}
+		
+		$("#shipFee").text(shipFee);
+	}
+	
 	function showReceiverList(){
 		$("#receiverInfo").hide();
 		$("#receiverList").show();
@@ -50,39 +59,54 @@
 		
 		if(check){
 			$(queryString).remove();
+			totalPrice = 0;
+			shipFee = 0;
+			getTotalPrice();
 			getFinalTotalPrice();
+			getShipFee();
 		}
-		
 	}
-	
 	function getFinalTotalPrice(){
-		var totalPrice = 0;
+		var finalTotalPrice = 0;
 		
+		$('.itemPrice').each(function() {
+			finalTotalPrice += parseInt($(this).text());
+        });
+		finalTotalPrice += shipFee;
+		
+		$("#finalTotalPrice").text(finalTotalPrice)
+	}
+	function getTotalPrice(){
 		$('.itemPrice').each(function() {
             totalPrice += parseInt($(this).text());
         });
-		
-		$("#finalTotalPrice").text(totalPrice)
+		$("#totalPrice").text(totalPrice)
 	}
+	
+	
+	
 </script>
 
 
 <div id="orderForm" style="margin: 0 auto; min-width: 360px">
-	<form action="post" style= "margin: 300px 0">
+	<form method="post" action="order" style= "margin: 300px 0">
 		<div class="title" style="text-align: center">배송지</div>
 		<div>
 			<!-- 배송지 정보 (배송지 목록 버튼 클릭시 안보임)-->
 			<div id="receiverInfo" style="display: block;">
-				<div style="font-weight: bold">
+				<input type="text" name="receiverId" value="${defaultReceiver.receiverId}">
+				<div id="receiverPersonName" style="font-weight: bold">
 					${defaultReceiver.receiverPersonName}
 				</div>
 				<div>
-					[${defaultReceiver.receiverZip}] ${defaultReceiver.receiverAddress} ${defaultReceiver.receiverAddressDetail}
+					<span id="receiverZip">[${defaultReceiver.receiverZip}]</span>
+					<span id="receiverAddress"> ${defaultReceiver.receiverAddress}</span>
+					<span id="receiverAddressDetail"> ${defaultReceiver.receiverAddressDetail}</span>
 				</div>
 				<div>
 					휴대전화
 				</div>
-				<div>
+				<div id="receiverTelno">
 					${defaultReceiver.receiverTelno}
 				</div>
 				<hr>
@@ -95,7 +119,9 @@
 							${receiver.receiverPersonName}
 						</div>
 						<div>
-							[${receiver.receiverZip}] ${receiver.receiverAddress} ${receiver.receiverAddressDetail}
+							<span>[${receiver.receiverZip}]</span> 
+							<span>${receiver.receiverAddress}</span>
+							<span>${receiver.receiverAddressDetail}</span> 
 						</div>
 						<div>
 							휴대전화
@@ -111,7 +137,7 @@
 					</div>
 				</c:forEach>
 			</div>
-			<div id="newReceiver">
+			<div id="newReceiverInfo">
 			
 			</div>
 			<div id="showReceiverList">
@@ -184,11 +210,11 @@
 			<table>
 				<tr>
 					<td>주문 상품</td>
-					<td>KRW 00,000</td>
+					<td>KRW <span id="totalPrice"></span></td>
 				</tr>
 				<tr>
 					<td>배송비</td>
-					<td>+KRW 0,000</td>
+					<td>+KRW <span id="shipFee"></span></td>
 				</tr>
 				<tr>
 					<td>할인/부가결제</td>
@@ -212,9 +238,9 @@
 			<div>
 				<div><input type="radio" checked="checked" disabled="disabled">결제수단 선택</div>
 				<div>
-					<label><span><input type="radio" name="pay-method" value="creditCard">신용카드</span></label>
-					<label><span><input type="radio" name="pay-method" value="transfer">계좌이체</span></label>
-					<label><span><input type="radio" name="pay-method" value="">무통장입금</span></label>
+					<label><span><input type="radio" name="orderSettlementMethod" value="신용카드">신용카드</span></label>
+					<label><span><input type="radio" name="orderSettlementMethod" value="계좌이체">계좌이체</span></label>
+					<label><span><input type="radio" name="orderSettlementMethod" value="무통장입금">무통장입금</span></label>
 				</div>
 				<!-- 신용카드 선택시 -->
 				<div>
