@@ -1,7 +1,6 @@
 package com.webteam2.poster4j.user.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webteam2.poster4j.dto.Customer;
@@ -35,7 +35,7 @@ public class OrderPageController {
 	
 	
 	@RequestMapping("/order")
-	public String order(HttpSession session, Model model, List<OrderItem> orderItems ) {
+	public String order(HttpSession session, Model model) {
 		//세션에 저장된 customer 정보
 		Customer customer = (Customer)session.getAttribute("customerLogin");
 		if (customer == null) {
@@ -54,29 +54,36 @@ public class OrderPageController {
 		
 		
 		
-		//넘겨받은 product id를 리스트로 저장
-		/*List<Integer> productIds = Arrays.asList(1, 2, 3);
-		
-		//List<ProductImage> productImages = productImageService.getOrderProductImageList(product.getProductId());
 		List<String> convertedImages = new ArrayList<String>();
-		List<Product> productList = new ArrayList<Product>();
+		List<Product> products = new ArrayList<Product>();
 		
-		for (Integer productId : productIds) {
-			List<ProductImage> productImages = productImageService.getOrderProductImageList(productId);
-			for (ProductImage image : productImages) {
-				String base64Img = Base64.getEncoder().encodeToString(image.getProductImageSource());
-				//image.setBase64Data(base64Img);
-				
-				convertedImages.add(base64Img);
-				product = productService.getOneProduct(image.getProductId());
-				productList.add(product);
-				
-			}
+		//현재는 OrderItem List 객체를 직접 생성했지만, 데이터를 넘겨 받게되면 바꿀 것임.
+		List<OrderItem> orderItems = new ArrayList<OrderItem>();
+		
+	    OrderItem item1 = new OrderItem(1,"cheolkim", 1, "500*300", "black");
+	    OrderItem item2 = new OrderItem(1,"cheolkim", 2, "5000*300", "black");
+	    
+	    orderItems.add(item1);
+	    orderItems.add(item2);
+		
+		
+		for (OrderItem item : orderItems) {
+			int productId = item.getProductId();
+			ProductImage productImage = productImageService.getImage(productId);
+			String convertedImage = Base64.getEncoder().encodeToString(productImage.getProductImageSource());
+			convertedImages.add(convertedImage);
+			
+			Product orderProduct = productService.getOneProduct(productId);
+			orderProduct.setProductPrice(orderProduct.getProductPrice() * item.getProductQuantity());  
+			products.add(orderProduct);
+			
 		}
 		
+		model.addAttribute("OrderItemList", orderItems);
+		model.addAttribute("productList", products);
+		model.addAttribute("orderProductImageList", convertedImages);
 		
-		model.addAttribute("convertedImages", convertedImages);
-		model.addAttribute("productList", productList);*/
+		
 		
 		return "user/orderForm";
 		

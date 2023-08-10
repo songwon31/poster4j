@@ -128,16 +128,16 @@
 				<div class="title">
 					주문 상품
 				</div>
-		<c:forEach var="image" items="${convertedImages}" varStatus="status">
+		<c:forEach var="image" items="${orderProductImageList}" varStatus="status">
 				<div id="${productList[status.index].productId}" class="orderItems" style="display: flex">
 					<img class="orderItemImage" alt="주문할 상품 이미지" src="data:image/jpeg;base64, ${image}" width="200px">
 					<div style="display: flex; flex-direction: column; justify-content: space-between; margin: 0 0 0 10px; ">
 						<div>
 							<div><a href="#" style="font-weight: bold; color: black">${productList[status.index].productName}</a></div>
-							<div>수량: <span id="itemQuantity">1</span>개</div>
+							<div>수량: <span id="itemQuantity">${OrderItemList[status.index].productQuantity}</span>개</div>
 							<div>
 								<span>KRW</span>
-								<span class="itemPrice">${productList[status.index].productPrice}</span>
+								<span class="itemPrice">${productList[status.index].productPrice * OrderItemList[status.index].productQuantity}</span>
 							</div>
 						</div>
 						<div style="align-items: ;">
