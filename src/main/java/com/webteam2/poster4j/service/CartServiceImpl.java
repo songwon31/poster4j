@@ -21,4 +21,14 @@ public class CartServiceImpl implements CartService {
 	public List<Cart> getItemsByCustomerId(String customerId) {
 		return cartDao.selectByCustomerId(customerId);
 	}
+	
+	@Override
+	public int plusQuantity(String customerId, int productId, String optionSize, String optionFrame) {
+		return cartDao.updatePlusQuantity(customerId, productId, optionSize, optionFrame);
+	}
+	
+	@Override
+	public int minusQuantity(String customerId, int productId, String optionSize, String optionFrame) {
+		return cartDao.updateMinusQuantity(customerId, productId, optionSize, optionFrame);
+	}
 }

@@ -3,6 +3,7 @@ package com.webteam2.poster4j.user.controller;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.webteam2.poster4j.dto.Cart;
 import com.webteam2.poster4j.dto.Customer;
@@ -56,12 +59,33 @@ public class CartController {
 			String base64Img = Base64.getEncoder().encodeToString(productImage.getProductImageSource());
 			imageList.add(base64Img);
 		}
-		
-		
+		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("productList", productList);
-		model.addAttribute("convertedImages", imageList);
+		model.addAttribute("imageList", imageList);
 		
 		
 		return "user/cart";
+	}
+	
+	@RequestMapping("/cartPlusQuantity")
+	@ResponseBody
+	public String cartPlusQuantity(@RequestParam String customerId, 
+									 @RequestParam int productId,
+									 @RequestParam String optionSize,
+									 @RequestParam String optionFrame) {
+		cartService.plusQuantity(customerId, productId, optionSize, optionFrame);
+		
+		return "success";
+	}
+	
+	@RequestMapping("/cartMinusQuantity")
+	@ResponseBody
+	public String cartMinusQuantity(@RequestParam String customerId, 
+									 @RequestParam int productId,
+									 @RequestParam String optionSize,
+									 @RequestParam String optionFrame) {
+		cartService.minusQuantity(customerId, productId, optionSize, optionFrame);
+		
+		return "success";
 	}
 }

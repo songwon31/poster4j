@@ -20,3 +20,34 @@
 	max-width: 351.333px;
     margin: 0 auto;
 }
+
+.cartItemImage {
+    aspect-ratio: auto 71 / 71;
+    box-sizing: border-box;
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+}
+
+.description {
+	padding: 0;
+    margin: 0;
+    border: none;
+    margin-top: 6px;
+}
+
+.cartItemName {
+	font-weight: bold;
+}
+
+.cartItemInfo {
+	list-style: none;
+    vertical-align: top;
+}
+
+
+
+
+
+
+

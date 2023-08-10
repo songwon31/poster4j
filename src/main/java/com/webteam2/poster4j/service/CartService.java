@@ -6,4 +6,6 @@ import com.webteam2.poster4j.dto.Cart;
 
 public interface CartService {
 	public List<Cart> getItemsByCustomerId(String customerId);
+	public int plusQuantity(String customerId, int productId, String optionSize, String optionFrame);
+	public int minusQuantity(String customerId, int productId, String optionSize, String optionFrame);
 }
