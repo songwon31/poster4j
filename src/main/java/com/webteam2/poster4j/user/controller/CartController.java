@@ -1,5 +1,7 @@
 package com.webteam2.poster4j.user.controller;
 
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -7,10 +9,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.webteam2.poster4j.dto.Cart;
 import com.webteam2.poster4j.dto.Customer;
-import com.webteam2.poster4j.dto.OrderItem;
+import com.webteam2.poster4j.dto.Product;
+import com.webteam2.poster4j.dto.ProductImage;
+import com.webteam2.poster4j.service.CartService;
 import com.webteam2.poster4j.service.ProductImageService;
 import com.webteam2.poster4j.service.ProductService;
 
@@ -23,9 +28,11 @@ public class CartController {
 	ProductImageService productImageService;
 	@Resource
 	ProductService productService;
+	@Resource
+	CartService cartService;
 
-	@GetMapping("/cart")
-	public String search(List<OrderItem> newOrderItemList, HttpSession session, Model model) {
+	@RequestMapping("/cart")
+	public String search(HttpSession session, Model model) {
 		/*
 		 * newOrderItemList를 cart 테이블에 넣고, cart 테이블에서 정보를 받아와 model에 저장
 		 * 
@@ -38,8 +45,21 @@ public class CartController {
 		 * => product, productImage(Represent), orderItemList 사용
 		 */
 		Customer customer = (Customer)session.getAttribute("customerLogin");
+		List<Cart> cartItemList = cartService.getItemsByCustomerId(customer.getCustomerId());
+		List<Product> productList = new ArrayList<>();
+		List<String> imageList = new ArrayList<String>();
+		for (Cart cartItem : cartItemList) {
+			int productId = cartItem.getProductId();
+			productList.add(productService.getOneProduct(productId));
+			
+			ProductImage productImage = productImageService.getRepresentProductImage(productId);
+			String base64Img = Base64.getEncoder().encodeToString(productImage.getProductImageSource());
+			imageList.add(base64Img);
+		}
 		
 		
+		model.addAttribute("productList", productList);
+		model.addAttribute("convertedImages", imageList);
 		
 		
 		return "user/cart";

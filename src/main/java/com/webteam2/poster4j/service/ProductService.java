@@ -20,4 +20,5 @@ public interface ProductService {
 	public List<Product> getSearchedProductList(ProductBoardSearch productBoardSearch, Pager pager);
 	public List<Product> getList();
 	public List<Integer> getAllProductId();
+	
 }

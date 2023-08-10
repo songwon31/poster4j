@@ -16,5 +16,6 @@ public interface ProductImageDao {
 	public int insertProductImage(ProductImage productImage);
 	public int deleteByProductId(int productId);
 	public List<ProductImage> selectAll();
-	public List<ProductImage> selectListById(int ProductId);
+	public List<ProductImage> selectListById(int productId);
+	public ProductImage selectRepresentProductImage(int productId);
 }
