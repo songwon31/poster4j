@@ -1,5 +1,7 @@
 package com.webteam2.poster4j.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,4 +21,15 @@ public class OrderItem {
 	private int productQuantity;
 	private String productSize;
 	private String productFrame;
+	private List<OrderItem> orderItemList;
+	
+	public OrderItem(int productId, String customerId, int productQuantity, String productSize, String productFrame) {
+		this.productId = productId;
+		this.customerId = customerId;
+		this.productQuantity = productQuantity;
+		this.productSize = productSize;
+		this.productFrame = productFrame;
+	}
+	
+	
 }

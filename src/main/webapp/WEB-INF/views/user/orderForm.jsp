@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 <!-- OrderForm 스타일 설정을 위한 css -->
@@ -10,6 +11,8 @@
 
 	function init(){
 		getFinalTotalPrice();
+		
+		
 	}
 
 
@@ -47,7 +50,19 @@
 		
 		if(check){
 			$(queryString).remove();
+			getFinalTotalPrice();
 		}
+		
+	}
+	
+	function getFinalTotalPrice(){
+		var totalPrice = 0;
+		
+		$('.itemPrice').each(function() {
+            totalPrice += parseInt($(this).text());
+        });
+		
+		$("#finalTotalPrice").text(totalPrice)
 	}
 </script>
 
@@ -129,19 +144,22 @@
 					주문 상품
 				</div>
 		<c:forEach var="image" items="${orderProductImageList}" varStatus="status">
-				<div id="${productList[status.index].productId}" class="orderItems" style="display: flex">
+				<div id="${productList[status.index].productId + OrderItemList[status.index].productQuantity}" class="orderItems" style="display: flex">
 					<img class="orderItemImage" alt="주문할 상품 이미지" src="data:image/jpeg;base64, ${image}" width="200px">
 					<div style="display: flex; flex-direction: column; justify-content: space-between; margin: 0 0 0 10px; ">
 						<div>
 							<div><a href="#" style="font-weight: bold; color: black">${productList[status.index].productName}</a></div>
-							<div>수량: <span id="itemQuantity">${OrderItemList[status.index].productQuantity}</span>개</div>
+							<div>수량: 
+								<span id="itemQuantity">${OrderItemList[status.index].productQuantity}</span>
+								개
+								</div>
 							<div>
 								<span>KRW</span>
-								<span class="itemPrice">${productList[status.index].productPrice * OrderItemList[status.index].productQuantity}</span>
+								<span class="itemPrice">${productList[status.index].productPrice}</span>
 							</div>
 						</div>
-						<div style="align-items: ;">
-							<button id="" class="btn btn-white btn-sm" type="button" onclick="deleteItem(${productList[status.index].productId})">삭제</button>
+						<div style="">
+							<button id="" class="btn btn-white btn-sm" type="button" onclick="deleteItem(${productList[status.index].productId + OrderItemList[status.index].productQuantity})">삭제</button>
 						</div>
 					</div>
 				</div>
@@ -183,7 +201,7 @@
 			</div>
 			<div style="margin: 20px 0; ">
 				<span style="">최종 결제 금액</span>
-				<span style="font-weight: 600;">KRW 00,000</span>
+				<span style="font-weight: 600;">KRW <span id="finalTotalPrice"></span></span>
 			</div>
 		</div>
 		

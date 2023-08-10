@@ -73,7 +73,10 @@ public class OrderPageController {
 			String convertedImage = Base64.getEncoder().encodeToString(productImage.getProductImageSource());
 			convertedImages.add(convertedImage);
 			
+			
 			Product orderProduct = productService.getOneProduct(productId);
+			log.info("" + orderProduct.getProductPrice());
+			log.info("" + orderProduct.getProductPrice() * item.getProductQuantity());
 			orderProduct.setProductPrice(orderProduct.getProductPrice() * item.getProductQuantity());  
 			products.add(orderProduct);
 			
