@@ -32,3 +32,10 @@
 	border-radius: 0;
 }
 
+.productDetailTable th {
+	padding-right: 48px;
+}
+
+.productDetailTable td {
+	padding-right: 8px;
+}

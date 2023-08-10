@@ -1,5 +1,6 @@
 package com.webteam2.poster4j.user.controller;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.webteam2.poster4j.dto.OrderItem;
 import com.webteam2.poster4j.dto.Product;
@@ -49,12 +52,32 @@ public class productDetailPageController {
 		return "user/productDetailPage";
 	}
 	
-	@GetMapping("/addOrderList")
-	public String addItemList(
+	@PostMapping("/addOrderList")
+	public String addOrderList(
 			OrderItem orderItem,
 			HttpSession session,
-			@ModelAttribute(value="orderItemList") List<OrderItem> orderItemList) {
-		log.info("" + session.getAttribute("orderItemList"));
+			@SessionAttribute(value="orderItemList", required=false) List<OrderItem> orderItemList) {
+		//orderItemList가 없을 경우, 새로 생성해서 저장
+		if(orderItemList == null) {
+			orderItemList = new ArrayList<OrderItem>();
+			session.setAttribute("orderItemList", orderItemList);
+		}
+		
+		//orderItemList에 해당 아이템이 있는 지 조사
+		boolean exist = false;
+		for(OrderItem item : orderItemList) {
+			if(item.getProductId()==orderItem.getProductId()) {
+				item.setProductQuantity(item.getProductQuantity() + orderItem.getProductQuantity());
+				exist = true;
+			}
+		}
+		
+		//orderItemList에 없는 새로운 아이템일 경우
+		if(exist == false) {
+			orderItemList.add(orderItem);
+		}
+		
+		log.info("" + orderItemList);
 		
 		return "user/productDetailPage";
 	}	
