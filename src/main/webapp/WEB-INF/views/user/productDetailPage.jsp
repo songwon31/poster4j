@@ -36,7 +36,7 @@
 			<tr class="sizeGroup">
 				<th class="mr-4">Size</th>
 				<td>
-					<select name="selectSize">
+					<select name="selectSize" required>
 						<option>--옵션을 선택해주세요--</option>
 						<option value="297 x 420mm">297 x 420mm</option>
 						<option value="420 x 594mm">420 x 594mm</option>
@@ -47,7 +47,7 @@
 			<tr class="frameGroup">
 				<th class="mr-4">Frame</th>
 				<td>
-					<select name="selectFrame">
+					<select name="selectFrame" required>
 						<option>--옵션을 선택해주세요--</option>
 						<option value="noframe">선택안함</option>
 						<option value="black">black</option>
@@ -59,16 +59,23 @@
 			</tr>
 		</table>
 		<!-- 선택상품 리스트 -->
-		<%-- <c:forEach var="item" items="${selectedItems}"> --%>
+		<form>
 			<table class="selectedItemTable">
 				<tr>
-					<td>${product.productName}</td>
-					<td id="seletedSize" ></td>
-					<td id="seletedFrame"></td>
+					<td>
+						<input type="hidden" value="${product.productName}">
+						<p>
+							${product.productName}
+							<span id="seletedSize"></span>
+							<input id= inputSize" type="hidden" value= "">
+							<span id="seletedFrame"></span>
+							<input id= inputFrame" type="hidden" value="">
+						</p>
+					</td>
 					<td>
 						<span>
 							<a><i class="fa fa-minus ml-5"></i></a>
-							<input id="selectedQty" type="text" size="1" min="1" style="text-align: center; border-bottom: none;" value="1"></input>
+							<input id="selectedQty" type="text" size="1" min="1" style="text-align: center; border-bottom: none;" value=1></input>
 							<a><i class="fa fa-plus"></i></a>
 						</span>
 					</td>
@@ -77,8 +84,7 @@
 					</td>
 				</tr>
 			</table>
-		<%-- </c:forEach> --%>
-		
+		</form>
 		<div class="totalPrice"></div>
 		<div class="btnGroup d-flex">
 			<a class="btn" href="addCart">Add to Cart</a>
@@ -86,7 +92,7 @@
 		</div>
 	</div>
 </div>
-<script>
+<script>	
 	$( "select[name=selectSize]" )
 	  .on( "change", function() {
 	    var str = "";
@@ -101,10 +107,8 @@
 	    var str = "";
 	    $( "select[name=selectFrame] option:selected" ).each( function() {
 	      str += $( this ).text() + " ";
-	    } );
 	    $( "#seletedFrame" ).text( str );
 	  } );
-	
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

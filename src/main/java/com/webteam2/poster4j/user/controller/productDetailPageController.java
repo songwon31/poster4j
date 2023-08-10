@@ -1,14 +1,18 @@
 package com.webteam2.poster4j.user.controller;
 
 import java.util.Base64;
+import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.webteam2.poster4j.dto.OrderItem;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
 import com.webteam2.poster4j.service.ProductImageService;
@@ -44,4 +48,14 @@ public class productDetailPageController {
 		
 		return "user/productDetailPage";
 	}
+	
+	@GetMapping("/addOrderList")
+	public String addItemList(
+			OrderItem orderItem,
+			HttpSession session,
+			@ModelAttribute(value="orderItemList") List<OrderItem> orderItemList) {
+		log.info("" + session.getAttribute("orderItemList"));
+		
+		return "user/productDetailPage";
+	}	
 }

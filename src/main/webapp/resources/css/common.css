@@ -8,8 +8,12 @@
 	font-size: 13px;
 }
  
-a, a:visited, a:hover {
+a, a:visited {
 	color: black;
+	text-decoration: none;
+}
+
+a:hover {
 	text-decoration: none;
 }
 
