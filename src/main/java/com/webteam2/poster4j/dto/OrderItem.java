@@ -8,7 +8,7 @@ package com.webteam2.poster4j.dto;
  */
 public class OrderItem {
 	private int productId;
-	private String CustomerId;
+	private String customerId;
 	private int productQuantity;
 	private String productSize;
 	private String productFrame;

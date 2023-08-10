@@ -1,0 +1,22 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+#contents {
+    font-weight: 500;
+    line-height: 1.7;
+    box-sizing: border-box;
+    padding: 0;
+    border: none;
+    max-width: 1080px;
+    min-height: calc(100vh - 393px);
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+#cart-body {
+	max-width: 351.333px;
+    margin: 0 auto;
+}
