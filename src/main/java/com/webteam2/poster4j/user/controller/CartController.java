@@ -3,7 +3,6 @@ package com.webteam2.poster4j.user.controller;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -18,6 +17,7 @@ import com.webteam2.poster4j.dto.Cart;
 import com.webteam2.poster4j.dto.Customer;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
+import com.webteam2.poster4j.interceptor.Login;
 import com.webteam2.poster4j.service.CartService;
 import com.webteam2.poster4j.service.ProductImageService;
 import com.webteam2.poster4j.service.ProductService;
@@ -35,6 +35,7 @@ public class CartController {
 	CartService cartService;
 
 	@RequestMapping("/cart")
+	@Login
 	public String search(HttpSession session, Model model) {
 		/*
 		 * newOrderItemList를 cart 테이블에 넣고, cart 테이블에서 정보를 받아와 model에 저장

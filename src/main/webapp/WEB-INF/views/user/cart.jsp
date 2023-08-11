@@ -147,6 +147,22 @@
 				        document.body.appendChild(form);
 						form.submit();
 					}
+					
+					function orderAllItems() {
+						$.ajax({
+							type: "POST",
+							url: "/poster4j/removeCartItem",
+							data: {
+								customerId: customerId,
+								productId: productId,
+								optionSize: optionSize,
+								optionFrame: optionFrame
+							},
+							success: function(data) {
+								document.location.reload();
+							}
+						});
+					}
 				</script>
 			</div>
 		</div>
