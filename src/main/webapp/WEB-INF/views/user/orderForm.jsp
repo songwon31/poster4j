@@ -178,6 +178,7 @@
 							<input type="text" name="productId" value="${OrderItemList[status.index].productId}">
 							<div><a href="#" style="font-weight: bold; color: black">${productList[status.index].productName}</a></div>
 							<div>수량: 
+								<input type="hidden" name="orderDetailQuantity" value="${OrderItemList[status.index].productQuantity}">
 								<span id="itemQuantity">${OrderItemList[status.index].productQuantity}</span>
 								개
 								</div>
@@ -186,6 +187,7 @@
 								<span class="itemPrice">${productList[status.index].productPrice}</span>
 							</div>
 							<div>
+								<input type="hidden" name="">
 								<span id="itemSize">${OrderItemList[status.index].productSize}</span>
 							</div>
 							<div>
