@@ -157,12 +157,40 @@
 								form.setAttribute("charset", "UTF-8");
 						        form.setAttribute("method", "Post");  //Post 방식
 						        form.setAttribute("action", "/poster4j/order"); //요청 보낼 주소
+								
+						        var hiddenField;
 						        
-						        var hiddenField = document.createElement("input");
-						        hiddenField.setAttribute("type", "hidden");
-						        hiddenField.setAttribute("name", "orderItem");
-						        hiddenField.setAttribute("value", orderItem);
-						        form.appendChild(hiddenField);
+								for (let i=0; i<orderItem.orderItemList.length; ++i) {
+									hiddenField = document.createElement("input");
+									hiddenField.setAttribute("type", "hidden");
+								    hiddenField.setAttribute("name", "orderItemList["+i+"].custormerId");
+								    hiddenField.setAttribute("value", orderItem.orderItemList[i].customerId);
+								    form.appendChild(hiddenField);
+								    
+								    hiddenField = document.createElement("input");
+									hiddenField.setAttribute("type", "hidden");
+								    hiddenField.setAttribute("name", "orderItemList["+i+"].productId");
+								    hiddenField.setAttribute("value", orderItem.orderItemList[i].productId);
+								    form.appendChild(hiddenField);
+								    
+								    hiddenField = document.createElement("input");
+									hiddenField.setAttribute("type", "hidden");
+								    hiddenField.setAttribute("name", "orderItemList["+i+"].productQuantity");
+								    hiddenField.setAttribute("value", orderItem.orderItemList[i].productQuantity);
+								    form.appendChild(hiddenField);
+								    
+								    hiddenField = document.createElement("input");
+									hiddenField.setAttribute("type", "hidden");
+								    hiddenField.setAttribute("name", "orderItemList["+i+"].productSize");
+								    hiddenField.setAttribute("value", orderItem.orderItemList[i].productSize);
+								    form.appendChild(hiddenField);
+								    
+								    hiddenField = document.createElement("input");
+									hiddenField.setAttribute("type", "hidden");
+								    hiddenField.setAttribute("name", "orderItemList["+i+"].productFrame");
+								    hiddenField.setAttribute("value", orderItem.orderItemList[i].productFrame);
+								    form.appendChild(hiddenField);
+								}
 						        
 						        document.body.appendChild(form);
 								form.submit();

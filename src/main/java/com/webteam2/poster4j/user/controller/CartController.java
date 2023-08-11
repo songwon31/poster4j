@@ -105,6 +105,7 @@ public class CartController {
 	@RequestMapping("/getAllCartItems")
 	@ResponseBody
 	public OrderItem getAllCartItems(HttpSession session) {
+		log.info("실행1");
 		Customer customer = (Customer)session.getAttribute("customerLogin");
 		String customerId = customer.getCustomerId();
 		List<Cart> cartItems = cartService.getItemsByCustomerId(customerId);
@@ -119,6 +120,7 @@ public class CartController {
 			newOrderItem.setProductFrame(cartItems.get(i).getOptionFrame());
 			orderItem.getOrderItemList().add(newOrderItem);
 		}
+		log.info("orderItem: " + orderItem);
 		
 		return orderItem;
 	}
