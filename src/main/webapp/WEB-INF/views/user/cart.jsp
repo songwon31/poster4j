@@ -45,7 +45,7 @@
 								</ul>
 								<div style="text-align: center; margin-top: 9px;">
 									<a href="javascript:void(0)" onclick='removeCartItem("${cartItem.customerId}", ${cartItem.productId}, ${cartItem.cartProductQuantity}, "${cartItem.optionSize}", "${cartItem.optionFrame}"); return false;' style="box-sizing: border-box; display: inline-block; padding: 9px 17px 11px; border: 1px solid black; line-height: 1; text-align: center; text-decoration: none; white-space: nowrap;">삭제</a>
-									<a href="javascript:void(0)" onclick='orderCartItem("${cartItem.customerId}", ${cartItem.productId}, ${cartItem.cartProductQuantity}, "${cartItem.optionSize}", "${cartItem.optionFrame}"); return false;' style="box-sizing: border-box; display: inline-block; padding: 9px 17px 11px; border: 1px solid black; line-height: 1; text-align: center; text-decoration: none; white-space: nowrap;">주문</a>
+									<a href="javascript:void(0)" onclick='orderCartItem(${status.index}, "${cartItem.customerId}", ${cartItem.productId}, "${cartItem.optionSize}", "${cartItem.optionFrame}"); return false;' style="box-sizing: border-box; display: inline-block; padding: 9px 17px 11px; border: 1px solid black; line-height: 1; text-align: center; text-decoration: none; white-space: nowrap;">주문</a>
 								</div>
 							</div>
 						</div>
@@ -124,7 +124,9 @@
 						
 					}
 					
-					function orderCartItem(customerId, productId, cartProductQuantity, optionSize, optionFrame) {
+					function orderCartItem(index, customerId, productId, optionSize, optionFrame) {
+						let cartProductQuantity = $("#cartQuantity"+index).html();
+						
 						var form = document.createElement("form");
 						form.setAttribute("charset", "UTF-8");
 				        form.setAttribute("method", "Post");  //Post 방식
