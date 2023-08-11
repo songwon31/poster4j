@@ -21,6 +21,7 @@ import com.webteam2.poster4j.dto.OrderT;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
 import com.webteam2.poster4j.dto.Receiver;
+import com.webteam2.poster4j.service.CartService;
 import com.webteam2.poster4j.service.OrderDetailService;
 import com.webteam2.poster4j.service.OrderTService;
 import com.webteam2.poster4j.service.ProductImageService;
@@ -42,6 +43,8 @@ public class OrderPageController {
 	OrderTService orderService;
 	@Resource
 	OrderDetailService orderDetailService;
+	@Resource
+	CartService cartService;
 
 	@RequestMapping("/order")
 	public String order(HttpSession session, Model model, OrderItem orderItem) {
@@ -124,9 +127,13 @@ public class OrderPageController {
 
 			log.info("orderDetail:" + orderDetail);
 			orderDetailService.saveOrderDetail((orderDetail));
-
+			
+			// 주문이 완료되면 상품 삭제
+			cartService.removeItem(order.getCustomerId(), orderDetail.getProductId(), orderDetail.getOptionSize(), orderDetail.getOptionFrame());
 		}
-
+		
+		
+		
 		return "redirect:/cart";
 	}
 }
