@@ -9,12 +9,15 @@
 <script type="text/javascript">
 	var totalPrice = 0;
 	var shipFee = 0;
+	
+	
 	$(init);
 
 	function init(){
-		getFinalTotalPrice();
 		getTotalPrice();	
+		getDiscountAmount()
 		getShipFee();
+		getFinalTotalPrice();
 	}
 	function getShipFee(){
 		if(totalPrice == 0){
@@ -45,7 +48,6 @@
 		var selectedReceiverInfo = $(queryString).html();
 		
 		$("#receiverId").val(receiverId);
-		console.log($("#receiverId").val());
 		
 		$("#receiverInfo").html(selectedReceiverInfo);
 		$("#receiverList").hide();
@@ -65,27 +67,50 @@
 			totalPrice = 0;
 			shipFee = 0;
 			getTotalPrice();
-			getFinalTotalPrice();
 			getShipFee();
+			getDiscountAmount();
+			getFinalTotalPrice();
 		}
 	}
-	function getFinalTotalPrice(){
+	
+	function getFinalTotalPrice() {
 		var finalTotalPrice = 0;
 		
 		$('.itemPrice').each(function() {
-			finalTotalPrice += parseInt($(this).text());
-        });
+		  finalTotalPrice += parseInt($(this).text());
+		});
 		finalTotalPrice += shipFee;
+		finalTotalPrice -= totalDiscountAmount; // 누적 할인 금액 차감
 		
-		$("#finalTotalPrice").text(finalTotalPrice)
-	}
+		$("#finalTotalPrice").text(finalTotalPrice);
+	}	
+	
 	function getTotalPrice(){
 		$('.itemPrice').each(function() {
             totalPrice += parseInt($(this).text());
         });
-		$("#totalPrice").text(totalPrice)
+		$("#totalPrice").text(totalPrice);
 	}
 	
+	function getDiscountAmount() {
+		totalDiscountAmount = 0; // 초기화
+		$(".orderItems").each(function() {
+			var $item = $(this);
+			var itemPrice = parseFloat($item.find(".itemPrice").text());
+			var discountRate = parseFloat($item.find(".productDiscountRate").text());
+		
+			if (!isNaN(itemPrice) && !isNaN(discountRate)) {
+				var discountAmount = (itemPrice * discountRate);
+				$item.find(".itemDiscountAmount").text(discountAmount);
+				totalDiscountAmount += discountAmount; // 누적 할인 금액 추가
+			}
+		});
+		updateTotalDiscountAmount();
+	}
+
+	function updateTotalDiscountAmount() {
+		$(".totalDiscountAmount").text("- KRW " + totalDiscountAmount);
+	}
 </script>
 
 
@@ -95,7 +120,7 @@
 		<div>
 			<!-- 배송지 정보 (배송지 목록 버튼 클릭시 안보임)-->
 			<div id="receiverInfo" style="display: block;">
-				<input type="text" id="receiverId" name="receiverId" value="${defaultReceiver.receiverId}">
+				<input type="hidden" id="receiverId" name="receiverId" value="${defaultReceiver.receiverId}">
 				<div id="receiverPersonName" style="font-weight: bold">
 					${defaultReceiver.receiverPersonName}
 				</div>
@@ -116,7 +141,7 @@
 			<div id="receiverList" style="display: none;">
 				<c:forEach var="receiver" items="${receivers}">
 					<div id="${receiver.receiverId}" style="display: block;">
-						<input type="text" name="receiverId" value="${receiver.receiverId}">
+						<input type="hidden" name="receiverId" value="${receiver.receiverId}">
 						<div style="font-weight: bold">
 							${receiver.receiverPersonName}
 						</div>
@@ -169,7 +194,7 @@
 				주문 상품
 			</div>
 			<c:forEach var="image" items="${orderProductImageList}" varStatus="status">
-					<div id="${productList[status.index].productId + OrderItemList[status.index].productQuantity}" class="orderItems" style="display: flex">
+					<div id="${productList[status.index].productId}${OrderItemList[status.index].productQuantity}${OrderItemList[status.index].productSize}${OrderItemList[status.index].productFrame}" class="orderItems" style="display: flex">
 						<img class="orderItemImage" alt="주문할 상품 이미지" src="data:image/jpeg;base64, ${image}" width="200px">
 						<div style="display: flex; flex-direction: column; justify-content: space-between; margin: 0 0 0 10px; ">
 							<div>
@@ -177,7 +202,7 @@
 								<div><a href="#" style="font-weight: bold; color: black">${productList[status.index].productName}</a></div>
 								<div>수량: 
 									<input type="hidden" name="orderDetailQuantity" value="${OrderItemList[status.index].productQuantity}">
-									<span id="itemQuantity">${OrderItemList[status.index].productQuantity}</span>
+									<span class="itemQuantity">${OrderItemList[status.index].productQuantity}</span>
 									개
 									</div>
 								<div>
@@ -186,15 +211,21 @@
 								</div>
 								<div>
 									<input type="hidden" name="optionSize" value="${OrderItemList[status.index].productSize}">
-									<span id="itemSize">${OrderItemList[status.index].productSize}</span>
+									<span class="itemSize">${OrderItemList[status.index].productSize}</span>
 								</div>
 								<div>
 									<input type="hidden" name="optionFrame" value="${OrderItemList[status.index].productFrame}">
-									<span id="itemFrame">${OrderItemList[status.index].productFrame}</span>
-								</div> 
+									<span class="itemFrame">${OrderItemList[status.index].productFrame}</span>
+								</div>
+								<div>
+									<span class="productDiscountRate">${productList[status.index].productDiscountRate}</span>
+								</div>
+								<div>
+									<span class="itemDiscountAmount"></span>
+								</div>
 							</div>
 							<div style="">
-								<button id="" class="btn btn-white btn-sm" type="button" onclick="deleteItem(${productList[status.index].productId + OrderItemList[status.index].productQuantity})">삭제</button>
+								<button id="" class="btn btn-white btn-sm" type="button" onclick="deleteItem('${productList[status.index].productId}${OrderItemList[status.index].productQuantity}${OrderItemList[status.index].productSize}${OrderItemList[status.index].productFrame}')">삭제</button>
 							</div>
 						</div>
 					</div>
@@ -205,13 +236,13 @@
 		<!-- 할인/부가 결제 -->
 		<div>
 			<div class="title">할인/부가 결제 </div>
-			<div>KRW  원</div>
+			<div class="totalDiscountAmount">KRW  원</div>
 		</div>
 		<hr>
 		<!-- 적용 금액 -->
 		<div>
 			<div class="title">적용금액</div>
-			<div>-KRW </div>
+			<div class="totalDiscountAmount">-KRW </div>
 		</div>
 		<!-- 결제 정보 -->
 		<div id="paymentInfo" >
@@ -227,12 +258,12 @@
 				</tr>
 				<tr>
 					<td>할인/부가결제</td>
-					<td>-KRW 0,000</td>
+					<td class="totalDiscountAmount">-KRW 0,000</td>
 				</tr>
 			</table>
 			<div>
 				<span>기본 할인 </span>
-				<span>-KRW 0,000</span>
+				<span class="totalDiscountAmount">-KRW 0,000</span>
 			</div>
 			<div style="margin: 20px 0; ">
 				<span style="">최종 결제 금액</span>

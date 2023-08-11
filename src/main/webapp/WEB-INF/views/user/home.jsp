@@ -22,7 +22,12 @@
 		});
 		
 		$(".navbar").css('background','')
+		
+		//포스터 이미지를 다 로딩이 된 후에 보여주기.
+		$("#contents").show();
 	}
+	
+	
 </script>
 
 <%-- home.jsp의 중앙내용 --%>
@@ -52,7 +57,7 @@
 		</div>
 		<!-- 포스터 목록 -->
 		<div>
-			<div id="contents" >
+			<div id="contents" style="display:none;" >
 				<ul id="productList">
 					<c:forEach var="image" items="${convertedImages}" varStatus="status" begin="0" end="20">
 						<li class="poster">
