@@ -33,6 +33,7 @@ public class productDetailPageController {
 	
 	@GetMapping("/productDetail")
 	public String productDetail(@RequestParam(defaultValue="1", value="productId")int productId, Model model) {
+		//대표 이미지 가져오기
 		ProductImage productImage = productImageService.getImage(productId);
 		Product product = new Product();
 
@@ -41,6 +42,18 @@ public class productDetailPageController {
 		
 		model.addAttribute("convertedImage", convertedImage);
 		model.addAttribute("product", product);
+		
+		//상세설명 이미지 리스트 가져오기
+		List<ProductImage> productDetailImageList = productImageService.getDetailImageList(productId);
+		List<String> convertedImages = new ArrayList<String>();
+		
+		for (ProductImage image : productDetailImageList) {
+			String base64Img = Base64.getEncoder().encodeToString(image.getProductImageSource());
+			
+			convertedImages.add(base64Img);
+		}
+		
+		model.addAttribute("convertedImages", convertedImages);
 		
 		//할인된 상품가격 계산
 		double discountedPrice = product.getProductPrice() * (1.0 - product.getProductDiscountRate());

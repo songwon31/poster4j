@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.webteam2.poster4j.dao.ProductImageDao">
-	<!-- product 이미지 1개 가져오기 -->
+	<!-- product 이미지 1개 가져오기(represent) -->
 	<select id="selectProductImageById" parameterType="int" resultType="ProductImage">
 		select *
 		from product_image
 		where product_id = #{productId} and product_image_ctgry = 'represent'
+	</select>
+	
+	<!-- product 이미지 List 가져오기(detail) -->
+	<select id="selectProductImageListById" parameterType="int" resultType="ProductImage">
+		select *
+		from product_image
+		where product_id = #{productId} and product_image_ctgry = 'detail'
 	</select>
 	
 	<insert id="insertProductImage" parameterType="ProductImage">
