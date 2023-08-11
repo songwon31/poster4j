@@ -88,4 +88,15 @@ public class CartController {
 		
 		return "success";
 	}
+	
+	@RequestMapping("/removeCartItem")
+	@ResponseBody
+	public String removeCartItem(@RequestParam String customerId, 
+			 						@RequestParam int productId,
+			 						@RequestParam String optionSize,
+			 						@RequestParam String optionFrame) 
+	{
+		cartService.removeItem(customerId, productId, optionSize, optionFrame);
+		return "success";
+	}
 }

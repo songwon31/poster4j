@@ -31,4 +31,9 @@ public class CartServiceImpl implements CartService {
 	public int minusQuantity(String customerId, int productId, String optionSize, String optionFrame) {
 		return cartDao.updateMinusQuantity(customerId, productId, optionSize, optionFrame);
 	}
+	
+	@Override
+	public int removeItem(String customerId, int productId, String optionSize, String optionFrame) {
+		return cartDao.deleteItem(customerId, productId, optionSize, optionFrame);
+	}
 }

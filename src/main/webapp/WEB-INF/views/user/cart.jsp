@@ -11,7 +11,7 @@
 		<div id="contents">
 			<div id="cart-body">
 				<c:forEach var="cartItem" items="${cartItemList}" varStatus="status">
-					<div style="border: none; margin-bottom: 30px">
+					<div id="${status.index}" style="border: none; margin-bottom: 30px">
 						<div style="text-align: center;">
 							<img class="cartItemImage" src="data:image/jpeg;base64, ${imageList[status.index]}">
 							<div class="description">
@@ -39,8 +39,8 @@
 									</li>
 								</ul>
 								<div style="text-align: center; margin-top: 9px;">
-									<a href="#" onclick="deleteCartItem(); return false;" style="box-sizing: border-box; display: inline-block; padding: 9px 17px 11px; border: 1px solid black; line-height: 1; text-align: center; text-decoration: none; white-space: nowrap;">삭제</a>
-									<a href="#" onclick="orderCartItem(); return false;" style="box-sizing: border-box; display: inline-block; padding: 9px 17px 11px; border: 1px solid black; line-height: 1; text-align: center; text-decoration: none; white-space: nowrap;">주문</a>
+									<a href="javascript:void(0)" onclick='removeCartItem("${cartItem.customerId}", ${cartItem.productId}, ${cartItem.cartProductQuantity}, "${cartItem.optionSize}", "${cartItem.optionFrame}"); return false;' style="box-sizing: border-box; display: inline-block; padding: 9px 17px 11px; border: 1px solid black; line-height: 1; text-align: center; text-decoration: none; white-space: nowrap;">삭제</a>
+									<a href="javascript:void(0)" onclick='orderCartItem("${cartItem.customerId}", ${cartItem.productId}, ${cartItem.cartProductQuantity}, "${cartItem.optionSize}", "${cartItem.optionFrame}"); return false;' style="box-sizing: border-box; display: inline-block; padding: 9px 17px 11px; border: 1px solid black; line-height: 1; text-align: center; text-decoration: none; white-space: nowrap;">주문</a>
 								</div>
 							</div>
 						</div>
@@ -60,8 +60,6 @@
 				</div>
 				<script>
 					function minusQuantity(index, customerId, productId, optionSize, optionFrame) {
-						console.log(customerId);
-						console.log(productId);
 						$.ajax({
 							type: "POST",
 							url: "/poster4j/cartMinusQuantity",
@@ -78,8 +76,6 @@
 					}
 					
 					function plusQuantity(index, customerId, productId, optionSize, optionFrame) {
-						console.log(customerId);
-						console.log(productId);
 						$.ajax({
 							type: "POST",
 							url: "/poster4j/cartPlusQuantity",
@@ -93,6 +89,62 @@
 								document.location.reload();
 							}
 						});
+					}
+					
+					function removeCartItem(customerId, productId, cartProductQuantity, optionSize, optionFrame) {
+						$.ajax({
+							type: "POST",
+							url: "/poster4j/removeCartItem",
+							data: {
+								customerId: customerId,
+								productId: productId,
+								optionSize: optionSize,
+								optionFrame: optionFrame
+							},
+							success: function(data) {
+								document.location.reload();
+							}
+						});
+					}
+					
+					function orderCartItem(customerId, productId, cartProductQuantity, optionSize, optionFrame) {
+						var form = document.createElement("form");
+						form.setAttribute("charset", "UTF-8");
+				        form.setAttribute("method", "Post");  //Post 방식
+				        form.setAttribute("action", "/poster4j/order"); //요청 보낼 주소
+				        
+				        var hiddenField = document.createElement("input");
+				        hiddenField.setAttribute("type", "hidden");
+				        hiddenField.setAttribute("name", "orderItemList[0].customerId");
+				        hiddenField.setAttribute("value", customerId);
+				        form.appendChild(hiddenField);
+				        
+				        hiddenField = document.createElement("input");
+				        hiddenField.setAttribute("type", "hidden");
+				        hiddenField.setAttribute("name", "orderItemList[0].productId");
+				        hiddenField.setAttribute("value", productId);
+				        form.appendChild(hiddenField);
+				        
+				        hiddenField = document.createElement("input");
+				        hiddenField.setAttribute("type", "hidden");
+				        hiddenField.setAttribute("name", "orderItemList[0].cartProductQuantity");
+				        hiddenField.setAttribute("value", cartProductQuantity);
+				        form.appendChild(hiddenField);
+				        
+				        hiddenField = document.createElement("input");
+				        hiddenField.setAttribute("type", "hidden");
+				        hiddenField.setAttribute("name", "orderItemList[0].optionSize");
+				        hiddenField.setAttribute("value", optionSize);
+				        form.appendChild(hiddenField);
+				        
+				        hiddenField = document.createElement("input");
+				        hiddenField.setAttribute("type", "hidden");
+				        hiddenField.setAttribute("name", "orderItemList[0].optionFrame");
+				        hiddenField.setAttribute("value", optionFrame);
+				        form.appendChild(hiddenField);
+				        
+				        document.body.appendChild(form);
+						form.submit();
 					}
 				</script>
 			</div>

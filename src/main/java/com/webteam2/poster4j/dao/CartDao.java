@@ -18,4 +18,8 @@ public interface CartDao {
 								  @Param("productId") int productId, 
 								  @Param("optionSize") String optionSize, 
 								  @Param("optionFrame") String optionFrame);
+	public int deleteItem(@Param("customerId") String customerId, 
+						@Param("productId") int productId, 
+						@Param("optionSize") String optionSize, 
+						@Param("optionFrame") String optionFrame);
 }
