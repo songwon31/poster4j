@@ -52,7 +52,7 @@
 				<div id="totalPriceDiv" style="text-align: center; margin-top: 70px;  padding-top:15px; border-top: 1px solid; border-color: #666; margin-bottom: 15px;">
 					<div>
 						<span style="font-size: 1.3rem; font-weight: 700;">Total: KRW</span>
-						<span id="totalPrice" style="font-size: 1.3rem; font-weight: 700;"><fmt:formatNumber value="${totalPrice}" pattern="#,###"/></span>
+						<span id="totalPrice" style="font-size: 1.3rem; font-weight: 700; padding: 0; border:none;"><fmt:formatNumber value="${totalPrice}" pattern="#,###"/></span>
 					</div>
 				</div>
 				<div style="text-align: center; margin: 9px auto 0; display: flex; justify-content: center;">
