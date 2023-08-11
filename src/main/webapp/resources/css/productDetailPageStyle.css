@@ -39,3 +39,11 @@
 .productDetailTable td {
 	padding-right: 8px;
 }
+
+.btnGroup {
+	margin-bottom: 100px;
+}
+
+.explainImage {
+	max-width: 1080px;
+}

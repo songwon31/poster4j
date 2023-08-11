@@ -4,17 +4,18 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
-<!-- CSS 연결 -->
+<!-- 공통 스타일 설정을 위한  css-->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/productDetailPageStyle.css"/>
+
+<!-- 아이콘 라이브러리 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
 
 <div class="wrapper">
 	<div class="productDetailContent d-flex flex-column align-items-center">
 		<h2 id="productTitle">${product.productName}</h2>
 		<img id="productImage" src="data:image/jpeg;base64, ${convertedImage}"/>
-		<form method="post" action="addOrderList">
+		<form id="productDetailForm" method="post" action="addOrderList">
 			<h3 id="productName">${product.productName}</h3>
 			<input id="productId" name="productId" type="hidden" value="${product.productName}">
 			<table class="productDetailTable mb-3">
@@ -62,12 +63,15 @@
 					</td>
 				</tr>
 			</table>
-			<!-- 선택상품 리스트 -->
-			<table class="selectedItemTable">
-				<tr>
+		</form>
+		<!-- 선택상품 리스트 -->
+		<table class="selectedItemTable">
+			<c:forEach var="item" items="${orderItem}">
+<%-- 							<tr>
 					<td>
-						<p>
-							${product.productName}
+						<p> --%>
+							<p>${item.productId}</p>
+<%-- 							${product.productName}
 							<span id="seletedSize"></span>
 							<span id="seletedFrame"></span>
 						</p>
@@ -75,20 +79,26 @@
 					<td>
 						<span>
 							<a><i class="fa fa-minus ml-5"></i></a>
-							<input id="productQuantity" name="productQuantity" type="text" size="1" min="1" style="text-align: center; border-bottom: none;" value=1></input>
+							<input id="productQuantity" form="productDetailForm" name="productQuantity" type="text" size="1" min="1" style="text-align: center; border-bottom: none;" value=1></input>
 							<a><i class="fa fa-plus"></i></a>
 						</span>
 					</td>
 					<td>
 						<a><i class="material-icons ml-5" style="font-weight: bold; font-size: 18px;">clear</i></a>
 					</td>
-				</tr>
-			</table>
-		</form>
+				</tr> --%>
+			</c:forEach>
+		</table>
 		<div class="totalPrice"></div>
 		<div class="btnGroup d-flex">
 			<a class="btn" href="addCart">Add to Cart</a>
 			<a class="btn" href="orderNow">Order Now</a>
+		</div>
+		<!-- 상세설명 이미지 리스트 -->
+		<div class="explainImageList d-flex flex-column align-items-center">
+			<c:forEach var="image" items="${convertedImages}">
+				<img class="explainImage" src="data:image/jpeg;base64, ${image}"/>
+			</c:forEach>
 		</div>
 	</div>
 </div>
@@ -112,7 +122,6 @@
 	    $("#seletedFrame").text(str);
 	    $("#productFrame").val(str);
 	  });
-	
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
