@@ -1,8 +1,11 @@
 package com.webteam2.poster4j.user.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -37,7 +40,7 @@ public class CartController {
 
 	@RequestMapping("/cart")
 	@Login
-	public String search(HttpSession session, Model model) {
+	public String cart(HttpSession session, Model model) {
 		/*
 		 * newOrderItemList를 cart 테이블에 넣고, cart 테이블에서 정보를 받아와 model에 저장
 		 * 
@@ -65,36 +68,96 @@ public class CartController {
 		model.addAttribute("productList", productList);
 		model.addAttribute("imageList", imageList);
 		
+		int totalPrice = 0;
+		for (int i=0; i<cartItemList.size(); ++i) {
+			totalPrice += cartItemList.get(i).getCartProductQuantity() * productList.get(i).getProductPrice() * (1 - productList.get(i).getProductDiscountRate());
+		}
+		model.addAttribute("totalPrice", totalPrice);
 		
 		return "user/cart";
 	}
 	
 	@RequestMapping("/cartPlusQuantity")
 	@ResponseBody
-	public String cartPlusQuantity(@RequestParam String customerId, 
+	public Map<String, String> cartPlusQuantity(@RequestParam String customerId, 
 									 @RequestParam int productId,
+									 @RequestParam int cartProductQuantity,
 									 @RequestParam String optionSize,
 									 @RequestParam String optionFrame) {
 		cartService.plusQuantity(customerId, productId, optionSize, optionFrame);
+
+		int productQuantity = cartProductQuantity + 1;
+		Product currentProduct = productService.getOneProduct(productId);
+		int currentPrice = productQuantity * currentProduct.getProductPrice();
+		Double discountPriceD = productQuantity * currentProduct.getProductPrice() * currentProduct.getProductDiscountRate();
+		int discountPrice = discountPriceD.intValue();
 		
-		return "success";
+		List<Cart> cartItemList = cartService.getItemsByCustomerId(customerId);
+		List<Product> productList = new ArrayList<>();
+		for (Cart cartItem : cartItemList) {
+			int currentProductId = cartItem.getProductId();
+			productList.add(productService.getOneProduct(currentProductId));
+		}
+		int totalPrice = 0;
+		for (int i=0; i<cartItemList.size(); ++i) {
+			totalPrice += cartItemList.get(i).getCartProductQuantity() * productList.get(i).getProductPrice() * (1 - productList.get(i).getProductDiscountRate());
+		}
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		DecimalFormat dc = new DecimalFormat("###,###,###,###");
+		
+		map.put("productQuantity", dc.format(productQuantity));
+		map.put("currentPrice", dc.format(currentPrice));
+		map.put("discountPrice", dc.format(discountPrice));
+		map.put("totalPrice", dc.format(totalPrice));
+		
+		return map;
 	}
 	
 	@RequestMapping("/cartMinusQuantity")
 	@ResponseBody
-	public String cartMinusQuantity(@RequestParam String customerId, 
+	public Map<String, String> cartMinusQuantity(@RequestParam String customerId, 
 									 @RequestParam int productId,
+									 @RequestParam int cartProductQuantity,
 									 @RequestParam String optionSize,
 									 @RequestParam String optionFrame) {
 		cartService.minusQuantity(customerId, productId, optionSize, optionFrame);
+
+		int productQuantity = cartProductQuantity - 1;
+		Product currentProduct = productService.getOneProduct(productId);
+		int currentPrice = productQuantity * currentProduct.getProductPrice();
+		Double discountPriceD = productQuantity * currentProduct.getProductPrice() * currentProduct.getProductDiscountRate();
+		int discountPrice = discountPriceD.intValue();
 		
-		return "success";
+		List<Cart> cartItemList = cartService.getItemsByCustomerId(customerId);
+		List<Product> productList = new ArrayList<>();
+		for (Cart cartItem : cartItemList) {
+			int currentProductId = cartItem.getProductId();
+			productList.add(productService.getOneProduct(currentProductId));
+		}
+		int totalPrice = 0;
+		for (int i=0; i<cartItemList.size(); ++i) {
+			totalPrice += cartItemList.get(i).getCartProductQuantity() * productList.get(i).getProductPrice() * (1 - productList.get(i).getProductDiscountRate());
+		}
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		DecimalFormat dc = new DecimalFormat("###,###,###,###");
+		
+		map.put("productQuantity", dc.format(productQuantity));
+		map.put("currentPrice", dc.format(currentPrice));
+		map.put("discountPrice", dc.format(discountPrice));
+		map.put("totalPrice", dc.format(totalPrice));
+		
+		return map;
 	}
 	
 	@RequestMapping("/removeCartItem")
 	@ResponseBody
 	public String removeCartItem(@RequestParam String customerId, 
 			 						@RequestParam int productId,
+			 						@RequestParam int cartProductQuantity,
 			 						@RequestParam String optionSize,
 			 						@RequestParam String optionFrame) 
 	{

@@ -6,6 +6,9 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cartStyle.css"/>
 
+<script>
+	 var index = 0;
+</script>
 <div class="wrapper">
 	<div id="container">
 		<div id="contents">
@@ -21,7 +24,9 @@
 										<span>Price: KRW </span>
 										<span id="cartPrice${status.index}"><fmt:formatNumber value="${productList[status.index].productPrice * cartItem.cartProductQuantity}" pattern="#,###"/></span>
 										<span>/</span>
-										<span id="cartDiscountPrice${status.index}">Discount: KRW -</span><span><fmt:formatNumber value="${(productList[status.index].productPrice * cartItem.cartProductQuantity * productList[status.index].productDiscountRate).intValue()}" pattern="#,###"/></span>
+										<span>
+											<span>Discount: KRW -</span><span id="cartDiscountPrice${status.index}"><fmt:formatNumber value="${(productList[status.index].productPrice * cartItem.cartProductQuantity * productList[status.index].productDiscountRate).intValue()}" pattern="#,###"/></span>
+										</span>
 										<span>/</span>
 									</li>
 									
@@ -50,7 +55,7 @@
 				<div id="totalPriceDiv" style="text-align: center; margin-top: 70px;  padding-top:15px; border-top: 1px solid; border-color: #666; margin-bottom: 15px;">
 					<div>
 						<span style="font-size: 1.3rem; font-weight: 700;">Total: KRW</span>
-						<span style="font-size: 1.3rem; font-weight: 700;"></span>
+						<span id="totalPrice" style="font-size: 1.3rem; font-weight: 700;"><fmt:formatNumber value="${totalPrice}" pattern="#,###"/></span>
 					</div>
 				</div>
 				<div style="text-align: center; margin: 9px auto 0; display: flex; justify-content: center;">
@@ -61,33 +66,43 @@
 				</div>
 				<script>
 					function minusQuantity(index, customerId, productId, optionSize, optionFrame) {
+						let cartProductQuantity = $("#cartQuantity"+index).html();
 						$.ajax({
 							type: "POST",
 							url: "/poster4j/cartMinusQuantity",
 							data: {
 								customerId: customerId,
 								productId: productId,
+								cartProductQuantity: cartProductQuantity,
 								optionSize: optionSize,
 								optionFrame: optionFrame
 							},
 							success: function(data) {
-								document.location.reload();
+								$("#cartQuantity"+index).html(data.productQuantity);
+								$("#cartPrice"+index).html(data.currentPrice);
+								$("#cartDiscountPrice"+index).html(data.discountPrice);
+								$("#totalPrice").html(data.totalPrice);
 							}
 						});
 					}
 					
 					function plusQuantity(index, customerId, productId, optionSize, optionFrame) {
+						let cartProductQuantity = $("#cartQuantity"+index).html();
 						$.ajax({
 							type: "POST",
 							url: "/poster4j/cartPlusQuantity",
 							data: {
 								customerId: customerId,
 								productId: productId,
+								cartProductQuantity: cartProductQuantity,
 								optionSize: optionSize,
 								optionFrame: optionFrame
 							},
 							success: function(data) {
-								document.location.reload();
+								$("#cartQuantity"+index).html(data.productQuantity);
+								$("#cartPrice"+index).html(data.currentPrice);
+								$("#cartDiscountPrice"+index).html(data.discountPrice);
+								$("#totalPrice").html(data.totalPrice);
 							}
 						});
 					}
@@ -106,6 +121,7 @@
 								document.location.reload();
 							}
 						});
+						
 					}
 					
 					function orderCartItem(customerId, productId, cartProductQuantity, optionSize, optionFrame) {
