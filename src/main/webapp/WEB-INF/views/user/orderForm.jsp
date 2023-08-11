@@ -43,7 +43,9 @@
 	function selectReceiver(receiverId){
 		var queryString = "#" + receiverId;
 		var selectedReceiverInfo = $(queryString).html();
-		console.log(selectedReceiverInfo);
+		
+		$("#receiverId").val(receiverId);
+		console.log($("#receiverId").val());
 		
 		$("#receiverInfo").html(selectedReceiverInfo);
 		$("#receiverList").hide();
@@ -51,6 +53,7 @@
 		$("#hideReceiverList").hide();
 		$("#showReceiverList").show();
 		$("#receiverBtn").hide();
+		
 	}
 	
 	function deleteItem(productId){
@@ -83,7 +86,6 @@
 		$("#totalPrice").text(totalPrice)
 	}
 	
-	
 </script>
 
 
@@ -93,7 +95,7 @@
 		<div>
 			<!-- 배송지 정보 (배송지 목록 버튼 클릭시 안보임)-->
 			<div id="receiverInfo" style="display: block;">
-				<input type="text" name="receiverId" value="${defaultReceiver.receiverId}">
+				<input type="text" id="receiverId" name="receiverId" value="${defaultReceiver.receiverId}">
 				<div id="receiverPersonName" style="font-weight: bold">
 					${defaultReceiver.receiverPersonName}
 				</div>
@@ -113,8 +115,8 @@
 			<!-- 배송지 목록(버튼 클릭시 보임) -->
 			<div id="receiverList" style="display: none;">
 				<c:forEach var="receiver" items="${receivers}">
-					<input type="text" name="receiverId" value="${receiver.receiverId}">
 					<div id="${receiver.receiverId}" style="display: block;">
+						<input type="text" name="receiverId" value="${receiver.receiverId}">
 						<div style="font-weight: bold">
 							${receiver.receiverPersonName}
 						</div>
@@ -136,9 +138,6 @@
 						<hr>
 					</div>
 				</c:forEach>
-			</div>
-			<div id="newReceiverInfo">
-			
 			</div>
 			<div id="showReceiverList">
 				<button class="btn btn-dark btn-sm" type="button" onclick="showReceiverList()">배송지 목록</button>
@@ -174,7 +173,7 @@
 						<img class="orderItemImage" alt="주문할 상품 이미지" src="data:image/jpeg;base64, ${image}" width="200px">
 						<div style="display: flex; flex-direction: column; justify-content: space-between; margin: 0 0 0 10px; ">
 							<div>
-								<input type="text" class="productId" name="productId" value="${OrderItemList[status.index].productId}">
+								<input type="hidden" class="productId" name="productId" value="${OrderItemList[status.index].productId}">
 								<div><a href="#" style="font-weight: bold; color: black">${productList[status.index].productName}</a></div>
 								<div>수량: 
 									<input type="hidden" name="orderDetailQuantity" value="${OrderItemList[status.index].productQuantity}">
@@ -186,11 +185,11 @@
 									<span class="itemPrice">${productList[status.index].productPrice}</span>
 								</div>
 								<div>
-									<input name="optionSize" value="${OrderItemList[status.index].productSize}">
+									<input type="hidden" name="optionSize" value="${OrderItemList[status.index].productSize}">
 									<span id="itemSize">${OrderItemList[status.index].productSize}</span>
 								</div>
 								<div>
-									<input name="optionFrame" value="${OrderItemList[status.index].productFrame}">
+									<input type="hidden" name="optionFrame" value="${OrderItemList[status.index].productFrame}">
 									<span id="itemFrame">${OrderItemList[status.index].productFrame}</span>
 								</div> 
 							</div>

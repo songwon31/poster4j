@@ -54,7 +54,7 @@
 		<div>
 			<div id="contents" >
 				<ul id="productList">
-					<c:forEach var="image" items="${convertedImages}" varStatus="status" begin="0" end="3">
+					<c:forEach var="image" items="${convertedImages}" varStatus="status" begin="0" end="20">
 						<li class="poster">
 							<div class="thumbnail">
 								<a href="productDetail?productId=${productList[status.index].productId}">
