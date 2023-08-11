@@ -114,6 +114,7 @@
 			<!-- 배송지 목록(버튼 클릭시 보임) -->
 			<div id="receiverList" style="display: none;">
 				<c:forEach var="receiver" items="${receivers}">
+					<input type="text" name="receiverId" value="${receiver.receiverId}">
 					<div id="${receiver.receiverId}" style="display: block;">
 						<div style="font-weight: bold">
 							${receiver.receiverPersonName}
@@ -174,6 +175,7 @@
 					<img class="orderItemImage" alt="주문할 상품 이미지" src="data:image/jpeg;base64, ${image}" width="200px">
 					<div style="display: flex; flex-direction: column; justify-content: space-between; margin: 0 0 0 10px; ">
 						<div>
+							<input type="text" name="productId" value="${OrderItemList[status.index].productId}">
 							<div><a href="#" style="font-weight: bold; color: black">${productList[status.index].productName}</a></div>
 							<div>수량: 
 								<span id="itemQuantity">${OrderItemList[status.index].productQuantity}</span>
@@ -182,6 +184,12 @@
 							<div>
 								<span>KRW</span>
 								<span class="itemPrice">${productList[status.index].productPrice}</span>
+							</div>
+							<div>
+								<span id="itemSize">${OrderItemList[status.index].productSize}</span>
+							</div>
+							<div>
+								<span id="itemFrame">${OrderItemList[status.index].productFrame}</span>
 							</div>
 						</div>
 						<div style="">
@@ -227,7 +235,7 @@
 			</div>
 			<div style="margin: 20px 0; ">
 				<span style="">최종 결제 금액</span>
-				<span style="font-weight: 600;">KRW <span id="finalTotalPrice"></span></span>
+				<span style="font-weight: 600;">KRW <span id="finalTotalPrice" style="font-weight: 600;"></span></span>
 			</div>
 		</div>
 		

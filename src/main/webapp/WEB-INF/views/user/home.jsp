@@ -36,7 +36,7 @@
 		</div>
 		<!-- 감성 글귀-->
 		<div style="min-height: 542px; display:flex;">
-			<div id="wrap" >
+			<div id="wrap"  style="padding: 0 30px;">
 				<span class="mb-3" style="display: block; font-size: 72px; font-weight: 600; line-height: 1.1">poster</span>
 				<span class="mb-3" style="display: block; font-size: 72px; word-spacing: -10px;">the most beautiful tool</span>
 				<span class="mb-3" style="display: block; font-size: 72px; word-spacing: -10px;">to start a journey</span>

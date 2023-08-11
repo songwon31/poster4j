@@ -1,5 +1,7 @@
 package com.webteam2.poster4j.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -28,5 +30,10 @@ public class OrderTServiceImpl implements OrderTService {
 	@Override
 	public void saveOrder(OrderT order) {
 		orderTDao.insert(order);
+	}
+	
+	@Override
+	public List<OrderT> getOrderListById(int orderId) {
+		return orderTDao.selectOrderListById(orderId);
 	}
 }

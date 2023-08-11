@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.webteam2.poster4j.dto.Customer;
+import com.webteam2.poster4j.dto.OrderDetail;
 import com.webteam2.poster4j.dto.OrderItem;
 import com.webteam2.poster4j.dto.OrderT;
 import com.webteam2.poster4j.dto.Product;
@@ -60,8 +61,8 @@ public class OrderPageController {
 		// 현재는 OrderItem List 객체를 직접 생성했지만, 데이터를 넘겨 받게되면 바꿀 것임.
 		List<OrderItem> orderItems = new ArrayList<OrderItem>();
 
-		OrderItem item1 = new OrderItem(1, "cheolkim", 1, "500*300", "black");
-		OrderItem item2 = new OrderItem(1, "cheolkim", 2, "5000*300", "black");
+		OrderItem item1 = new OrderItem(1, "cheolkim", 1, "a3(297*420mm)", "black");
+		OrderItem item2 = new OrderItem(2, "cheolkim", 2, "a2(420*594mm)", "silver");
 
 		orderItems.add(item1);
 		orderItems.add(item2);
@@ -87,7 +88,7 @@ public class OrderPageController {
 	}
 
 	@PostMapping("/order")
-	public String postOrder(OrderT order, HttpSession session) {
+	public String postOrder(OrderT order, HttpSession session, OrderDetail orderDetail) {
 		// 세션에 저장된 customer 정보
 		Customer customer = (Customer) session.getAttribute("customerLogin");
 		if (customer == null) {
@@ -102,7 +103,11 @@ public class OrderPageController {
 		
 		orderService.saveOrder(order);
 		
+		// 현재는 OrderItem List 객체를 직접 생성했지만, 데이터를 넘겨 받게되면 바꿀 것임.
 		
+		int productId = orderDetail.getProductId();
+		log.info("" +productId);
+		//List<OrderDetail> orderDeatilList = orderItems.
 		
 		return "redirect:/order";
 	}
