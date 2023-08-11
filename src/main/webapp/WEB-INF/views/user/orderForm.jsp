@@ -84,7 +84,6 @@
 	}
 	
 	
-	
 </script>
 
 
@@ -166,41 +165,42 @@
 		<hr>
 		
 		<!-- 주문 상품 내용  -->
-			<div>
-				<div class="title">
-					주문 상품
-				</div>
-		<c:forEach var="image" items="${orderProductImageList}" varStatus="status">
-				<div id="${productList[status.index].productId + OrderItemList[status.index].productQuantity}" class="orderItems" style="display: flex">
-					<img class="orderItemImage" alt="주문할 상품 이미지" src="data:image/jpeg;base64, ${image}" width="200px">
-					<div style="display: flex; flex-direction: column; justify-content: space-between; margin: 0 0 0 10px; ">
-						<div>
-							<input type="text" name="productId" value="${OrderItemList[status.index].productId}">
-							<div><a href="#" style="font-weight: bold; color: black">${productList[status.index].productName}</a></div>
-							<div>수량: 
-								<input type="hidden" name="orderDetailQuantity" value="${OrderItemList[status.index].productQuantity}">
-								<span id="itemQuantity">${OrderItemList[status.index].productQuantity}</span>
-								개
+		<div>
+			<div class="title">
+				주문 상품
+			</div>
+			<c:forEach var="image" items="${orderProductImageList}" varStatus="status">
+					<div id="${productList[status.index].productId + OrderItemList[status.index].productQuantity}" class="orderItems" style="display: flex">
+						<img class="orderItemImage" alt="주문할 상품 이미지" src="data:image/jpeg;base64, ${image}" width="200px">
+						<div style="display: flex; flex-direction: column; justify-content: space-between; margin: 0 0 0 10px; ">
+							<div>
+								<input type="text" class="productId" name="productId" value="${OrderItemList[status.index].productId}">
+								<div><a href="#" style="font-weight: bold; color: black">${productList[status.index].productName}</a></div>
+								<div>수량: 
+									<input type="hidden" name="orderDetailQuantity" value="${OrderItemList[status.index].productQuantity}">
+									<span id="itemQuantity">${OrderItemList[status.index].productQuantity}</span>
+									개
+									</div>
+								<div>
+									<span>KRW</span>
+									<span class="itemPrice">${productList[status.index].productPrice}</span>
 								</div>
-							<div>
-								<span>KRW</span>
-								<span class="itemPrice">${productList[status.index].productPrice}</span>
+								<div>
+									<input name="optionSize" value="${OrderItemList[status.index].productSize}">
+									<span id="itemSize">${OrderItemList[status.index].productSize}</span>
+								</div>
+								<div>
+									<input name="optionFrame" value="${OrderItemList[status.index].productFrame}">
+									<span id="itemFrame">${OrderItemList[status.index].productFrame}</span>
+								</div> 
 							</div>
-							<div>
-								<input type="hidden" name="">
-								<span id="itemSize">${OrderItemList[status.index].productSize}</span>
+							<div style="">
+								<button id="" class="btn btn-white btn-sm" type="button" onclick="deleteItem(${productList[status.index].productId + OrderItemList[status.index].productQuantity})">삭제</button>
 							</div>
-							<div>
-								<span id="itemFrame">${OrderItemList[status.index].productFrame}</span>
-							</div>
-						</div>
-						<div style="">
-							<button id="" class="btn btn-white btn-sm" type="button" onclick="deleteItem(${productList[status.index].productId + OrderItemList[status.index].productQuantity})">삭제</button>
 						</div>
 					</div>
-				</div>
-		</c:forEach>
-			</div>
+			</c:forEach>
+		</div>
 			
 			
 		<!-- 할인/부가 결제 -->
