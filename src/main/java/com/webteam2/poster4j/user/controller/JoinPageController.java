@@ -63,13 +63,13 @@ public class JoinPageController {
 			String idError = "이미 사용중인 아이디입니다.";
 			model.addAttribute("error", idError);
 			return "user/joinForm";
-		} else if(!passwordEncoder.matches(customer.getCustomerPassword(), passwordEncoder.encode(customerPasswordCheck))) {
+		} /*else if(!passwordEncoder.matches(customer.getCustomerPassword(), passwordEncoder.encode(customerPasswordCheck))) {
 			//비밀번호 확인이 비밀번호와 일치하지 않을 경우
 			log.info("입력하신 비밀번호가 일치하지 않습니다.");
 			String pwError = "입력하신 비밀번호가 일치하지 않습니다.";
 			model.addAttribute("error", pwError);
 			return "user/joinForm";
-		} else {
+		}*/ else {
 			//비밀번호 확인이 비밀번호와 일치하는 경우
 			customerService.join(customer);
 			

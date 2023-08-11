@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.webteam2.poster4j.dto.OrderItem;
@@ -66,10 +67,12 @@ public class productDetailPageController {
 	}
 	
 	@PostMapping("/addOrderList")
+	@ResponseBody
 	public String addOrderList(
 			OrderItem orderItem,
 			HttpSession session,
 			@SessionAttribute(value="orderItemList", required=false) List<OrderItem> orderItemList) {
+		
 		//orderItemList가 없을 경우, 새로 생성해서 저장
 		if(orderItemList == null) {
 			orderItemList = new ArrayList<OrderItem>();
