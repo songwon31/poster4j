@@ -157,7 +157,6 @@ public class CartController {
 	@ResponseBody
 	public String removeCartItem(@RequestParam String customerId, 
 			 						@RequestParam int productId,
-			 						@RequestParam int cartProductQuantity,
 			 						@RequestParam String optionSize,
 			 						@RequestParam String optionFrame) 
 	{

@@ -6,9 +6,6 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cartStyle.css"/>
 
-<script>
-	 var index = 0;
-</script>
 <div class="wrapper">
 	<div id="container">
 		<div id="contents">
@@ -44,7 +41,7 @@
 									</li>
 								</ul>
 								<div style="text-align: center; margin-top: 9px;">
-									<a href="javascript:void(0)" onclick='removeCartItem("${cartItem.customerId}", ${cartItem.productId}, ${cartItem.cartProductQuantity}, "${cartItem.optionSize}", "${cartItem.optionFrame}"); return false;' style="box-sizing: border-box; display: inline-block; padding: 9px 17px 11px; border: 1px solid black; line-height: 1; text-align: center; text-decoration: none; white-space: nowrap;">삭제</a>
+									<a href="javascript:void(0)" onclick='removeCartItem("${cartItem.customerId}", ${cartItem.productId}, "${cartItem.optionSize}", "${cartItem.optionFrame}"); return false;' style="box-sizing: border-box; display: inline-block; padding: 9px 17px 11px; border: 1px solid black; line-height: 1; text-align: center; text-decoration: none; white-space: nowrap;">삭제</a>
 									<a href="javascript:void(0)" onclick='orderCartItem(${status.index}, "${cartItem.customerId}", ${cartItem.productId}, "${cartItem.optionSize}", "${cartItem.optionFrame}"); return false;' style="box-sizing: border-box; display: inline-block; padding: 9px 17px 11px; border: 1px solid black; line-height: 1; text-align: center; text-decoration: none; white-space: nowrap;">주문</a>
 								</div>
 							</div>
@@ -107,7 +104,7 @@
 						});
 					}
 					
-					function removeCartItem(customerId, productId, cartProductQuantity, optionSize, optionFrame) {
+					function removeCartItem(customerId, productId, optionSize, optionFrame) {
 						$.ajax({
 							type: "POST",
 							url: "/poster4j/removeCartItem",
