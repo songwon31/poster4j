@@ -69,15 +69,17 @@
 						</div>
 					</c:if>
 					<c:if test="${customerLogin != null}">
-						<a href="${pageContext.request.contextPath}/">
-							<img alt="" src="${pageContext.request.contextPath}/resources/images/search.png" width="25px;"/>
-						</a>
-						<a href="${pageContext.request.contextPath}/mypage">
-							<img alt="" src="${pageContext.request.contextPath}/resources/images/login.png" width="25px;"/>
-						</a>
-						<a href="${pageContext.request.contextPath}/">
-							<img alt="" src="${pageContext.request.contextPath}/resources/images/menu.png" width="25px;"/>
-						</a>
+						<div style="padding-top:10px; padding-bottom:10px">
+							<a href="${pageContext.request.contextPath}/search">
+								<i class="material-icons">search</i>
+							</a>
+							<a href="${pageContext.request.contextPath}/mypage">
+								<i class="material-icons">person_outline</i>
+							</a>
+							<a id="headerMenuButton" href="#">
+								<i class="material-icons">menu</i>
+							</a>
+						</div>
 					</c:if>
 					<script>
 						$(init);
