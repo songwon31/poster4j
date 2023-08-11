@@ -89,49 +89,49 @@
 			<version>20230618</version>
 		</dependency>
 
-		<!-- Ch02 Java 객체를 JSON으로 변환, JSON을 자바 객체로 변환할 때 내부적으로 사용되는 라이브러리 -->
+		<!-- Java 객체를 JSON으로 변환, JSON을 자바 객체로 변환할 때 내부적으로 사용되는 라이브러리 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.15.2</version>
 		</dependency>
 
-		<!-- Ch04 @Valid 어노테이션을 사용하기 위한 의존 설정 -->
+		<!-- @Valid 어노테이션을 사용하기 위한 의존 설정 -->
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 			<version>2.0.1.Final</version>
 		</dependency>
 
-		<!-- Ch09 멀티파트를 해석하기 위해 필요(방법1) -->
+		<!-- 멀티파트를 해석하기 위해 필요(방법1) -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.5</version>
 		</dependency>
 
-		<!-- Ch13 커넥션 풀을 사용하기 위해 필요 -->
+		<!-- 커넥션 풀을 사용하기 위해 필요 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>
 			<version>2.9.0</version>
 		</dependency>
 
-		<!-- Ch13 JDBC Driver -->
+		<!-- JDBC Driver -->
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
 			<version>19.3.0.0</version>
 		</dependency>
 
-		<!-- Ch13 JDBC가 생성하는(MyBatis) SQL문을 로그로 출력해주는 라이브러리 -->
+		<!-- JDBC가 생성하는(MyBatis) SQL문을 로그로 출력해주는 라이브러리 -->
 		<dependency>
 			<groupId>com.googlecode.log4jdbc</groupId>
 			<artifactId>log4jdbc</artifactId>
 			<version>1.2</version>
 		</dependency>
 
-		<!-- Ch13 스프링 프레임워크에서 MyBatis를 사용하기 위해 필요한 라이브러리 -->
+		<!-- 스프링 프레임워크에서 MyBatis를 사용하기 위해 필요한 라이브러리 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
@@ -144,14 +144,14 @@
 			<version>2.1.1</version>
 		</dependency>
 
-		<!-- Ch13 PasswordEncoder를 사용하기 위해 필요한 라이브러리 -->
+		<!-- PasswordEncoder를 사용하기 위해 필요한 라이브러리 -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
 			<version>5.5.8</version>
 		</dependency>
 
-		<!-- Ch14 AOP 사용을 위한 의존 라이브러리 -->
+		<!-- AOP 사용을 위한 의존 라이브러리 -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
