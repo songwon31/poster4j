@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.webteam2.poster4j.dto.Cart;
 import com.webteam2.poster4j.dto.Customer;
+import com.webteam2.poster4j.dto.OrderItem;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
 import com.webteam2.poster4j.interceptor.Login;
@@ -99,5 +100,26 @@ public class CartController {
 	{
 		cartService.removeItem(customerId, productId, optionSize, optionFrame);
 		return "success";
+	}
+	
+	@RequestMapping("/getAllCartItems")
+	@ResponseBody
+	public OrderItem getAllCartItems(HttpSession session) {
+		Customer customer = (Customer)session.getAttribute("customerLogin");
+		String customerId = customer.getCustomerId();
+		List<Cart> cartItems = cartService.getItemsByCustomerId(customerId);
+		OrderItem orderItem = new OrderItem();
+		orderItem.setOrderItemList(new ArrayList<OrderItem>());
+		for (int i=0; i<cartItems.size(); ++i) {
+			OrderItem newOrderItem = new OrderItem();
+			newOrderItem.setCustomerId(cartItems.get(i).getCustomerId());
+			newOrderItem.setProductId(cartItems.get(i).getProductId());
+			newOrderItem.setProductQuantity(cartItems.get(i).getCartProductQuantity());
+			newOrderItem.setProductSize(cartItems.get(i).getOptionSize());
+			newOrderItem.setProductFrame(cartItems.get(i).getOptionFrame());
+			orderItem.getOrderItemList().add(newOrderItem);
+		}
+		
+		return orderItem;
 	}
 }

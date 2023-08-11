@@ -151,15 +151,21 @@
 					function orderAllItems() {
 						$.ajax({
 							type: "POST",
-							url: "/poster4j/removeCartItem",
-							data: {
-								customerId: customerId,
-								productId: productId,
-								optionSize: optionSize,
-								optionFrame: optionFrame
-							},
-							success: function(data) {
-								document.location.reload();
+							url: "/poster4j/getAllCartItems",
+							success: function(orderItem) {
+								var form = document.createElement("form");
+								form.setAttribute("charset", "UTF-8");
+						        form.setAttribute("method", "Post");  //Post 방식
+						        form.setAttribute("action", "/poster4j/order"); //요청 보낼 주소
+						        
+						        var hiddenField = document.createElement("input");
+						        hiddenField.setAttribute("type", "hidden");
+						        hiddenField.setAttribute("name", "orderItem");
+						        hiddenField.setAttribute("value", orderItem);
+						        form.appendChild(hiddenField);
+						        
+						        document.body.appendChild(form);
+								form.submit();
 							}
 						});
 					}
