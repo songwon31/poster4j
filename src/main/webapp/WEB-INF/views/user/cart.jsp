@@ -54,7 +54,8 @@
 					</div>
 				</div>
 				<div style="text-align: center; margin: 9px auto 0; display: flex; justify-content: center;">
-					<a href="#" style="flex:1; display:flex; align-items:center; justify-content:center; background-color:#000; color:#fff; padding:12px 17px 15px;">
+					<a href="javascript:void(0)" onclick='orderAllItems()'
+						style="flex:1; display:flex; align-items:center; justify-content:center; background-color:#000; color:#fff; padding:12px 17px 15px;">
 						주문
 					</a>
 				</div>
@@ -127,19 +128,19 @@
 				        
 				        hiddenField = document.createElement("input");
 				        hiddenField.setAttribute("type", "hidden");
-				        hiddenField.setAttribute("name", "orderItemList[0].cartProductQuantity");
+				        hiddenField.setAttribute("name", "orderItemList[0].productQuantity");
 				        hiddenField.setAttribute("value", cartProductQuantity);
 				        form.appendChild(hiddenField);
 				        
 				        hiddenField = document.createElement("input");
 				        hiddenField.setAttribute("type", "hidden");
-				        hiddenField.setAttribute("name", "orderItemList[0].optionSize");
+				        hiddenField.setAttribute("name", "orderItemList[0].productSize");
 				        hiddenField.setAttribute("value", optionSize);
 				        form.appendChild(hiddenField);
 				        
 				        hiddenField = document.createElement("input");
 				        hiddenField.setAttribute("type", "hidden");
-				        hiddenField.setAttribute("name", "orderItemList[0].optionFrame");
+				        hiddenField.setAttribute("name", "orderItemList[0].productFrame");
 				        hiddenField.setAttribute("value", optionFrame);
 				        form.appendChild(hiddenField);
 				        
