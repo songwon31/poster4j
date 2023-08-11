@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -16,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webteam2.poster4j.dto.Customer;
+import com.webteam2.poster4j.dto.OrderDetail;
 import com.webteam2.poster4j.dto.OrderItem;
 import com.webteam2.poster4j.dto.OrderT;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
 import com.webteam2.poster4j.dto.Receiver;
+import com.webteam2.poster4j.service.OrderDetailService;
 import com.webteam2.poster4j.service.OrderTService;
 import com.webteam2.poster4j.service.ProductImageService;
 import com.webteam2.poster4j.service.ProductService;
@@ -39,6 +40,8 @@ public class OrderPageController {
 	ProductService productService;
 	@Resource
 	OrderTService orderService;
+	@Resource
+	OrderDetailService orderDetailService;
 
 	@RequestMapping("/order")
 	public String order(HttpSession session, Model model, OrderItem orderItem) {
@@ -89,12 +92,12 @@ public class OrderPageController {
 	}
 
 	@PostMapping("/postOrder")
-	public String postOrder(HttpServletRequest request,
-						HttpSession session,
-						OrderT order,
-						@RequestParam("productId") String[] productIds,
-						@RequestParam("optionSize") String[] optionSizes,
-						@RequestParam("optionFrame") String[] optionFrames) {
+	public String postOrder(HttpSession session,
+							OrderT order,
+							@RequestParam("productId") String[] productIds,
+							@RequestParam("optionSize") String[] optionSizes,
+							@RequestParam("orderDetailQuantity") String[] orderDetailQuantity,
+							@RequestParam("optionFrame") String[] optionFrames) {
 		// 세션에 저장된 customer 정보
 		Customer customer = (Customer) session.getAttribute("customerLogin");
 		if (customer == null) {
@@ -109,6 +112,10 @@ public class OrderPageController {
 		
 		orderService.saveOrder(order);
 		
+		log.info("" + order.getOrderId());
+		//order id 를 가져와서 orderid에 해당하는 값들을 넣어줘야대
+
+		
 		for(String pId : productIds) {
 			log.info("pId" +Integer.parseInt(pId));
 		}
@@ -119,12 +126,26 @@ public class OrderPageController {
 			log.info("optionFrame" +optionFrame);
 		}
 		
+		
+		 for (int i = 0; i < productIds.length; i++) {
+	            OrderDetail orderDetail = new OrderDetail();
+	            orderDetail.setOrderId(order.getOrderId());
+	            orderDetail.setProductId(Integer.parseInt(productIds[i]));
+	            orderDetail.setOptionSize(optionSizes[i]);
+	            orderDetail.setOptionFrame(optionFrames[i]);
+	            orderDetail.setOrderDetailQuantity(Integer.parseInt(orderDetailQuantity[i]));
+	            
+	            log.info("orderDetail:" + orderDetail);
+	            orderDetailService.saveOrderDetail((orderDetail));
+	            
+	        }
+		
 		//log.info("" + orderDetail.getOptionSize());
 		//log.info("" + orderDetail.getOptionFrame());
 		
 		
 		//List<OrderDetail> orderDeatilList = orderItems.
 		
-		return "redirect:/order";
+		return "redirect:/cart";
 	}
 }

@@ -56,5 +56,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	public int changeOrderDetailStatus(int orderId, int productId, String orderStatus) {
 		return orderDetailDao.updateOrderStatus(orderId, productId, orderStatus);
 	}
-
+	
+	@Override
+	public void saveOrderDetail(OrderDetail orderDetail) {
+		orderDetailDao.insert(orderDetail);
+	}
 }

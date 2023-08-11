@@ -11,10 +11,13 @@
 		select count(*) from order
 	</select>
 	
-	<select id="insert" parameterType="OrderT">
+	<insert id="insert" parameterType="OrderT">
+		<selectKey keyProperty="orderId" resultType="int" order="BEFORE">
+			select order_t_seq.nextval from dual 
+		</selectKey>
 		insert into order_t (order_id, customer_id, receiver_id, coupon_id, order_date, order_settlement_method)
-		values (order_t_seq.nextval, #{customerId}, #{receiverId}, #{couponId, jdbcType=DECIMAL }, #{orderDate}, #{orderSettlementMethod})
-	</select>
+		values (#{orderId}, #{customerId}, #{receiverId}, #{couponId, jdbcType=DECIMAL }, #{orderDate}, #{orderSettlementMethod})
+	</insert>
 	
 	<select id="selectOrderListById" parameterType="int" resultType="OrderT">
 		select *

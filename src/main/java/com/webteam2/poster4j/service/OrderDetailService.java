@@ -13,4 +13,5 @@ public interface OrderDetailService {
 	public int getOrderDetailNumByOrderId(int orderId);
 	public int getOrderDetailNumByProductId(int productId);
 	public int changeOrderDetailStatus(int orderId, int productId, String orderStatus);
+	public void saveOrderDetail(OrderDetail orderDetail);
 }

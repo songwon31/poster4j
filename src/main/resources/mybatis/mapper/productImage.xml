@@ -30,6 +30,11 @@
 		select *
 		from product_image
 	</select>
+	<select id="selectHomeList" resultType="ProductImage">
+		select *
+		from product_image
+		where product_image_ctgry = 'represent'
+	</select>
 	
 	<!-- ProductId로 상품 이미지들 -->
 	<select id="selectListById" parameterType="int" resultType="ProductImage">

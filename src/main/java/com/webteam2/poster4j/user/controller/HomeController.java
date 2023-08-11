@@ -36,7 +36,7 @@ public class HomeController {
 	@GetMapping("/")
 	public String getPosterImage(Model model) {
 		
-		List<ProductImage> productImages = productImageService.getList();
+		List<ProductImage> productImages = productImageService.getHomeList();
 		List<String> convertedImages = new ArrayList<String>();
 		List<Product> productList = new ArrayList<Product>();
 		for (ProductImage image : productImages) {

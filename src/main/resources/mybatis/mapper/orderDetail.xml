@@ -69,5 +69,9 @@
 		where order_id=#{orderId} and product_id=#{productId} and order_detail_status != '취소됨'
 	</update>
 	
+	<insert id="insert" parameterType="OrderDetail">
+		insert into order_detail (order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date, option_size, option_frame)
+		values (#{orderId}, #{productId}, #{orderDetailQuantity}, '결제완료', #{orderDlCmptnDate, jdbcType=VARCHAR}, #{optionSize}, #{optionFrame})
+	</insert>
 	
 </mapper>

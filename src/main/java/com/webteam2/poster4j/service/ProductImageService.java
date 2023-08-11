@@ -11,6 +11,7 @@ public interface ProductImageService {
 	public int register(ProductImage productImage);
 	public int deleteProductImagesByProductId(int productId);
 	public List<ProductImage> getList();
+	public List<ProductImage> getHomeList();
 	public List<ProductImage> getOrderProductImageList(int productId);
 	public ProductImage getRepresentProductImage(int productId);
 }

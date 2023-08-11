@@ -88,7 +88,7 @@
 
 
 <div id="orderForm" style="margin: 0 auto; min-width: 360px">
-	<form method="post" action="order" style= "margin: 300px 0">
+	<form method="post" action="postOrder" style= "margin: 300px 0">
 		<div class="title" style="text-align: center">배송지</div>
 		<div>
 			<!-- 배송지 정보 (배송지 목록 버튼 클릭시 안보임)-->
