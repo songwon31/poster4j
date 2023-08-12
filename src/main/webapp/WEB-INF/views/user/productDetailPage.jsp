@@ -14,6 +14,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
+<!-- 선택된 아이템 리스트 인덱싱을 위한 배열 선언 -->
 <script>
 	var check=[];
 </script>
@@ -29,35 +30,44 @@
 		<table class="productDetailTable mb-3">
 			<tr class="priceGroup">
 				<th>Price</th>
-				<td><span>KRW</span> <span><fmt:formatNumber
-							value="${product.productPrice}" pattern="#,###" /></span></td>
+				<td>
+					<span>KRW</span>
+					<span><fmt:formatNumber value="${product.productPrice}" pattern="#,###" /></span>
+				</td>
 			</tr>
 			<tr class="discountedPriceGroup">
 				<th>Discounted Price</th>
-				<td><span>KRW</span> <span id="discountedPrice"><fmt:formatNumber
-							value="${discountedPrice}" pattern="#,###" /></span> <span>(KRW</span>
-					<span id="discountAmount"><fmt:formatNumber
-							value="${discountAmount}" pattern="#,###" /></span> <span>할인)</span></td>
+				<td>
+					<span>KRW</span>
+					<span id="discountedPrice"><fmt:formatNumber value="${discountedPrice}" pattern="#,###" /></span>
+					<span>(KRW</span>
+					<span id="discountAmount"><fmt:formatNumber value="${discountAmount}" pattern="#,###" /></span>
+					<span>할인)</span>
+				</td>
 			</tr>
 			<tr class="sizeGroup">
 				<th>Size</th>
-				<td><select name="selectSize" onchange="selectOption()">
+				<td>
+					<select name="selectSize" onchange="selectOption()">
 						<option>--옵션을 선택해주세요--</option>
 						<option value="297 x 420mm">297 x 420mm</option>
 						<option value="420 x 594mm">420 x 594mm</option>
 						<option value="500 x 700mm">500 x 700mm</option>
-				</select></td>
+					</select>
+				</td>
 			</tr>
 			<tr class="frameGroup">
 				<th>Frame</th>
-				<td><select name="selectFrame" onchange="selectOption()">
+				<td>
+					<select name="selectFrame" onchange="selectOption()">
 						<option>--옵션을 선택해주세요--</option>
 						<option value="선택안함">선택안함</option>
 						<option value="black">black</option>
 						<option value="silver">silver</option>
 						<option value="white">white</option>
 						<option value="gold">gold</option>
-				</select></td>
+					</select>
+				</td>
 			</tr>
 		</table>
 
@@ -70,8 +80,8 @@
 
 		<%-- 장바구니 추가 / 바로 주문 버튼 --%>
 		<div class="btnGroup d-flex">
-			<a class="btn" href="javascript:void(0)" onclick="addCart();return false;">Add to Cart</a>
-			<a class="btn" href="javascript:void(0)" onclick="orderNow();return false;">Order Now</a>
+			<a class="btn mx-1" href="javascript:void(0)" onclick="addCart();return false;">Add to Cart</a>
+			<a class="btn mx-1" href="javascript:void(0)" onclick="orderNow();return false;">Order Now</a>
 		</div>
 
 		<%-- 상세설명 이미지 리스트 --%>
@@ -89,7 +99,6 @@
 			type: "POST",
 			url: "/poster4j/addOrderList",
 			success: function(data) {
-				//alert(data);
 				var seletedSize = $("select[name=selectSize] option:selected").val();				
 				var seletedFrame = $("select[name=selectFrame] option:selected").val();
 				
@@ -128,13 +137,16 @@
 					html += '	</td>';
 					html += '	<td>';
 					html += '		<span>';
-					html += '		<a onclick="minusQuantity('+ index +')"><i class="fa fa-minus ml-5"></i></a>';
-					html += '		<input type="text"  id="productQuantity' + index + '" name="orderItemList[' + index + '].productQuantity" size="1" min="1" style="text-align: center; border-bottom: none;" value=1>';
-					html += '		<a onclick="plusQuantity('+ index +')"><i class="fa fa-plus"></i></a>';
+					html += '			<a onclick="minusQuantity('+ index +')"><i class="fa fa-minus ml-5"></i></a>';
+					html += '			<input type="text"  id="productQuantity' + index + '" name="orderItemList[' + index + '].productQuantity" size="1" min="1" style="text-align: center; border-bottom: none;" value=1>';
+					html += '			<a onclick="plusQuantity('+ index +')"><i class="fa fa-plus mr-5"></i></a>';
 					html += '		</span>';
 					html += '	</td>';
 					html += '	<td>';
-					html += '		<a href="javascript:void(0)" onclick="deleteSelectedItem('+ index +');return false;"><i class="material-icons ml-5" style="font-weight: bold; font-size: 18px;">clear</i></a>';
+					html += '		<span class="mr-5"><fmt:formatNumber value="${discountedPrice}" pattern="#,###" /></span>';
+					html += '	</td>';
+					html += '	<td>';
+					html += '		<a href="javascript:void(0)" onclick="deleteSelectedItem('+ index +');return false;"><i class="material-icons" style="font-weight: bold; font-size: 18px;">clear</i></a>';
 					html += '	</td>';
 					html += '	</form>';
 					html += '</tr>';
@@ -150,8 +162,8 @@
 	//아이템 수량 감소
 	function minusQuantity(index) {
 		var presentValue =parseInt($("#productQuantity" + index).val());
-		if(presentValue == 0) {
-			//delete
+		if(presentValue == 1) {
+			deleteSelectedItem(index);
 		} else {
 			$("#productQuantity" + index).val(presentValue - 1);
 		}
@@ -174,10 +186,6 @@
 		var orderItemList = new Array();
 		for (let i = 0; i < check.length; i++) {
 			if (check[i]) {
-				console.log($("#productId" + i).val());
-				console.log($("#productSize" + i).val());
-				console.log($("#productFrame" + i).val());
-				console.log($("#productQuantity" + i).val());
 				let orderItem = {
 					productId : $("#productId" + i).val(),
 					customerId : "",
@@ -188,7 +196,6 @@
 				orderItemList.push(orderItem);
 			}
 		}
-		console.log(orderItemList);
 
 		$.ajax({
 			type : "POST",
@@ -196,12 +203,13 @@
 			contentType: "application/json",
 		    data: JSON.stringify(orderItemList),
 			success : function(data) {
-				//담은 아이템들 다 지워주고, check배열을 초기화
+				//장바구니에 담은 아이템들 다 지워주기
 				for (let i = 0; i < check.length; i++) {
 					if (check[i]) {
 						deleteSelectedItem(i);
 					}
 				}
+				//선택된 아이템 리스트 인덱싱을 위한 배열 초기화
 				check = [];
 			}
 		});

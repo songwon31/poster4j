@@ -8,12 +8,8 @@
 	font-size: 13px;
 }
  
-a, a:visited {
+.navbar a, .navbar a:visited {
 	color: black;
-	text-decoration: none;
-}
-
-a:hover {
 	text-decoration: none;
 }
 
@@ -42,7 +38,6 @@ input[type=text], input[type=password]{
 #headerMenuList {
 	width: 480px;
 	list-style: none;
-	
 }
 
 #headerMenuList > li {

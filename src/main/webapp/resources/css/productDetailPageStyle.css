@@ -26,10 +26,25 @@
 	font-size: 13px;
 }
 
-.productDetailTable tr, .btnGroup a {
+.productDetailTable tr {
 	border: none;
 	border-bottom: 1.3px solid #000000;
+}
+
+.btnGroup a {
+	background-color: black;
+	color: white;
 	border-radius: 0;
+}
+
+.btnGroup a:hover {
+	color: white;
+	font-weight: bold;
+}
+
+#selectedItemTable a, #selectedItemTable a:hover {
+	color: black;
+	text-decoration: none;
 }
 
 .productDetailTable th {
