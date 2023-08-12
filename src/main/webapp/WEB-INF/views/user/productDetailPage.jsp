@@ -12,7 +12,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <script>
-	var index = 0;
+	var check=[];
 </script>
 
 <div class="wrapper">
@@ -43,7 +43,6 @@
 			<tr class="sizeGroup">
 				<th>Size</th>
 				<td>
-					<input id="productSize" name="productSize" type="hidden">
 					<select name="selectSize" onchange="selectOption()">
 						<option>--옵션을 선택해주세요--</option>
 						<option value="297 x 420mm">297 x 420mm</option>
@@ -55,7 +54,6 @@
 			<tr class="frameGroup">
 				<th>Frame</th>
 				<td>
-					<input id="productFrame" name="productFrame" type="hidden">
 					<select name="selectFrame" onchange="selectOption()">
 						<option>--옵션을 선택해주세요--</option>
 						<option value="선택안함">선택안함</option>
@@ -77,7 +75,7 @@
 		
 		<%-- 장바구니 추가 / 바로 주문 버튼 --%>
 		<div class="btnGroup d-flex">
-			<a class="btn" href="addCart">Add to Cart</a>
+			<a class="btn" href="javascript:void(0)" onclick="addCart();return false;">Add to Cart</a>
 			<a class="btn" href="orderNow">Order Now</a>
 		</div>
 		
@@ -92,18 +90,31 @@
 <script>
 	//옵션선택시 선택된 아이템 표시
 	function selectOption() {
+		let i=0;
+		let index = 0;
+		for (i=0; i < check.length; ++i) {
+			if (check[i] == 0) {
+				index = i;
+			}
+		}
+		if (i == check.length) {
+			check.push(1);
+			index = i;
+		}
+		
 		$.ajax({
 			type: "POST",
 			url: "/poster4j/addOrderList",
 			success: function(data) {
+				//alert(data);
 				var seletedSize = $("select[name=selectSize] option:selected").val();				
 				var seletedFrame = $("select[name=selectFrame] option:selected").val();
 				
 				if(seletedSize == null || seletedFrame == null || seletedSize == "--옵션을 선택해주세요--" || seletedFrame == "--옵션을 선택해주세요--") {
-					alert("옵션을 선택해주세요.");
+					//alert("옵션을 선택해주세요.");
 				} else {
 					var html = "";
-					html += '<tr>';
+					html += '<tr id="tr' + index + '">';
 					html += '	<td>';
 					html += '		<p>';
 					html += '			${product.productName}';
@@ -116,14 +127,15 @@
 					html += '	</td>';
 					html += '	<td>';
 					html += '		<span>';
-					html += '		<a onclick="minusQuantity()"><i class="fa fa-minus ml-5"></i></a>';
+					html += '		<a onclick="minusQuantity('+ index +')"><i class="fa fa-minus ml-5"></i></a>';
 					html += '		<input type="text"  id="productQuantity' + index + '" name="orderItemList[' + index + '].productQuantity" size="1" min="1" style="text-align: center; border-bottom: none;" value=1>';
-					html += '		<a onclick="plusQuantity()"><i class="fa fa-plus"></i></a>';
+					html += '		<a onclick="plusQuantity('+ index +')"><i class="fa fa-plus"></i></a>';
 					html += '		</span>';
 					html += '	</td>';
 					html += '	<td>';
-					html += '		<a><i class="material-icons ml-5" style="font-weight: bold; font-size: 18px;">clear</i></a>';
+					html += '		<a href="javascript:void(0)" onclick="deleteSelectedItem('+ index +');return false;"><i class="material-icons ml-5" style="font-weight: bold; font-size: 18px;">clear</i></a>';
 					html += '	</td>';
+					html += '</tr>';
 						
 					$("#selectedItemTable").append(html);
 					
@@ -134,19 +146,55 @@
 	}
 	
 	//아이템 수량 감소
-	function minusQuantity() {
-		var presentValue = parseInt($(event.target).parent().next().val());
+	function minusQuantity(index) {
+		var presentValue =parseInt($("#productQuantity" + index).val());
 		if(presentValue == 0) {
 			//delete
 		} else {
-			$(event.target).parent().next().val(presentValue - 1);
+			$("#productQuantity" + index).val(presentValue - 1);
 		}
 	}
 	
 	//아이템 수량 추가
-	function plusQuantity() {
-		var presentValue = parseInt($(event.target).parent().prev().val());
-		$(event.target).parent().prev().val(presentValue + 1);
+	function plusQuantity(index) {
+		var presentValue =parseInt($("#productQuantity" + index).val());
+		$("#productQuantity" + index).val(presentValue + 1);
+	}
+	
+	//아이템 삭제
+	function deleteSelectedItem(index) {
+		$("#tr" + index).remove();
+		check[index] = 0;
+	}
+	
+	//장바구니에 담기
+	function addCart() {
+		var orderItemList = [];
+		
+		for(let i=0; i<check.length; i++) {
+			if(check[i]) {
+				let productId = $("#productId" + i).val();
+				let productQuantity = parseInt($("#productQuantity" + i).val());
+				let productSize = $("#productSize" + i).val();
+				let productFrame = $("#productFrame" + i).val();
+				orderItemList.push({"productId": productId, "productQuantity": productQuantity, "productSize": productSize, "productFrame": productFrame});
+			}
+		}
+		
+		$.ajax({
+			type: "POST",
+			url: "/poster4j/saveCart",
+			data: { orderItemList: orderItemList},
+			success: function(data) {
+				
+			}
+		});
+	}
+	
+	//바로 주문하기
+	function orderNow() {
+		
+		
 	}
 </script>
 

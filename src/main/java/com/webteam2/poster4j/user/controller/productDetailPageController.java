@@ -10,8 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -93,8 +93,13 @@ public class productDetailPageController {
 			orderItemList.add(orderItem);
 		}
 		
+		return "success";
+	}
+	
+	@RequestMapping("/saveCart")
+	@ResponseBody
+	public String saveCart(@RequestParam(value="orderItemList[]") ArrayList<OrderItem> orderItemList) {
 		log.info("" + orderItemList);
-		
-		return "user/productDetailPage";
-	}	
+		return "success";
+	}
 }
