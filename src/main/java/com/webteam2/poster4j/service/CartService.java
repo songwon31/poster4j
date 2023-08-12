@@ -9,4 +9,5 @@ public interface CartService {
 	public int plusQuantity(String customerId, int productId, String optionSize, String optionFrame);
 	public int minusQuantity(String customerId, int productId, String optionSize, String optionFrame);
 	public int removeItem(String customerId, int productId, String optionSize, String optionFrame);
+	public int addItem(Cart cart);
 }

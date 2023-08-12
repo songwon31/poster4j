@@ -10,6 +10,7 @@ import com.webteam2.poster4j.dto.Cart;
 @Mapper
 public interface CartDao {
 	public List<Cart> selectByCustomerId(String customerId);
+	public int insertItem(Cart cart);
 	public int updatePlusQuantity(@Param("customerId") String customerId, 
 								  @Param("productId") int productId, 
 								  @Param("optionSize") String optionSize, 

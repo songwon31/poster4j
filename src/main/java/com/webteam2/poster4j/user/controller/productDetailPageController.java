@@ -7,6 +7,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.webteam2.poster4j.dto.Cart;
+import com.webteam2.poster4j.dto.Customer;
 import com.webteam2.poster4j.dto.OrderItem;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
+import com.webteam2.poster4j.service.CartService;
 import com.webteam2.poster4j.service.ProductImageService;
 import com.webteam2.poster4j.service.ProductService;
 
@@ -32,9 +37,11 @@ public class productDetailPageController {
 	ProductService productService;
 	@Resource
 	ProductImageService productImageService;
+	@Resource
+	CartService cartService;
 	
 	@GetMapping("/productDetail")
-	public String productDetail(@RequestParam(defaultValue="1", value="productId")int productId, Model model) {
+	public String productDetail(@RequestParam(defaultValue="1", value="productId")int productId, Model model, HttpSession session) {
 		//대표 이미지 가져오기
 		ProductImage productImage = productImageService.getImage(productId);
 		Product product = new Product();
@@ -99,8 +106,27 @@ public class productDetailPageController {
 	
 	@RequestMapping("/saveCart")
 	@ResponseBody
-	public String saveCart(@RequestBody String data) {
-		log.info("" + data);
+	public String saveCart(@RequestBody String data, HttpSession session) {
+		JSONArray jsonArray = new JSONArray(data);
+		String customerId = ((Customer)session.getAttribute("customerLogin")).getCustomerId();
+		for(int i=0; i<jsonArray.length(); i++) {
+			Cart cart = new Cart();
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
+			cart.setProductId(jsonObject.getInt("productId"));
+			cart.setCustomerId(customerId);
+			cart.setOptionSize(jsonObject.getString("productSize"));
+			cart.setOptionFrame(jsonObject.getString("productFrame"));
+			cart.setCartProductQuantity(jsonObject.getInt("productQuantity"));
+			
+			//cart 테이블에 데이터 저장하기
+			cartService.addItem(cart);
+		}
 		return "success";
+	}
+	
+	@RequestMapping("/getCustomerId")
+	@ResponseBody
+	public String getCustomerId(HttpSession session) {
+		return ((Customer)session.getAttribute("customerLogin")).getCustomerId();
 	}
 }

@@ -70,9 +70,8 @@
 
 		<%-- 장바구니 추가 / 바로 주문 버튼 --%>
 		<div class="btnGroup d-flex">
-			<a class="btn" href="javascript:void(0)"
-				onclick="addCart();return false;">Add to Cart</a> <a class="btn"
-				href="orderNow">Order Now</a>
+			<a class="btn" href="javascript:void(0)" onclick="addCart();return false;">Add to Cart</a>
+			<a class="btn" href="javascript:void(0)" onclick="orderNow();return false;">Order Now</a>
 		</div>
 
 		<%-- 상세설명 이미지 리스트 --%>
@@ -197,14 +196,67 @@
 			contentType: "application/json",
 		    data: JSON.stringify(orderItemList),
 			success : function(data) {
-
+				//담은 아이템들 다 지워주고, check배열을 초기화
+				for (let i = 0; i < check.length; i++) {
+					if (check[i]) {
+						deleteSelectedItem(i);
+					}
+				}
+				check = [];
 			}
 		});
 	}
 
 	//바로 주문하기
 	function orderNow() {
-
+		$.ajax({
+			type : "POST",
+			url : "/poster4j/getCustomerId",
+			success: function(data) {
+				var form = document.createElement("form");
+				form.setAttribute("charset", "UTF-8");
+		        form.setAttribute("method", "Post");  //Post 방식
+		        form.setAttribute("action", "/poster4j/order"); //요청 보낼 주소
+				
+		        var hiddenField;
+		        
+				for (let i = 0; i < check.length; i++) {
+					if (check[i]) {
+						hiddenField = document.createElement("input");
+						hiddenField.setAttribute("type", "hidden");
+					    hiddenField.setAttribute("name", "orderItemList["+i+"].custormerId");
+					    hiddenField.setAttribute("value", data);
+					    form.appendChild(hiddenField);
+						
+					    hiddenField = document.createElement("input");
+						hiddenField.setAttribute("type", "hidden");
+					    hiddenField.setAttribute("name", "orderItemList["+i+"].productId");
+					    hiddenField.setAttribute("value", $("#productId" + i).val());
+					    form.appendChild(hiddenField);
+					    
+					    hiddenField = document.createElement("input");
+						hiddenField.setAttribute("type", "hidden");
+					    hiddenField.setAttribute("name", "orderItemList["+i+"].productQuantity");
+					    hiddenField.setAttribute("value", $("#productQuantity" + i).val());
+					    form.appendChild(hiddenField);
+					    
+					    hiddenField = document.createElement("input");
+						hiddenField.setAttribute("type", "hidden");
+					    hiddenField.setAttribute("name", "orderItemList["+i+"].productSize");
+					    hiddenField.setAttribute("value", $("#productSize" + i).val());
+					    form.appendChild(hiddenField);
+					    
+					    hiddenField = document.createElement("input");
+						hiddenField.setAttribute("type", "hidden");
+					    hiddenField.setAttribute("name", "orderItemList["+i+"].productFrame");
+					    hiddenField.setAttribute("value",  $("#productFrame" + i).val());
+					    form.appendChild(hiddenField);
+					}
+				}
+				document.body.appendChild(form);
+				form.submit();
+			}
+		});
 	}
 </script>
 

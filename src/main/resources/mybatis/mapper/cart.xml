@@ -7,6 +7,11 @@
 		where customer_id = #{customerId}
 	</select>
 	
+	<insert id="insertItem" parameterType="Cart">
+		insert into cart (product_id, customer_id, cart_product_quantity, option_size, option_frame)
+		values(#{productId}, #{customerId}, #{cartProductQuantity}, #{optionSize}, #{optionFrame})
+	</insert>
+	
 	<update id="updatePlusQuantity" parameterType="map">
 		update cart set cart_product_quantity = cart_product_quantity + 1
 		where customer_id=#{customerId} and product_id=#{productId} and option_size = #{optionSize} and option_frame = #{optionFrame}
