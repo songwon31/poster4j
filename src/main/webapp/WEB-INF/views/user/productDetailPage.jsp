@@ -189,11 +189,13 @@
 				orderItemList.push(orderItem);
 			}
 		}
+		console.log(orderItemList);
 
 		$.ajax({
 			type : "POST",
 			url : "/poster4j/saveCart",
-			data : {orderItemList : orderItemList},
+			contentType: "application/json",
+		    data: JSON.stringify(orderItemList),
 			success : function(data) {
 
 			}
