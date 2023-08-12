@@ -3,6 +3,7 @@ package com.webteam2.poster4j.user.controller;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -98,7 +99,7 @@ public class productDetailPageController {
 	
 	@RequestMapping("/saveCart")
 	@ResponseBody
-	public String saveCart(@RequestParam(value="orderItemList[]") ArrayList<OrderItem> orderItemList) {
+	public String saveCart(@RequestParam(value="orderItemList[]") List<OrderItem> orderItemList) {
 		log.info("" + orderItemList);
 		return "success";
 	}
