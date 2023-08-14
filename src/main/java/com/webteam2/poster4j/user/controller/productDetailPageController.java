@@ -58,7 +58,6 @@ public class productDetailPageController {
 		
 		for (ProductImage image : productDetailImageList) {
 			String base64Img = Base64.getEncoder().encodeToString(image.getProductImageSource());
-			
 			convertedImages.add(base64Img);
 		}
 		
@@ -78,9 +77,9 @@ public class productDetailPageController {
 	@ResponseBody
 	public String addOrderList(
 			OrderItem orderItem,
-			HttpSession session,
-			@SessionAttribute(value="orderItemList", required=false) List<OrderItem> orderItemList) {
+			HttpSession session) {
 		
+		/*
 		//orderItemList가 없을 경우, 새로 생성해서 저장
 		if(orderItemList == null) {
 			orderItemList = new ArrayList<OrderItem>();
@@ -100,6 +99,7 @@ public class productDetailPageController {
 		if(exist == false) {
 			orderItemList.add(orderItem);
 		}
+		*/
 		
 		return "success";
 	}

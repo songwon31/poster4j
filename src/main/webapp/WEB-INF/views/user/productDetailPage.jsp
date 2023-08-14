@@ -14,9 +14,12 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
-<!-- 선택된 아이템 리스트 인덱싱을 위한 배열 선언 -->
 <script>
+	//선택된 아이템 리스트 인덱싱을 위한 배열
 	var check=[];
+	
+	//선택된 아이템 총가격
+	var totalPrice = 0;
 </script>
 
 <div class="wrapper">
@@ -75,8 +78,11 @@
 		<table id="selectedItemTable">
 		</table>
 
-		<%-- 총 가격 --%>
-		<div class="totalPrice"></div>
+		<%-- 선택상품 총 가격 --%>
+		<div id="totalPriceGroup" class="d-flex m-3">
+			<span class="mr-2">KRW</span>
+			<span id="totalPrice"></span>
+		</div>
 
 		<%-- 장바구니 추가 / 바로 주문 버튼 --%>
 		<div class="btnGroup d-flex">
@@ -143,7 +149,7 @@
 					html += '		</span>';
 					html += '	</td>';
 					html += '	<td>';
-					html += '		<span class="mr-5"><fmt:formatNumber value="${discountedPrice}" pattern="#,###" /></span>';
+					html += '		<span id="selectedItemPrice' + index + '" class="selectedItemPrice mr-5"><fmt:formatNumber value="${discountedPrice}" pattern="#,###" /></span>';
 					html += '	</td>';
 					html += '	<td>';
 					html += '		<a href="javascript:void(0)" onclick="deleteSelectedItem('+ index +');return false;"><i class="material-icons" style="font-weight: bold; font-size: 18px;">clear</i></a>';
@@ -153,6 +159,12 @@
 						
 					$("#selectedItemTable").append(html);
 					
+					//선택된 아이템 총가격 계산
+					let selectedPrice = $("#selectedItemPrice" + index).text();
+					let parsedSelectedPrice = parseInt(selectedPrice.replace(/[^0-9]/g, ""));
+					totalPrice += parsedSelectedPrice;
+					$("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
+					
 					index++;
 				}
 			}
@@ -161,18 +173,40 @@
 	
 	//아이템 수량 감소
 	function minusQuantity(index) {
-		var presentValue =parseInt($("#productQuantity" + index).val());
-		if(presentValue == 1) {
+		var presentQuantity =parseInt($("#productQuantity" + index).val());
+		if(presentQuantity == 1) {
 			deleteSelectedItem(index);
 		} else {
-			$("#productQuantity" + index).val(presentValue - 1);
+			var newQuantity = $("#productQuantity" + index).val(presentQuantity - 1).val();
+			
+			//수량감소시 옵션별 총가격
+			var presentPrice = $("#selectedItemPrice" + index).text();
+			var parsedPresentPrice = parseInt(presentPrice.replace(/[^0-9]/g, ""));
+			var optionItemPrice = (parsedPresentPrice/presentQuantity) * newQuantity;
+			
+			$("#selectedItemPrice" + index).text(optionItemPrice.toLocaleString("ko-KR"));
+			
+			//수량감소시 선택된 아이템 총가격 변경
+			totalPrice -= parsedPresentPrice;
+			$("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
 		}
 	}
 	
 	//아이템 수량 추가
 	function plusQuantity(index) {
-		var presentValue =parseInt($("#productQuantity" + index).val());
-		$("#productQuantity" + index).val(presentValue + 1);
+		var presentQuantity = parseInt($("#productQuantity" + index).val());
+		var newQuantity = $("#productQuantity" + index).val(presentQuantity + 1).val();
+		
+		//수량추가시 옵션별 총가격
+		var presentPrice = $("#selectedItemPrice" + index).text();
+		var parsedPresentPrice = parseInt(presentPrice.replace(/[^0-9]/g, ""));
+		var optionItemPrice = (parsedPresentPrice/presentQuantity) * newQuantity;
+		
+		$("#selectedItemPrice" + index).text(optionItemPrice.toLocaleString("ko-KR"));
+		
+		//수량추가시 선택된 아이템 총가격 변경
+		totalPrice += parsedPresentPrice;
+		$("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
 	}
 	
 	//아이템 삭제
