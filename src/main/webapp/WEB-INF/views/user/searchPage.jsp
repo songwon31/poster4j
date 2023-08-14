@@ -47,10 +47,12 @@
 		});
 		
 		$('.thumbnail').hover(function() {
-			$(this).find('.productDetail').css('display','block');
+			$(this).find('.productDetail').fadeTo(200,1);
 		}, function() {
-			$(this).find('.productDetail').css('display','none');
+			$(this).find('.productDetail').fadeTo(200,0);
 		});
+		
+		document.addEventListener("touchstart", function() {}, true);
 	}
 </script>
 
@@ -155,7 +157,7 @@
 							<a href="productDetail?productId=${productList[status.index].productId}">
 								<div class="thumbnail">
 									<img class="imgOnList mb-3" src="data:image/jpeg;base64, ${image}">
-									<div class="productDetail" style="display:none;">
+									<div class="productDetail">
 										<div class="productDetailDiv" style="display:block;">
 											<div class="productDetailDiv2">
 												<div class="d-flex justify-content-start" style="font-size:18px;;">${productList[status.index].productName}</div>
