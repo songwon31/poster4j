@@ -28,8 +28,7 @@
 		<img id="productImage" src="data:image/jpeg;base64, ${convertedImage}" />
 		<%-- 상품 정보 테이블 --%>
 		<h3 id="productName">${product.productName}</h3>
-		<input id="productId" name="productId" type="hidden"
-			value="${product.productName}" form="selectedItemForm">
+		<input id="productId" name="productId" type="hidden" value="${product.productName}" form="selectedItemForm">
 		<table id="productDetailTable">
 			<tr class="priceGroup">
 				<th>Price</th>
@@ -105,67 +104,106 @@
 			type: "POST",
 			url: "/poster4j/addOrderList",
 			success: function(data) {
-				var seletedSize = $("select[name=selectSize] option:selected").val();				
-				var seletedFrame = $("select[name=selectFrame] option:selected").val();
+				var selectedSize = $("select[name=selectSize] option:selected").val();				
+				var selectedFrame = $("select[name=selectFrame] option:selected").val();
+				var duplicatedItem = "";
 				
-				if(seletedSize == null || seletedFrame == null || seletedSize == "--옵션을 선택해주세요--" || seletedFrame == "--옵션을 선택해주세요--") {
+				if(selectedSize == null || selectedFrame == null || selectedSize == "--옵션을 선택해주세요--" || selectedFrame == "--옵션을 선택해주세요--") {
 					//alert("옵션을 선택해주세요.");
 				} else {
-					let i=0;
-					let index = 0;
-					if (check.length == 0) {
-						index = 0;
-						check.push(1);
+					let isDuplicated = false;
+					//선택한 옵션이 있는 옵션인지 조사
+					$('.productSize').each(function(sizeIndex, sizeItem) {
+						$('.productFrame').each(function (frameIndex, frameItem) {
+							if (selectedSize == sizeItem.value && selectedFrame == frameItem.value) {
+								isDuplicated = true;
+								//해당 인덱스를 저장
+								duplicatedItemIndex = $(this).attr("id").replace(/[^0-9]/g, "");
+							}
+						});
+					});
+					
+					//선택한 옵션이 기존에 있던 옵션일 경우
+					if (isDuplicated) {						
+						//이미 선택한 옵션
+					    let duplicatedQuantityInput = $("#productQuantity" + duplicatedItemIndex);
+					    
+					    //현재 수량
+					    let presentQuantity = parseInt(duplicatedQuantityInput.val());
+					    let newQuantity = duplicatedQuantityInput.val(presentQuantity + 1);
+					    
+					    //옵션별 총가격 계산
+					    var presentPrice = $("#selectedItemPrice" + index).text();
+						var parsedPresentPrice = parseInt(presentPrice.replace(/[^0-9]/g, ""));
+						var optionItemPrice = (parsedPresentPrice/presentQuantity) * newQuantity;
+						
+						$("#selectedItemPrice" + index).text(optionItemPrice.toLocaleString("ko-KR"));
+					    
+					    //선택된 아이템 총가격 계산
+					    let selectedPrice = $("#selectedItemPrice" + duplicatedItemIndex).text();
+					    let parsedSelectedPrice = parseInt(selectedPrice.replace(/[^0-9]/g, ""));
+					    totalPrice += parsedSelectedPrice;
+					    $("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
+						
 					} else {
-						for (i=0; i < check.length; ++i) {
-							if (check[i] == 0) {
+						//선택한 옵션이 새로운 옵션일 경우
+						let i = 0;
+						let index = 0;
+						if (check.length == 0) {
+							index = 0;
+							check.push(1);
+						} else {
+							for (i=0; i < check.length; ++i) {
+								if (check[i] == 0) {
+									index = i;
+								}
+							}
+							if (i == check.length) {
+								check.push(1);
 								index = i;
 							}
 						}
-						if (i == check.length) {
-							check.push(1);
-							index = i;
-						}
+	
+						var html = "";
+						html += '<tr id="tr' + index + '">';
+						html += '	<form id="selectedItemForm" method="POST">';
+						html += '		<td>';
+						html += '			<p>';
+						html += '				${product.productName}';
+						html += '				<input type="hidden" id="productId' + index + '" name="orderItemList[' + index + '].productId" value="${product.productId}">';
+						html += '				<input  class="productSize" type="hidden" id="productSize' + index + '" name="orderItemList[' + index + '].productSize" value="' + selectedSize + '">';
+						html += '				<span>' + $("select[name=selectSize] option:selected").val() + '</span>';
+						html += '				<input class="productFrame" type="hidden" id="productFrame' + index + '" name="orderItemList[' + index + '].productFrame" value="' + selectedFrame + '">';
+						html += '				<span>' + $("select[name=selectFrame] option:selected").val() + '</span>';
+						html += '			</p>';
+						html += '		</td>';
+						html += '		<td>';
+						html += '			<span>';
+						html += '				<a onclick="minusQuantity('+ index +')"><i class="fa fa-minus ml-5"></i></a>';
+						html += '				<input type="text" id="productQuantity' + index + '" name="orderItemList[' + index + '].productQuantity" size="1" min="1" style="text-align: center; border-bottom: none;" value=1>';
+						html += '				<a onclick="plusQuantity('+ index +')"><i class="fa fa-plus mr-5"></i></a>';
+						html += '			</span>';
+						html += '		</td>';
+						html += '		<td>';
+						html += '			<span id="selectedItemPrice' + index + '" class="selectedItemPrice mr-5"><fmt:formatNumber value="${discountedPrice}" pattern="#,###" /></span>';
+						html += '		</td>';
+						html += '		<td>';
+						html += '			<a href="javascript:void(0)" onclick="deleteSelectedItem('+ index +');return false;"><i class="material-icons" style="font-weight: bold; font-size: 18px;">clear</i></a>';
+						html += '		</td>';
+						html += '	</form>';
+						html += '</tr>';
+						
+						$("#selectedItemTable").append(html);
+						
+						//선택된 아이템 총가격 계산
+						let selectedPrice = $("#selectedItemPrice" + index).text();
+						let parsedSelectedPrice = parseInt(selectedPrice.replace(/[^0-9]/g, ""));
+						totalPrice += parsedSelectedPrice;
+						$("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
+						
+						index++;
 					}
 					
-					var html = "";
-					html += '<tr id="tr' + index + '">';
-					html += '	<form id="selectedItemForm" method="POST">';
-					html += '	<td>';
-					html += '		<p>';
-					html += '			${product.productName}';
-					html += '			<input type="hidden" id="productId' + index + '" name="orderItemList[' + index + '].productId" value="${product.productId}">';
-					html += '			<input type="hidden" id="productSize' + index + '" name="orderItemList[' + index + '].productSize" value="' + seletedSize + '">';
-					html += '			<span>' + $("select[name=selectSize] option:selected").val() + '</span>';
-					html += '			<input type="hidden" id="productFrame' + index + '" name="orderItemList[' + index + '].productFrame" value="' + seletedFrame + '">';
-					html += '			<span>' + $("select[name=selectFrame] option:selected").val() + '</span>';
-					html += '		</p>';
-					html += '	</td>';
-					html += '	<td>';
-					html += '		<span>';
-					html += '			<a onclick="minusQuantity('+ index +')"><i class="fa fa-minus ml-5"></i></a>';
-					html += '			<input type="text"  id="productQuantity' + index + '" name="orderItemList[' + index + '].productQuantity" size="1" min="1" style="text-align: center; border-bottom: none;" value=1>';
-					html += '			<a onclick="plusQuantity('+ index +')"><i class="fa fa-plus mr-5"></i></a>';
-					html += '		</span>';
-					html += '	</td>';
-					html += '	<td>';
-					html += '		<span id="selectedItemPrice' + index + '" class="selectedItemPrice mr-5"><fmt:formatNumber value="${discountedPrice}" pattern="#,###" /></span>';
-					html += '	</td>';
-					html += '	<td>';
-					html += '		<a href="javascript:void(0)" onclick="deleteSelectedItem('+ index +');return false;"><i class="material-icons" style="font-weight: bold; font-size: 18px;">clear</i></a>';
-					html += '	</td>';
-					html += '	</form>';
-					html += '</tr>';
-						
-					$("#selectedItemTable").append(html);
-					
-					//선택된 아이템 총가격 계산
-					let selectedPrice = $("#selectedItemPrice" + index).text();
-					let parsedSelectedPrice = parseInt(selectedPrice.replace(/[^0-9]/g, ""));
-					totalPrice += parsedSelectedPrice;
-					$("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
-					
-					index++;
 				}
 			}
 		});
@@ -173,7 +211,7 @@
 	
 	//아이템 수량 감소
 	function minusQuantity(index) {
-		var presentQuantity =parseInt($("#productQuantity" + index).val());
+		var presentQuantity = parseInt($("#productQuantity" + index).val());
 		if(presentQuantity == 1) {
 			deleteSelectedItem(index);
 		} else {
