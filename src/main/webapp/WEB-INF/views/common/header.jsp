@@ -28,23 +28,15 @@
 				<ul id="headerMenuList" class="list-group list-group-flush" style="padding: 0 30px;">
 					<li class="list-group-item border-bottom border-dark">
 						<a href="${pageContext.request.contextPath}/admin/orderBoard" 
-						   class="text-decoration-none text-dark">주문 목록</a>
+						   class="text-decoration-none text-dark">테마</a>
 					</li>
 					<li class="list-group-item border-bottom border-dark">
 						<a href="${pageContext.request.contextPath}/admin/productBoard" 
-						   class="text-decoration-none text-dark">상품 목록</a>
+						   class="text-decoration-none text-dark">아티스트</a>
 					</li>
 					<li class="list-group-item border-bottom border-dark">
 						<a href="${pageContext.request.contextPath}/admin/canceledOrderBoard" 
-						   class="text-decoration-none text-dark">취소/교환/반품 목록</a>
-					</li>
-					<li class="list-group-item border-bottom border-dark">
-						<a href="${pageContext.request.contextPath}/admin/orderInquiryBoard" 
-						   class="text-decoration-none text-dark">배송 문의 목록</a>
-					</li>
-					<li class="list-group-item border-bottom border-dark">
-						<a href="${pageContext.request.contextPath}/admin/productInquiryBoard" 
-						   class="text-decoration-none text-dark">상품 문의 목록</a>
+						   class="text-decoration-none text-dark">텍스처</a>
 					</li>
 				</ul>
 			</div>

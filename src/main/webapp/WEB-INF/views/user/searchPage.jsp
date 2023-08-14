@@ -72,6 +72,10 @@
 			}, function() {
 				$(this).find('.productDetail').fadeTo(200, 0);
 			});
+			$('.totalProduct').click(function() {
+				productId = $(this).find('.currentProductId').html();
+				location.href = 'productDetail?productId=' + productId;
+			});
 		}
 	}
 </script>
