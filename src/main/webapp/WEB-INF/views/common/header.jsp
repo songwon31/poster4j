@@ -27,15 +27,15 @@
 			<div id="headerMenu" class="d-flex justify-content-center align-items-center">
 				<ul id="headerMenuList" class="list-group list-group-flush" style="padding: 0 30px;">
 					<li class="list-group-item border-bottom border-dark">
-						<a href="${pageContext.request.contextPath}/admin/orderBoard" 
+						<a href="${pageContext.request.contextPath}/" 
 						   class="text-decoration-none text-dark">테마</a>
 					</li>
 					<li class="list-group-item border-bottom border-dark">
-						<a href="${pageContext.request.contextPath}/admin/productBoard" 
+						<a href="${pageContext.request.contextPath}/" 
 						   class="text-decoration-none text-dark">아티스트</a>
 					</li>
 					<li class="list-group-item border-bottom border-dark">
-						<a href="${pageContext.request.contextPath}/admin/canceledOrderBoard" 
+						<a href="${pageContext.request.contextPath}/" 
 						   class="text-decoration-none text-dark">텍스처</a>
 					</li>
 				</ul>
