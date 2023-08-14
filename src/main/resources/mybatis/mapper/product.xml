@@ -149,13 +149,13 @@
 	
 	<select id="selectSearchedProductByPage" parameterType="map" resultType="Product">
 		select rnum, product_id, product_name, product_price, product_discount_rate, 
-			   product_theme, product_artist, product_texture, product_stock
+			   product_theme, product_artist, product_texture, product_stock, product_detail
 		from (
 		    select rownum as rnum, product_id, product_name, product_price, product_discount_rate, 
-		    	   product_theme, product_artist, product_texture, product_stock
+		    	   product_theme, product_artist, product_texture, product_stock, product_detail
 		    from (
 		        select product_id, product_name, product_price, product_discount_rate, 
-		    		   product_theme, product_artist, product_texture, product_stock
+		    		   product_theme, product_artist, product_texture, product_stock, product_detail
 		        from product
 		        <where>
 					<if test="productBoardSearch.productId!=null and !productBoardSearch.productId.equals('')">

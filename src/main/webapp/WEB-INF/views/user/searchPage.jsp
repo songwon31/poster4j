@@ -45,6 +45,12 @@
 			}
 			window.name = $('#productSearchDiv').css('display');
 		});
+		
+		$('.thumbnail').hover(function() {
+			$(this).find('.productDetail').css('display','block');
+		}, function() {
+			$(this).find('.productDetail').css('display','none');
+		});
 	}
 </script>
 
@@ -146,15 +152,32 @@
 				<ul id="productList">
 					<c:forEach var="image" items="${convertedImages}" varStatus="status">
 						<li>
-							<div class="thumbnail">
-								<a href="#">
+							<a href="productDetail?productId=${productList[status.index].productId}">
+								<div class="thumbnail">
 									<img class="imgOnList mb-3" src="data:image/jpeg;base64, ${image}">
+									<div class="productDetail" style="display:none;">
+										<div class="productDetailDiv" style="display:block;">
+											<div class="productDetailDiv2">
+												<div class="d-flex justify-content-start" style="font-size:18px;;">${productList[status.index].productName}</div>
+												<br>
+												<div class="d-flex justify-content-start" style="">${productList[status.index].productDetail}</div>
+												<br><br>
+												<c:if test="${productList[status.index].productDiscountRate > 0}">
+													<div class="d-flex justify-content-end" style="text-decoration: line-through;">KRW: ${productList[status.index].productPrice}</div>
+													<div class="d-flex justify-content-end">KRW: ${(productList[status.index].productPrice * (1.0 - productList[status.index].productDiscountRate)).intValue()}</div>
+												</c:if>
+												<c:if test="${productList[status.index].productDiscountRate == 0}">
+													<div class="d-flex justify-content-end" style="">KRW: ${productList[status.index].productPrice}</div>
+												</c:if>
+											</div>
+										</div>
+									</div>
 									<span>
-										<span>[${productList[status.index].productTheme}] </span>
-										<span>${productList[status.index].productName}</span>
+										<span style="text-decoration:none; color:black;">[${productList[status.index].productTheme}] </span>
+										<span style="text-decoration:none; color:black;">${productList[status.index].productName}</span>
 									</span>
-								</a>
-							</div>
+								</div>
+							</a>
 						</li>
 					</c:forEach>
 				</ul>
