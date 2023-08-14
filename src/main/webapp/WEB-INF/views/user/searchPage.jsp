@@ -46,13 +46,15 @@
 			window.name = $('#productSearchDiv').css('display');
 		});
 		
-		$('.thumbnail').hover(function() {
-			$(this).find('.productDetail').fadeTo(200,1);
-		}, function() {
-			$(this).find('.productDetail').fadeTo(200,0);
+		$('.totalProduct').click(function() {
+			if ($(this).find('.productDetail').css('opacity') == 0) {
+				$(this).find('.productDetail').fadeTo(200,1);
+			} else {
+				$('.productDetail').css('opacity', 0);
+				productId = $(this).find('.currentProductId').html();
+				location.href = 'productDetail?productId=' + productId;
+			}
 		});
-		
-		document.addEventListener("touchstart", function() {}, true);
 	}
 </script>
 
@@ -146,7 +148,7 @@
 			</div>
 			<div style="padding: 0 30px;">
 				<div class="d-flex justify-content-end px-2 pb-3">
-					<a id="toggleSearchButton" href="#" class="btn btn-dark btn-sm" style="color: white;">검색창 닫기</a>
+					<a id="toggleSearchButton" href="javascript:void(0)" class="btn btn-dark btn-sm" style="color: white;">검색창 닫기</a>
 				</div>
 			</div>
 			<%-- 상품 리스트 --%>
@@ -154,13 +156,14 @@
 				<ul id="productList">
 					<c:forEach var="image" items="${convertedImages}" varStatus="status">
 						<li>
-							<a href="productDetail?productId=${productList[status.index].productId}">
+							<a class="totalProduct" href="javascript:void(0)" onclick="">
 								<div class="thumbnail">
 									<img class="imgOnList mb-3" src="data:image/jpeg;base64, ${image}">
 									<div class="productDetail">
 										<div class="productDetailDiv" style="display:block;">
 											<div class="productDetailDiv2">
-												<div class="d-flex justify-content-start" style="font-size:18px;;">${productList[status.index].productName}</div>
+												<div class="currentProductId" style="display:none">${productList[status.index].productId}</div>
+												<div class="d-flex justify-content-start" style="font-size:18px;">${productList[status.index].productName}</div>
 												<br>
 												<div class="d-flex justify-content-start" style="">${productList[status.index].productDetail}</div>
 												<br><br>
