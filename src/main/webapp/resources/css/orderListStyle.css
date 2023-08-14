@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+#period {
+	
+}
+
+
+
+ /* 화면 크기에 따라 너비 조절 */
+@media (max-width: 768px) {
+	.table {
+	    width: auto; /* 작은 화면에서는 너비를 자동으로 조절 */
+	}
+}
