@@ -1,5 +1,7 @@
 package com.webteam2.poster4j.user.controller;
 
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,11 +11,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.webteam2.poster4j.dto.BuyItem;
 import com.webteam2.poster4j.dto.Customer;
+import com.webteam2.poster4j.dto.OrderDetail;
+import com.webteam2.poster4j.dto.OrderItem;
 import com.webteam2.poster4j.dto.OrderT;
 import com.webteam2.poster4j.dto.Pager;
+import com.webteam2.poster4j.dto.Product;
+import com.webteam2.poster4j.dto.ProductImage;
 import com.webteam2.poster4j.service.OrderDetailService;
 import com.webteam2.poster4j.service.OrderTService;
+import com.webteam2.poster4j.service.ProductImageService;
+import com.webteam2.poster4j.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,9 +33,13 @@ public class OrderListController {
 	OrderTService orderService;
 	@Resource
 	OrderDetailService orderDetailService;
+	@Resource
+	ProductImageService productImageService;
+	@Resource
+	ProductService productService;
 
 	@RequestMapping("/orderList")
-	public String getOrderList(HttpSession session, Model model, OrderT order, String pageNo) {
+	public String getOrderList(HttpSession session, Model model, String pageNo) {
 		Customer customer = (Customer)session.getAttribute("customerLogin");
 		if (customer == null) {
 			// 로그인 정보가 없으면 로그인 페이지로 이동하거나 필요한 처리를 수행
@@ -47,16 +60,54 @@ public class OrderListController {
 		// 세션에 PageNo를 저장
 		session.setAttribute("pageNo", String.valueOf(pageNo));
 		
-		/*int totalOrderDetailNum = orderDetailService.getTotalOrderDetailNumById(customer.getCustomerId());
+		int totalOrderNum = orderService.getTotalOrderTNumByCustomerId(customer.getCustomerId());
+		Pager pager = new Pager(5, 5, totalOrderNum, intPageNo);
+		log.info(""+totalOrderNum);
+		//customerId에 해당하는 주문 목록 불러오기
 		
-		order.setCustomerId(customer.getCustomerId());
-		List<OrderT> orderList = orderService.getOrderListById(order.getCustomerId());
+		List<OrderT> orderList = orderService.getOrderListById(customer.getCustomerId());
+		//List<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
 		
-		model.addAttribute("orderList", orderList);
+		//2차원 리스트
+		List<List<OrderDetail>> orderDetailList = new ArrayList<>();
+		
+		List<BuyItem> buyItemList = new ArrayList<>();
 		
 		for(int i=0; i<orderList.size(); i++) {
-			orderDetailService.getListByOrderId(order.getOrderId(), endRowNo, startRowNo)
-		}*/
+			int orderId = orderList.get(i).getOrderId();
+			List<OrderDetail> newOrderDetailList = orderDetailService.getListNoPager(orderId);
+			orderDetailList.add(newOrderDetailList);
+			
+			List<Product> productList = new ArrayList<Product>();
+			List<String> productImageList = new ArrayList<String>();
+			
+			for(OrderDetail orderDetail : newOrderDetailList) {
+				int productId = orderDetail.getProductId();
+				log.info("" + productId);
+				Product product = productService.getOneProduct(productId);
+				productList.add(product);
+				
+				ProductImage productImage = productImageService.getRepresentProductImage(productId);
+				String base64Img = Base64.getEncoder().encodeToString(productImage.getProductImageSource());
+				
+				productImageList.add(base64Img);
+				
+			}
+			BuyItem buyItem = new BuyItem();
+			
+			buyItem.setOrderDetail(newOrderDetailList);
+			buyItem.setProduct(productList);
+			buyItem.setProductImage(productImageList);
+			
+			buyItemList.add(buyItem);
+		}
+		
+		model.addAttribute("buyItemList", buyItemList);
+		/*model.addAttribute("productList", productList);
+		model.addAttribute("productImageList", productImageList);*/
+		
+		model.addAttribute("orderDetailList", orderDetailList);
+		model.addAttribute("orderList", orderList);
 		
 		return "user/orderList";
 	}

@@ -14,4 +14,5 @@ public class ProductImage {
 	private int productId;
 	private String productImageType;
 	private String productImageName;
+	private String base64Image;
 }

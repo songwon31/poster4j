@@ -21,7 +21,10 @@ public class OrderItem {
 	private int productQuantity;
 	private String productSize;
 	private String productFrame;
+	private String productImageBase64;
 	private List<OrderItem> orderItemList;
+	private String productName;
+	private String productTheme;
 	
 	public OrderItem(int productId, String customerId, int productQuantity, String productSize, String productFrame) {
 		this.productId = productId;

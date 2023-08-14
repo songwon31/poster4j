@@ -74,4 +74,9 @@
 		values (#{orderId}, #{productId}, #{orderDetailQuantity}, '결제완료', #{orderDlCmptnDate, jdbcType=VARCHAR}, #{optionSize}, #{optionFrame})
 	</insert>
 	
+	<select id="selectListByOrderId" parameterType="int" resultType="OrderDetail">
+		select *
+		from order_detail
+		where order_id = #{orderId}
+	</select>
 </mapper>

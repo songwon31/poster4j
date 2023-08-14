@@ -8,7 +8,13 @@
 	</select> 
 	
 	<select id="count" resultType="int">
-		select count(*) from order
+		select count(*) from order_t
+	</select>
+	
+	<select id="countByCustomerId" resultType="int">
+		select count(*) 
+		from order_t
+		where customer_id = #{customerId}
 	</select>
 	
 	<insert id="insert" parameterType="OrderT">
@@ -24,4 +30,22 @@
 		from order_t
 		where customer_id = #{customerId}
 	</select>
+	
+	<select id="selectOrderListPageById" parameterType="map" resultType="OrderT">
+		<![CDATA[
+		select rnum, order_id, customer_id, receiver_id, coupon_id, order_date, order_settlement_method
+		from (
+		    select rownum as rnum, order_id, customer_id, receiver_id, coupon_id, order_date, order_settlement_method
+		    from (
+		        select order_id, customer_id, receiver_id, coupon_id, order_date, order_settlement_method
+		        from order_t
+		        where customer_id = #{customerId}
+		        order by order_id desc
+		    )
+		    where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
+	</select> 
+	
 </mapper>

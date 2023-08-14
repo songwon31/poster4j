@@ -47,17 +47,43 @@
 							</tr>
 						</thead>
 						<tbody class="center displaynone">
-							<tr class="">
-								<c:forEach items="">
-									<td class="orderDate orderNo"></td>
-									<td class="productImage"></td>
-						          	<td class="productInfo"></td>
-									<td class="productQuantity"></td>
-						            <td class="purchasePrice"></td>
-									<td class="orderStatus"></td>
-									<td class="cancel Exchange re"></td>
+							<c:forEach var="order" items="${buyItemList}" varStatus="status">
+								<c:forEach var="orderDetail" items="${order.orderDetail}" varStatus="detailStatus">
+									<c:if test="${status.index == detailStatus.index}">
+										<c:forEach var="product" items="${order.product}" varStatus="productStatus">
+											<c:if test="${detailStatus.index == productStatus.index}">
+											<%-- ${status.index ....... detailStatus.index ..........productStatus.index ...} --%>
+											<tr class="">
+												<td class="orderDate orderNo">${orderDetail.orderId}</td>
+												<td class="productImage">
+													<c:forEach var="productImage" items="${order.productImage}" varStatus="imageStatus">
+														<img alt="" src="data:image/jpeg;base64, ${productImage.base64Image}" width="100%">
+													</c:forEach>
+												</td>
+									          	<td class="productInfo">${product.productName}</td>
+												<td class="productQuantity">${orderDetail.orderDetailQuantity}</td>
+									            <td class="purchasePrice"></td>
+												<td class="orderStatus">${orderDetail.orderDetailStatus}</td>
+												<td class="cancel Exchange re"></td>
+											</tr>
+											</c:if>
+										</c:forEach>
+									</c:if>
 								</c:forEach>
-							</tr>
+							</c:forEach>
+							<%-- <c:forEach var="orderItem" items="${orderItemList}" varStatus="status">
+							    <c:forEach var="orderDetail" items="${orderDetailList[status.index]}" varStatus="detailStatus">
+							        <tr class="">
+							            <td class="orderDate orderNo">${orderDetail.orderId}</td>
+							            <td class="productImage"><img alt="" src="data:image/jpeg;base64, ${orderItem.productImageBase64}" width="100%"></td>
+							            <td class="productInfo">${orderItem.productName}</td>
+							            <td class="productQuantity">${orderDetail.orderDetailQuantity}</td>
+							            <td class="purchasePrice"></td>
+							            <td class="orderStatus">${orderDetail.orderDetailStatus}</td>
+							            <td class="cancel Exchange re"></td>
+							        </tr>
+							    </c:forEach>
+							</c:forEach> --%>
 							<tr>
 								<td colspan="12" class="text-center">
 									<div>

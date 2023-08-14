@@ -61,8 +61,12 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	public void saveOrderDetail(OrderDetail orderDetail) {
 		orderDetailDao.insert(orderDetail);
 	}
-	/*@Override
-	public int getTotalOrderDetailNumById(String CustomerId) {
-		return orderDetailDao.countByCustomerId(orderId);
-	}*/
+	
+	@Override
+	public List<OrderDetail> getListNoPager(int orderId) {
+		// TODO Auto-generated method stub
+		return orderDetailDao.selectListByOrderId(orderId);
+	}
+	
+	
 }
