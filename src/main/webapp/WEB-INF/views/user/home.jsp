@@ -25,6 +25,8 @@
 		
 		//포스터 이미지를 다 로딩이 된 후에 보여주기.
 		$("#contents").show();
+		
+		$('[data-toggle="tooltip"]').tooltip();
 	}
 	
 	
@@ -36,7 +38,7 @@
 		<!-- 메인 포스터 -->
 		<div id="main-poster" class="container-fluid" style="background-color: #F4F4F4; min-height: 1084px;" >
 			<div id="frame" style="background-image: url('data:image/jpeg;base64, ${randomImage}');">
-				<img id="frame-image" alt="프레임" src="${pageContext.request.contextPath}/resources/images/frame.png" width="450px" height="630px";>
+				<img id="frame-image" alt="프레임" src="${pageContext.request.contextPath}/resources/images/frame.png" width="450px" height="630px;">
 			</div>
 		</div>
 		<!-- 감성 글귀-->
@@ -62,7 +64,7 @@
 					<c:forEach var="image" items="${convertedImages}" varStatus="status" begin="0" end="20">
 						<li class="poster">
 							<div class="thumbnail">
-								<a href="productDetail?productId=${productList[status.index].productId}">
+								<a href="productDetail?productId=${productList[status.index].productId}" >
 									<img class="imgOnList" alt="123" src="data:image/jpeg;base64, ${image}">
 									<div class="mt-3" style="margin-bottom: 30px; color: black;">[${productList[status.index].productTheme}] ${productList[status.index].productName}</div>
 								</a>

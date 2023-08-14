@@ -42,7 +42,13 @@
 	</select>
 	
 	<update id="updateById" parameterType="Receiver">
-		update receiver set receiver_name=#{receiverName}, receiver_zip=#{receiverZip}, receiver_address=#{receiverAddress}, receiver_address_detail=#{receiverAddressDetail}, receiver_telno=#{receiverTelno}, receiver_person_name=#{receiverPersonName}
+		update receiver set 
+			receiver_name=#{receiverName}, 
+			receiver_zip=#{receiverZip},
+			receiver_address=#{receiverAddress},
+			receiver_address_detail=#{receiverAddressDetail},
+			receiver_telno=#{receiverTelno},
+			receiver_person_name=#{receiverPersonName}
 		where receiver_id=#{receiverId}
 	</update>
 	

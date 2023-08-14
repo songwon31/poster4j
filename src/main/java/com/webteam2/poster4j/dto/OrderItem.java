@@ -30,6 +30,4 @@ public class OrderItem {
 		this.productSize = productSize;
 		this.productFrame = productFrame;
 	}
-	
-	
 }

@@ -111,6 +111,9 @@
 	function updateTotalDiscountAmount() {
 		$(".totalDiscountAmount").text("- KRW " + totalDiscountAmount);
 	}
+	function completedOrder(){
+		alert("주문이 완료되었습니다.");
+	}
 </script>
 
 
@@ -341,7 +344,7 @@
 					</div>
 				</div>	
 				<div style="text-align: center; margin-top: 80px;" >
-					<button class="btn btn-sm btn-dark">Checkout</button>
+					<button class="btn btn-sm btn-dark" onclick="completedOrder()">Checkout</button>
 				</div>
 			</div>
 		</div>
