@@ -35,7 +35,7 @@
 						   class="text-decoration-none text-dark">아티스트</a>
 					</li>
 					<li class="list-group-item border-bottom border-dark">
-						<a href="${pageContext.request.contextPath}/" 
+						<a href="${pageContext.request.contextPath}/">
 						   class="text-decoration-none text-dark">텍스처</a>
 					</li>
 				</ul>
