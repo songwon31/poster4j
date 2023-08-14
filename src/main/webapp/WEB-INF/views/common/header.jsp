@@ -23,30 +23,58 @@
 		
 	</head>
 	<body style="width:100%; height:100%;">
-		<div id="headerMenu" class="d-flex justify-content-center align-items-center">
-			<ul id="headerMenuList" class="list-group list-group-flush" style="padding: 0 30px;">
-				<li class="list-group-item border-bottom border-dark">
-					<a href="${pageContext.request.contextPath}/admin/orderBoard" 
-					   class="text-decoration-none text-dark">주문 목록</a>
-				</li>
-				<li class="list-group-item border-bottom border-dark">
-					<a href="${pageContext.request.contextPath}/admin/productBoard" 
-					   class="text-decoration-none text-dark">상품 목록</a>
-				</li>
-				<li class="list-group-item border-bottom border-dark">
-					<a href="${pageContext.request.contextPath}/admin/canceledOrderBoard" 
-					   class="text-decoration-none text-dark">취소/교환/반품 목록</a>
-				</li>
-				<li class="list-group-item border-bottom border-dark">
-					<a href="${pageContext.request.contextPath}/admin/orderInquiryBoard" 
-					   class="text-decoration-none text-dark">배송 문의 목록</a>
-				</li>
-				<li class="list-group-item border-bottom border-dark">
-					<a href="${pageContext.request.contextPath}/admin/productInquiryBoard" 
-					   class="text-decoration-none text-dark">상품 문의 목록</a>
-				</li>
-			</ul>
-		</div>
+		<c:if test="${customerLogin.customerId != 'admin'}">
+			<div id="headerMenu" class="d-flex justify-content-center align-items-center">
+				<ul id="headerMenuList" class="list-group list-group-flush" style="padding: 0 30px;">
+					<li class="list-group-item border-bottom border-dark">
+						<a href="${pageContext.request.contextPath}/admin/orderBoard" 
+						   class="text-decoration-none text-dark">주문 목록</a>
+					</li>
+					<li class="list-group-item border-bottom border-dark">
+						<a href="${pageContext.request.contextPath}/admin/productBoard" 
+						   class="text-decoration-none text-dark">상품 목록</a>
+					</li>
+					<li class="list-group-item border-bottom border-dark">
+						<a href="${pageContext.request.contextPath}/admin/canceledOrderBoard" 
+						   class="text-decoration-none text-dark">취소/교환/반품 목록</a>
+					</li>
+					<li class="list-group-item border-bottom border-dark">
+						<a href="${pageContext.request.contextPath}/admin/orderInquiryBoard" 
+						   class="text-decoration-none text-dark">배송 문의 목록</a>
+					</li>
+					<li class="list-group-item border-bottom border-dark">
+						<a href="${pageContext.request.contextPath}/admin/productInquiryBoard" 
+						   class="text-decoration-none text-dark">상품 문의 목록</a>
+					</li>
+				</ul>
+			</div>
+		</c:if>
+		<c:if test="${customerLogin.customerId == 'admin'}">
+			<div id="headerMenu" class="d-flex justify-content-center align-items-center">
+				<ul id="headerMenuList" class="list-group list-group-flush" style="padding: 0 30px;">
+					<li class="list-group-item border-bottom border-dark">
+						<a href="${pageContext.request.contextPath}/admin/orderBoard" 
+						   class="text-decoration-none text-dark">주문 목록</a>
+					</li>
+					<li class="list-group-item border-bottom border-dark">
+						<a href="${pageContext.request.contextPath}/admin/productBoard" 
+						   class="text-decoration-none text-dark">상품 목록</a>
+					</li>
+					<li class="list-group-item border-bottom border-dark">
+						<a href="${pageContext.request.contextPath}/admin/canceledOrderBoard" 
+						   class="text-decoration-none text-dark">취소/교환/반품 목록</a>
+					</li>
+					<li class="list-group-item border-bottom border-dark">
+						<a href="${pageContext.request.contextPath}/admin/orderInquiryBoard" 
+						   class="text-decoration-none text-dark">배송 문의 목록</a>
+					</li>
+					<li class="list-group-item border-bottom border-dark">
+						<a href="${pageContext.request.contextPath}/admin/productInquiryBoard" 
+						   class="text-decoration-none text-dark">상품 문의 목록</a>
+					</li>
+				</ul>
+			</div>
+		</c:if>
 		<div class="d-flex flex-column vh-100" >
 			<nav class="navbar" style="position: fixed; z-index: 99; left: 0; top: 0; width: 100%;
 				 background: linear-gradient(to bottom, rgba(255,255,255,1) 80%, rgba(255, 255, 255, 0) 100%);">

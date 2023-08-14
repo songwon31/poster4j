@@ -10,6 +10,16 @@
 	$(init);
 	
 	function init() {
+		
+		const isMobile = () => {
+			try {
+				document.createEvent("TouchEvent");
+				return true;
+			} catch (e) {
+				return false;
+			}
+		};
+		
 		function setColumnCounts() {
 			var innerWidth = window.innerWidth;
 			var productList = $("#productList");
@@ -46,15 +56,23 @@
 			window.name = $('#productSearchDiv').css('display');
 		});
 		
-		$('.totalProduct').click(function() {
-			if ($(this).find('.productDetail').css('opacity') == 0) {
-				$(this).find('.productDetail').fadeTo(200,1);
-			} else {
-				$('.productDetail').css('opacity', 0);
-				productId = $(this).find('.currentProductId').html();
-				location.href = 'productDetail?productId=' + productId;
-			}
-		});
+		if (isMobile()) {
+			$('.totalProduct').click(function() {
+				if ($(this).find('.productDetail').css('opacity') == 0) {
+					$(this).find('.productDetail').fadeTo(200,1);
+				} else {
+					$('.productDetail').css('opacity', 0);
+					productId = $(this).find('.currentProductId').html();
+					location.href = 'productDetail?productId=' + productId;
+				}
+			});
+		} else {
+			$('.totalProduct').hover(function() {
+				$(this).find('.productDetail').fadeTo(200, 1);
+			}, function() {
+				$(this).find('.productDetail').fadeTo(200, 0);
+			});
+		}
 	}
 </script>
 
