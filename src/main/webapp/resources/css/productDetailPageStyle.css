@@ -16,9 +16,11 @@
 }
 
 #productName {
+	width: 80%;
 	font-size: 13px;
 	font-weight: bold;
 	border-bottom: 1.3px solid #000000;
+	margin-bottom: 10px;
 }
 
 .productDetailContent {
@@ -26,7 +28,7 @@
 	font-size: 13px;
 }
 
-.productDetailTable tr {
+#productDetailTable tr {
 	border: none;
 	border-bottom: 1.3px solid #000000;
 }
@@ -42,17 +44,30 @@
 	font-weight: bold;
 }
 
+#selectedItemTable, #productDetailTable, #totalPriceGroup {
+	width: 80%;
+	max-width: 1080px;
+	height: auto;
+	margin-bottom: 50px;
+}
+
+#totalPriceGroup {
+	display: flex;
+	justify-content: right;
+	margin-bottom: 50px;
+}
+
 #selectedItemTable a, #selectedItemTable a:hover {
 	color: black;
 	text-decoration: none;
 }
 
-.productDetailTable th {
-	padding-right: 48px;
+#productDetailTable th {
+	width: 30%;
 }
 
-.productDetailTable td {
-	padding-right: 8px;
+#productDetailTable td {
+	width: 50%;
 }
 
 .btnGroup {
@@ -61,4 +76,10 @@
 
 .explainImage {
 	max-width: 1080px;
+}
+
+#explainImageList {
+	width: 80%;
+	max-width: 1080px;
+	height: auto;
 }

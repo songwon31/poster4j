@@ -30,7 +30,7 @@
 		<h3 id="productName">${product.productName}</h3>
 		<input id="productId" name="productId" type="hidden"
 			value="${product.productName}" form="selectedItemForm">
-		<table class="productDetailTable mb-3">
+		<table id="productDetailTable">
 			<tr class="priceGroup">
 				<th>Price</th>
 				<td>
@@ -79,19 +79,19 @@
 		</table>
 
 		<%-- 선택상품 총 가격 --%>
-		<div id="totalPriceGroup" class="d-flex m-3">
+		<div id="totalPriceGroup" class="d-flex justify-content-right">
 			<span class="mr-2">KRW</span>
 			<span id="totalPrice"></span>
 		</div>
 
 		<%-- 장바구니 추가 / 바로 주문 버튼 --%>
 		<div class="btnGroup d-flex">
-			<a class="btn mx-1" href="javascript:void(0)" onclick="addCart();return false;">Add to Cart</a>
-			<a class="btn mx-1" href="javascript:void(0)" onclick="orderNow();return false;">Order Now</a>
+			<a class="btn mx-2 px-5" href="javascript:void(0)" onclick="addCart();return false;">Add to Cart</a>
+			<a class="btn mx-2 px-5" href="javascript:void(0)" onclick="orderNow();return false;">Order Now</a>
 		</div>
 
 		<%-- 상세설명 이미지 리스트 --%>
-		<div class="explainImageList d-flex flex-column align-items-center">
+		<div id="explainImageList" class="d-flex flex-column align-items-center">
 			<c:forEach var="image" items="${convertedImages}">
 				<img class="explainImage" src="data:image/jpeg;base64, ${image}" />
 			</c:forEach>
@@ -187,7 +187,7 @@
 			$("#selectedItemPrice" + index).text(optionItemPrice.toLocaleString("ko-KR"));
 			
 			//수량감소시 선택된 아이템 총가격 변경
-			totalPrice -= parsedPresentPrice;
+			totalPrice -= (parsedPresentPrice/presentQuantity);
 			$("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
 		}
 	}
@@ -205,12 +205,18 @@
 		$("#selectedItemPrice" + index).text(optionItemPrice.toLocaleString("ko-KR"));
 		
 		//수량추가시 선택된 아이템 총가격 변경
-		totalPrice += parsedPresentPrice;
+		totalPrice += (parsedPresentPrice/presentQuantity);
 		$("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
 	}
 	
 	//아이템 삭제
 	function deleteSelectedItem(index) {
+		//아이템 삭제시 총가격 금액변경
+		let deleteTargetPrice = parseInt($("#selectedItemPrice" + index).text().replace(/[^0-9]/g, ""));
+		totalPrice -= deleteTargetPrice;
+		$("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
+		
+		//해당 아이템 삭제하고 index배열 값 0으로 변경
 		$("#tr" + index).remove();
 		check[index] = 0;
 	}
