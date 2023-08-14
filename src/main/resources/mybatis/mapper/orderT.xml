@@ -19,9 +19,9 @@
 		values (#{orderId}, #{customerId}, #{receiverId}, #{couponId, jdbcType=DECIMAL }, #{orderDate}, #{orderSettlementMethod})
 	</insert>
 	
-	<select id="selectOrderListById" parameterType="int" resultType="OrderT">
+	<select id="selectOrderListById" parameterType="String" resultType="OrderT">
 		select *
 		from order_t
-		where order_id = #{orderId}
+		where customer_id = #{customerId}
 	</select>
 </mapper>

@@ -8,5 +8,5 @@ public interface OrderTService {
 	public OrderT getOrderTById(int orderId);
 	public int getTotalOrderTNum();
 	public void saveOrder(OrderT order);
-	public List<OrderT> getOrderListById(int orderId);
+	public List<OrderT> getOrderListById(String customerId);
 }

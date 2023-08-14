@@ -33,7 +33,7 @@ public class OrderTServiceImpl implements OrderTService {
 	}
 	
 	@Override
-	public List<OrderT> getOrderListById(int orderId) {
-		return orderTDao.selectOrderListById(orderId);
+	public List<OrderT> getOrderListById(String customerId) {
+		return orderTDao.selectOrderListById(customerId);
 	}
 }

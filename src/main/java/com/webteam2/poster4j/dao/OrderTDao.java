@@ -11,5 +11,5 @@ public interface OrderTDao {
 	public OrderT selectOrderTById(int orderId);
 	public int count();
 	public void insert(OrderT order);
-	public List<OrderT> selectOrderListById(int orderId);
+	public List<OrderT> selectOrderListById(String customerId);
 }

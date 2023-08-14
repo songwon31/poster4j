@@ -61,4 +61,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	public void saveOrderDetail(OrderDetail orderDetail) {
 		orderDetailDao.insert(orderDetail);
 	}
+	/*@Override
+	public int getTotalOrderDetailNumById(String CustomerId) {
+		return orderDetailDao.countByCustomerId(orderId);
+	}*/
 }
