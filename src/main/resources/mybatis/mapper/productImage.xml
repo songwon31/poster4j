@@ -12,7 +12,7 @@
 	<select id="selectProductImageListById" parameterType="int" resultType="ProductImage">
 		select *
 		from product_image
-		where product_id = #{productId} and product_image_ctgry = 'detail'
+		where product_id = #{productId} and product_image_ctgry = 'DETAIL'
 	</select>
 	
 	<insert id="insertProductImage" parameterType="ProductImage">
@@ -30,6 +30,7 @@
 		select *
 		from product_image
 	</select>
+	
 	<select id="selectHomeList" resultType="ProductImage">
 		select *
 		from product_image
