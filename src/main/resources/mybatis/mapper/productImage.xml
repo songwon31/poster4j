@@ -5,7 +5,7 @@
 	<select id="selectProductImageById" parameterType="int" resultType="ProductImage">
 		select *
 		from product_image
-		where product_id = #{productId} and product_image_ctgry = 'represent'
+		where product_id = #{productId} and product_image_ctgry = 'REPRESENT'
 	</select>
 	
 	<!-- product 이미지 List 가져오기(detail) -->
@@ -33,19 +33,19 @@
 	<select id="selectHomeList" resultType="ProductImage">
 		select *
 		from product_image
-		where product_image_ctgry = 'represent'
+		where product_image_ctgry = 'REPRESENT'
 	</select>
 	
 	<!-- ProductId로 상품 이미지들 -->
 	<select id="selectListById" parameterType="int" resultType="ProductImage">
 		select *
 		from product_image
-		where product_id = #{productId} and product_image_ctgry = 'represent'
+		where product_id = #{productId} and product_image_ctgry = 'REPRESENT'
 	</select>
 	
 	<select id="selectRepresentProductImage" parameterType="int" resultType="ProductImage">
 		select *
 		from product_image
-		where product_id = #{productId} and product_image_ctgry = 'represent'
+		where product_id = #{productId} and product_image_ctgry = 'REPRESENT'
 	</select>
 </mapper>
