@@ -151,7 +151,7 @@
 				<script>
 					function updateProduct(productId) {
 						var popupWidth = 400;
-						var popupHeight = 350;
+						var popupHeight = 480;
 						var popupX = (window.screen.width/2)-(popupWidth/2);
 						var popupY= (window.screen.height/2)-(popupHeight/2);
 						

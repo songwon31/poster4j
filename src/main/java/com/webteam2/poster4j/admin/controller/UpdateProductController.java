@@ -3,8 +3,6 @@ package com.webteam2.poster4j.admin.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,17 +40,16 @@ public class UpdateProductController {
 	}
 	
 	@PostMapping("/update") 
-	public String register(HttpServletRequest request, HttpSession session,
+	public String update(
 			@RequestParam(value="productId")int productId,
 			@RequestParam(value="productName")String productName,
 			@RequestParam(value="productPrice")int productPrice,
-			@RequestParam(value="productDiscountRate")int productDiscountRate,
+			@RequestParam(value="productDiscountRate")double productDiscountRate,
 			@RequestParam(value="productTheme")String productTheme,
 			@RequestParam(value="productArtist")String productArtist,
-			@RequestParam(value="productTexture")String productTexture,
-			@RequestParam(value="productStock", required=false)String productStock,
 			@RequestParam(value="representImage")MultipartFile representImage,
-			@RequestParam(value="detailImages")List<MultipartFile> detailImages
+			@RequestParam(value="detailImages")List<MultipartFile> detailImages,
+			@RequestParam(value="productDetail", required=false)String productDetail
 			) throws Exception 
 		{
 		Product product = new Product();
@@ -62,9 +59,8 @@ public class UpdateProductController {
 		product.setProductDiscountRate(productDiscountRate);
 		product.setProductTheme(productTheme);
 		product.setProductArtist(productArtist);
-		product.setProductTexture(productTexture);
-		if (productStock != null && !productStock.equals("")) {
-			product.setProductStock(Integer.parseInt(productStock));
+		if (productDetail != null) {
+			product.setProductDetail(productDetail);
 		}
 		productService.updateProduct(product);
 		

@@ -49,7 +49,7 @@
 	
 	<update id="updateProduct" parameterType="Product">
 		update product set product_name=#{productName}, product_price=#{productPrice}, product_discount_rate=#{productDiscountRate},
-						 product_theme=#{productTheme}, product_artist=#{productArtist}, product_detail=#{productDetail}, product_enabled=#{productEnabled} 
+						 product_theme=#{productTheme}, product_artist=#{productArtist}, product_detail=#{productDetail}
 		where product_id=#{productId}
 	</update>
 	

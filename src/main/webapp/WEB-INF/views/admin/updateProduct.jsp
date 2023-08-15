@@ -65,16 +65,6 @@
 								</div>
 								
 								<div class="input-group" style="width:100%;">
-									<div class="input-group-addon" style="width:35%; text-align:left;"><span class="input-group-text">텍스처</span></div>
-									<input id="productTexture" type="text" name="productTexture" class="form-control" value="${product.productTexture}" style="width:65%;">
-								</div>
-								
-								<div class="input-group" style="width:100%;">
-									<div class="input-group-addon" style="width:35%; text-align:left;"><span class="input-group-text">재고(옵션)</span></div>
-									<input id="productStock" type="text" name="productStock" class="form-control" value="${product.productStock}" style="width:65%;">
-								</div>
-								
-								<div class="input-group" style="width:100%;">
 									<div class="input-group-addon" style="width:35%; text-align:left;"><span class="input-group-text">대표 이미지</span></div>
 									<input required id="pattach" type="file" name="representImage" class="form-control" style="width:65%;">
 								</div>
@@ -83,6 +73,12 @@
 									<div class="input-group-addon" style="width:35%; text-align:left;"><span class="input-group-text">상세 이미지</span></div>
 									<input multiple id="pattach" type="file" name="detailImages" class="form-control" style="width:65%;">
 								</div>
+								
+								<div class="input-group" style="width:100%;">
+									<div class="mt-3 mb-1" style="width:20%; text-align:left;"><span style="font-weight:600;">상품 상세</span></div>
+									<textarea rows="10" cols="100" name="productDetail">${product.productDetail}</textarea>
+								</div>
+								
 								<div class="d-flex justify-content-end mt-2">
 									<button class="btn btn-secondary btn-sm">수정</button>
 								</div>
