@@ -44,10 +44,9 @@ public class RegisterProductController {
 			@RequestParam(value="productDiscountRate")double productDiscountRate,
 			@RequestParam(value="productTheme")String productTheme,
 			@RequestParam(value="productArtist")String productArtist,
-			@RequestParam(value="productTexture")String productTexture,
-			@RequestParam(value="productStock", required=false)String productStock,
 			@RequestParam(value="representImage")MultipartFile representImage,
-			@RequestParam(value="detailImages")List<MultipartFile> detailImages
+			@RequestParam(value="detailImages")List<MultipartFile> detailImages,
+			@RequestParam(value="productDetail", required=false)String productDetail
 			) throws Exception 
 		{
 		Product newProduct = new Product();
@@ -56,15 +55,14 @@ public class RegisterProductController {
 		newProduct.setProductDiscountRate(productDiscountRate);
 		newProduct.setProductTheme(productTheme);
 		newProduct.setProductArtist(productArtist);
-		newProduct.setProductTexture(productTexture);
-		if (productStock != null && !productStock.equals("")) {
-			newProduct.setProductStock(Integer.parseInt(productStock));
+		if (productDetail != null) {
+			newProduct.setProductDetail(productDetail);
 		}
 		productService.registerProduct(newProduct);
 		
 		ProductImage productImage = new ProductImage();
 		productImage.setProductId(newProduct.getProductId());
-		productImage.setProductImageCtgry("represent");
+		productImage.setProductImageCtgry("REPRESENT");
 		MultipartFile mf = representImage;
 		productImage.setProductImageName(mf.getOriginalFilename());
 		productImage.setProductImageType(mf.getContentType());
@@ -74,7 +72,7 @@ public class RegisterProductController {
 		for (MultipartFile mfd : detailImages) {
 			ProductImage detailProductImage = new ProductImage();
 			detailProductImage.setProductId(newProduct.getProductId());
-			detailProductImage.setProductImageCtgry("detail");
+			detailProductImage.setProductImageCtgry("DETAIL");
 			detailProductImage.setProductImageName(mfd.getOriginalFilename());
 			detailProductImage.setProductImageType(mfd.getContentType());
 			detailProductImage.setProductImageSource(mfd.getBytes());
