@@ -177,7 +177,7 @@
 		
 		<!-- 메시지 선택(선택사항) -->
 		<div>
-			<select style="width: 100%; margin-bottom:30px; border: 0; border-bottom: 1px solid;">
+			<select name="" style="width: 100%; margin-bottom:30px; border: 0; border-bottom: 1px solid;">
 				<option>--메시지 선택(선택사항)--</option>
 				<option value="배송 전에 미리 연락 바랍니다.">배송 전에 미리 연락 바랍니다.</option>
 				<option value="부재 시 경비실에 맡겨주세요.">부재 시 경비실에 맡겨주세요.</option>
