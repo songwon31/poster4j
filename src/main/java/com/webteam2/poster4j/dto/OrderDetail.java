@@ -16,4 +16,5 @@ public class OrderDetail {
 	private Date orderDlCmptnDate;
 	private String optionSize;
 	private String optionFrame;
+	private int orderDetailPrice;
 }

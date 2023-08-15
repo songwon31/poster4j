@@ -9,16 +9,14 @@
 <script type="text/javascript">
 	var totalPrice = 0;
 	var shipFee = 0;
-	
-	
 	$(init);
-
 	function init(){
 		getTotalPrice();	
 		getDiscountAmount()
 		getShipFee();
 		getFinalTotalPrice();
 	}
+	
 	function getShipFee(){
 		if(totalPrice == 0){
 			shipFee = 0;
@@ -210,6 +208,7 @@
 									</div>
 								<div>
 									<span>KRW</span>
+									<input type="hidden" name="orderDetailPrice" value="${productList[status.index].productPrice}">
 									<span class="itemPrice">${productList[status.index].productPrice}</span>
 								</div>
 								<div>

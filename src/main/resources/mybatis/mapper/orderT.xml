@@ -21,8 +21,8 @@
 		<selectKey keyProperty="orderId" resultType="int" order="BEFORE">
 			select order_t_seq.nextval from dual 
 		</selectKey>
-		insert into order_t (order_id, customer_id, receiver_id, coupon_id, order_date, order_settlement_method)
-		values (#{orderId}, #{customerId}, #{receiverId}, #{couponId, jdbcType=DECIMAL }, #{orderDate}, #{orderSettlementMethod})
+		insert into order_t (order_id, customer_id, receiver_id, order_date, order_settlement_method)
+		values (#{orderId}, #{customerId}, #{receiverId}, #{orderDate}, #{orderSettlementMethod})
 	</insert>
 	
 	<select id="selectOrderListById" parameterType="String" resultType="OrderT">
@@ -33,11 +33,11 @@
 	
 	<select id="selectOrderListPageById" parameterType="map" resultType="OrderT">
 		<![CDATA[
-		select rnum, order_id, customer_id, receiver_id, coupon_id, order_date, order_settlement_method
+		select rnum, order_id, customer_id, receiver_id, order_date, order_settlement_method
 		from (
-		    select rownum as rnum, order_id, customer_id, receiver_id, coupon_id, order_date, order_settlement_method
+		    select rownum as rnum, order_id, customer_id, receiver_id, order_date, order_settlement_method
 		    from (
-		        select order_id, customer_id, receiver_id, coupon_id, order_date, order_settlement_method
+		        select order_id, customer_id, receiver_id, order_date, order_settlement_method
 		        from order_t
 		        where customer_id = #{customerId}
 		        order by order_id desc

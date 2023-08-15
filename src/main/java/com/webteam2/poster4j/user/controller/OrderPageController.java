@@ -103,7 +103,8 @@ public class OrderPageController {
 	public String postOrder(HttpSession session, OrderT order, @RequestParam("productId") String[] productIds,
 			@RequestParam("optionSize") String[] optionSizes,
 			@RequestParam("orderDetailQuantity") String[] orderDetailQuantity,
-			@RequestParam("optionFrame") String[] optionFrames) {
+			@RequestParam("optionFrame") String[] optionFrames,
+			@RequestParam("orderDetailPrice") int[] orderDetailPrice) {
 		// 세션에 저장된 customer 정보
 		Customer customer = (Customer) session.getAttribute("customerLogin");
 		if (customer == null) {
@@ -124,6 +125,7 @@ public class OrderPageController {
 			orderDetail.setOptionSize(optionSizes[i]);
 			orderDetail.setOptionFrame(optionFrames[i]);
 			orderDetail.setOrderDetailQuantity(Integer.parseInt(orderDetailQuantity[i]));
+			orderDetail.setOrderDetailPrice(orderDetailPrice[i]);
 
 			log.info("orderDetail:" + orderDetail);
 			orderDetailService.saveOrderDetail((orderDetail));

@@ -70,8 +70,8 @@
 	</update>
 	
 	<insert id="insert" parameterType="OrderDetail">
-		insert into order_detail (order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date, option_size, option_frame)
-		values (#{orderId}, #{productId}, #{orderDetailQuantity}, '결제완료', #{orderDlCmptnDate, jdbcType=VARCHAR}, #{optionSize}, #{optionFrame})
+		insert into order_detail (order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date, option_size, option_frame, order_detail_price)
+		values (#{orderId}, #{productId}, #{orderDetailQuantity}, '결제완료', #{orderDlCmptnDate, jdbcType=VARCHAR}, #{optionSize}, #{optionFrame}, #{orderDetailPrice})
 	</insert>
 	
 	<select id="selectListByOrderId" parameterType="int" resultType="OrderDetail">
