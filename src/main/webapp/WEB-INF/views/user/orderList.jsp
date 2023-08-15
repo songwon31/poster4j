@@ -50,7 +50,6 @@
 							<c:forEach var="order" items="${buyItemList}" varStatus="status">
 								<c:forEach var="orderDetail" items="${order.orderDetail}" varStatus="detailStatus">
 										<c:forEach var="product" items="${order.product}" varStatus="productStatus">
-											<%-- ${status.index ....... detailStatus.index ..........productStatus.index ...} --%>
 											<c:if test="${detailStatus.index==productStatus.index}">
 												<tr class="">
 													<td class="orderDate orderNo">${orderDetail.orderId}</td>
