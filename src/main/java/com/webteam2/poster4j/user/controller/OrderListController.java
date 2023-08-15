@@ -84,6 +84,8 @@ public class OrderListController {
 			for(OrderDetail orderDetail : newOrderDetailList) {
 				int productId = orderDetail.getProductId();
 				log.info("" + productId);
+				
+				//이거 수정해야함
 				Product product = productService.getOneProduct(productId);
 				productList.add(product);
 				
@@ -93,6 +95,8 @@ public class OrderListController {
 				productImageList.add(base64Img);
 				
 			}
+			
+			log.info("" +productList);
 			BuyItem buyItem = new BuyItem();
 			
 			buyItem.setOrderDetail(newOrderDetailList);

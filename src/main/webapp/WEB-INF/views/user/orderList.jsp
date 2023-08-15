@@ -52,12 +52,13 @@
 									<c:if test="${status.index == detailStatus.index}">
 										<c:forEach var="product" items="${order.product}" varStatus="productStatus">
 											<c:if test="${detailStatus.index == productStatus.index}">
-											<%-- ${status.index ....... detailStatus.index ..........productStatus.index ...} --%>
 											<tr class="">
 												<td class="orderDate orderNo">${orderDetail.orderId}</td>
 												<td class="productImage">
 													<c:forEach var="productImage" items="${order.productImage}" varStatus="imageStatus">
-														<img alt="" src="data:image/jpeg;base64, ${productImage.base64Image}" width="100%">
+														<c:if test="${productStatus.index == imageStatus.index}">
+															<img alt="" src="data:image/jpeg;base64, ${productImage.base64Image}" width="100%">
+														</c:if>
 													</c:forEach>
 												</td>
 									          	<td class="productInfo">${product.productName}</td>
