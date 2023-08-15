@@ -1,7 +1,5 @@
 package com.webteam2.poster4j.dto;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
 import lombok.Data;
 
 @Data
@@ -14,9 +12,6 @@ public class ProductBoardSearch {
 	private Integer productDiscountRateEnd;
 	private String productTheme;
 	private String productArtist;
-	private String productTexture;
-	private Integer productStockStart;
-	private Integer productStockEnd;
 	
 	public void makeEmptyToNull() {
 		if (productName=="") {
@@ -28,16 +23,12 @@ public class ProductBoardSearch {
 		if (productArtist=="") {
 			productArtist = null;
 		}
-		if (productTexture=="") {
-			productTexture = null;
-		}
 	}
 
 	public boolean isNull() {
 		if (productId==null && productName==null && productPriceStart==null && productPriceEnd==null &&
 			productDiscountRateStart==null && productDiscountRateEnd==null && productTheme==null &&
-			productArtist==null && productTexture==null &&
-			productStockStart==null && productStockEnd==null) {
+			productArtist==null) {
 				return true;
 		}
 		return false;
@@ -98,18 +89,6 @@ public class ProductBoardSearch {
 		} else if ((this.productArtist!=null && other.productArtist==null) ||
 			(this.productArtist==null && other.productArtist!=null) ||
 			(this.productArtist!=null && other.productArtist!=null && !this.productArtist.equals(other.productArtist))) {
-			return false;
-		} else if ((this.productTexture!=null && other.productTexture==null) ||
-			(this.productTexture==null && other.productTexture!=null) ||
-			(this.productTexture!=null && other.productTexture!=null && !this.productTexture.equals(other.productTexture))) {
-			return false;
-		} else if ((this.productStockStart!=null && other.productStockStart==null) ||
-			(this.productStockStart==null && other.productStockStart!=null) ||
-			(this.productStockStart!=null && other.productStockStart!=null && !this.productStockStart.equals(other.productStockStart))) {
-			return false;
-		} else if ((this.productStockEnd!=null && other.productStockEnd==null) ||
-			(this.productStockEnd==null && other.productStockEnd!=null) ||
-			(this.productStockEnd!=null && other.productStockEnd!=null && !this.productStockEnd.equals(other.productStockEnd))) {
 			return false;
 		}
 		/*	

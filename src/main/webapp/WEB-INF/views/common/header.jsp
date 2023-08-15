@@ -35,7 +35,7 @@
 						   class="text-decoration-none text-dark">아티스트</a>
 					</li>
 					<li class="list-group-item border-bottom border-dark">
-						<a href="${pageContext.request.contextPath}/">
+						<a href="${pageContext.request.contextPath}/"
 						   class="text-decoration-none text-dark">텍스처</a>
 					</li>
 				</ul>
@@ -70,10 +70,18 @@
 		<div class="d-flex flex-column vh-100" >
 			<nav class="navbar" style="position: fixed; z-index: 99; left: 0; top: 0; width: 100%;
 				 background: linear-gradient(to bottom, rgba(255,255,255,1) 80%, rgba(255, 255, 255, 0) 100%);">
-				<a class="" href="${pageContext.request.contextPath}"> 
-					<img alt="" src="${pageContext.request.contextPath}/resources/images/poster4j.png" width="20px">
-					<span style="font-size: 20px; font-weight: 500; color: #212529">poster4j</span>
-				</a>
+				<c:if test="${customerLogin.customerId == 'admin'}">
+					<a class="" href="${pageContext.request.contextPath}/admin/orderBoard"> 
+						<img alt="" src="${pageContext.request.contextPath}/resources/images/poster4j.png" width="20px">
+						<span style="font-size: 20px; font-weight: 500; color: #212529">poster4j</span>
+					</a>
+				</c:if>
+				<c:if test="${customerLogin.customerId != 'admin'}">
+					<a class="" href="${pageContext.request.contextPath}"> 
+						<img alt="" src="${pageContext.request.contextPath}/resources/images/poster4j.png" width="20px">
+						<span style="font-size: 20px; font-weight: 500; color: #212529">poster4j</span>
+					</a>
+				</c:if>
 				<div>
 					<c:if test="${customerLogin == null}">
 						<div style="padding-top:10px; padding-bottom:10px">

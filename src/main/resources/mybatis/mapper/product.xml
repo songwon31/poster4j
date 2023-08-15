@@ -4,13 +4,13 @@
 	<select id="selectByPage" parameterType="Pager" resultType="Product">
 		<![CDATA[
 		select rnum, product_id, product_name, product_price, product_discount_rate, 
-			   product_theme, product_artist, product_texture, product_stock
+			   product_theme, product_artist
 		from (
 		    select rownum as rnum, product_id, product_name, product_price, product_discount_rate, 
-		    	   product_theme, product_artist, product_texture, product_stock
+		    	   product_theme, product_artist
 		    from (
 		        select product_id, product_name, product_price, product_discount_rate, 
-		    		   product_theme, product_artist, product_texture, product_stock
+		    		   product_theme, product_artist
 		        from product
 		        order by product_id desc
 		    )
@@ -42,15 +42,14 @@
 		</selectKey>
 		<!-- null이 들어갈 수 있는 컬럼값은 반드시 jdbcType을 명시해야 함 -->
 		insert into product (product_id, product_name, product_price, product_discount_rate, 
-							 product_theme, product_artist, product_texture, product_stock)
+							 product_theme, product_artist, product_detail, product_enabled)
 		values(#{productId}, #{productName}, #{productPrice}, #{productDiscountRate}, #{productTheme}, 
-			   #{productArtist}, #{productTexture}, #{productStock, jdbcType=DECIMAL})
+			   #{productArtist}, #{productDetail}, 'TRUE')
 	</insert>
 	
 	<update id="updateProduct" parameterType="Product">
 		update product set product_name=#{productName}, product_price=#{productPrice}, product_discount_rate=#{productDiscountRate},
-						 product_theme=#{productTheme}, product_artist=#{productArtist}, product_texture=#{productTexture},
-						 product_stock=#{productStock} 
+						 product_theme=#{productTheme}, product_artist=#{productArtist}, product_detail=#{productDetail}, product_enabled=#{productEnabled} 
 		where product_id=#{productId}
 	</update>
 	
@@ -119,43 +118,18 @@
 			<if test="productArtist!=null">
 				and product_artist = #{productArtist}
 			</if>
-			<if test="productTexture!=null">
-				and product_texture = #{productTexture}
-			</if>
-			
-			<!-- 가격 범위 계산 -->
-			<!-- 시작값, 끝값 모두 제공됐을 경우 -->
-			<if test="(productStockStart!=null and !productStockStart.equals('')) and 
-					  (productStockEnd!=null and !productStockEnd.equals(''))">
-				and product_stock between #{productStockStart} and #{productStockEnd}
-			</if>
-			<!-- 시작값만 제공됐을 경우 -->
-			<if test="(productStockStart!=null and !productStockStart.equals('')) and 
-					  (productStockEnd==null or productStockEnd.equals(''))">
-				<![CDATA[
-				and product_stock >= #{productStockStart}
-				]]>
-			</if>
-			<!-- 끝값만 제공됐을 경우 -->
-			<if test="(productStockStart==null or productStockStart.equals('')) and 
-					  (productStockEnd!=null and !productStockEnd.equals(''))">
-				<![CDATA[
-				and product_stock <= #{productStockEnd}
-				]]>
-			</if>
-			
 		</where>
 	</select>
 	
 	<select id="selectSearchedProductByPage" parameterType="map" resultType="Product">
 		select rnum, product_id, product_name, product_price, product_discount_rate, 
-			   product_theme, product_artist, product_texture, product_stock, product_detail
+			   product_theme, product_artist, product_detail
 		from (
 		    select rownum as rnum, product_id, product_name, product_price, product_discount_rate, 
-		    	   product_theme, product_artist, product_texture, product_stock, product_detail
+		    	   product_theme, product_artist, product_detail
 		    from (
 		        select product_id, product_name, product_price, product_discount_rate, 
-		    		   product_theme, product_artist, product_texture, product_stock, product_detail
+		    		   product_theme, product_artist, product_detail
 		        from product
 		        <where>
 					<if test="productBoardSearch.productId!=null and !productBoardSearch.productId.equals('')">
@@ -214,30 +188,6 @@
 					</if>
 					<if test="productBoardSearch.productArtist!=null">
 						and product_artist = #{productBoardSearch.productArtist}
-					</if>
-					<if test="productBoardSearch.productTexture!=null">
-						and product_texture = #{productBoardSearch.productTexture}
-					</if>
-					
-					<!-- 가격 범위 계산 -->
-					<!-- 시작값, 끝값 모두 제공됐을 경우 -->
-					<if test="(productBoardSearch.productStockStart!=null and !productBoardSearch.productStockStart.equals('')) and 
-							  (productBoardSearch.productStockEnd!=null and !productBoardSearch.productStockEnd.equals(''))">
-						and product_stock between #{productBoardSearch.productStockStart} and #{productBoardSearch.productStockEnd}
-					</if>
-					<!-- 시작값만 제공됐을 경우 -->
-					<if test="(productBoardSearch.productStockStart!=null and !productBoardSearch.productStockStart.equals('')) and 
-							  (productBoardSearch.productStockEnd==null or productBoardSearch.productStockEnd.equals(''))">
-						<![CDATA[
-						and product_stock >= #{productBoardSearch.productStockStart}
-						]]>
-					</if>
-					<!-- 끝값만 제공됐을 경우 -->
-					<if test="(productBoardSearch.productStockStart==null or productBoardSearch.productStockStart.equals('')) and 
-							  (productBoardSearch.productStockEnd!=null and !productBoardSearch.productStockEnd.equals(''))">
-						<![CDATA[
-						and product_stock <= #{productBoardSearch.productStockEnd}
-						]]>
 					</if>
 					
 				</where>

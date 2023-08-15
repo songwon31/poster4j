@@ -10,7 +10,6 @@ public class Product {
 	private double productDiscountRate;
 	private String productTheme;
 	private String productArtist;
-	private String productTexture;
-	private int productStock;
 	private String productDetail;
+	private String productEnabled;
 }
