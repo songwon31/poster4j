@@ -26,14 +26,14 @@
 						<td class="align-middle" style="width:10px;"><span class="d-flex justify-content-center">${productInquiry.productId}</span></td>
 						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${productInquiry.productInquiryContent}</span></td>
 						<td class="align-middle" style="width:50px;"><span class="d-flex justify-content-center"><fmt:formatDate value="${productInquiry.productInquiryDate}" pattern="yyyy-MM-dd"/></span></td>
-						<c:if test='${productInquiry.productInquiryAnswered == "false"}'>
+						<c:if test='${productInquiry.productInquiryAnswered == "FALSE"}'>
 							<td class="align-middle" style="width:30px;">
 								<span class="d-flex justify-content-center">
 									<a href="#" onClick='answerProductInquiry(${productInquiry.productInquiryId}, "${productInquiry.productInquiryContent}"); return false;' class="btn btn-warning btn-sm">답변 등록</a>
 								</span>
 							</td>
 						</c:if>
-						<c:if test='${productInquiry.productInquiryAnswered == "true"}'>
+						<c:if test='${productInquiry.productInquiryAnswered == "TRUE"}'>
 							<td class="align-middle" style="width:30px;">
 								<span class="d-flex justify-content-center">
 									<a href="#" onClick='editProductInquiry(${productInquiry.productInquiryId}, "${productInquiry.productInquiryContent}"); return false;' class="btn btn-success btn-sm">답변 수정</a>

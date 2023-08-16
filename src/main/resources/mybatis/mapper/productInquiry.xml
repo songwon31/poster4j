@@ -22,7 +22,7 @@
 	</select>
 	
 	<update id="updateAnsweredToTrue" parameterType="int">
-		update product_inquiry set product_inquiry_answered = 'true' 
+		update product_inquiry set product_inquiry_answered = 'TRUE' 
 		where product_inquiry_id=#{productInquiryId}
 	</update>
 	

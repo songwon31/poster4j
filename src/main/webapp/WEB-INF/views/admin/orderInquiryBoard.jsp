@@ -24,14 +24,14 @@
 						<td class="align-middle" scope="row" style="width:10px;"><span class="d-flex justify-content-center">${orderInquiry.orderId}</span></td>
 						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${orderInquiry.orderInquiryContent}</span></td>
 						<td class="align-middle" style="width:50px;"><span class="d-flex justify-content-center"><fmt:formatDate value="${orderInquiry.orderInquiryDate}" pattern="yyyy-MM-dd"/></span></td>
-						<c:if test='${orderInquiry.orderInquiryAnswered == "false"}'>
+						<c:if test='${orderInquiry.orderInquiryAnswered == "FALSE"}'>
 							<td class="align-middle" style="width:30px;">
 								<span class="d-flex justify-content-center">
 									<a href="#" onClick='answerOrderInquiry(${orderInquiry.orderInquiryId}, "${orderInquiry.orderInquiryContent}"); return false;' class="btn btn-warning btn-sm">답변 등록</a>
 								</span>
 							</td>
 						</c:if>
-						<c:if test='${orderInquiry.orderInquiryAnswered == "true"}'>
+						<c:if test='${orderInquiry.orderInquiryAnswered == "TRUE"}'>
 							<td class="align-middle" style="width:30px;">
 								<span class="d-flex justify-content-center">
 									<a href="#" onClick='editOrderInquiry(${orderInquiry.orderInquiryId}, "${orderInquiry.orderInquiryContent}"); return false;' class="btn btn-success btn-sm">답변 수정</a>
