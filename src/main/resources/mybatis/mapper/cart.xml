@@ -28,6 +28,11 @@
 		where customer_id = #{customerId} and product_id = #{productId} and option_size = #{optionSize} and option_frame = #{optionFrame}
 	</update>
 	
+	<update id="updateQuantity" parameterType="map">
+		update cart set cart_product_quantity = #{cartProductQuantity}
+		where customer_id = #{customerId} and product_id = #{productId} and option_size = #{optionSize} and option_frame = #{optionFrame}
+	</update>
+	
 	<delete id="deleteItem" parameterType="map">
 		delete from cart 
 		where customer_id = #{customerId} and product_id = #{productId} and option_size = #{optionSize} and option_frame = #{optionFrame}

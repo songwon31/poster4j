@@ -23,4 +23,9 @@ public interface CartDao {
 						@Param("productId") int productId, 
 						@Param("optionSize") String optionSize, 
 						@Param("optionFrame") String optionFrame);
+	public int updateQuantity(@Param("customerId") String customerId, 
+			@Param("productId") int productId, 
+			@Param("cartProductQuantity") int cartProductQuantity,
+			@Param("optionSize") String optionSize, 
+			@Param("optionFrame") String optionFrame);
 }

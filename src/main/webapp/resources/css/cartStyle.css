@@ -4,13 +4,16 @@
 	box-sizing: border-box;
 }
 
+input[type=checkbox] {
+	accent-color: black;
+}
+
 .contents-cart {
 	font-size: 100%;
     color: #111;
     display: block;
     position: relative;
     width: 980px;
-    border: 1px solid black;
     margin: 60px auto 70px;
     padding: 40px 39px;
     background: #fff;
@@ -75,7 +78,7 @@
     padding-right: 15px;
 }
 
-.product_image img {
+.product-image img {
     width: 78px;
     aspect-ratio: auto 78 / 78;
     height: 78px;
@@ -85,7 +88,7 @@
     vertical-align: top;
 }
 
-.product_box {
+.product-box {
     border-bottom: 1px solid #ddd;
     line-height: 35px;
     width: 568px;
@@ -108,6 +111,97 @@
     padding-bottom: 5px;
     letter-spacing: -1px;
 }
+
+.item-detail-part {
+    line-height: 35px;
+    text-align: left;
+    color: #111;
+    margin: 0;
+    width: 100%;
+    padding: 4px 0;
+    border-top: 0;
+    float: none;
+}
+
+.option-item-part {
+    line-height: 35px;
+    text-align: left;
+    color: #111;
+    float: left;
+    max-width: 330px;
+    position: relative;
+}
+
+.option-price-part {
+	line-height: 35px;
+	max-width: 330px;
+    text-align: left;
+    color: #111;
+    float: right;
+    font-size: 12px;
+    position:relative;
+    top: 7px;
+}
+
+.item-total-price {
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 1;
+    position: relative;
+    line-height: normal;
+    border-left: 1px solid #ddd;
+    font-size: 12px;
+    color: #888;
+    width: 88px;
+}
+
+.total-price-area {
+    font-size: 12px;
+    line-height: 29px;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.order-table-foot {
+	clear: both;
+    position: relative;
+    padding: 10px 0 35px;
+}
+
+.keepShoppingBtn {
+    text-decoration: none;
+    background: white;
+    color: black;
+    margin-right: 5px;
+    font-size: 18px;
+    font-weight: 700;
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    line-height: 18px;
+    border: 2px solid black;
+    padding: 15px 0 15px;
+    text-align: center;
+}
+
+.goPaymentBtn {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 700;
+    display: inline-block;
+    position: relative;
+    width: 200px;
+    line-height: 18px;
+    border: 2px solid black;
+    padding: 15px 0 15px;
+    text-align: center;
+    background: black;
+    color: white;
+}
+
 
 
 

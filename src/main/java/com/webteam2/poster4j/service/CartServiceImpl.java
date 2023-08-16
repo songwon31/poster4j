@@ -41,4 +41,9 @@ public class CartServiceImpl implements CartService {
 	public int addItem(Cart cart) {
 		return cartDao.insertItem(cart);
 	}
+	
+	@Override
+	public int changeQuantity(String customerId, int productId, int cartProductQuantity, String optionSize, String optionFrame) {
+		return cartDao.updateQuantity(customerId, productId, cartProductQuantity, optionSize, optionFrame);
+	}
 }
