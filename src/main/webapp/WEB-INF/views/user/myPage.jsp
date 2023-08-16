@@ -13,6 +13,9 @@
 			<li>
 				<a class="addressLink" href="addressList">Address</a>
 			</li>
+			<li>
+				<a class="orderListLink" href="orderList">order</a>
+			</li>
 		</ul>
 	</div>
 </div>
