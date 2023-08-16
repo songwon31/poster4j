@@ -4,6 +4,121 @@
 	box-sizing: border-box;
 }
 
+.contents-cart {
+	font-size: 100%;
+    color: #111;
+    display: block;
+    position: relative;
+    width: 980px;
+    border: 1px solid black;
+    margin: 60px auto 70px;
+    padding: 40px 39px;
+    background: #fff;
+    visibility: visible;
+}
+
+.cart-title {
+	clear: both;
+    height: 45px;
+    margin-bottom: 0;
+    padding-bottom: 32px;
+}
+
+.cartContent {
+    margin: 0;
+    padding: 0;
+}
+
+.cartTable {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 898px;
+    border-top: 0;
+}
+
+.table-head {
+	border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-head th {
+    color: #111;
+    height: 40px;
+    font-size: 13px;
+    background: #fafafa;
+    text-align: center;
+    font-weigth: bold;
+}
+
+.product-select {
+    border-bottom: 1px solid #ddd;
+    line-height: 35px;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 1;
+    width: 50px;
+    overflow: hidden;
+}
+
+.product-image {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-bottom: 1px solid #ddd;
+    line-height: 35px;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 1;
+    width: 80px;
+    overflow: hidden;
+    padding-right: 15px;
+}
+
+.product_image img {
+    width: 78px;
+    aspect-ratio: auto 78 / 78;
+    height: 78px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    vertical-align: top;
+}
+
+.product_box {
+    border-bottom: 1px solid #ddd;
+    line-height: 35px;
+    width: 568px;
+    overflow: hidden;
+    padding: 10px 5px 10px 15px;
+    text-align: left;
+    vertical-align: top;
+    z-index: 100;
+    padding-left: 0;
+}
+
+.product-name-part {
+    border-spacing: 0;
+    line-height: 35px;
+    text-align: left;
+    color: #111;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #e2e5e7;
+    padding-bottom: 5px;
+    letter-spacing: -1px;
+}
+
+
+
+
+
+
+
+
+
+
+
 #contents {
     font-weight: 500;
     line-height: 1.7;

@@ -7,6 +7,52 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cartStyle.css"/>
 
 <div class="wrapper">
+	<section class="contents-cart">
+		<section class="cart-title">
+			<div style="font-size:25px; font-weight: bold;">CART</div>
+		</section>
+		<div id="cartContent">
+			<table class="cartTable">
+				<colgroup>
+					<col width="50">
+					<col width="80">
+					<col width="*">
+					<col width="90">
+				</colgroup>
+				<thead>
+		            <tr class="table-head">
+		                <th scope="col">
+		                	<label style="margin: 0px;">
+		                		<input title="모든 상품을 결제상품으로 설정" type="checkbox" class="all-deal-select">
+		                		<span style="font-weight:bold;">&nbsp;&nbsp;전체선택</span>
+		                	</label>
+		                </th>
+		                <th scope="colgroup" colspan="2" style="font-weight:bold;">상품정보</th>
+		                <th scope="col" style="font-weight:bold;">상품금액</th>
+		            </tr>
+	            </thead>
+	            <tbody class="table-body">
+	            	<c:forEach var="cartItem" items="${cartItemList}" varStatus="status">
+	            		<tr class="cart-deal-item" style="position: relative;">
+	            			<td class="product-select">
+	            				<input type="checkbox" checked="checked">
+	            			</td>
+	            			<td class="product-image">
+	            				<img style="width:78px; height:78px; aspect-ratio: auto 78 / 78; vertical-align: top;" src="data:image/jpeg;base64, ${imageList[status.index]}">
+	            			</td>
+	            			<td class="product-box">
+	            				<div class="product-name-part">
+	            					<a>
+	            						${productList[status.index].productName}
+	            					</a>
+	            				</div>
+	            			</td>
+	            		</tr>
+	            	</c:forEach>
+	            </tbody>
+			</table>
+		</div>
+	</section>
 	<div id="container">
 		<div id="contents">
 			<div id="cart-body">

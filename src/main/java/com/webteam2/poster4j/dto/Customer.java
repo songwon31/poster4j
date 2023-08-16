@@ -13,4 +13,5 @@ public class Customer {
 	private String customerInfoAgree;
 	private String customerSmsAgree;
 	private String customerEmailAgree;
+	private String customerEnabled;
 }
