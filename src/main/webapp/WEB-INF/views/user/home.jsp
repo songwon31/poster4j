@@ -42,14 +42,14 @@
 			</div>
 		</div>
 		<!-- 감성 글귀-->
-		<div style="min-height: 542px; display:flex; padding-left: 30px; padding-right: 30px;">
+		<!-- <div style="min-height: 542px; display:flex; padding-left: 30px; padding-right: 30px;">
 			<div id="wrap">
 				<span class="mb-3" style="display: block; font-size: 72px; font-weight: 600; line-height: 1.1">poster</span>
 				<span class="mb-3" style="display: block; font-size: 72px; word-spacing: -10px;">the most beautiful tool</span>
 				<span class="mb-3" style="display: block; font-size: 72px; word-spacing: -10px;">to start a journey</span>
 				<span class="mb-3" style="display: block; font-size: 72px; text-align: right;">&copy;2023</span>
 			</div>
-		</div>
+		</div> -->
 		<!-- 슬로건 -->
 		<div id="slogan" style="padding: 42px 13px 100px;"> 
 			<h2 style="text-align: center; ">

@@ -60,9 +60,9 @@
 															</c:if>
 														</c:forEach>
 													</td>
-										          	<td class="productInfo">${product.productName}</td>
+										          	<td class="productInfo">[${product.productTheme}]${product.productName}<br>[옵션:${orderDetail.optionSize}/${orderDetail.optionFrame}]</td>
 													<td class="productQuantity">${orderDetail.orderDetailQuantity}</td>
-										            <td class="purchasePrice"></td>
+										            <td class="purchasePrice">${orderDetail.orderDetailPrice}</td>
 													<td class="orderStatus">${orderDetail.orderDetailStatus}</td>
 													<td class="cancel Exchange re"></td>
 												</tr>
