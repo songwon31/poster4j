@@ -123,14 +123,12 @@
 									<option value="">테마 선택</option>
 									<c:if test='${productBoardSearch.productTheme == "wave"}'><option value="wave" selected>wave</option></c:if>
 									<c:if test='${productBoardSearch.productTheme != "wave"}'><option value="wave">wave</option></c:if>
-									<c:if test='${productBoardSearch.productTheme == "tree"}'><option value="tree" selected>tree</option></c:if>
-									<c:if test='${productBoardSearch.productTheme != "tree"}'><option value="tree">tree</option></c:if>
-									<c:if test='${productBoardSearch.productTheme == "house"}'><option value="house" selected>house</option></c:if>
-									<c:if test='${productBoardSearch.productTheme != "house"}'><option value="house">house</option></c:if>
-									<c:if test='${productBoardSearch.productTheme == "street"}'><option value="street" selected>street</option></c:if>
-									<c:if test='${productBoardSearch.productTheme != "street"}'><option value="street">street</option></c:if>
-									<c:if test='${productBoardSearch.productTheme == "other"}'><option value="other" selected>other</option></c:if>
-									<c:if test='${productBoardSearch.productTheme != "other"}'><option value="other">other</option></c:if>
+									<c:if test='${productBoardSearch.productTheme == "forest"}'><option value="forest" selected>forest</option></c:if>
+									<c:if test='${productBoardSearch.productTheme != "forest"}'><option value="forest">forest</option></c:if>
+									<c:if test='${productBoardSearch.productTheme == "window"}'><option value="window" selected>window</option></c:if>
+									<c:if test='${productBoardSearch.productTheme != "window"}'><option value="window">window</option></c:if>
+									<c:if test='${productBoardSearch.productTheme == "life"}'><option value="life" selected>life</option></c:if>
+									<c:if test='${productBoardSearch.productTheme != "life"}'><option value="life">life</option></c:if>
 								</select>
 							</div>
 							
@@ -138,25 +136,12 @@
 								<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">작가</span>
 								<select id="productArtist" name="productArtist" class="form-control-sm" style="width:80%">
 									<option value="">아티스트 선택</option>
-									<c:if test='${productBoardSearch.productArtist == "songwon"}'><option value="songwon" selected>songwon</option></c:if>
-									<c:if test='${productBoardSearch.productArtist != "songwon"}'><option value="songwon">songwon</option></c:if>
-									<c:if test='${productBoardSearch.productArtist == "kimfefe"}'><option value="kimfefe" selected>kimfefe</option></c:if>
-									<c:if test='${productBoardSearch.productArtist != "kimfefe"}'><option value="kimfefe">kimfefe</option></c:if>
-									<c:if test='${productBoardSearch.productArtist == "hyeonjulee"}'><option value="hyeonjulee" selected>hyeonjulee</option></c:if>
-									<c:if test='${productBoardSearch.productArtist != "hyeonjulee"}'><option value="hyeonjulee">hyeonjulee</option></c:if>
+									<c:if test='${productBoardSearch.productArtist == "유래혁"}'><option value="유래혁" selected>유래혁</option></c:if>
+									<c:if test='${productBoardSearch.productArtist != "유래혁"}'><option value="유래혁">유래혁</option></c:if>
+									<c:if test='${productBoardSearch.productArtist == "문예진"}'><option value="문예진" selected>문예진</option></c:if>
+									<c:if test='${productBoardSearch.productArtist != "문예진"}'><option value="문예진">문예진</option></c:if>
 									<c:if test='${productBoardSearch.productArtist == "other"}'><option value="other" selected>other</option></c:if>
 									<c:if test='${productBoardSearch.productArtist != "other"}'><option value="other">other</option></c:if>
-								</select>
-							</div>
-							
-							<div class="input-group row justify-content-center mb-2" style="width: 100%">
-								<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">텍스처</span>
-								<select id="productTexture" name="productTexture" class="form-control-sm" style="width:80%">
-									<option value="">텍스처 선택</option>
-									<c:if test='${productBoardSearch.productTexture == "normal"}'><option value="normal" selected>normal</option></c:if>
-									<c:if test='${productBoardSearch.productTexture != "normal"}'><option value="normal">normal</option></c:if>
-									<c:if test='${productBoardSearch.productTexture == "fabric"}'><option value="fabric" selected>fabric</option></c:if>
-									<c:if test='${productBoardSearch.productTexture != "fabric"}'><option value="fabric">fabric</option></c:if>
 								</select>
 							</div>
 							
@@ -219,9 +204,6 @@
 						productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
 						productTheme=${productBoardSearch.productTheme}&
 						productArtist=${productBoardSearch.productArtist}&
-						productTexture=${productBoardSearch.productTexture}&
-						productStockStart=${productBoardSearch.productStockStart}&
-						productStockEnd=${productBoardSearch.productStockEnd}&
 						pageNo=1">first</a>
 				<c:if test="${pager.groupNo>1}">
 					<a class="text-dark mr-2" style="font-weight:600;" 
@@ -233,9 +215,6 @@
 							productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
 							productTheme=${productBoardSearch.productTheme}&
 							productArtist=${productBoardSearch.productArtist}&
-							productTexture=${productBoardSearch.productTexture}&
-							productStockStart=${productBoardSearch.productStockStart}&
-							productStockEnd=${productBoardSearch.productStockEnd}&
 							pageNo=${pager.startPageNo-1}">prev</a>
 				</c:if>
 				
@@ -250,9 +229,6 @@
 								productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
 								productTheme=${productBoardSearch.productTheme}&
 								productArtist=${productBoardSearch.productArtist}&
-								productTexture=${productBoardSearch.productTexture}&
-								productStockStart=${productBoardSearch.productStockStart}&
-								productStockEnd=${productBoardSearch.productStockEnd}&
 								pageNo=${i}">${i}</a>
 					</c:if>
 					<c:if test="${pager.pageNo == i}">
@@ -265,9 +241,6 @@
 								productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
 								productTheme=${productBoardSearch.productTheme}&
 								productArtist=${productBoardSearch.productArtist}&
-								productTexture=${productBoardSearch.productTexture}&
-								productStockStart=${productBoardSearch.productStockStart}&
-								productStockEnd=${productBoardSearch.productStockEnd}&
 								pageNo=${i}">${i}</a>
 					</c:if>
 				</c:forEach>
@@ -282,9 +255,6 @@
 							productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
 							productTheme=${productBoardSearch.productTheme}&
 							productArtist=${productBoardSearch.productArtist}&
-							productTexture=${productBoardSearch.productTexture}&
-							productStockStart=${productBoardSearch.productStockStart}&
-							productStockEnd=${productBoardSearch.productStockEnd}&
 							pageNo=${pager.endPageNo+1}">next</a>
 				</c:if>
 				<a class="text-dark ml-2" style="font-weight:600;" 
@@ -296,9 +266,6 @@
 						productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
 						productTheme=${productBoardSearch.productTheme}&
 						productArtist=${productBoardSearch.productArtist}&
-						productTexture=${productBoardSearch.productTexture}&
-						productStockStart=${productBoardSearch.productStockStart}&
-						productStockEnd=${productBoardSearch.productStockEnd}&
 						pageNo=${pager.totalPageNo}">last</a>
 			</div>
 		</div>
