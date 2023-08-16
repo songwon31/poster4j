@@ -24,9 +24,11 @@ import com.webteam2.poster4j.dto.OrderItem;
 import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
+import com.webteam2.poster4j.dto.Review;
 import com.webteam2.poster4j.service.CartService;
 import com.webteam2.poster4j.service.ProductImageService;
 import com.webteam2.poster4j.service.ProductService;
+import com.webteam2.poster4j.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,9 +41,13 @@ public class productDetailPageController {
 	ProductImageService productImageService;
 	@Resource
 	CartService cartService;
+	@Resource
+	ReviewService reviewService;
 	
 	@GetMapping("/productDetail")
-	public String productDetail(@RequestParam(defaultValue="1", value="productId")int productId, Model model, HttpSession session) {
+	public String productDetail(@RequestParam(value="productId")int productId,
+						String pageNo, Model model, HttpSession session) {
+		log.info("" +productId);
 		//대표 이미지 가져오기
 		ProductImage productImage = productImageService.getImage(productId);
 		Product product = new Product();
@@ -75,6 +81,34 @@ public class productDetailPageController {
 		
 		model.addAttribute("discountedPrice", discountedPrice);
 		model.addAttribute("discountAmount", discountAmount);
+		
+		
+		/*Review review = new Review();*/
+		/*review = reviewService.getReview(128, 1, "297 x 420mm", "silver");
+		log.info("" + review);*/
+		
+		//브라우저에서 pageNo가 넘어오지 않았을 경우
+		if (pageNo == null) {
+			//세션에 저장되어 있는 지 확인
+			pageNo = (String) session.getAttribute("pageNo");
+			if (pageNo == null) {
+				//세션에 저장되어 있지 않다면 "1"로 초기화
+				pageNo = "1";
+			}
+		}
+		//문자열을 정수로 변환
+		int intPageNo = Integer.parseInt(pageNo);
+		//세션에 pageNo를 저장
+		session.setAttribute("pageNo", String.valueOf(pageNo));
+		log.info("productId: " + productId);
+		int totalReviewNum = reviewService.getTotalReviewNum(productId);
+		Pager pager = new Pager(10, 5, totalReviewNum, intPageNo);
+
+		List<Review> reviews = reviewService.getList(productId, pager);
+		//List<Review> list = reviewService.getList(pager);
+
+		model.addAttribute("pager", pager);
+		model.addAttribute("reviews", reviews);
 		
 		return "user/productDetailPage";
 	}
@@ -135,4 +169,11 @@ public class productDetailPageController {
 	public String getCustomerId(HttpSession session) {
 		return ((Customer)session.getAttribute("customerLogin")).getCustomerId();
 	}
+	
+	@GetMapping("/getReviewList")
+   public String getReviewList(String pageNo, Model model, HttpSession session) {
+		
+
+		return "user/productDetailPage";
+   }
 }

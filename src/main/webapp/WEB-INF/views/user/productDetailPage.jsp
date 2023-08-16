@@ -20,6 +20,11 @@
 	
 	//선택된 아이템 총가격
 	var totalPrice = 0;
+	
+/* 	$(init);
+	function init() {
+		getReviewList();
+	} */
 </script>
 
 <div class="wrapper">
@@ -28,7 +33,7 @@
 		<img id="productImage" src="data:image/jpeg;base64, ${convertedImage}" />
 		<%-- 상품 정보 테이블 --%>
 		<h3 id="productName">${product.productName}</h3>
-		<input id="productId" name="productId" type="hidden" value="${product.productName}" form="selectedItemForm">
+		<input id="productId" name="productId" type="hidden" value="${product.productId}" form="selectedItemForm">
 		<table id="productDetailTable">
 			<tr class="priceGroup">
 				<th>Price</th>
@@ -100,14 +105,66 @@
 		<div id="frameDetailWrapper" class="d-flex justify-content-center"> 
 			<img id="frameDetail" src="data:image/jpeg;base64, ${frameDetail}" />
 		</div>
+		
+		<%-- 리뷰 게시판 보기 --%>
+		<table id="reviewTable">
+			<h3 id="reviewTableTitle" class="mt-3 mb-3">Review</h3>
+			<tr>
+				<th style="width:300px">제목</th>
+				<th style="width:70px">별점</th>
+				<th style="width:70px">작성자</th>
+				<th style="width:70px">날짜</th>
+			</tr>
+			
+			<c:forEach var="review" items="${reviews}">
+				<tr>
+					<td>${review.productId} ${review.optionSize} ${review.optionFrame}</td>
+					<td>${review.reviewStarRating}</td>
+					<td>${review.reviewContent}</td>
+					<td>
+						<fmt:formatDate value="${review.reviewWrittenDate}" pattern="yyyy-MM-dd"/>
+					</td>
+				</tr>
+			</c:forEach>
+				<%-- 페이지 번호 --%>
+				<tr>
+					<td colspan="4" class="text-center">
+						<div>
+							<a class="btn btn-outline-primary btn-sm" href="getReviewList?pageNo=1">처음</a>
+							<c:if test="${pager.groupNo>1}">
+								<a class="btn btn-outline-info btn-sm" href="getReviewList?pageNo=${pager.startPageNo-1}">이전</a>
+							</c:if>
+							
+							<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+								<c:if test="${pager.pageNo != i}">
+									<a class="btn btn-outline-success btn-sm" href="getReviewList?pageNo=${i}">${i}</a>
+								</c:if>
+								<c:if test="${pager.pageNo == i}">
+									<a class="btn btn-danger btn-sm" href="getReviewList?pageNo=${i}">${i}</a>
+								</c:if>
+							</c:forEach>
+							
+							<c:if test="${pager.groupNo<pager.totalGroupNo}">
+								<a class="btn btn-outline-info btn-sm" href="getReviewList?pageNo=${pager.endPageNo+1}">다음</a>
+							</c:if>
+							<a class="btn btn-outline-primary btn-sm" href="getReviewList?pageNo=${pager.totalPageNo}">맨끝</a>
+						</div>
+					</td>
+				</tr>
+		</table>
 	</div>
 </div>
 <script>
 	//리뷰 테이블
 	function getReviewList() {
-		$.ajax({
+		/* $.ajax({
+			type: "GET",
+			url: "/poster4j/getReviewList",
+			success: function(data) {
+				console.log(data);
+			}
 			
-		})
+		}) */
 	}
 	
 	//옵션선택시 선택된 아이템 표시
