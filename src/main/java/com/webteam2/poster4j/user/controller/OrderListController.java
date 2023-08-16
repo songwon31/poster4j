@@ -11,15 +11,19 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webteam2.poster4j.dto.BuyItem;
+import com.webteam2.poster4j.dto.CanceledOrder;
 import com.webteam2.poster4j.dto.Customer;
 import com.webteam2.poster4j.dto.OrderDetail;
 import com.webteam2.poster4j.dto.OrderT;
 import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
+import com.webteam2.poster4j.service.CanceledOrderService;
 import com.webteam2.poster4j.service.OrderDetailService;
 import com.webteam2.poster4j.service.OrderTService;
 import com.webteam2.poster4j.service.ProductImageService;
@@ -38,6 +42,8 @@ public class OrderListController {
 	ProductImageService productImageService;
 	@Resource
 	ProductService productService;
+	@Resource
+	CanceledOrderService canceledOrderService;
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
@@ -66,7 +72,6 @@ public class OrderListController {
 		
 		int totalOrderNum = orderService.getTotalOrderTNumByCustomerId(customer.getCustomerId());
 		Pager pager = new Pager(5, 5, totalOrderNum, intPageNo);
-		log.info(""+totalOrderNum);
 		//customerId에 해당하는 주문 목록 불러오기
 		
 		List<OrderT> orderList = orderService.getOrderListPageById(customer.getCustomerId(), pager);
@@ -115,12 +120,18 @@ public class OrderListController {
 		
 		model.addAttribute("buyItemList", buyItemList);
 		model.addAttribute("pager", pager);
-		/*model.addAttribute("productList", productList);
-		model.addAttribute("productImageList", productImageList);*/
-		
-		//model.addAttribute("orderDetailList", orderDetailList);
-		//model.addAttribute("orderList", orderList);
 		
 		return "user/orderList";
+	}
+	
+	@PostMapping("/orderList")
+	public String postOrderList(CanceledOrder canceledOrder) {
+		Date canceledOrderReqDate = new Date();
+		
+		canceledOrder.setCanceledOrderReqDate(canceledOrderReqDate);
+		canceledOrderService.cancelOrder(canceledOrder);
+		
+		
+		return "redirect:/orderList";
 	}
 }

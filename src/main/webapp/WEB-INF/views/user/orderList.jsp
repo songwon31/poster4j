@@ -2,10 +2,30 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<script>
+	 $(init);
+	 
+	 function init(){
+		
+	 }
+	 
+	function cancelOrder(orderId, productId, optionSize, optionFrame) {
+		var popupWidth = 600;
+		var popupHeight = 300;
+		var popupX = (window.screen.width/2) - (popupWidth/2);
+		var popupY= (window.screen.height/2) - (popupHeight/2);
+		
+		let options = "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY";
+		window.open("userCancelOrderForm?orderId="+orderId+"&productId="+productId+"&optionSize="+optionSize+"&optionFrame="+optionFrame, "_blank", "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height="+popupHeight+", width="+popupWidth+", left="+popupX+", top="+popupY);
+	}
+ 
+</script>
+
+
 <div id="wrapper" style="margin: 0 auto; min-height: calc(100vh - 393px);">
 	<div id="container" class="container-fluid" style="margin: 100px 0;  max-width: 100%;">
 		 <div id="contents" class="row">
-		 	<form class="d-flex flex-column" action="">
+		 	<div class="d-flex flex-column" action="">
 		 		<div style="text-align: center;">
 		 			<select class="m-2" style="border: 0; border-bottom: 1px solid;">
 		 				<option>전체 주문처리상태</option>
@@ -51,38 +71,36 @@
 								<c:forEach var="orderDetail" items="${buyItem.orderDetail}" varStatus="detailStatus">
 									<c:forEach var="product" items="${buyItem.product}" varStatus="productStatus">
 										<c:if test="${detailStatus.index==productStatus.index}">
-											<tr class="">
-												<td class="orderDate orderNo">${buyItem.order.convertedOrderDate}<br>[${orderDetail.orderId}]</td>
-												<td class="productImage">
-													<c:forEach var="productImage" items="${buyItem.productImage}" varStatus="imageStatus">
-														<c:if test="${productStatus.index==imageStatus.index}">
-															<img alt="" src="data:image/jpeg;base64, ${productImage}" width="100%">
-														</c:if>
-													</c:forEach>
-												</td>
-									          	<td class="productInfo">[${product.productTheme}]${product.productName}<br>[옵션:${orderDetail.optionSize}/${orderDetail.optionFrame}]</td>
-												<td class="productQuantity">${orderDetail.orderDetailQuantity}</td>
-									            <td class="purchasePrice">${orderDetail.orderDetailPrice}</td>
-												<td class="orderStatus">${orderDetail.orderDetailStatus}</td>
-												<td class="cancel Exchange re"></td>
-											</tr>
+											<c:forEach var="productImage" items="${buyItem.productImage}" varStatus="imageStatus">
+												<c:if test="${productStatus.index==imageStatus.index}">
+													<tr class="">
+														<form method="post" action="orderList">
+															<input type= hidden name="orderId" value="${orderDetail.orderId}">
+															<input type= hidden name="productId" value="${orderDetail.productId}">
+															<input type= hidden name="optionSize" value="${orderDetail.optionSize}">
+															<input type= hidden name="optionFrame" value="${orderDetail.optionFrame}">
+															
+															<td class="orderDate orderNo">
+																<span class="convertedOrderDate">${buyItem.order.convertedOrderDate}</span><br>[${orderDetail.orderId}]
+															</td>
+															<td class="productImage">
+																<img alt="" src="data:image/jpeg;base64, ${productImage}" width="100%">
+															</td>
+												          	<td class="productInfo">[${product.productTheme}]${product.productName}<br>[옵션:${orderDetail.optionSize}/${orderDetail.optionFrame}]</td>
+															<td class="productQuantity">${orderDetail.orderDetailQuantity}</td>
+												            <td class="purchasePrice">${orderDetail.orderDetailPrice}</td>
+															<td class="orderStatus">${orderDetail.orderDetailStatus}</td>
+															<td class="cancel Exchange re">
+																<a href="javascript:void(0)" class="btn btn-dark" onclick = "cancelOrder(${orderDetail.orderId}, ${orderDetail.productId}, '${orderDetail.optionSize}', '${orderDetail.optionFrame}')">취소</a>
+															</td>
+														</form>
+													</tr>
+												</c:if>
+											</c:forEach>
 										</c:if>
 									</c:forEach>
 								</c:forEach>
 							</c:forEach>
-							<%-- <c:forEach var="orderItem" items="${orderItemList}" varStatus="status">
-							    <c:forEach var="orderDetail" items="${orderDetailList[status.index]}" varStatus="detailStatus">
-							        <tr class="">
-							            <td class="orderDate orderNo">${orderDetail.orderId}</td>
-							            <td class="productImage"><img alt="" src="data:image/jpeg;base64, ${orderItem.productImageBase64}" width="100%"></td>
-							            <td class="productInfo">${orderItem.productName}</td>
-							            <td class="productQuantity">${orderDetail.orderDetailQuantity}</td>
-							            <td class="purchasePrice"></td>
-							            <td class="orderStatus">${orderDetail.orderDetailStatus}</td>
-							            <td class="cancel Exchange re"></td>
-							        </tr>
-							    </c:forEach>
-							</c:forEach> --%>
 							<tr>
 								<td colspan="12" class="text-center">
 									<div>
@@ -110,7 +128,7 @@
 						</tbody>
 					</table>
 		 		</div>
-		 	</form>
+		 	</div>
 		 </div>
 	</div>
 </div>
