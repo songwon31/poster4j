@@ -7,10 +7,16 @@
 		where customer_id = #{customerId}
 	</select>
 
-	<insert id="insertItem" parameterType="Cart">
-		insert into cart (customer_id, product_id, cart_product_quantity, option_size, option_frame)
-		values (#{customerId}, #{productId}, #{cartProductQuantity}, #{optionSize}, #{optionFrame})
-	</insert>
+	<update id="insertItem" parameterType="Cart">
+		merge into cart
+		using dual
+		on (CUSTOMER_ID = #{customerId} and PRODUCT_ID = #{productId} and OPTION_SIZE = #{optionSize} and OPTION_FRAME = #{optionFrame})
+		when matched then
+			update set CART_PRODUCT_QUANTITY = CART_PRODUCT_QUANTITY + 1
+		when not matched then
+			insert (CUSTOMER_ID, PRODUCT_ID, CART_PRODUCT_QUANTITY, OPTION_SIZE, OPTION_FRAME)
+			values (#{customerId}, #{productId}, #{cartProductQuantity}, #{optionSize}, #{optionFrame})
+	</update>
 		
 	<update id="updatePlusQuantity" parameterType="map">
 		update cart set cart_product_quantity = cart_product_quantity + 1

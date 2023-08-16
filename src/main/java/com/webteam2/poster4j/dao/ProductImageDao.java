@@ -12,7 +12,8 @@ public interface ProductImageDao {
 	public ProductImage selectProductImageById(int productId);
 	//product 이미지 List 가져오기(detail)
 	public List<ProductImage> selectProductImageListById(int productId);
-	//public List<ProductImage> selectProductImageListById(int productId);
+	//frameDetail 이미지 가져오기
+	public ProductImage selectFrameDetailImage();
 	//상품 이미지 삽입
 	public int insertProductImage(ProductImage productImage);
 	public int deleteByProductId(int productId);

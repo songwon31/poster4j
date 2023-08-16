@@ -95,9 +95,21 @@
 				<img class="explainImage" src="data:image/jpeg;base64, ${image}" />
 			</c:forEach>
 		</div>
+			
+		<%-- 상품상세 공통 이미지 frameDetail --%>
+		<div id="frameDetailWrapper" class="d-flex justify-content-center"> 
+			<img id="frameDetail" src="data:image/jpeg;base64, ${frameDetail}" />
+		</div>
 	</div>
 </div>
 <script>
+	//리뷰 테이블
+	function getReviewList() {
+		$.ajax({
+			
+		})
+	}
+	
 	//옵션선택시 선택된 아이템 표시
 	function selectOption() {
 		$.ajax({
@@ -106,38 +118,40 @@
 			success: function(data) {
 				var selectedSize = $("select[name=selectSize] option:selected").val();				
 				var selectedFrame = $("select[name=selectFrame] option:selected").val();
-				var duplicatedItem = "";
 				
 				if(selectedSize == null || selectedFrame == null || selectedSize == "--옵션을 선택해주세요--" || selectedFrame == "--옵션을 선택해주세요--") {
 					//alert("옵션을 선택해주세요.");
 				} else {
 					let isDuplicated = false;
-					//선택한 옵션이 있는 옵션인지 조사
+					let duplicatedItemIndex = 0;
+					
+					//선택한 옵션이 이미 있는 옵션인지 조사
 					$('.productSize').each(function(sizeIndex, sizeItem) {
 						$('.productFrame').each(function (frameIndex, frameItem) {
 							if (selectedSize == sizeItem.value && selectedFrame == frameItem.value) {
 								isDuplicated = true;
 								//해당 인덱스를 저장
-								duplicatedItemIndex = $(this).attr("id").replace(/[^0-9]/g, "");
+								duplicatedItemIndex = frameIndex;
 							}
 						});
 					});
+					
 					
 					//선택한 옵션이 기존에 있던 옵션일 경우
 					if (isDuplicated) {						
 						//이미 선택한 옵션
 					    let duplicatedQuantityInput = $("#productQuantity" + duplicatedItemIndex);
 					    
-					    //현재 수량
+					    //수량
 					    let presentQuantity = parseInt(duplicatedQuantityInput.val());
-					    let newQuantity = duplicatedQuantityInput.val(presentQuantity + 1);
+					    let newQuantity = duplicatedQuantityInput.val(presentQuantity + 1).val();
 					    
 					    //옵션별 총가격 계산
-					    var presentPrice = $("#selectedItemPrice" + index).text();
+					    var presentPrice = $("#selectedItemPrice" + duplicatedItemIndex).text();
 						var parsedPresentPrice = parseInt(presentPrice.replace(/[^0-9]/g, ""));
 						var optionItemPrice = (parsedPresentPrice/presentQuantity) * newQuantity;
 						
-						$("#selectedItemPrice" + index).text(optionItemPrice.toLocaleString("ko-KR"));
+						$("#selectedItemPrice" + duplicatedItemIndex).text(optionItemPrice.toLocaleString("ko-KR"));
 					    
 					    //선택된 아이템 총가격 계산
 					    let selectedPrice = $("#selectedItemPrice" + duplicatedItemIndex).text();

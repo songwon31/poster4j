@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.webteam2.poster4j.dto.Cart;
 import com.webteam2.poster4j.dto.Customer;
 import com.webteam2.poster4j.dto.OrderItem;
+import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
 import com.webteam2.poster4j.service.CartService;
@@ -62,6 +62,12 @@ public class productDetailPageController {
 		}
 		
 		model.addAttribute("convertedImages", convertedImages);
+		
+		//상세설명 이미지 리스트에 공통 이미지인 frameDetail 추가하기
+		ProductImage frameDetail = productImageService.getFrameDetailImage();
+		String convertedFrameDetail = Base64.getEncoder().encodeToString(frameDetail.getProductImageSource());
+		
+		model.addAttribute("frameDetail", convertedFrameDetail);
 		
 		//할인된 상품가격 계산
 		double discountedPrice = product.getProductPrice() * (1.0 - product.getProductDiscountRate());
