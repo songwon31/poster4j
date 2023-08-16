@@ -81,12 +81,6 @@ public class OrderBoardController {
 			List<OrderDetail> orderDetailList = orderDetailService.getListByOrderId(orderId, endRowNo, startRowNo);
 			model.addAttribute("orderDetailList", orderDetailList);
 			
-			List<Integer> orderDetailPriceList = new ArrayList<>();
-			for (OrderDetail orderDetail : orderDetailList) {
-				orderDetailPriceList.add(productService.getPriceById(orderDetail.getProductId()) * orderDetail.getOrderDetailQuantity());
-			}
-			model.addAttribute("orderDetailPriceList", orderDetailPriceList);
-			
 			List<Date> orderDateList = new ArrayList<>();
 			for (OrderDetail orderDetail : orderDetailList) {
 				orderDateList.add(orderTService.getOrderTById(orderDetail.getOrderId()).getOrderDate());
@@ -103,12 +97,6 @@ public class OrderBoardController {
 			List<OrderDetail> orderDetailList = orderDetailService.getListByProductId(productId, endRowNo, startRowNo);
 			model.addAttribute("orderDetailList", orderDetailList);
 			
-			List<Integer> orderDetailPriceList = new ArrayList<>();
-			for (OrderDetail orderDetail : orderDetailList) {
-				orderDetailPriceList.add(productService.getPriceById(orderDetail.getProductId()) * orderDetail.getOrderDetailQuantity());
-			}
-			model.addAttribute("orderDetailPriceList", orderDetailPriceList);
-			
 			List<Date> orderDateList = new ArrayList<>();
 			for (OrderDetail orderDetail : orderDetailList) {
 				orderDateList.add(orderTService.getOrderTById(orderDetail.getOrderId()).getOrderDate());
@@ -122,12 +110,6 @@ public class OrderBoardController {
 			List<OrderDetail> orderDetailList = orderDetailService.getList(pager);
 			model.addAttribute("orderDetailList", orderDetailList);
 			
-			List<Integer> orderDetailPriceList = new ArrayList<>();
-			for (OrderDetail orderDetail : orderDetailList) {
-				orderDetailPriceList.add(productService.getPriceById(orderDetail.getProductId()) * orderDetail.getOrderDetailQuantity());
-			}
-			model.addAttribute("orderDetailPriceList", orderDetailPriceList);
-			
 			List<Date> orderDateList = new ArrayList<>();
 			for (OrderDetail orderDetail : orderDetailList) {
 				orderDateList.add(orderTService.getOrderTById(orderDetail.getOrderId()).getOrderDate());
@@ -139,8 +121,8 @@ public class OrderBoardController {
 	}
 	
 	@GetMapping("/changeOrderStatus")
-	public String changeOrderStatus (int orderId, int productId, String orderStatus) {
-		orderDetailService.changeOrderDetailStatus(orderId, productId, orderStatus);
+	public String changeOrderStatus (int orderId, int productId, String optionSize, String optionFrame, String orderStatus) {
+		orderDetailService.changeOrderDetailStatus(orderId, productId, optionSize, optionFrame, orderStatus);
 		return "redirect:/admin/orderBoard";
 	}
 	

@@ -3,11 +3,14 @@
 <mapper namespace="com.webteam2.poster4j.dao.OrderDetailDao">
 	<select id="selectByPage" parameterType="Pager" resultType="OrderDetail">
 		<![CDATA[
-		select rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		select rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date,
+			option_size, option_frame, order_detail_price
 		from (
-		    select rownum as rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		    select rownum as rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date,
+				option_size, option_frame, order_detail_price
 		    from (
-		        select order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		        select order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date,
+					option_size, option_frame, order_detail_price
 		        from order_detail
 		        where order_detail_status != '취소됨'
 		        order by order_id desc
@@ -20,11 +23,14 @@
 	
 	<select id="selectPageByOrderId" parameterType="map" resultType="OrderDetail">
 		<![CDATA[
-		select rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		select rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date,
+			option_size, option_frame, order_detail_price
 		from (
-		    select rownum as rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		    select rownum as rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date,
+				option_size, option_frame, order_detail_price
 		    from (
-		        select order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		        select order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date,
+					option_size, option_frame, order_detail_price
 		        from order_detail
 		        where order_id = #{orderId} and order_detail_status != '취소됨'
 		        order by order_id desc
@@ -37,11 +43,14 @@
 	
 	<select id="selectPageByProductId" parameterType="map" resultType="OrderDetail">
 		<![CDATA[
-		select rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		select rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date,
+				option_size, option_frame, order_detail_price
 		from (
-		    select rownum as rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		    select rownum as rnum, order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date,
+				option_size, option_frame, order_detail_price
 		    from (
-		        select order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date
+		        select order_id, product_id, order_detail_quantity, order_detail_status, order_dl_cmptn_date,
+					option_size, option_frame, order_detail_price
 		        from order_detail
 		        where product_id = #{productId} and order_detail_status != '취소됨'
 		        order by order_id desc
@@ -66,7 +75,7 @@
 	
 	<update id="updateOrderStatus" parameterType="map">
 		update order_detail set order_detail_status = #{orderStatus}
-		where order_id=#{orderId} and product_id=#{productId} and order_detail_status != '취소됨'
+		where order_id=#{orderId} and product_id=#{productId} and option_size=#{optionSize} and option_frame=#{optionFrame} and order_detail_status != '취소됨'
 	</update>
 	
 	<insert id="insert" parameterType="OrderDetail">

@@ -26,9 +26,13 @@ public class AdminCancelOrderController {
 	CanceledOrderService canceledOrderService;
 	
 	@RequestMapping("/adminCancelOrderForm")
-	public String updateProductForm (int orderId, int productId, Model model) {
+	public String updateProductForm (int orderId, int productId, 
+			@RequestParam(value="optionSize", required=false)String optionSize, 
+			@RequestParam(value="optionFrame", required=false)String optionFrame, Model model) {
 		model.addAttribute("orderId", orderId);
 		model.addAttribute("productId", productId);
+		model.addAttribute("optionSize", optionSize);
+		model.addAttribute("optionFrame", optionFrame);
 		return "admin/cancelOrder";
 	}
 	
@@ -36,16 +40,19 @@ public class AdminCancelOrderController {
 	public String cancelOrder(
 			@RequestParam("orderId") int orderId,
 			@RequestParam("productId") int productId,
+			@RequestParam(value="optionSize", required=false)String optionSize, 
+			@RequestParam(value="optionFrame", required=false)String optionFrame,
 			@RequestParam("cancelCategory") String cancelCategory,
 			@RequestParam(value="cancelReason", required=false) String cancelReason) 
 	{
-		orderDetailService.changeOrderDetailStatus(orderId, productId, "취소됨");
+		orderDetailService.changeOrderDetailStatus(orderId, productId, optionSize, optionFrame, "취소됨");
 		
 		CanceledOrder canceledOrder = new CanceledOrder();
 		canceledOrder.setOrderId(orderId);
 		canceledOrder.setProductId(productId);
+		canceledOrder.setOptionSize(optionSize);
+		canceledOrder.setOptionFrame(optionFrame);
 		canceledOrder.setCanceledOrderCategory(cancelCategory);
-		log.info("cancelReason: " + cancelReason);
 		if (cancelReason != null && !cancelReason.equals("")) {
 			canceledOrder.setCanceledOrderReason(cancelReason);
 		}

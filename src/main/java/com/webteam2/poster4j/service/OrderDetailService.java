@@ -12,7 +12,7 @@ public interface OrderDetailService {
 	public int getTotalOrderDetailNum();
 	public int getOrderDetailNumByOrderId(int orderId);
 	public int getOrderDetailNumByProductId(int productId);
-	public int changeOrderDetailStatus(int orderId, int productId, String orderStatus);
+	public int changeOrderDetailStatus(int orderId, int productId, String optionSize, String optionFrame, String orderStatus);
 	public void saveOrderDetail(OrderDetail orderDetail);
 	public List<OrderDetail> getListNoPager(int orderId);
 }

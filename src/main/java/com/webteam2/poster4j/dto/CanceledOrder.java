@@ -10,6 +10,8 @@ import lombok.Data;
 public class CanceledOrder {
 	private int orderId;
 	private int productId;
+	private String optionSize;
+	private String optionFrame;
 	private String canceledOrderCategory;
 	private String canceledOrderReason;
 	@DateTimeFormat(pattern="yyyy-MM-dd")

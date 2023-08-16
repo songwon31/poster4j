@@ -30,6 +30,8 @@
 							<form id="updateProductForm" method="post" action="cancelOrder">
 								<input hidden id="orderId" type="text" name="orderId" value="${orderId}"/>
 								<input hidden id="productId" type="text" name="productId" value="${productId}"/>
+								<input hidden id="optionSize" type="text" name="optionSize" value="${optionSize}"/>
+								<input hidden id="optionFrame" type="text" name="optionFrame" value="${optionFrame}"/>
 								<div class="input-group mt-2" style="width:100%;">
 									<div class="input-group-addon" style="width:20%; text-align:left;"><span class="input-group-text">카테고리</span></div>
 									<select id="cancelCategory" name="cancelCategory" class="form-control" style="width:80%;">

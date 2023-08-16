@@ -34,6 +34,8 @@
 				<tr>
 					<th scope="col"><span class="d-flex justify-content-center">주문 번호</span></th>
 					<th scope="col"><span class="d-flex justify-content-center">상품</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">사이즈</span></th>
+					<th scope="col"><span class="d-flex justify-content-center">프레임</span></th>
 					<th scope="col"><span class="d-flex justify-content-center">수량</span></th>
 					<th scope="col"><span class="d-flex justify-content-center">금액</span></th>
 					<th scope="col"><span class="d-flex justify-content-center">주문 날짜</span></th>
@@ -46,14 +48,18 @@
 					<tr>
 						<td class="align-middle" scope="row" style="width:30px;"><span class="d-flex justify-content-center">${orderDetail.orderId}</span></td>
 						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${orderDetail.productId}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center align-self-center">${orderDetail.optionSize}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center align-self-center">${orderDetail.optionFrame}</span></td>
 						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center align-self-center">${orderDetail.orderDetailQuantity}</span></td>
-						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center align-self-center">${orderDetailPriceList[status.index].intValue()}</span></td>
+						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center align-self-center">${orderDetail.orderDetailPrice}</span></td>
 						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center align-self-center"><fmt:formatDate value="${orderDateList[status.index]}" pattern="yyyy-MM-dd"/></span></td>
 						<td class="align-middle" style="width:30px;">
 							<div class="d-flex justify-content-center">
 								<form class="form-inline" method="get" action="changeOrderStatus">
 									<input hidden name="orderId" value="${orderDetail.orderId}"/>
 									<input hidden name="productId" value="${orderDetail.productId}"/>
+									<input hidden name="optionSize" value="${orderDetail.optionSize}"/>
+									<input hidden name="optionFrame" value="${orderDetail.optionFrame}"/>
 									<select class="form-control-sm" id="orderStatus" name="orderStatus">
 										<c:if test='${orderDetail.orderDetailStatus == "결제완료"}'><option value="결제완료" selected>결제완료</option></c:if>
 										<c:if test='${orderDetail.orderDetailStatus != "결제완료"}'><option value="결제완료">결제완료</option></c:if>
@@ -71,19 +77,19 @@
 							</div>
 						</td>
 						<td class="align-middle" style="width:30px;">
-							<span class="d-flex justify-content-center"><a href="#" onClick="updateProduct(${orderDetail.orderId}, ${orderDetail.productId}); return false;" class="btn btn-danger btn-sm">취소</a></span>
+							<span class="d-flex justify-content-center"><a href="javascript:void(0)" onClick="cancelOrder(${orderDetail.orderId}, ${orderDetail.productId}, '${orderDetail.optionSize}', '${orderDetail.optionFrame}'); return false;" class="btn btn-danger btn-sm">취소</a></span>
 						</td>
 					</tr>
 				</c:forEach>
 				<script>
-					function updateProduct(orderId, productId) {
+					function cancelOrder(orderId, productId, optionSize, optionFrame) {
 						var popupWidth = 600;
 						var popupHeight = 300;
 						var popupX = (window.screen.width/2) - (popupWidth/2);
 						var popupY= (window.screen.height/2) - (popupHeight/2);
 						
 						let options = "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY";
-						window.open("adminCancelOrderForm?orderId="+orderId+"&productId="+productId, "_blank", "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height="+popupHeight+", width="+popupWidth+", left="+popupX+", top="+popupY);
+						window.open("adminCancelOrderForm?orderId="+orderId+"&productId="+productId+"&optionSize="+optionSize+"&optionFrame="+optionFrame, "_blank", "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height="+popupHeight+", width="+popupWidth+", left="+popupX+", top="+popupY);
 					}
 				</script>
 				<tr>

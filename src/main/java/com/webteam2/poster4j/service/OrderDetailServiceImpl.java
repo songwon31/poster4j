@@ -53,8 +53,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	}
 	
 	@Override
-	public int changeOrderDetailStatus(int orderId, int productId, String orderStatus) {
-		return orderDetailDao.updateOrderStatus(orderId, productId, orderStatus);
+	public int changeOrderDetailStatus(int orderId, int productId, String optionSize, String optionFrame, String orderStatus) {
+		return orderDetailDao.updateOrderStatus(orderId, productId, optionSize, optionFrame, orderStatus);
 	}
 	
 	@Override
