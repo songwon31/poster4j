@@ -64,9 +64,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	
 	@Override
 	public List<OrderDetail> getListNoPager(int orderId) {
-		// TODO Auto-generated method stub
 		return orderDetailDao.selectListByOrderId(orderId);
 	}
-	
 	
 }

@@ -38,4 +38,14 @@ public class CanceledOrderServiceImpl implements CanceledOrderService {
 	public int registerCmptnDate(int orderId, int productId, Date date) {
 		return canceledOrderDao.updateCmptnDate(orderId, productId, date);
 	}
+	
+	@Override
+	public int getTotalCanceledOrderNumByCustomerId(String customerId) {
+		return canceledOrderDao.countTotalCanceledOrderByCustomerId(customerId);
+	}
+	
+	@Override
+	public List<CanceledOrder> getListWithPagerAndId(Pager pager, int orderId) {
+		return canceledOrderDao.selectWithPagerAndId(pager, orderId);
+	}
 }

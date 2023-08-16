@@ -16,3 +16,4 @@ public interface OrderDetailService {
 	public void saveOrderDetail(OrderDetail orderDetail);
 	public List<OrderDetail> getListNoPager(int orderId);
 }
+
