@@ -31,7 +31,6 @@ public class SearchPageController {
 
 	@GetMapping("/search")
 	public String search(ProductBoardSearch productBoardSearch, String pageNo, Model model, HttpSession session) {
-		log.info("productBoardSearch: " + productBoardSearch);
 		productBoardSearch.makeEmptyToNull();
 		ProductBoardSearch pastProductBoardSearch = (ProductBoardSearch)session.getAttribute("productBoardSearch");
 		/*
