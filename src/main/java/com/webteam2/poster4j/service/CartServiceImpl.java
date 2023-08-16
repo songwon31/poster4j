@@ -46,4 +46,14 @@ public class CartServiceImpl implements CartService {
 	public int changeQuantity(String customerId, int productId, int cartProductQuantity, String optionSize, String optionFrame) {
 		return cartDao.updateQuantity(customerId, productId, cartProductQuantity, optionSize, optionFrame);
 	}
+	
+	@Override
+	public int toggleCheckedToTrue(Cart cart) {
+		return cartDao.updateCheckedToTrue(cart);
+	}
+	
+	@Override
+	public int toggleCheckedToFalse(Cart cart) {
+		return cartDao.updateCheckedToFalse(cart);
+	}
 }

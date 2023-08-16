@@ -9,4 +9,5 @@ public class Cart {
 	private int cartProductQuantity;
 	private	String optionSize;
 	private String optionFrame;
+	private String cartProductChecked;
 }

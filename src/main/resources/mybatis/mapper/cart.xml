@@ -14,8 +14,8 @@
 		when matched then
 			update set CART_PRODUCT_QUANTITY = CART_PRODUCT_QUANTITY + 1
 		when not matched then
-			insert (CUSTOMER_ID, PRODUCT_ID, CART_PRODUCT_QUANTITY, OPTION_SIZE, OPTION_FRAME)
-			values (#{customerId}, #{productId}, #{cartProductQuantity}, #{optionSize}, #{optionFrame})
+			insert (CUSTOMER_ID, PRODUCT_ID, CART_PRODUCT_QUANTITY, OPTION_SIZE, OPTION_FRAME, CART_PRODUCT_CHECKED)
+			values (#{customerId}, #{productId}, #{cartProductQuantity}, #{optionSize}, #{optionFrame}, 'TRUE')
 	</update>
 		
 	<update id="updatePlusQuantity" parameterType="map">
@@ -30,6 +30,16 @@
 	
 	<update id="updateQuantity" parameterType="map">
 		update cart set cart_product_quantity = #{cartProductQuantity}
+		where customer_id = #{customerId} and product_id = #{productId} and option_size = #{optionSize} and option_frame = #{optionFrame}
+	</update>
+	
+	<update id="updateCheckedToTrue" parameterType="Cart">
+		update cart set cart_product_checked = 'TRUE'
+		where customer_id = #{customerId} and product_id = #{productId} and option_size = #{optionSize} and option_frame = #{optionFrame}
+	</update>
+	
+	<update id="updateCheckedToFalse" parameterType="Cart">
+		update cart set cart_product_checked = 'FALSE'
 		where customer_id = #{customerId} and product_id = #{productId} and option_size = #{optionSize} and option_frame = #{optionFrame}
 	</update>
 	

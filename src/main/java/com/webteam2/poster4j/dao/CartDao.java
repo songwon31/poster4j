@@ -28,4 +28,6 @@ public interface CartDao {
 			@Param("cartProductQuantity") int cartProductQuantity,
 			@Param("optionSize") String optionSize, 
 			@Param("optionFrame") String optionFrame);
+	public int updateCheckedToTrue(Cart cart);
+	public int updateCheckedToFalse(Cart cart);
 }

@@ -11,4 +11,6 @@ public interface CartService {
 	public int changeQuantity(String customerId, int productId, int cartProductQuantity, String optionSize, String optionFrame);
 	public int removeItem(String customerId, int productId, String optionSize, String optionFrame);
 	public int addItem(Cart cart);
+	public int toggleCheckedToTrue(Cart cart);
+	public int toggleCheckedToFalse(Cart cart);
 }
