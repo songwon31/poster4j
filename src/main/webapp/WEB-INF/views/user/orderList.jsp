@@ -47,27 +47,27 @@
 							</tr>
 						</thead>
 						<tbody class="center displaynone">
-							<c:forEach var="order" items="${buyItemList}" varStatus="status">
-								<c:forEach var="orderDetail" items="${order.orderDetail}" varStatus="detailStatus">
-										<c:forEach var="product" items="${order.product}" varStatus="productStatus">
-											<c:if test="${detailStatus.index==productStatus.index}">
-												<tr class="">
-													<td class="orderDate orderNo">${orderDetail.orderId}</td>
-													<td class="productImage">
-														<c:forEach var="productImage" items="${order.productImage}" varStatus="imageStatus">
-															<c:if test="${productStatus.index==imageStatus.index}">
-																<img alt="" src="data:image/jpeg;base64, ${productImage}" width="100%">
-															</c:if>
-														</c:forEach>
-													</td>
-										          	<td class="productInfo">[${product.productTheme}]${product.productName}<br>[옵션:${orderDetail.optionSize}/${orderDetail.optionFrame}]</td>
-													<td class="productQuantity">${orderDetail.orderDetailQuantity}</td>
-										            <td class="purchasePrice">${orderDetail.orderDetailPrice}</td>
-													<td class="orderStatus">${orderDetail.orderDetailStatus}</td>
-													<td class="cancel Exchange re"></td>
-												</tr>
-											</c:if>
-										</c:forEach>
+							<c:forEach var="buyItem" items="${buyItemList}" varStatus="status">
+								<c:forEach var="orderDetail" items="${buyItem.orderDetail}" varStatus="detailStatus">
+									<c:forEach var="product" items="${buyItem.product}" varStatus="productStatus">
+										<c:if test="${detailStatus.index==productStatus.index}">
+											<tr class="">
+												<td class="orderDate orderNo">${buyItem.order.convertedOrderDate}<br>[${orderDetail.orderId}]</td>
+												<td class="productImage">
+													<c:forEach var="productImage" items="${buyItem.productImage}" varStatus="imageStatus">
+														<c:if test="${productStatus.index==imageStatus.index}">
+															<img alt="" src="data:image/jpeg;base64, ${productImage}" width="100%">
+														</c:if>
+													</c:forEach>
+												</td>
+									          	<td class="productInfo">[${product.productTheme}]${product.productName}<br>[옵션:${orderDetail.optionSize}/${orderDetail.optionFrame}]</td>
+												<td class="productQuantity">${orderDetail.orderDetailQuantity}</td>
+									            <td class="purchasePrice">${orderDetail.orderDetailPrice}</td>
+												<td class="orderStatus">${orderDetail.orderDetailStatus}</td>
+												<td class="cancel Exchange re"></td>
+											</tr>
+										</c:if>
+									</c:forEach>
 								</c:forEach>
 							</c:forEach>
 							<%-- <c:forEach var="orderItem" items="${orderItemList}" varStatus="status">

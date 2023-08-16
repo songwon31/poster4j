@@ -42,9 +42,9 @@
 		        where customer_id = #{customerId}
 		        order by order_id desc
 		    )
-		    where rownum <= #{endRowNo}
+		    where rownum <= #{pager.endRowNo}
 		)
-		where rnum >= #{startRowNo}
+		where rnum >= #{pager.startRowNo}
 		]]>
 	</select> 
 	

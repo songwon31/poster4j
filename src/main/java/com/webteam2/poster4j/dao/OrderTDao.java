@@ -3,6 +3,7 @@ package com.webteam2.poster4j.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.webteam2.poster4j.dto.OrderT;
 import com.webteam2.poster4j.dto.Pager;
@@ -14,5 +15,5 @@ public interface OrderTDao {
 	public int countByCustomerId(String customerId);
 	public void insert(OrderT order);
 	public List<OrderT> selectOrderListById(String customerId);
-	public List<OrderT> selectOrderListPageById(String customerId, Pager pager);
+	public List<OrderT> selectOrderListPageById(@Param("customerId")String customerId, @Param("pager")Pager pager);
 }

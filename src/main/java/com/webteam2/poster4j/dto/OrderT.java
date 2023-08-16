@@ -15,4 +15,5 @@ public class OrderT {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date orderDate;
 	private String orderSettlementMethod;
+	private String convertedOrderDate;
 }

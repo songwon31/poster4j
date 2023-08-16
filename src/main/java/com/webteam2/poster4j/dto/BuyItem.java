@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class BuyItem {
+	private OrderT order;
 	private List<OrderDetail> orderDetail;
 	private List<Product> product;
 	private List<String> productImage;

@@ -1,7 +1,9 @@
 package com.webteam2.poster4j.user.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.webteam2.poster4j.dto.BuyItem;
 import com.webteam2.poster4j.dto.Customer;
 import com.webteam2.poster4j.dto.OrderDetail;
-import com.webteam2.poster4j.dto.OrderItem;
 import com.webteam2.poster4j.dto.OrderT;
 import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Product;
@@ -38,8 +39,11 @@ public class OrderListController {
 	@Resource
 	ProductService productService;
 
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	
 	@RequestMapping("/orderList")
 	public String getOrderList(HttpSession session, Model model, String pageNo) {
+		
 		Customer customer = (Customer)session.getAttribute("customerLogin");
 		if (customer == null) {
 			// 로그인 정보가 없으면 로그인 페이지로 이동하거나 필요한 처리를 수행
@@ -65,7 +69,7 @@ public class OrderListController {
 		log.info(""+totalOrderNum);
 		//customerId에 해당하는 주문 목록 불러오기
 		
-		List<OrderT> orderList = orderService.getOrderListById(customer.getCustomerId());
+		List<OrderT> orderList = orderService.getOrderListPageById(customer.getCustomerId(), pager);
 		//List<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
 		
 		//2차원 리스트
@@ -83,9 +87,7 @@ public class OrderListController {
 			
 			for(OrderDetail orderDetail : newOrderDetailList) {
 				int productId = orderDetail.getProductId();
-				log.info("" + productId);
 				
-				//이거 수정해야함
 				Product product = productService.getOneProduct(productId);
 				productList.add(product);
 				
@@ -96,9 +98,14 @@ public class OrderListController {
 				
 			}
 			
-			log.info("" +productList);
-			BuyItem buyItem = new BuyItem();
+			Date orderDate = orderList.get(i).getOrderDate();
+			String convertedOrderDate = dateFormat.format(orderDate);
 			
+			orderList.get(i).setConvertedOrderDate(convertedOrderDate);
+			
+			
+			BuyItem buyItem = new BuyItem();
+			buyItem.setOrder(orderList.get(i));
 			buyItem.setOrderDetail(newOrderDetailList);
 			buyItem.setProduct(productList);
 			buyItem.setProductImage(productImageList);
@@ -107,11 +114,12 @@ public class OrderListController {
 		}
 		
 		model.addAttribute("buyItemList", buyItemList);
+		model.addAttribute("pager", pager);
 		/*model.addAttribute("productList", productList);
 		model.addAttribute("productImageList", productImageList);*/
 		
-		model.addAttribute("orderDetailList", orderDetailList);
-		model.addAttribute("orderList", orderList);
+		//model.addAttribute("orderDetailList", orderDetailList);
+		//model.addAttribute("orderList", orderList);
 		
 		return "user/orderList";
 	}
