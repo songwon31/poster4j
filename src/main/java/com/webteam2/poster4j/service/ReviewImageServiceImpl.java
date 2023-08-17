@@ -18,9 +18,10 @@ public class ReviewImageServiceImpl implements ReviewImageService {
 	ReviewImageDao reviewImageDao;
 	
 	@Override
-	public List<ReviewImage> getReviewImageList(int productId) {
-		return reviewImageDao.selectReviewImageListById(productId);
+	public List<ReviewImage> getReviewImageList(int orderId, int productId, String optionSize, String optionFrame) {
+		return reviewImageDao.selectReviewImageListById(orderId, productId, optionSize, optionFrame);
 	}
+	
 	@Override
 	public void register(ReviewImage reviewImage) {
 		reviewImageDao.insert(reviewImage);

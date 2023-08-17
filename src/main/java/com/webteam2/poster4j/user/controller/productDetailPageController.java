@@ -102,16 +102,20 @@ public class productDetailPageController {
 		Pager pager = new Pager(10, 5, totalReviewNum, intPageNo);
 
 		List<Review> reviews = reviewService.getList(productId, pager);
-		//List<Review> list = reviewService.getList(pager);
 
 		model.addAttribute("pager", pager);
 		model.addAttribute("reviews", reviews);
 		
 		//리뷰 이미지 리스트 가져오기
-		List<ReviewImage> reviewImageList = reviewImageService.getReviewImageList(productId);
+		List<ReviewImage> reviewImages = new ArrayList<>();
+		for(Review review: reviews) {
+			List<ReviewImage> reviewList = reviewImageService.getReviewImageList(review.getOrderId(), review.getProductId(), review.getOptionSize(), review.getOptionFrame());
+			reviewImages.addAll(reviewList);
+		}
+		
 		List<String> convertedReviewImages = new ArrayList<String>();
 		
-		for (ReviewImage image : reviewImageList) {
+		for (ReviewImage image : reviewImages) {
 			String base64Img = Base64.getEncoder().encodeToString(image.getReviewImageSource());
 			convertedReviewImages.add(base64Img);
 		}

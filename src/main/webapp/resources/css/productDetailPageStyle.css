@@ -3,6 +3,10 @@
 	padding: 0;
 }
 
+li{
+	list-style: none;
+}
+
 #productImage {
 	margin-bottom: 100px;
 	width: 80%;
@@ -32,7 +36,7 @@
 
 #productDetailTable tr {
 	border: none;
-	border-bottom: 1.3px solid #000000;
+	border-bottom: 1.3px solid black;
 	height: 38px;
 }
 
@@ -47,11 +51,17 @@
 	font-weight: bold;
 }
 
-#selectedItemTable, #productDetailTable, #totalPriceGroup {
+#selectedItemTable, #productDetailTable, #totalPriceGroup , #reviewTable {
 	width: 80%;
 	max-width: 1080px;
 	height: auto;
 	margin-bottom: 50px;
+}
+
+.reviewTableItem {
+	border: none;
+	border-bottom: 1.3px solid black;
+	height: 300x;
 }
 
 #totalPriceGroup {
@@ -84,9 +94,8 @@
 	width: 80%;
 }
 
-.explainImage, #frameDetail {
+.explainImage, #frameDetail, .pagingArea {
 	max-width: 1080px;
 	width: 100%;
 	height: auto;
 }
-

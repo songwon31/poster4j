@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.webteam2.poster4j.dao.ReviewImageDao">	
 	<!-- review 이미지 List 가져오기 -->
-	<select id="selectReviewImageListById" parameterType="int" resultType="ReviewImage">
+	<select id="selectReviewImageListById" parameterType="map" resultType="ReviewImage">
 		select *
 		from review_image
-		where product_id = #{productId}
+		where order_id = #{orderId} and product_id = #{productId} and option_size = #{optionSize} and option_frame = #{optionFrame}
 	</select>
 	
 	<insert id="insert" parameterType="reviewImage">
