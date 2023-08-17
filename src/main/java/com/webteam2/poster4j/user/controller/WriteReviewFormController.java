@@ -2,6 +2,7 @@ package com.webteam2.poster4j.user.controller;
 
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -11,12 +12,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.webteam2.poster4j.dto.Customer;
 import com.webteam2.poster4j.dto.ProductImage;
 import com.webteam2.poster4j.dto.ProductReview;
 import com.webteam2.poster4j.dto.Review;
+import com.webteam2.poster4j.dto.ReviewImage;
 import com.webteam2.poster4j.service.ProductImageService;
+import com.webteam2.poster4j.service.ReviewImageService;
+import com.webteam2.poster4j.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,6 +30,10 @@ import lombok.extern.slf4j.Slf4j;
 public class WriteReviewFormController {
 	@Resource
 	ProductImageService productImageService;
+	@Resource
+	ReviewService reviewService;
+	@Resource
+	ReviewImageService reviewImageService;
 	
 	@GetMapping("/writeReview")
 	public String getWriteReviewForm(HttpSession session, Model model,
@@ -63,11 +72,25 @@ public class WriteReviewFormController {
 	}
 	
 	@PostMapping("/postWriteReview")
-	public String postWriteReviewForm(Review review) {
+	public String postWriteReviewForm(Review review,
+									@RequestParam("reviewImages")List<MultipartFile> reviewImages
+									) throws Exception {
 		Date reviewWrittenDate = new Date();
 		review.setReviewWrittenDate(reviewWrittenDate);
+		reviewService.register(review);
 		log.info(""+ review);
 		
+		for(MultipartFile mf: reviewImages) {
+			ReviewImage reviewImage = new ReviewImage();
+			reviewImage.setOrderId(review.getOrderId());
+			reviewImage.setProductId(review.getProductId());
+			reviewImage.setOptionSize(review.getOptionSize());
+			reviewImage.setOptionFrame(review.getOptionFrame());
+			reviewImage.setReviewImageName(mf.getOriginalFilename());
+			reviewImage.setReviewImageType(mf.getContentType());
+			reviewImage.setReviewImageSource(mf.getBytes());
+			reviewImageService.register(reviewImage);
+		}
 		
 		return "redirect:/orderList";
 	}

@@ -10,4 +10,5 @@ import com.webteam2.poster4j.dto.ReviewImage;
 public interface ReviewImageDao {
 	//review 이미지 List 가져오기
 	public List<ReviewImage> selectReviewImageListById(int productId);
+	public void insert(ReviewImage reviewImage);
 }

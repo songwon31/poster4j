@@ -13,4 +13,5 @@ public interface ReviewDao {
 	public List<Review> selectByPage(@Param("productId") int productId, @Param("pager") Pager pager);
 	public Review selectReview(int orderId, int productId, String optionSize, String optionFrame);
 	public int count(int productId);
+	public void insert(Review review);
 }

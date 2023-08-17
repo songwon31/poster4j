@@ -8,7 +8,7 @@
 
 <div id="wrapper">
     <div id="container">
-        <form id="form" method="post" action="postWriteReview">
+        <form id="form" method="post" action="postWriteReview" enctype="multipart/form-data">
         	<input name="orderId" type="hidden" value="${productReview.orderId}">
         	<input name="productId" type="hidden" value="${productReview.productId}">
         	<input name="optionSize" type="hidden" value="${productReview.optionSize}">
@@ -44,6 +44,7 @@
             <div class="attach-photo mb-4">
                 <div class="h5 font-weight-bold">사진 첨부하기</div>
                 <div class="upload-file">첨부파일</div>
+                <input multiple id="pattach" type="file" name="reviewImages" class="form-control">
             </div>
             <div id="buttonContainer" class="text-center mt-4">
                 <a class="btn btn-light mr-3 cancel-button" href="orderList" type="button">취소하기</a>
