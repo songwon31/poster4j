@@ -23,24 +23,6 @@
 		
 	</head>
 	<body style="width:100%; height:100%;">
-		<c:if test="${customerLogin.customerId != 'admin'}">
-			<div id="headerMenu" class="d-flex justify-content-center align-items-center">
-				<ul id="headerMenuList" class="list-group list-group-flush" style="padding: 0 30px;">
-					<li class="list-group-item border-bottom border-dark">
-						<a href="${pageContext.request.contextPath}/" 
-						   class="text-decoration-none text-dark">테마</a>
-					</li>
-					<li class="list-group-item border-bottom border-dark">
-						<a href="${pageContext.request.contextPath}/" 
-						   class="text-decoration-none text-dark">아티스트</a>
-					</li>
-					<li class="list-group-item border-bottom border-dark">
-						<a href="${pageContext.request.contextPath}/"
-						   class="text-decoration-none text-dark">텍스처</a>
-					</li>
-				</ul>
-			</div>
-		</c:if>
 		<c:if test="${customerLogin.customerId == 'admin'}">
 			<div id="headerMenu" class="d-flex justify-content-center align-items-center">
 				<ul id="headerMenuList" class="list-group list-group-flush" style="padding: 0 30px;">
@@ -88,19 +70,29 @@
 							<a href="${pageContext.request.contextPath}/search">
 								<i class="material-icons">search</i>
 							</a>
+							<a href="${pageContext.request.contextPath}/cart">
+								<i class="material-icons">shopping_cart</i>
+							</a>
 							<a href="${pageContext.request.contextPath}/login">
 								<i class="material-icons">person_outline</i>
 							</a>
-							<a id="headerMenuButton" href="#">
-								<i class="material-icons">menu</i>
-							</a>
 						</div>
 					</c:if>
-					<c:if test="${customerLogin != null}">
+					<c:if test="${customerLogin != null && customerLogin.customerId != 'admin'}">
 						<div style="padding-top:10px; padding-bottom:10px">
 							<a href="${pageContext.request.contextPath}/search">
 								<i class="material-icons">search</i>
 							</a>
+							<a href="${pageContext.request.contextPath}/cart">
+								<i class="material-icons">shopping_cart</i>
+							</a>
+							<a href="${pageContext.request.contextPath}/mypage">
+								<i class="material-icons">person_outline</i>
+							</a>
+						</div>
+					</c:if>
+					<c:if test="${customerLogin != null && customerLogin.customerId == 'admin'}">
+						<div style="padding-top:10px; padding-bottom:10px">
 							<a href="${pageContext.request.contextPath}/mypage">
 								<i class="material-icons">person_outline</i>
 							</a>

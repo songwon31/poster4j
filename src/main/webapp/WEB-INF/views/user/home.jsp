@@ -8,8 +8,22 @@
 <script>
 	$(init);
 	
-	function init() {
+	var currentMainCategory = '${currentMainCategory}';
+	var currentSubCategory = '${currentSubCategory}';
+	
+	var entireHtml = '<li><a style="visibility:hidden;" href="javascript:void(0)" onclick="">0</a></li>';
+	var themeHtml = '';
+	themeHtml += '<li><a href="?productTheme=wave&productArtist=&pageNo=1" id="wave">wave</a></li>';
+	themeHtml += '<li><a href="?productTheme=forest&productArtist=&pageNo=1" id="forest">forest</a></li>';
+	themeHtml += '<li><a href="?productTheme=window&productArtist=&pageNo=1" id="window">window</a></li>';
+	themeHtml += '<li><a href="?productTheme=life&productArtist=&pageNo=1" id=life">life</a></li>';
+	var artistHtml = '';
+	artistHtml += '<li><a href="?productTheme=&productArtist=유래혁&pageNo=1" id="유래혁">유래혁</a></li>';
+	artistHtml += '<li><a href="?productTheme=&productArtist=문예진&pageNo=1" id="문예진">문예진</a></li>';
+	artistHtml += '<li><a href="?productTheme=&productArtist=other&pageNo=1" id="other">other</a></li>';
 		
+	
+	function init() {
 		const isMobile = () => {
 			try {
 				document.createEvent("TouchEvent");
@@ -35,7 +49,7 @@
 		
 		$(window).resize(setColumnCounts);
 		
-		$(".navbar").css('background','')
+		//$(".navbar").css('background','')
 		
 		//포스터 이미지를 다 로딩이 된 후에 보여주기.
 		$("#contents").show();
@@ -63,7 +77,46 @@
 				location.href = 'productDetail?productId=' + productId;
 			});
 		}
+		
+		console.log(currentMainCategory);
+		console.log(currentSubCategory);
+		
+		if (currentMainCategory == 'entire') {
+			$('#subCategory').html(entireHtml);
+		} else if (currentMainCategory == 'theme') {
+			$('#subCategory').html(themeHtml);
+		} else if (currentMainCategory == 'artist') {
+			$('#subCategory').html(artistHtml);
+		}
+		
+		$('#subCategory li a').css('color', 'darkgray');
+		$('#mainCategory h2 span a').css('color', 'darkgray');
+		$('#'+currentMainCategory).css('color', 'black');
+		$('#'+currentSubCategory).css('color', 'black');
 	}
+	
+	function selectEntire() {
+		$('#mainCategory h2 span a').css('color', 'darkgray');
+		$('#entire').css('color', 'black');
+		$('#subCategory').html(entireHtml);
+	}
+	
+	function selectTheme() {
+		$('#mainCategory h2 span a').css('color', 'darkgray');
+		$('#theme').css('color', 'black');
+		$('#subCategory').html(themeHtml);
+		$('#subCategory li a').css('color', 'darkgray');
+		$('#'+currentSubCategory).css('color', 'black');
+	}
+	
+	function selectArtist() {
+		$('#mainCategory h2 span a').css('color', 'darkgray');
+		$('#artist').css('color', 'black');
+		$('#subCategory').html(artistHtml);
+		$('#subCategory li a').css('color', 'darkgray');
+		$('#'+currentSubCategory).css('color', 'black');
+	}
+	
 	
 	
 </script>
@@ -71,6 +124,7 @@
 <%-- home.jsp의 중앙내용 --%>
 <div id="wrapper">
 	<div id="container">
+		<%-- 
 		<!-- 메인 포스터 -->
 		<div id="main-poster" class="container-fluid" style="background-color: #F4F4F4; " >
 			<div id="frame" style="background-image: url('data:image/jpeg;base64, ${randomImage}');">
@@ -93,17 +147,21 @@
 				<span style="display: block; font-weight: 500; font-size: 17px; word-spacing: -3px;">in my room</span>
 			</h2>
 		</div>
+		 --%>
 		<!-- 포스터 목록 -->
 		<div>
 			<div id="contents" style="display:none;" >
 				<div id="menuArea">
 					<div id="mainCategory">
 						<h2>
-							<span><a>모두 보기</a></span>
-							<span><a>테마</a></span>
-							<span><a>아티스트</a></span>
+							<span><a id="entire" href="?productTheme=&productArtist=&pageNo=1">전체</a></span>
+							<span><a id="theme" href="javascript:void(0)" onclick="selectTheme(); return false;">테마</a></span>
+							<span><a id="artist" href="javascript:void(0)" onclick="selectArtist(); return false;">아티스트</a></span>
 						</h2>
 					</div>
+					<ul id="subCategory">
+						
+					</ul>
 				</div>
 				<div>
 					<ul id="productList">
@@ -139,6 +197,44 @@
 							</li>
 						</c:forEach>
 					</ul>
+				</div>
+				<div class="d-flex justify-content-center">
+					<a class="text-dark mr-2" style="font-weight:600;" 
+					   href="?productTheme=${productBoardSearch.productTheme}&
+							productArtist=${productBoardSearch.productArtist}&
+							pageNo=1">first</a>
+					<c:if test="${pager.groupNo>1}">
+						<a class="text-dark mr-2" style="font-weight:600;" 
+						   href="?productTheme=${productBoardSearch.productTheme}&
+								productArtist=${productBoardSearch.productArtist}&
+								pageNo=${pager.startPageNo-1}">prev</a>
+					</c:if>
+					
+					<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+						<c:if test="${pager.pageNo != i}">
+							<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px;" 
+							   href="?productTheme=${productBoardSearch.productTheme}&
+									productArtist=${productBoardSearch.productArtist}&
+									pageNo=${i}">${i}</a>
+						</c:if>
+						<c:if test="${pager.pageNo == i}">
+							<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px; text-decoration:underline;" 
+							   href="?productTheme=${productBoardSearch.productTheme}&
+									productArtist=${productBoardSearch.productArtist}&
+									pageNo=${i}">${i}</a>
+						</c:if>
+					</c:forEach>
+								
+					<c:if test="${pager.groupNo<pager.totalGroupNo}">
+						<a class="text-dark ml-2" style="font-weight:600;" 
+						   href="?productTheme=${productBoardSearch.productTheme}&
+								productArtist=${productBoardSearch.productArtist}&
+								pageNo=${pager.endPageNo+1}">next</a>
+					</c:if>
+					<a class="text-dark ml-2" style="font-weight:600;" 
+					   href="?productTheme=${productBoardSearch.productTheme}&
+							productArtist=${productBoardSearch.productArtist}&
+							pageNo=${pager.totalPageNo}">last</a>
 				</div>
 			</div>
 		</div>
