@@ -96,6 +96,15 @@
 		<!-- 포스터 목록 -->
 		<div>
 			<div id="contents" style="display:none;" >
+				<div id="menuArea">
+					<div id="mainCategory">
+						<h2>
+							<span><a>모두 보기</a></span>
+							<span><a>테마</a></span>
+							<span><a>아티스트</a></span>
+						</h2>
+					</div>
+				</div>
 				<div>
 					<ul id="productList">
 						<c:forEach var="image" items="${convertedImages}" varStatus="status" begin="0" end="20">

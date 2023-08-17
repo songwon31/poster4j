@@ -11,7 +11,6 @@ public class Receiver {
 	private String receiverAddress;
 	private String receiverAddressDetail;
 	private String receiverTelno;
-	private String receiverDemand;
 	private String receiverAddressType;
 	private String receiverEnabled;
 	private String receiverPersonName;

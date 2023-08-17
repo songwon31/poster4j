@@ -9,22 +9,57 @@
 <script type="text/javascript">
 	var totalPrice = 0;
 	var shipFee = 0;
+	var finalTotalPrice = 0;
+	var totalDiscountAmount = 0;
 	$(init);
 	function init(){
 		getTotalPrice();	
 		getDiscountAmount()
+		getFinalTotalPrice();
 		getShipFee();
 		getFinalTotalPrice();
+		
+		$("#orderDeliveryDemand").change(function() {
+			if ($(this).val() === "직접 입력") {
+				$("#orderDeliveryDemandInput").css('display', 'block');
+			} else {
+				$("#orderDeliveryDemandInput").css('display', 'none');
+			}
+		})
+		
+		
+		
+		window.addEventListener("message", function(event) {
+			var receiverId = event.data;
+			console.log("Received data from child:", receiverId);
+			
+			$.ajax({
+				type: "POST",
+				url: "/poster4j/getNewReceiver",
+				data: {
+					receiverId : receiverId
+				},
+				success: function(data) {
+					$("#receiverId").html(data.receiverId);
+					$("#receiverPersonName").html(data.receiverPersonName);
+					$("#receiverAddress").html(data.receiverAddress);
+					$("#receiverAddressDetail").html(data.receiverAddressDetail);
+					$("#receiverTelno").html(data.receiverTelno);
+					
+				}
+			});
+		});
 	}
 	
 	function getShipFee(){
-		if(totalPrice == 0){
-			shipFee = 0;
-		}else if(totalPrice < 50000){
+		if(finalTotalPrice < 50000){
 			shipFee = 3000;
+		} else {
+			shipFee = 0;
 		}
 		
-		$("#shipFee").text(shipFee);
+		let formattedShipFee = shipFee.toLocaleString(shipFee);
+		$("#shipFee").text(formattedShipFee);
 	}
 	
 	function showReceiverList(){
@@ -62,44 +97,48 @@
 		
 		if(check){
 			$(queryString).remove();
-			totalPrice = 0;
-			shipFee = 0;
 			getTotalPrice();
-			getShipFee();
 			getDiscountAmount();
+			getFinalTotalPrice();
+			getShipFee();
 			getFinalTotalPrice();
 		}
 	}
 	
 	function getFinalTotalPrice() {
-		var finalTotalPrice = 0;
+		finalTotalPrice = 0;
 		
 		$('.itemPrice').each(function() {
-		  finalTotalPrice += parseInt($(this).text());
+			finalTotalPrice += parseInt($(this).val());
 		});
 		finalTotalPrice += shipFee;
 		finalTotalPrice -= totalDiscountAmount; // 누적 할인 금액 차감
 		
-		$("#finalTotalPrice").text(finalTotalPrice);
+		let formattedFinalTotalPrice = finalTotalPrice.toLocaleString();
+		$("#finalTotalPrice").text(formattedFinalTotalPrice);
 	}	
 	
 	function getTotalPrice(){
+		totalPrice = 0;
+		
 		$('.itemPrice').each(function() {
-            totalPrice += parseInt($(this).text());
+			console.log($(this).val());
+            totalPrice += parseInt($(this).val());
         });
-		$("#totalPrice").text(totalPrice);
+		let formattedTotalPrice = totalPrice.toLocaleString();
+		$("#totalPrice").text(formattedTotalPrice);
 	}
 	
 	function getDiscountAmount() {
 		totalDiscountAmount = 0; // 초기화
 		$(".orderItems").each(function() {
 			var $item = $(this);
-			var itemPrice = parseFloat($item.find(".itemPrice").text());
-			var discountRate = parseFloat($item.find(".productDiscountRate").text());
+			var itemPrice = parseFloat($item.find(".itemPrice").val());
+			var discountRate = parseFloat($item.find(".productDiscountRate").val());
 		
 			if (!isNaN(itemPrice) && !isNaN(discountRate)) {
 				var discountAmount = (itemPrice * discountRate);
-				$item.find(".itemDiscountAmount").text(discountAmount);
+				$item.find(".itemDiscountAmount").val(discountAmount);
 				totalDiscountAmount += discountAmount; // 누적 할인 금액 추가
 			}
 		});
@@ -107,13 +146,186 @@
 	}
 
 	function updateTotalDiscountAmount() {
-		$(".totalDiscountAmount").text("- KRW " + totalDiscountAmount);
+		let formattedTotalDiscountAmount = totalDiscountAmount.toLocaleString();
+		$(".totalDiscountAmount").text("-" + formattedTotalDiscountAmount);
 	}
 	function completedOrder(){
 		alert("주문이 완료되었습니다.");
 	}
+	
+	function changeReceiver() {
+		var popupWidth = 400;
+		var popupHeight = 480;
+		var popupX = (window.screen.width/2)-(popupWidth/2);
+		var popupY= (window.screen.height/2)-(popupHeight/2);
+		
+		window.open("changeReceiverForm", "_blank", "toolbar=no,scrollbars=no,location=no,resizable=yes,status=no,menubar=no,height="+popupHeight+", width="+popupWidth+", left="+popupX+", top="+popupY);
+	}
 </script>
 
+<div id="body">
+	<div class="middle">
+		<div class="orderTitle">
+			<div style="font-size:25px; font-weight: bold;">ORDER</div>
+		</div>
+		<form action="postOrder" method="POST">
+			<input type="hidden" id="receiverId" name="receiverId" value="${defaultReceiver.receiverId}">
+			<div class="deliveryAddress">
+				<div class="deliveryAddressHeader">
+					받는사람정보
+					<a href="javascript:void(0)" onclick="changeReceiver(); return false;" class="btn btn-sm btn-secondary">배송지변경</a>
+				</div>
+				<table class="deliveryAddressTable">
+					<tbody>
+						<tr>
+							<th>이름</th>
+							<td id="receiverPersonName">${defaultReceiver.receiverPersonName}</td>
+						</tr>
+						<tr>
+							<th>배송주소</th>
+							<td>
+								<span id="receiverAddress">${defaultReceiver.receiverAddress}</span>
+								<span id="receiverAddressDetail">${defaultReceiver.receiverAddressDetail}</span>
+							</td>
+						</tr>
+						<tr>
+							<th>연락처</th>
+							<td id="receiverTelno">${defaultReceiver.receiverTelno}</td>
+						</tr>
+						<tr>
+							<th>배송요청사항</th>
+							<td>
+								<select id="orderDeliveryDemand" name="orderDeliveryDemand" style="width:300px;">
+									<option value="">--메시지 선택(선택사항)--</option>
+									<option value="배송 전에 미리 연락 바랍니다.">배송 전에 미리 연락 바랍니다.</option>
+									<option value="부재 시 경비실에 맡겨주세요.">부재 시 경비실에 맡겨주세요.</option>
+									<option value="부재 시 문 앞에 놓아주세요.">부재 시 문 앞에 놓아주세요.</option>
+									<option value="빠른 배송 부탁드립니다.">빠른 배송 부탁드립니다.</option>
+									<option value="택배함에 보관해주세요.">택배함에 보관해주세요.</option>
+									<option value="직접 입력">직접 입력</option>
+								</select>
+								<textarea id="orderDeliveryDemandInput" name="orderDeliveryDemandInput" class="mt-2" cols="50" rows="3" style="display:none" value=""></textarea>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="deliveryItems">
+				<div class="deliveryItemsHeader">
+					주문상품
+				</div>
+				<table class="deliveryItemsTable">
+					<colgroup>
+						<col width="80">
+						<col width="220">
+						<col width="220">
+						<col width="220">
+						<col width="220">
+						<col width="20">
+					</colgroup>
+					<thead>
+			            <tr class="table-head">
+			                <th scope="col">이미지</th>
+			                <th scope="col">상품명</th>
+			                <th scope="col">옵션</th>
+			                <th scope="col">수량</th>
+			                <th scope="col">금액</th>
+			                <th scope="col"></th>
+			            </tr>
+		            </thead>
+		            <tbody>
+		            	<c:forEach var="orderItem" items="${orderItemList}" varStatus="status">
+		            		<tr id="${status.index}" class="orderItems mt-2" style="border-bottom:1px solid #e4e4e4;">
+		            			
+		            			<td class="product-image">
+		            				<img class="py-1" style="margin:0; width:80px; height:auto;" src="data:image/jpeg;base64, ${orderProductImageList[status.index]}">
+		            			</td>
+		            			<td>
+		            				${productList[status.index].productName}
+		            			</td>
+		            			<td>
+		            				<div>${orderItem.productSize}</div>
+		            				<div>${orderItem.productFrame}</div>
+		            			</td>
+		            			<td>
+		            				${orderItem.productQuantity}
+		            			</td>
+		            			<td>
+		            				<c:if test="${productList[status.index].productDiscountRate > 0}">
+		            					<div style="text-decoration:line-through;"><fmt:formatNumber value="${productList[status.index].productPrice}" pattern="#,###"/>원</div>
+		            					<div><fmt:formatNumber value="${((1 - productList[status.index].productDiscountRate) * productList[status.index].productPrice).intValue()}" pattern="#,###"/>원</div>
+		            				</c:if>
+		            			</td>
+		            			<td>
+		            				<a style="font-size:10px; padding:1.5px 6px; border:1px solid #FF6464; text-decoration:none; color:#FF6464;" 
+		            								href="javascript:void(0)" onclick='deleteItem(${status.index}); return false;'>X</a>
+		            				<input type="hidden" class="productId" name="productId" value="${orderItem.productId}">
+			            			<input type="hidden" name="optionSize" value="${orderItem.productSize}">
+			            			<input type="hidden" name="orderDetailQuantity" value="${orderItem.productQuantity}">
+			            			<input type="hidden" name="optionFrame" value="${orderItem.productFrame}">
+			            			<input type="hidden" name="orderDetailPrice" value="${productList[status.index].productPrice}">
+			            			<input type="hidden" class="itemPrice" value="${productList[status.index].productPrice}">
+			            			<input type="hidden" class="productDiscountRate" value="${productList[status.index].productDiscountRate}">
+		            			</td>
+		            		</tr>
+		            	</c:forEach>
+		            </tbody>
+				</table>
+			</div>
+			<div id="paymentInfo">
+				<div class="paymentInfoHeader">
+					결제정보
+				</div>
+				<table class="paymentInfoTable">
+					<tbody>
+						<tr>
+							<th>총 상품가격</th>
+							<td style="border-bottom: 1px solid #e4e4e4; padding: 10px 0 10px 16px; padding-top: 12.5px; padding-bottom: 12.5px;">
+								<span id="totalPrice" style="font-weight:600;"></span><span>원</span>
+							</td>
+						</tr>
+						<tr>
+							<th>할인</th>
+							<td style="border-bottom: 1px solid #e4e4e4; padding: 10px 0 10px 16px; padding-top: 12.5px; padding-bottom: 12.5px;">
+								<span class="totalDiscountAmount" style="font-weight:600;"></span><span>원</span>
+							</td>
+						</tr>
+						<tr>
+							<th>배송비</th>
+							<td style="border-bottom: 1px solid #e4e4e4; padding: 10px 0 10px 16px; padding-top: 12.5px; padding-bottom: 12.5px;">
+								<span id="shipFee" style="font-weight:600;"></span><span>원</span>
+							</td>
+						</tr>
+						<tr>
+							<th>총 결제금액</th>
+							<td style="border-bottom: 1px solid #e4e4e4; padding: 10px 0 10px 16px; padding-top: 12.5px; padding-bottom: 12.5px;">
+								<span id="finalTotalPrice" style="font-size:15px; font-weight:600;"></span><span>원</span>
+							</td>
+						</tr>
+						<tr>
+							<th>결제방법</th>
+							<td style="border-bottom: 1px solid #e4e4e4; padding: 10px 0 10px 16px; padding-top: 12.5px; padding-bottom: 12.5px;">
+								<label><input type="radio" name="orderSettlementMethod" value="신용카드" checked> 신용카드</label>
+      							<label class="ml-3"><input type="radio" name="orderSettlementMethod" value="계좌이체"> 계좌이체</label>
+      							<label class="ml-3"><input type="radio" name="orderSettlementMethod" value="무통장입금"> 무통장입금</label>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div style="margin-top: 20px; text-align: center; position: relative;">
+				<button type="submit" onclick="completedOrder();" class="goPaymentBtn" style="text-decoration:none; color:white;">결제하기</button>
+			</div>
+		</form>
+		
+	</div>
+	
+</div>
+
+
+
+
+<%-- 
 
 <div id="orderForm" style="margin: 0 auto; min-width: 360px">
 	<form method="post" action="postOrder" style= "margin: 300px 0">
@@ -199,11 +411,11 @@
 						<img class="orderItemImage" alt="주문할 상품 이미지" src="data:image/jpeg;base64, ${image}" width="200px">
 						<div style="display: flex; flex-direction: column; justify-content: space-between; margin: 0 0 0 10px; ">
 							<div>
-								<input type="hidden" class="productId" name="productId" value="${OrderItemList[status.index].productId}">
+								<input type="hidden" class="productId" name="productId" value="${orderItemList[status.index].productId}">
 								<div><a href="#" style="font-weight: bold; color: black">${productList[status.index].productName}</a></div>
 								<div>수량: 
-									<input type="hidden" name="orderDetailQuantity" value="${OrderItemList[status.index].productQuantity}">
-									<span class="itemQuantity">${OrderItemList[status.index].productQuantity}</span>
+									<input type="hidden" name="orderDetailQuantity" value="${orderItemList[status.index].productQuantity}">
+									<span class="itemQuantity">${orderItemList[status.index].productQuantity}</span>
 									개
 									</div>
 								<div>
@@ -212,12 +424,12 @@
 									<span class="itemPrice">${productList[status.index].productPrice}</span>
 								</div>
 								<div>
-									<input type="hidden" name="optionSize" value="${OrderItemList[status.index].productSize}">
-									<span class="itemSize">${OrderItemList[status.index].productSize}</span>
+									<input type="hidden" name="optionSize" value="${orderItemList[status.index].productSize}">
+									<span class="itemSize">${orderItemList[status.index].productSize}</span>
 								</div>
 								<div>
-									<input type="hidden" name="optionFrame" value="${OrderItemList[status.index].productFrame}">
-									<span class="itemFrame">${OrderItemList[status.index].productFrame}</span>
+									<input type="hidden" name="optionFrame" value="${orderItemList[status.index].productFrame}">
+									<span class="itemFrame">${orderItemList[status.index].productFrame}</span>
 								</div>
 								<div>
 									<span class="productDiscountRate">${productList[status.index].productDiscountRate}</span>
@@ -349,8 +561,7 @@
 		</div>
 	</form>
 </div>
-
-
+ --%>
 
 
 

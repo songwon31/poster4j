@@ -60,6 +60,42 @@
     padding-left: 0;
     padding-right: 0;
 }
+
+
+
+
+#menuArea {
+    font-weight: 500;
+    box-sizing: border-box;
+    word-break: keep-all;
+    word-wrap: break-word;
+    margin: 0;
+    border: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    line-height: 1;
+    z-index: 10;
+    position: unset;
+    padding: 80px 13px 100px;
+}
+
+#mainCategory {
+	padding: 0;
+    margin: 0;
+    border: none;
+    position: relative;
+}
+
+
+
+
+
+
+
+
+
  
  #productList {
 	list-style: none;

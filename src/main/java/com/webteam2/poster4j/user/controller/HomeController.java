@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webteam2.poster4j.dto.Product;
+import com.webteam2.poster4j.dto.ProductBoardSearch;
 import com.webteam2.poster4j.dto.ProductImage;
 import com.webteam2.poster4j.service.ProductImageService;
 import com.webteam2.poster4j.service.ProductService;
@@ -34,7 +36,7 @@ public class HomeController {
 	}
 
 	@GetMapping("/")
-	public String getPosterImage(Model model) {
+	public String getPosterImage(ProductBoardSearch productBoardSearch, String pageNo, Model model, HttpSession session) {
 		
 		List<ProductImage> productImages = productImageService.getHomeList();
 		List<String> convertedImages = new ArrayList<String>();

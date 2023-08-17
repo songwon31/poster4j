@@ -3,7 +3,9 @@ package com.webteam2.poster4j.user.controller;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -13,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.webteam2.poster4j.dto.Customer;
 import com.webteam2.poster4j.dto.OrderDetail;
@@ -91,20 +94,42 @@ public class OrderPageController {
 
 		}
 
-		model.addAttribute("OrderItemList", orderItem.getOrderItemList());
+		model.addAttribute("orderItemList", orderItem.getOrderItemList());
 		model.addAttribute("productList", products);
 		model.addAttribute("orderProductImageList", convertedImages);
 
 		return "user/orderForm";
 
 	}
+	
+	@PostMapping("/getNewReceiver")
+	@ResponseBody
+	public Map<String, String> getNewReceiver(@RequestParam int receiverId) {
+		Receiver receiver  = receiverService.getBoard(receiverId);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		map.put("receiverId", Integer.toString(receiver.getReceiverId()));
+		map.put("receiverName", receiver.getReceiverName());
+		map.put("receiverZip", receiver.getReceiverZip());
+		map.put("receiverAddress", receiver.getReceiverAddress());
+		map.put("receiverAddressDetail", receiver.getReceiverAddressDetail());
+		map.put("receiverTelno", receiver.getReceiverTelno());
+		map.put("receiverAddressType", receiver.getReceiverAddressType());
+		map.put("receiverEnabled", receiver.getReceiverEnabled());
+		map.put("receiverPersonName", receiver.getReceiverPersonName());
+		
+		return map;
+	}
 
 	@PostMapping("/postOrder")
-	public String postOrder(HttpSession session, OrderT order, @RequestParam("productId") String[] productIds,
+	public String postOrder(HttpSession session, OrderT order, 
+			@RequestParam("productId") String[] productIds,
 			@RequestParam("optionSize") String[] optionSizes,
 			@RequestParam("orderDetailQuantity") String[] orderDetailQuantity,
 			@RequestParam("optionFrame") String[] optionFrames,
-			@RequestParam("orderDetailPrice") int[] orderDetailPrice) {
+			@RequestParam("orderDetailPrice") int[] orderDetailPrice,
+			@RequestParam(value="orderDeliveryDemandInput", required=false) String orderDeliveryDemandInput) {
 		// 세션에 저장된 customer 정보
 		Customer customer = (Customer) session.getAttribute("customerLogin");
 		if (customer == null) {
@@ -115,6 +140,10 @@ public class OrderPageController {
 		Date orderDate = new Date();
 		order.setCustomerId(customer.getCustomerId());
 		order.setOrderDate(orderDate);
+		
+		if (order.getOrderDeliveryDemand().equals("직접 입력")) {
+			order.setOrderDeliveryDemand(orderDeliveryDemandInput);
+		}
 
 		orderService.saveOrder(order);
 
@@ -133,8 +162,6 @@ public class OrderPageController {
 			// 주문이 완료되면 상품 삭제
 			cartService.removeItem(order.getCustomerId(), orderDetail.getProductId(), orderDetail.getOptionSize(), orderDetail.getOptionFrame());
 		}
-		
-		
 		
 		return "redirect:/cart";
 	}
