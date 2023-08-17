@@ -14,7 +14,10 @@
 				<a class="addressLink" href="addressList">Address</a>
 			</li>
 			<li>
-				<a class="orderListLink" href="orderList">order</a>
+				<a class="orderListLink" href="orderList">Order</a>
+			</li>
+			<li>
+				<a class="canceledOrderListLink" href="canceledOrderList">CanceledOrder</a>
 			</li>
 		</ul>
 	</div>

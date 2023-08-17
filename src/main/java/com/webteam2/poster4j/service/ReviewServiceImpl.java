@@ -44,4 +44,8 @@ public class ReviewServiceImpl implements ReviewService {
 	public void modify(Review review) {
 		reviewDao.update(review);
 	}
+	@Override
+	public void remove(int orderId, int productId, String optionSize, String optionFrame) {
+		reviewDao.delete(orderId, productId, optionSize, optionFrame);
+	}
 }

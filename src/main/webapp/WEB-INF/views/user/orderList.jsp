@@ -80,6 +80,7 @@
 															<input type= hidden name="productTheme" value="${product.productTheme}">
 															<input type= hidden name="optionSize" value="${orderDetail.optionSize}">
 															<input type= hidden name="optionFrame" value="${orderDetail.optionFrame}">
+															<input type= hidden name="orderDetailStatus" value="${orderDetail.orderDetailStatus}">
 															
 															<td class="orderDate orderNo">
 																<span class="convertedOrderDate">${buyItem.order.convertedOrderDate}</span><br>[${orderDetail.orderId}]
@@ -95,6 +96,7 @@
 																<a href="javascript:void(0)" class="btn btn-dark" onclick = "cancelOrder(${orderDetail.orderId}, ${orderDetail.productId}, '${orderDetail.optionSize}', '${orderDetail.optionFrame}')">취소</a><br>
 																<button id="writeReviewBtn" type="submit" class="writeReview btn btn-light" style="border: 1px solid">리뷰 작성</button>
 																<a id="updateReviewBtn" href="updateReview?orderId=${orderDetail.orderId}&productId=${orderDetail.productId}&optionSize=${orderDetail.optionSize}&optionFrame=${orderDetail.optionFrame}" class="updateReview btn btn-light" style="border: 1px solid">리뷰 수정</a>
+																<a id="deleteReviewBtn" href="deleteReview?orderId=${orderDetail.orderId}&productId=${orderDetail.productId}&optionSize=${orderDetail.optionSize}&optionFrame=${orderDetail.optionFrame}" class="updateReview btn btn-light" style="border: 1px solid">리뷰 삭제</a>
 															</td>
 														</form>
 													</tr>

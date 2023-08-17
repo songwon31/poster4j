@@ -41,4 +41,9 @@
 			review_written_date=#{reviewWrittenDate}
 		where order_id = #{orderId} and product_id = #{productId} and option_size = #{optionSize} and option_frame = #{optionFrame}
 	</update>
+	
+	<delete id="delete" parameterType="map">
+		delete from review
+		where order_id = #{orderId} and product_id = #{productId} and option_size = #{optionSize} and option_frame = #{optionFrame}
+	</delete>
 </mapper>

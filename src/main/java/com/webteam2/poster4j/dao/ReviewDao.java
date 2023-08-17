@@ -18,4 +18,8 @@ public interface ReviewDao {
 	public int count(int productId);
 	public void insert(Review review);
 	public void update(Review review);
+	public void delete(@Param("orderId") int orderId,
+					@Param("productId") int productId, 
+					@Param("optionSize") String optionSize,
+					@Param("optionFrame") String optionFrame);
 }
