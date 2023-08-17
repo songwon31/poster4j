@@ -74,9 +74,11 @@
 											<c:forEach var="productImage" items="${buyItem.productImage}" varStatus="imageStatus">
 												<c:if test="${productStatus.index==imageStatus.index}">
 													<tr class="">
-														<form method="post" action="orderList">
+														<form method="get" action="writeReview">
 															<input type= hidden name="orderId" value="${orderDetail.orderId}">
 															<input type= hidden name="productId" value="${orderDetail.productId}">
+															<input type= hidden name="productName" value="${product.productName}">
+															<input type= hidden name="productTheme" value="${product.productTheme}">
 															<input type= hidden name="optionSize" value="${orderDetail.optionSize}">
 															<input type= hidden name="optionFrame" value="${orderDetail.optionFrame}">
 															
@@ -91,7 +93,8 @@
 												            <td class="purchasePrice">${orderDetail.orderDetailPrice}</td>
 															<td class="orderStatus">${orderDetail.orderDetailStatus}</td>
 															<td class="cancel Exchange re">
-																<a href="javascript:void(0)" class="btn btn-dark" onclick = "cancelOrder(${orderDetail.orderId}, ${orderDetail.productId}, '${orderDetail.optionSize}', '${orderDetail.optionFrame}')">취소</a>
+																<a href="javascript:void(0)" class="btn btn-dark" onclick = "cancelOrder(${orderDetail.orderId}, ${orderDetail.productId}, '${orderDetail.optionSize}', '${orderDetail.optionFrame}')">취소</a><br>
+																<button type="submit" class="writeReview btn btn-light" style="border: 1px solid">리뷰 작성</a>
 															</td>
 														</form>
 													</tr>
