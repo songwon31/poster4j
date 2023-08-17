@@ -56,8 +56,8 @@
 		
 	}
 	
-	function deleteItem(productId){
-		var queryString = "#" + productId;
+	function deleteItem(index){
+		var queryString = "#"+ index;
 		var check = confirm("정말 삭제하시겠습니까?");
 		
 		if(check){
@@ -195,7 +195,7 @@
 				주문 상품
 			</div>
 			<c:forEach var="image" items="${orderProductImageList}" varStatus="status">
-					<div id="${productList[status.index].productId}${OrderItemList[status.index].productQuantity}${OrderItemList[status.index].productSize}${OrderItemList[status.index].productFrame}" class="orderItems" style="display: flex">
+					<div id="${status.index}" class="orderItems" style="display: flex">
 						<img class="orderItemImage" alt="주문할 상품 이미지" src="data:image/jpeg;base64, ${image}" width="200px">
 						<div style="display: flex; flex-direction: column; justify-content: space-between; margin: 0 0 0 10px; ">
 							<div>
@@ -227,7 +227,7 @@
 								</div>
 							</div>
 							<div style="">
-								<button id="" class="btn btn-white btn-sm" type="button" onclick="deleteItem('${productList[status.index].productId}${OrderItemList[status.index].productQuantity}${OrderItemList[status.index].productSize}${OrderItemList[status.index].productFrame}')">삭제</button>
+								<button id="" class="btn btn-white btn-sm" type="button" onclick="deleteItem(${status.index})">삭제</button>
 							</div>
 						</div>
 					</div>
