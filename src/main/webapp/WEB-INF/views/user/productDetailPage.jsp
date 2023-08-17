@@ -24,69 +24,79 @@
 
 <div class="wrapper">
 	<div class="productDetailContent d-flex flex-column align-items-center">
-		<h2 id="productTitle">${product.productName}</h2>
-		<img id="productImage" src="data:image/jpeg;base64, ${convertedImage}" />
-		<%-- 상품 정보 테이블 --%>
-		<h3 id="productName">${product.productName}</h3>
-		<input id="productId" name="productId" type="hidden" value="${product.productId}" form="selectedItemForm">
-		<table id="productDetailTable">
-			<tr class="priceGroup">
-				<th>Price</th>
-				<td>
-					<span>KRW</span>
-					<span><fmt:formatNumber value="${product.productPrice}" pattern="#,###" /></span>
-				</td>
-			</tr>
-			<tr class="discountedPriceGroup">
-				<th>Discounted Price</th>
-				<td>
-					<span>KRW</span>
-					<span id="discountedPrice"><fmt:formatNumber value="${discountedPrice}" pattern="#,###" /></span>
-					<span>(KRW</span>
-					<span id="discountAmount"><fmt:formatNumber value="${discountAmount}" pattern="#,###" /></span>
-					<span>할인)</span>
-				</td>
-			</tr>
-			<tr class="sizeGroup">
-				<th>Size</th>
-				<td>
-					<select name="selectSize" onchange="selectOption()">
-						<option>--옵션을 선택해주세요--</option>
-						<option value="297 x 420mm">297 x 420mm</option>
-						<option value="420 x 594mm">420 x 594mm</option>
-						<option value="500 x 700mm">500 x 700mm</option>
-					</select>
-				</td>
-			</tr>
-			<tr class="frameGroup">
-				<th>Frame</th>
-				<td>
-					<select name="selectFrame" onchange="selectOption()">
-						<option>--옵션을 선택해주세요--</option>
-						<option value="선택안함">선택안함</option>
-						<option value="black">black</option>
-						<option value="silver">silver</option>
-						<option value="white">white</option>
-						<option value="gold">gold</option>
-					</select>
-				</td>
-			</tr>
-		</table>
-
-		<%-- 선택상품 리스트 --%>
-		<table id="selectedItemTable">
-		</table>
-
-		<%-- 선택상품 총 가격 --%>
-		<div id="totalPriceGroup" class="d-flex justify-content-right">
-			<span class="mr-2">KRW</span>
-			<span id="totalPrice"></span>
-		</div>
-
-		<%-- 장바구니 추가 / 바로 주문 버튼 --%>
-		<div class="btnGroup d-flex">
-			<a class="btn mx-2 px-5" href="javascript:void(0)" onclick="addCart();return false;">Add to Cart</a>
-			<a class="btn mx-2 px-5" href="javascript:void(0)" onclick="orderNow();return false;">Order Now</a>
+		<div class="productWrapper d-flex justify-content-center row">
+			<%-- 상품 대표 이미지 --%>
+			<img id="productImage" class="col" src="data:image/jpeg;base64, ${convertedImage}" />
+			
+			<%-- 상품 정보 및 선택란 --%>
+			<div id="productInfoAndSelect" class="col">
+				<%-- 상품 정보 테이블 --%>
+				<table id="productDetailTable">
+					<thead>
+						<h3 id="productName">${product.productName}</h3>
+						<input id="productId" name="productId" type="hidden" value="${product.productId}" form="selectedItemForm">
+					</thead>
+					<tbody>
+						<tr class="priceGroup">
+							<th>Price</th>
+							<td>
+								<span>KRW</span>
+								<span><fmt:formatNumber value="${product.productPrice}" pattern="#,###" /></span>
+							</td>
+						</tr>
+						<tr class="discountedPriceGroup">
+							<th>Discounted Price</th>
+							<td>
+								<span>KRW</span>
+								<span id="discountedPrice"><fmt:formatNumber value="${discountedPrice}" pattern="#,###" /></span>
+								<span>(KRW</span>
+								<span id="discountAmount"><fmt:formatNumber value="${discountAmount}" pattern="#,###" /></span>
+								<span>할인)</span>
+							</td>
+						</tr>
+						<tr class="sizeGroup">
+							<th>Size</th>
+							<td>
+								<select name="selectSize" onchange="selectOption()">
+									<option>--옵션을 선택해주세요--</option>
+									<option value="297 x 420mm">297 x 420mm</option>
+									<option value="420 x 594mm">420 x 594mm</option>
+									<option value="500 x 700mm">500 x 700mm</option>
+								</select>
+							</td>
+						</tr>
+						<tr class="frameGroup">
+							<th>Frame</th>
+							<td>
+								<select name="selectFrame" onchange="selectOption()">
+									<option>--옵션을 선택해주세요--</option>
+									<option value="선택안함">선택안함</option>
+									<option value="black">black</option>
+									<option value="silver">silver</option>
+									<option value="white">white</option>
+									<option value="gold">gold</option>
+								</select>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+		
+				<%-- 선택상품 리스트 --%>
+				<table id="selectedItemTable">
+				</table>
+		
+				<%-- 선택상품 총 가격 --%>
+				<div id="totalPriceGroup" class="d-flex justify-content-right mr-1">
+					<span class="mr-2">KRW</span>
+					<span id="totalPrice"></span>
+				</div>
+		
+				<%-- 장바구니 추가 / 바로 주문 버튼 --%>
+				<div class="btnGroup d-flex">
+					<a class="eventBtn btn px-5 py-2" href="javascript:void(0)" onclick="addCart();return false;">Add to Cart</a>
+					<a class="eventBtn btn ml-2 px-5 py-2" href="javascript:void(0)" onclick="orderNow();return false;">Order Now</a>
+				</div>
+			</div>
 		</div>
 
 		<%-- 상세설명 이미지 리스트 --%>
@@ -102,12 +112,12 @@
 		</div>
 		
 		<%-- 리뷰 게시판 보기 --%>
-		<c:forEach var="review" items="${reviews}">
-			<table id="reviewTable">
-				<h3 id="reviewTableTitle" class="mt-3 mb-3">Review</h3>
-				<tr class="reviewTableItem">
+		<div id="reviewBoard">
+			<h3 id="reviewBoardTitle">REVIEW</h3>
+			<c:forEach var="review" items="${reviews}">
+				<div class="reviewBoardItem">
 					<div>${product.productName} ${review.optionSize} ${review.optionFrame}</div>
-					<div>
+					<div class="mt-3">
 						<c:if test="${review.reviewStarRating==5}">
 							<span class="star">★★★★★</span>
 						</c:if>
@@ -124,18 +134,18 @@
 							<span class="star">★</span>
 						</c:if>
 					</div>
-					<div class="reviewImageList d-flex">
+					<div class="reviewImageList d-flex mt-2">
 						<c:forEach var="image" items="${convertedReviewImages}">
 							<img class="reviewImage mx-1" src="data:image/jpeg;base64, ${image}" width="100px" height="100px" />
 						</c:forEach>
 					</div>
-					<div>${review.reviewContent}</div>
-					<div><fmt:formatDate value="${review.reviewWrittenDate}" pattern="yyyy-MM-dd" /></div>
-				</tr>
-			</table>
-		</c:forEach>
+					<div class="mt-3">${review.reviewContent}</div>
+					<div class="mt-3"><fmt:formatDate value="${review.reviewWrittenDate}" pattern="yyyy-MM-dd" /></div>
+				</div>
+			</c:forEach>
+		</div>
 		<%-- 페이지 번호 --%>
-		<div class="pagingArea">
+		<div class="d-flex">
 			<a class="btn btn-outline-primary btn-sm" href="getReviewList?pageNo=1">처음</a>
 			<c:if test="${pager.groupNo>1}">
 				<a class="btn btn-outline-info btn-sm" href="getReviewList?pageNo=${pager.startPageNo-1}">이전</a>
