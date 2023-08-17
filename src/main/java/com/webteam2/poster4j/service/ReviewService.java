@@ -11,4 +11,5 @@ public interface ReviewService {
 	public Review getReview(int orderId, int productId, String optionSize, String optionFrame);
 	public int getTotalReviewNum(int productId);
 	public void register(Review review);
+	public void modify(Review review);
 }

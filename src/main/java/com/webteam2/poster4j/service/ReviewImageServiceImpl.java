@@ -25,4 +25,9 @@ public class ReviewImageServiceImpl implements ReviewImageService {
 	public void register(ReviewImage reviewImage) {
 		reviewImageDao.insert(reviewImage);
 	}
+	
+	@Override
+	public void remove(int orderId, int productId, String optionSize, String optionFrame) {
+		reviewImageDao.delete(orderId, productId, optionSize, optionFrame);
+	}
 }

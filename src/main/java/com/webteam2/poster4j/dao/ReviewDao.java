@@ -11,7 +11,11 @@ import com.webteam2.poster4j.dto.Review;
 @Mapper
 public interface ReviewDao {
 	public List<Review> selectByPage(@Param("productId") int productId, @Param("pager") Pager pager);
-	public Review selectReview(int orderId, int productId, String optionSize, String optionFrame);
+	public Review selectReview(@Param("orderId") int orderId,
+							@Param("productId") int productId, 
+							@Param("optionSize") String optionSize,
+							@Param("optionFrame") String optionFrame);
 	public int count(int productId);
 	public void insert(Review review);
+	public void update(Review review);
 }

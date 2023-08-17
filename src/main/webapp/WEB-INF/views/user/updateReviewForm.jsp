@@ -8,7 +8,7 @@
 
 <div id="wrapper">
     <div id="container">
-        <form id="form" method="post" action="postWriteReview" enctype="multipart/form-data">
+        <form id="form" method="post" action="postUpdateReview" enctype="multipart/form-data">
         	<input name="orderId" type="hidden" value="${productReview.orderId}">
         	<input name="productId" type="hidden" value="${productReview.productId}">
         	<input name="optionSize" type="hidden" value="${productReview.optionSize}">
@@ -36,7 +36,7 @@
             <div class="detail-review mb-4">
                 <div class="h5 font-weight-bold">상세 리뷰</div>
                 <div>
-                    <textarea id="reviewText" name="reviewContent" rows="4" class="form-control"></textarea>
+                    <textarea id="reviewText" name="reviewContent" rows="4" class="form-control">${review.reviewContent}</textarea>
                     <div class="small text-muted mt-2">상품 품질과 관계없는 내용은 비공개 처리될 수 있습니다.</div>
                 </div>
                 <div class="mt-2 small text-muted character-count">글자수 세기: <span id="charCount">0</span></div>

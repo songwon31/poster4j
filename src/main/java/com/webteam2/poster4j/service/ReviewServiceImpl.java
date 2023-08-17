@@ -40,4 +40,8 @@ public class ReviewServiceImpl implements ReviewService {
 	public void register(Review review) {
 		reviewDao.insert(review);
 	}
+	@Override
+	public void modify(Review review) {
+		reviewDao.update(review);
+	}
 }

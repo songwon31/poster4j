@@ -6,7 +6,6 @@
 	 $(init);
 	 
 	 function init(){
-		
 	 }
 	 
 	function cancelOrder(orderId, productId, optionSize, optionFrame) {
@@ -74,7 +73,7 @@
 											<c:forEach var="productImage" items="${buyItem.productImage}" varStatus="imageStatus">
 												<c:if test="${productStatus.index==imageStatus.index}">
 													<tr class="">
-														<form method="get" action="writeReview">
+														<form id="form" method="get" action="writeReview">
 															<input type= hidden name="orderId" value="${orderDetail.orderId}">
 															<input type= hidden name="productId" value="${orderDetail.productId}">
 															<input type= hidden name="productName" value="${product.productName}">
@@ -94,7 +93,8 @@
 															<td class="orderStatus">${orderDetail.orderDetailStatus}</td>
 															<td class="cancel Exchange re">
 																<a href="javascript:void(0)" class="btn btn-dark" onclick = "cancelOrder(${orderDetail.orderId}, ${orderDetail.productId}, '${orderDetail.optionSize}', '${orderDetail.optionFrame}')">취소</a><br>
-																<button type="submit" class="writeReview btn btn-light" style="border: 1px solid">리뷰 작성</a>
+																<button id="writeReviewBtn" type="submit" class="writeReview btn btn-light" style="border: 1px solid">리뷰 작성</button>
+																<a id="updateReviewBtn" href="updateReview?orderId=${orderDetail.orderId}&productId=${orderDetail.productId}&optionSize=${orderDetail.optionSize}&optionFrame=${orderDetail.optionFrame}" class="updateReview btn btn-light" style="border: 1px solid">리뷰 수정</a>
 															</td>
 														</form>
 													</tr>

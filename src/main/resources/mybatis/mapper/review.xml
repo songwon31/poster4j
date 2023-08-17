@@ -18,7 +18,7 @@
       ]]>
 	</select>
 	
-	<select id="selectReview" parameterType="int" resultType="Review">
+	<select id="selectReview" resultType="Review">
 		select order_id, product_id, option_size, option_frame, review_star_rating, review_content, review_written_date
 		from review
 		where order_id = #{orderId} and product_id = #{productId} and option_size = #{optionSize} and option_frame = #{optionFrame}
@@ -33,4 +33,12 @@
 		insert into review (order_id, product_id, option_size, option_frame, review_star_rating, review_content, review_written_date)
 		values(#{orderId}, #{productId}, #{optionSize}, #{optionFrame}, #{reviewStarRating}, #{reviewContent}, #{reviewWrittenDate})
 	</insert>
+	
+	<update id="update" parameterType="review">
+		update review set 
+			review_star_rating=#{reviewStarRating},
+			review_content=#{reviewContent},
+			review_written_date=#{reviewWrittenDate}
+		where order_id = #{orderId} and product_id = #{productId} and option_size = #{optionSize} and option_frame = #{optionFrame}
+	</update>
 </mapper>
