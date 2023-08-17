@@ -17,10 +17,6 @@
       where rnum >= #{pager.startRowNo}
       ]]>
 	</select>
-
-	<!-- <select id="selectByPage" parameterType="int" resultType="Review">
-		select * from review where product_id = #{productId}
-	</select> -->
 	
 	<select id="selectReview" parameterType="int" resultType="Review">
 		select order_id, product_id, option_size, option_frame, review_star_rating, review_content, review_written_date

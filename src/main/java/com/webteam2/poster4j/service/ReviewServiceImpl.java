@@ -21,7 +21,6 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public List<Review> getList(int productId, Pager pager) {
-		log.info("" + productId);
 		List<Review> reviewList = reviewDao.selectByPage(productId, pager);
 		return reviewList;
 	}
@@ -37,7 +36,4 @@ public class ReviewServiceImpl implements ReviewService {
 		int totalReviewNum = reviewDao.count(productId);
 		return totalReviewNum;
 	}
-
-	
-	
 }

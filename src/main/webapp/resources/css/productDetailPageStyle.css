@@ -73,6 +73,9 @@
 	width: 50%;
 }
 
+.star {
+	color: gold;
+}
 .btnGroup {
 	margin-bottom: 100px;
 }
@@ -86,3 +89,4 @@
 	width: 100%;
 	height: auto;
 }
+

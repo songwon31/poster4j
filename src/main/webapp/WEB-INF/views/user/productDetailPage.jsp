@@ -21,10 +21,10 @@
 	//선택된 아이템 총가격
 	var totalPrice = 0;
 	
-/* 	$(init);
-	function init() {
-		getReviewList();
-	} */
+	//리뷰 이미지 배열
+    const convertedReviewImages = ${convertedReviewImages};
+	//현재 리뷰 이미지의 인덱스
+	var currentReviewImageIndex = 0; 
 </script>
 
 <div class="wrapper">
@@ -110,17 +110,48 @@
 		<table id="reviewTable">
 			<h3 id="reviewTableTitle" class="mt-3 mb-3">Review</h3>
 			<tr>
-				<th style="width:300px">제목</th>
+				<th style="width:100px">사진</th>
+				<th style="width:200px">구매제품</th>
+				<th style="width:200px">내용</th>
 				<th style="width:70px">별점</th>
-				<th style="width:70px">작성자</th>
 				<th style="width:70px">날짜</th>
 			</tr>
 			
 			<c:forEach var="review" items="${reviews}">
 				<tr>
-					<td>${review.productId} ${review.optionSize} ${review.optionFrame}</td>
-					<td>${review.reviewStarRating}</td>
+					<td id="reviewImageContainer" style="position: relative;">
+					    <img class="reviewImage" src="data:image/jpeg;base64, ${convertedReviewImages[0]}" width="150px" height="150px" />
+					    <button class="btn btnLeft" style="color: white; position: absolute; top: 40%; left: 0%;" onclick="toLeftReview()">◀</button>
+					    <button class="btn btnRight" style="color: white; position: absolute; top: 40%; right: 0%;" onclick="toRightReview()">▶</button>
+					</td>
+					<%-- <td id="reviewImageContainer">
+						<img class="firstImage" src="data:image/jpeg;base64, ${convertedReviewImages[0]}" width="100px" height="100px" />
+						<button class="btn btnLeft">◀</button>
+						<button class="btn btnRight">▶</button>
+
+						<c:forEach var="reviewImage" items="${convertedReviewImages}" varStatus="status">
+							<img class="explainImage" src="data:image/jpeg;base64, ${reviewImage[status.index}" />
+						</c:forEach>
+					</td> --%>
+					<td>${product.productName} ${review.optionSize} ${review.optionFrame}</td>
 					<td>${review.reviewContent}</td>
+					<td>
+						<c:if test="${review.reviewStarRating==5}">
+							<span class="star">★★★★★</span>
+						</c:if>
+						<c:if test="${review.reviewStarRating==4}">
+							<span class="star">★★★★</span>
+						</c:if>
+						<c:if test="${review.reviewStarRating==3}">
+							<span class="star">★★★</span>
+						</c:if>
+						<c:if test="${review.reviewStarRating==2}">
+							<span class="star">★★</span>
+						</c:if>
+						<c:if test="${review.reviewStarRating==1}">
+							<span class="star">★</span>
+						</c:if>
+					</td>
 					<td>
 						<fmt:formatDate value="${review.reviewWrittenDate}" pattern="yyyy-MM-dd"/>
 					</td>
@@ -155,18 +186,6 @@
 	</div>
 </div>
 <script>
-	//리뷰 테이블
-	function getReviewList() {
-		/* $.ajax({
-			type: "GET",
-			url: "/poster4j/getReviewList",
-			success: function(data) {
-				console.log(data);
-			}
-			
-		}) */
-	}
-	
 	//옵션선택시 선택된 아이템 표시
 	function selectOption() {
 		$.ajax({
@@ -415,6 +434,36 @@
 			}
 		});
 	}
+
+	//이전 리뷰이미지 보기
+	function toLeftReview() {
+	    if (currentReviewImageIndex == 0) {
+	    } else {
+	    	currentReviewImageIndex--;
+	        updateImage();
+	    }
+	}
+
+	//다음 리뷰이미지 보기
+	function toRightReview() {
+    	console.log(currentReviewImageIndex);
+		console.log("toRightReview");
+	    if (currentReviewImageIndex < convertedReviewImages.length - 1) {
+	    	currentReviewImageIndex++;
+	        updateImage();
+	    } else {
+	    	currentReviewImageIndex = convertedReviewImages.length;
+	    }
+	}
+
+	//해당 인덱스 리뷰 이미지 업데이트
+	function updateImage() {
+	    const imageContainer = document.getElementById("reviewImageContainer");
+	    const imageElement = imageContainer.querySelector(".reviewImage");
+	    
+	    imageElement.src = "data:image/jpeg;base64, ${convertedReviewImages[currentReviewImageIndex]}";
+	}
+
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

@@ -25,9 +25,11 @@ import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
 import com.webteam2.poster4j.dto.Review;
+import com.webteam2.poster4j.dto.ReviewImage;
 import com.webteam2.poster4j.service.CartService;
 import com.webteam2.poster4j.service.ProductImageService;
 import com.webteam2.poster4j.service.ProductService;
+import com.webteam2.poster4j.service.ReviewImageService;
 import com.webteam2.poster4j.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,11 +45,12 @@ public class productDetailPageController {
 	CartService cartService;
 	@Resource
 	ReviewService reviewService;
+	@Resource
+	ReviewImageService reviewImageService;
 	
 	@GetMapping("/productDetail")
 	public String productDetail(@RequestParam(value="productId")int productId,
 						String pageNo, Model model, HttpSession session) {
-		log.info("" +productId);
 		//대표 이미지 가져오기
 		ProductImage productImage = productImageService.getImage(productId);
 		Product product = new Product();
@@ -66,7 +69,6 @@ public class productDetailPageController {
 			String base64Img = Base64.getEncoder().encodeToString(image.getProductImageSource());
 			convertedImages.add(base64Img);
 		}
-		
 		model.addAttribute("convertedImages", convertedImages);
 		
 		//상세설명 이미지 리스트에 공통 이미지인 frameDetail 추가하기
@@ -82,11 +84,7 @@ public class productDetailPageController {
 		model.addAttribute("discountedPrice", discountedPrice);
 		model.addAttribute("discountAmount", discountAmount);
 		
-		
-		/*Review review = new Review();*/
-		/*review = reviewService.getReview(128, 1, "297 x 420mm", "silver");
-		log.info("" + review);*/
-		
+		//해당 상품의 리뷰 테이블
 		//브라우저에서 pageNo가 넘어오지 않았을 경우
 		if (pageNo == null) {
 			//세션에 저장되어 있는 지 확인
@@ -100,7 +98,6 @@ public class productDetailPageController {
 		int intPageNo = Integer.parseInt(pageNo);
 		//세션에 pageNo를 저장
 		session.setAttribute("pageNo", String.valueOf(pageNo));
-		log.info("productId: " + productId);
 		int totalReviewNum = reviewService.getTotalReviewNum(productId);
 		Pager pager = new Pager(10, 5, totalReviewNum, intPageNo);
 
@@ -109,6 +106,16 @@ public class productDetailPageController {
 
 		model.addAttribute("pager", pager);
 		model.addAttribute("reviews", reviews);
+		
+		//리뷰 이미지 리스트 가져오기
+		List<ReviewImage> reviewImageList = reviewImageService.getReviewImageList(productId);
+		List<String> convertedReviewImages = new ArrayList<String>();
+		
+		for (ReviewImage image : reviewImageList) {
+			String base64Img = Base64.getEncoder().encodeToString(image.getReviewImageSource());
+			convertedReviewImages.add(base64Img);
+		}
+		model.addAttribute("convertedReviewImages", convertedReviewImages);
 		
 		return "user/productDetailPage";
 	}
@@ -171,9 +178,7 @@ public class productDetailPageController {
 	}
 	
 	@GetMapping("/getReviewList")
-   public String getReviewList(String pageNo, Model model, HttpSession session) {
-		
-
+	public String getReviewList(String pageNo, Model model, HttpSession session) {
 		return "user/productDetailPage";
    }
 }
