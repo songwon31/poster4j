@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/myPageStyle.css"/>
 
-<div class="wrapper">
+<div class="wrapper" style="margin-top: 80px;">
 	<div class="myPageContent d-flex justify-content-center">
 		<ul class="myPageList d-flex flex-column align-items-center">
 			<li>

@@ -4,34 +4,36 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/customerModify.css">
 
 <div class="wrapper" style="margin-top:60px;">
 	<div id="container">
 		<div id="contents">
-			<div>회원정보확인</div>
-			<form method="post" action="customerModifySubmit">
-				<div class="input-group" style="width:100%;">
-					<div class="input-group-addon" style="width:35%; text-align:left;"><span class="input-group-text">아이디</span></div>
-					<input id="customerId" type="text" name="customerId" class="form-control" style="width:65%; background-color: white;" value="${customer.customerId}">
-				</div>
-				
-				<div class="input-group" style="width:100%;">
-					<div class="input-group-addon" style="width:35%; text-align:left;"><span class="input-group-text">이름</span></div>
-					<input id="customerName" type="text" name="customerName" class="form-control" style="width:65%;" value="${customer.customerName}" value="${customer.customerName}">
-				</div>
-								
-				<div class="input-group" style="width:100%;">
-					<div class="input-group-addon" style="width:35%; text-align:left;"><span class="input-group-text">비밀번호</span></div>
-					<input id="customerPassword" type="text" name="customerPassword" class="form-control" style="width:65%;">
-				</div>
-				
-				<div>
-					<span><button class="btn btn-sm btn-primary">확인</button></span>
-					<span><button class="btn btn-sm btn-secondary">취소</button></span>
-				</div>
-				
-			</form>
+			<div id="title">
+				<div style="font-size:25px; font-weight: bold;">회원정보수정</div>
+			</div>
+			<table class="usermodify-table">
+                <tbody>
+                <tr>
+                    <th scope="row">아이디</th>
+                    <td>
+                    	<form>
+                    		<input type="text" name="customerId" value="${customer.customerId}">
+                    	</form>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">비밀번호</th>
+                    <td>
+                        <input name="customerPassword" type="password">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+			<div class="foot">
+				<span><button class="btn btn-dark" style="border-radius:0px">확인</button></span>
+				<span><button type="button" onclick="goHome();" class="btn btn-secondary" style="border-radius:0px">취소</button></span>
+			</div>
 		</div>
 	</div>
 </div>

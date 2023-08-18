@@ -31,7 +31,7 @@ public class CustomerModifyController {
 	
 	@PostMapping("/customerModify")
 	@Login
-	public String customerModify(HttpSession session,
+	public String customerModify(Model model, HttpSession session,
 			String customerId, String customerPassword) 
 	{
 		Customer verifyCustomer = new Customer();
@@ -39,6 +39,8 @@ public class CustomerModifyController {
 		verifyCustomer.setCustomerPassword(customerPassword);
 		LoginResult result = customerService.login(verifyCustomer);
 		if (result == LoginResult.SUCCESS) {
+			Customer customer = (Customer)session.getAttribute("customerLogin");
+			model.addAttribute("customer", customer);
 			return "user/customerModify";
 		} else {
 			return "redirect:/user/customerVerification";
