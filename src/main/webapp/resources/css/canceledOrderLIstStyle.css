@@ -1,57 +1,113 @@
-@charset "UTF-8";
-
 /* Custom Styles */
+
 .order-list-wrapper {
-	padding: 50px 0;
+	margin: 0 auto;
+	margin-top: 100px;
+	max-width: 1080px;
+	padding: 30px;
+	background-color: white;
 }
 
 .order-list-title {
-	font-size: 28px;
+	font-size: 24px;
+	margin-bottom: 20px;
 	font-weight: bold;
-	margin-bottom: 30px;
 }
 
 .order-list-items {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(860px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .order-list-items {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
 }
 
 .order-item {
-	background-color: #f5f5f5;
+	border: 1px solid #ddd;
 	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	flex-basis: calc(33.33% - 20px);
-	margin-bottom: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	background-color: #fff;
 }
 
-.order-date {
+.order-item img {
+	max-width: 100%;
+}
+
+.order-item-title {
+	font-size: 20px;
 	font-weight: bold;
-	font-size: 18px;
+	margin: 10px 0;
+}
+
+.order-item-price {
+	font-size: 16px;
+	color: #007bff;
 	margin-bottom: 10px;
 }
 
-.order-item-details {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
-	font-size: 14px;
+.order-item-status {
+	font-size: 18px;
+	color: #28a745;
+	margin-bottom: 10px;
 }
 
-.order-pagination {
+.pagination {
+	margin-top: 20px;
 	display: flex;
 	justify-content: center;
-	margin-top: 30px;
 }
 
-.order-pagination a {
-	text-decoration: none;
-	color: #333;
+.pagination a {
+	margin: 0 5px;
+}
+
+.pagination a.active {
+	color: #007bff;
 	font-weight: bold;
-	margin: 0 10px;
+}
+.date{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
-.order-pagination a:hover {
-	color: #555;
+.order-item-theme{
+	font-size: 20px;
 }
+
+.order-item-name{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.date-content{
+	font-size: 17px;
+}
+
+.order-item-details{
+	margin: 20px 0;
+	display: flex;
+	flex-direction: row;
+	/* justify-content: space-between; */
+	align-items: center;
+}
+
+.order-item-details > div{
+	
+}
+
+.productImage{
+	box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.9); /* 가로, 세로, 흐림 정도, 색상 */
+  	transition: box-shadow 0.3s ease-in-out; /* 호버 시 부드러운 변화 */
+  	transform: scale(1);
+}
+
+.productImage:hover {
+	 box-shadow: 0px 10px 20px rgba(0, 0, 0, 1.0); /* 호버 시 그림자 효과 강화 */
+	 transform: scale(1.1);
+}
+

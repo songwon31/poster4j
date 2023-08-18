@@ -208,4 +208,10 @@
 		from product
 	</select>
 	
+	<select id="selectById">
+		select *
+		from product
+		where product_id = #{productId}
+	</select>
+	
 </mapper>

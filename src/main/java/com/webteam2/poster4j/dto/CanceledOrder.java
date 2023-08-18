@@ -18,4 +18,5 @@ public class CanceledOrder {
 	private Date canceledOrderReqDate;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date canceledOrderCmptnDate;
+	private String formattedCanceledOrderReqDate;
 }

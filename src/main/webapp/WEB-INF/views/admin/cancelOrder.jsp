@@ -36,9 +36,9 @@
 									<div class="input-group-addon" style="width:20%; text-align:left;"><span class="input-group-text">카테고리</span></div>
 									<select id="cancelCategory" name="cancelCategory" class="form-control" style="width:80%;">
 										<option value="">카테고리 선택</option>
-										<option value="cancelBeforeSend">발송 전 취소</option>
-										<option value="exchange">교환</option>
-										<option value="return">반품</option>
+										<option value="발송 전 취소">발송 전 취소</option>
+										<option value="교환">교환</option>
+										<option value="반품">반품</option>
 									</select>
 								</div>
 								<div class="input-group" style="width:100%;">

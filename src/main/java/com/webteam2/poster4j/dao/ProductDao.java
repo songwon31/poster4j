@@ -24,5 +24,6 @@ public interface ProductDao {
 													 @Param("pager") Pager pager);
 	public List<Product> selectAll();
 	public List<Integer> selectAllProductId();
+	public List<Product> selectById(int productId);
 	
 }

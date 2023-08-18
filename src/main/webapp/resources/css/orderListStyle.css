@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
-
+#wrapper{
+	background-color: #fff;
+}
 
 #contents{
 	margin-top: 100px;
@@ -39,9 +41,16 @@
 	grid-gap: 20px;
 }
 
+/* @media (max-width: 768px) {
+  .order-list-items {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+ */
 .order-item {
 	border: 1px solid #ddd;
-	padding: 20px;
+	padding: 30px;
+	padding-top: 40px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	background-color: #fff;
 	

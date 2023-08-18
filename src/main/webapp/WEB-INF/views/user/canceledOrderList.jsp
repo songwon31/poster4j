@@ -1,46 +1,60 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/canceledOrderListStyle.css">
- 
-<div id="wrapper" class="order-list-wrapper">
-  <div id="container" class="container">
-    <div id="contents">
-      <h1 class="order-list-title">CANCELED ORDERS</h1>
-      <div class="order-list-items">
-        <c:forEach var="canceledOrder" items="${canceledOrderList}" varStatus="status">
-          <div class="order-item">
-            <div class="order-date">${canceledOrder.canceledOrderReqDate}</div>
-            <div class="order-item-details">
-              <div>${orderList[status.index].orderDate}</div>
-              <div>${canceledOrder.optionSize}[${canceledOrder.optionFrame}]</div>
-              <div>Quantity:
-                ${orderDetailList[status.index].orderDetailQuantity}</div>
-              <div>Price:
-                ${orderDetailList[status.index].orderDetailPrice}</div>
-              <div>${canceledOrder.canceledOrderCategory}</div>
-            </div>
-          </div>
-        </c:forEach>
-      </div>
-      <div class="order-pagination">
-        <a class="text-dark" href="orderList?pageNo=1">first</a>
-        <c:if test="${pager.groupNo>1}">
-          <a class="text-dark" href="orderList?pageNo=${pager.startPageNo-1}">prev</a>
-        </c:if>
-        <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-          <a class="text-dark" href="orderList?pageNo=${i}">${i}</a>
-        </c:forEach>
-        <c:if test="${pager.groupNo<pager.totalGroupNo}">
-          <a class="text-dark" href="orderList?pageNo=${pager.endPageNo+1}">next</a>
-        </c:if>
-        <a class="text-dark" href="orderList?pageNo=${pager.totalPageNo}">last</a>
-      </div>
-    </div>
-  </div>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/canceledOrderLIstStyle.css">
+
+<div class="order-list-wrapper">
+	<h1 class="order-list-title">CANCELED ORDER</h1>
+	<div class="order-list-items">
+		<c:forEach var="canceledOrder" items="${canceledOrderList}"
+			varStatus="status">
+			<div class="order-item">
+				<div class="date mt-3" >
+					<div class="canceled-order-date">취소접수일: <span class="date-content">${canceledOrder.formattedCanceledOrderReqDate}</span></div>
+					<div class="order-date">주문일: <span class="date-content">${orderList[status.index].convertedOrderDate}</span></div>
+					<div class="order-no">주문번호: <span class="date-content">${orderList[status.index].orderId}</span></div>
+				</div>
+				<div class="order-item-details d-flex container">
+					<div class="productImage ml-3" style="width: 170px;"><img alt="" src="data:image/jpeg;base64, ${productImageList[status.index]}" width="100%"></div>
+					<div class="ml-5" style="width:250px;">
+						<div><span class="order-item-theme">[${productList[status.index].productTheme}]</span><br><span class="order-item-name mt-2">${productList[status.index].productName}</span> </div>
+						<div class="mt-3">[옵션: ${canceledOrder.optionSize} / ${canceledOrder.optionFrame}]</div>
+					</div>
+					<div style="width:200px;">
+						<div>수량:
+							${orderDetailList[status.index].orderDetailQuantity}개</div>
+						<div class="order-item-price mt-3">KRW <fmt:formatNumber value="${orderDetailList[status.index].orderDetailPrice}" pattern="#,###" /></div>
+					</div>
+					<c:if test="${canceledOrder.canceledOrderCategory.equals('반품')}">
+						<div class="order-item-status" style="color: red;">${canceledOrder.canceledOrderCategory}</div>
+					</c:if>
+					<c:if test="${canceledOrder.canceledOrderCategory.equals('교환')}">
+						<div class="order-item-status" style=" color: yellow;">${canceledOrder.canceledOrderCategory}</div>
+					</c:if>
+					<c:if test="${canceledOrder.canceledOrderCategory.equals('발송 전 취소')}">
+						<div class="order-item-status" style="">${canceledOrder.canceledOrderCategory}</div>
+					</c:if>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
+	<div class="pagination">
+		<a class="text-dark" href="orderList?pageNo=1">first</a>
+		<c:if test="${pager.groupNo>1}">
+			<a class="text-dark" href="orderList?pageNo=${pager.startPageNo-1}">prev</a>
+		</c:if>
+		<c:forEach var="i" begin="${pager.startPageNo}"
+			end="${pager.endPageNo}">
+			<a class="text-dark" href="orderList?pageNo=${i}">${i}</a>
+		</c:forEach>
+		<c:if test="${pager.groupNo<pager.totalGroupNo}">
+			<a class="text-dark" href="orderList?pageNo=${pager.endPageNo+1}">next</a>
+		</c:if>
+		<a class="text-dark" href="orderList?pageNo=${pager.totalPageNo}">last</a>
+	</div>
 </div>
 
 
@@ -116,4 +130,4 @@
 	</div>
 </div> --%>
 
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>

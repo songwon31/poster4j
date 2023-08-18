@@ -1,6 +1,9 @@
 package com.webteam2.poster4j.user.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -15,9 +18,13 @@ import com.webteam2.poster4j.dto.Customer;
 import com.webteam2.poster4j.dto.OrderDetail;
 import com.webteam2.poster4j.dto.OrderT;
 import com.webteam2.poster4j.dto.Pager;
+import com.webteam2.poster4j.dto.Product;
+import com.webteam2.poster4j.dto.ProductImage;
 import com.webteam2.poster4j.service.CanceledOrderService;
 import com.webteam2.poster4j.service.OrderDetailService;
 import com.webteam2.poster4j.service.OrderTService;
+import com.webteam2.poster4j.service.ProductImageService;
+import com.webteam2.poster4j.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +37,10 @@ public class CanceledOrderListController {
 	OrderTService orderService;
 	@Resource
 	OrderDetailService orderDetailService;
+	@Resource
+	ProductService productService;
+	@Resource
+	ProductImageService productImageService;
 	
 	@RequestMapping("/canceledOrderList")
 	public String getCanceledOrderList(HttpSession session, Model model, String pageNo) {
@@ -60,22 +71,47 @@ public class CanceledOrderListController {
 		List<OrderT> orderList = orderService.getOrderListById(customer.getCustomerId());
 		List<CanceledOrder> canceledOrderList  = new ArrayList<>();
 		List<OrderDetail> orderDetailList = new ArrayList<>();
+		List<Product> productList = new ArrayList<>();
+		List<String> productImageList = new ArrayList<>();
 		
 		for(OrderT order : orderList) {
 			int orderId = order.getOrderId();
 			List<CanceledOrder> canceledOrdersForOrder = canceledOrderService.getListWithPagerAndId(pager, orderId);
 			List<OrderDetail> orderDetailsForOrder = orderDetailService.getListNoPager(orderId);
+			for(OrderDetail orderDetail : orderDetailsForOrder) {
+				int productId = orderDetail.getProductId();
+				Product product = productService.getOneProduct(productId);
+				ProductImage productImage = productImageService.getRepresentProductImage(productId);
+				String base64Img = Base64.getEncoder().encodeToString(productImage.getProductImageSource());
+				
+				productList.add(product);
+				productImageList.add(base64Img);
+			}
+			
 			canceledOrderList.addAll(canceledOrdersForOrder);
 			orderDetailList.addAll(orderDetailsForOrder);
 		}
 		
-		//List<CanceledOrder> canceledOrderList = canceledOrderService.getListWithPager(pager);
-		log.info(""+canceledOrderList);
-		log.info(""+ orderDetailList);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		
+		for(OrderT order : orderList) {
+			Date orderDate = order.getOrderDate();
+			String formattedOrderDate = dateFormat.format(orderDate);
+			order.setConvertedOrderDate(formattedOrderDate);
+		}
+		
+		for(CanceledOrder canceledOrder : canceledOrderList) {
+			Date canceledOrderReqDate = canceledOrder.getCanceledOrderReqDate();
+			String formattedDate = dateFormat.format(canceledOrderReqDate);
+			canceledOrder.setFormattedCanceledOrderReqDate(formattedDate);
+			
+		}
 		
 		model.addAttribute("orderList", orderList);
 		model.addAttribute("canceledOrderList", canceledOrderList);
 		model.addAttribute("orderDetailList", orderDetailList);
+		model.addAttribute("productList", productList);
+		model.addAttribute("productImageList", productImageList);
 		model.addAttribute("pager", pager);
 		return "/user/canceledOrderList";
 	}
