@@ -93,6 +93,18 @@
 		$('#mainCategory h2 span a').css('color', 'darkgray');
 		$('#'+currentMainCategory).css('color', 'black');
 		$('#'+currentSubCategory).css('color', 'black');
+		
+/* 		//scroll 위치 기억
+		function memorizeScroll() {
+			 var strCook = document.cookie;
+			 if(strCook.indexOf("!~")!=0) {
+				 var intS = strCook.indexOf("!~");
+				 var intE = strCook.indexOf("~!");
+				 var strPos = strCook.substring(intS+2,intE);
+
+				$("#contents").scrollTop() = strPos;
+			}
+		} */
 	}
 	
 	function selectEntire() {
@@ -117,15 +129,19 @@
 		$('#'+currentSubCategory).css('color', 'black');
 	}
 	
-	
-	
+/* 	//저장된 scroll 위치로 이동
+	function SetPosition() {
+		 var intY = $("#contents").scrollTop();
+		 document.title = intY;
+		 document.cookie = "yPos=!~" + intY + "~!";
+	} */
 </script>
 
 <%-- home.jsp의 중앙내용 --%>
 <div id="wrapper">
 	<div id="container">
-		<%-- 
-		<!-- 메인 포스터 -->
+		
+		<%-- <!-- 메인 포스터 -->
 		<div id="main-poster" class="container-fluid" style="background-color: #F4F4F4; " >
 			<div id="frame" style="background-image: url('data:image/jpeg;base64, ${randomImage}');">
 				<img id="frame-image" alt="프레임" src="${pageContext.request.contextPath}/resources/images/frame.png" width="450px" height="630px;">
@@ -146,11 +162,11 @@
 				<span style="display: block; font-weight: 600; font-size: 17px; ">Journey</span>
 				<span style="display: block; font-weight: 500; font-size: 17px; word-spacing: -3px;">in my room</span>
 			</h2>
-		</div>
-		 --%>
+		</div> --%>
+		
 		<!-- 포스터 목록 -->
 		<div>
-			<div id="contents" style="display:none;" >
+			<div id="contents" style="display:none;" onscroll="SetPosition()">
 				<div id="menuArea">
 					<div id="mainCategory">
 						<h2>

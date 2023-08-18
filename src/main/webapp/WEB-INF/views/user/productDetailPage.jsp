@@ -143,27 +143,65 @@
 					<div class="mt-3"><fmt:formatDate value="${review.reviewWrittenDate}" pattern="yyyy-MM-dd" /></div>
 				</div>
 			</c:forEach>
+			<%-- 페이지 번호 --%>
+			<div class="d-flex">
+				<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=1">first</a>
+				<c:if test="${reviewPager.groupNo>1}">
+					<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=${reviewPager.startPageNo-1}">prev</a>
+				</c:if>
+				
+				<c:forEach var="i" begin="${reviewPager.startPageNo}" end="${reviewPager.endPageNo}">
+					<c:if test="${reviewPager.pageNo != i}">
+						<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px;" href="getReviewList?pageNo=${i}">${i}</a>
+					</c:if>
+					<c:if test="${reviewPager.pageNo == i}">
+						<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px; text-decoration:underline;" href="getReviewList?pageNo=${i}">${i}</a>
+					</c:if>
+				</c:forEach>
+				
+				<c:if test="${reviewPager.groupNo<reviewPager.totalGroupNo}">
+					<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${reviewPager.endPageNo+1}">next</a>
+				</c:if>
+				<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${reviewPager.totalPageNo}">last</a>
+			</div>
 		</div>
+		
+		<%-- QNA 게시판 --%>
+		<table id="qnaBoard">
+			<h3 id="qnawBoardTitle">QNA</h3>
+			<c:forEach var="productInquiry" items="${productInquiries}">
+				<tr class="qnaBoardItem">
+					<td>${productInquiry.productInquiryContent}</td>
+					<td>${productInquiry.customerId}</td>
+					<td>${productInquiry.productInquiryDate}</td>
+					<td></td>
+					<td>
+						<c:if test="${productInquiry.productInquiryAnswered==TRUE}">YES</c:if>
+						<c:if test="${productInquiry.productInquiryAnswered==FALSE}">NO</c:if>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
 		<%-- 페이지 번호 --%>
 		<div class="d-flex">
-			<a class="btn btn-outline-primary btn-sm" href="getReviewList?pageNo=1">처음</a>
-			<c:if test="${pager.groupNo>1}">
-				<a class="btn btn-outline-info btn-sm" href="getReviewList?pageNo=${pager.startPageNo-1}">이전</a>
+			<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=1">first</a>
+			<c:if test="${qnaPager.groupNo>1}">
+				<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=${qnaPager.startPageNo-1}">prev</a>
 			</c:if>
 			
-			<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-				<c:if test="${pager.pageNo != i}">
-					<a class="btn btn-outline-success btn-sm" href="getReviewList?pageNo=${i}">${i}</a>
+			<c:forEach var="i" begin="${qnaPager.startPageNo}" end="${qnaPager.endPageNo}">
+				<c:if test="${qnaPager.pageNo != i}">
+					<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px;" href="getReviewList?pageNo=${i}">${i}</a>
 				</c:if>
-				<c:if test="${pager.pageNo == i}">
-					<a class="btn btn-danger btn-sm" href="getReviewList?pageNo=${i}">${i}</a>
+				<c:if test="${qnaPager.pageNo == i}">
+					<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px; text-decoration:underline;" href="getReviewList?pageNo=${i}">${i}</a>
 				</c:if>
 			</c:forEach>
 			
-			<c:if test="${pager.groupNo<pager.totalGroupNo}">
-				<a class="btn btn-outline-info btn-sm" href="getReviewList?pageNo=${pager.endPageNo+1}">다음</a>
+			<c:if test="${qnaPager.groupNo<qnaPager.totalGroupNo}">
+				<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${qnaPager.endPageNo+1}">next</a>
 			</c:if>
-			<a class="btn btn-outline-primary btn-sm" href="getReviewList?pageNo=${pager.totalPageNo}">맨끝</a>
+			<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${qnaPager.totalPageNo}">last</a>
 		</div>
 	</div>
 </div>

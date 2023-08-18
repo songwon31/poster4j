@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.webteam2.poster4j.dao.ProductInquiryDao;
 import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.ProductInquiry;
+import com.webteam2.poster4j.dto.Review;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,5 +37,16 @@ public class ProductInquiryServiceImpl implements ProductInquiryService {
 	@Override
 	public String getContentById(int productInquiryId) {
 		return productInquiryDao.selectContentById(productInquiryId);
+	}
+
+	@Override
+	public int getEachProductInquiryNum(int productId) {
+		return productInquiryDao.countEachProductInquiry(productId);
+	}
+
+	@Override
+	public List<ProductInquiry> getListWithProductIdPager(int productId, Pager pager) {
+		List<ProductInquiry> qnaList = productInquiryDao.selectWithProductIdPager(productId, pager);
+		return qnaList;
 	}
 }

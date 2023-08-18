@@ -21,6 +21,32 @@
 		]]>
 	</select>
 	
+	<select id="selectWithProductIdPager" parameterType="map" resultType="ProductInquiry">
+		<![CDATA[
+		select rnum, product_inquiry_id, customer_id, product_id, product_inquiry_content, product_inquiry_date, product_inquiry_answered
+		from (
+		    select rownum as rnum, product_inquiry_id, customer_id, product_id, product_inquiry_content, product_inquiry_date, product_inquiry_answered
+		    from (
+		        select product_inquiry_id, customer_id, product_id, product_inquiry_content, product_inquiry_date, product_inquiry_answered
+		        from product_inquiry
+		        where product_id = #{productId}
+		        order by product_inquiry_id desc
+		    )
+		    where rownum <= #{pager.endRowNo}
+		)
+		where rnum >= #{pager.startRowNo}
+		]]>
+	</select>
+	
+	<select id="countEachProductInquiry" resultType="int">
+		select count(*) from product_inquiry where product_id = #{productId}
+	</select>
+	
+	<insert id="insertProductInquiry" parameterType="ProductInquiry">
+		insert into product_inquiry (productInquiry_id, customer_id, product_id, product_inquiry_content, product_inquiry_date, product_inquiry_answered)
+		values(#{productInquiryId}, #{customerId}, #{productId}, #{productInquiryContent}, #{productInquiryDate}, #{productInquiryAnswered})
+	</insert>
+	
 	<update id="updateAnsweredToTrue" parameterType="int">
 		update product_inquiry set product_inquiry_answered = 'TRUE' 
 		where product_inquiry_id=#{productInquiryId}
