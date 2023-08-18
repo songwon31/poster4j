@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+#container {
+	font-size: 12px;
+    line-height: 1.6;
+    display: block;
+    padding: 0 0 40px;
+    position: relative;
+    z-index: 1;
+    width: 980px;
+    margin: 0 auto;
+}
+
+#contents {
+    font-size: 12px;
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
+    min-height: 900px;
+    padding: 50px;
+    background-color: #fff;
+}
+
+#title {
+	clear: both;
+    height: 45px;
+    margin-bottom: 0;
+    padding-bottom: 32px;
+    overflow: hidden;
+    color: black;
+}
+
+.usermodify-table {
+    line-height: 1.6;
+    color: #666;
+    font-size: 100%;
+    border-spacing: 0;
+    width: 100%;
+    border-top: 2px solid #969696;
+    border-collapse: collapse;
+}
+
+.usermodify-table th {
+	margin: 0;
+    padding: 14px 30px;
+    border-bottom: 1px solid #ddd;
+    background-color: #eef1f8;
+    text-align: left;
+    white-space: nowrap;
+    width: 100px;
+}
+
+.usermodify-table td {
+	margin: 0;
+    padding: 14px 30px;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+}
+
+.usermodify-table input {
+	border-spacing: 0;
+    border-collapse: collapse;
+    color: inherit;
+    font: inherit;
+    margin: 0;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    height: 22px;
+    padding: 2px 5px;
+    line-height: 22px;
+    width: 200px;
+}
+
+.foot {
+    font-size: 12px;
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
+    padding: 0;
+    margin-top: 30px;
+    text-align: center;
+}

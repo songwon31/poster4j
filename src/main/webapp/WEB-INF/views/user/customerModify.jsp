@@ -4,6 +4,8 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
+
+
 <div class="wrapper" style="margin-top:60px;">
 	<div id="container">
 		<div id="contents">

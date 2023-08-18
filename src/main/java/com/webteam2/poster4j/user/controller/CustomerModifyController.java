@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.webteam2.poster4j.dto.Customer;
 import com.webteam2.poster4j.interceptor.Login;
 import com.webteam2.poster4j.service.CustomerService;
+import com.webteam2.poster4j.service.CustomerService.LoginResult;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,8 +34,11 @@ public class CustomerModifyController {
 	public String customerModify(HttpSession session,
 			String customerId, String customerPassword) 
 	{
-		Customer loginCustomer = (Customer)session.getAttribute("customerLogin");
-		if (customerId.equals(loginCustomer.getCustomerId()) && customerPassword.equals(loginCustomer.getCustomerPassword())) {
+		Customer verifyCustomer = new Customer();
+		verifyCustomer.setCustomerId(customerId);
+		verifyCustomer.setCustomerPassword(customerPassword);
+		LoginResult result = customerService.login(verifyCustomer);
+		if (result == LoginResult.SUCCESS) {
 			return "user/customerModify";
 		} else {
 			return "redirect:/user/customerVerification";

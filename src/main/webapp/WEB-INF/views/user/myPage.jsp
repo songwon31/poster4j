@@ -19,6 +19,9 @@
 			<li>
 				<a class="canceledOrderListLink" href="canceledOrderList">CanceledOrder</a>
 			</li>
+			<li>
+				<a class="customerModifyLink" href="customerModify">개인정보수정</a>
+			</li>
 		</ul>
 	</div>
 </div>

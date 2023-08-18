@@ -8,11 +8,15 @@ li {
 }
 
 .myPageContent {
-	margin: 400px 0px;
 	font-size: 13px;
+}
+
+.myPageList li {
+	margin-bottom: 20px;
 }
 
 .myPageList li a {
 	color: black;
 	font-size: 36px;
+	text-decoration: none;
 }
