@@ -24,6 +24,35 @@
 		
 	
 	function init() {
+
+		const $frame = $("#frame");
+
+		$(document).on("mousemove", function(e) {
+			
+			var offsetX = e.clientX;
+			var offsetY = e.clientY;
+			
+			var centerX = $frame.offset().left + $frame.width() / 2;
+			var centerY = $frame.offset().top + $frame.height() / 2;
+			
+			var distanceX = (centerX - offsetX) *2;
+			var distanceY = (centerY - offsetY) *2;
+			
+			var shadowX = distanceX / centerX * 10;
+			var shadowY = distanceY / centerY * 10;
+			
+			
+			var ceilShadowX = Math.ceil(shadowX);
+			var ceilShadowY = Math.ceil(shadowY);
+			
+			console.log("shadowX:  " + ceilShadowX);
+			console.log("shadowY:  " + ceilShadowY);
+			
+			$frame.css("box-shadow", "rgba(0, 0, 0, 0.6) " + ceilShadowX + "px " + ceilShadowY + "px 20px"  );
+			
+		});
+		
+		
 		const isMobile = () => {
 			try {
 				document.createEvent("TouchEvent");
@@ -140,8 +169,7 @@
 <%-- home.jsp의 중앙내용 --%>
 <div id="wrapper">
 	<div id="container">
-		
-		<%-- <!-- 메인 포스터 -->
+		<!-- 메인 포스터 -->
 		<div id="main-poster" class="container-fluid" style="background-color: #F4F4F4; " >
 			<div id="frame" style="background-image: url('data:image/jpeg;base64, ${randomImage}');">
 				<img id="frame-image" alt="프레임" src="${pageContext.request.contextPath}/resources/images/frame.png" width="450px" height="630px;">
@@ -157,7 +185,7 @@
 			</div>
 		</div> -->
 		<!-- 슬로건 -->
-		<div id="slogan" style="padding: 42px 13px 100px;"> 
+		<%--<div id="slogan" style="padding: 42px 13px 100px;"> 
 			<h2 style="text-align: center; ">
 				<span style="display: block; font-weight: 600; font-size: 17px; ">Journey</span>
 				<span style="display: block; font-weight: 500; font-size: 17px; word-spacing: -3px;">in my room</span>
@@ -190,9 +218,9 @@
 											<div class="productDetailDiv" style="display:block;">
 												<div class="productDetailDiv2">
 													<div class="currentProductId" style="display:none">${productList[status.index].productId}</div>
-													<div class="d-flex justify-content-start" style="font-size:18px;">${productList[status.index].productName}</div>
+													<div class="d-flex justify-content-start" style="font-size:16px;">${productList[status.index].productName}</div>
 													<br>
-													<div class="d-flex justify-content-start" style="white-space: pre-line;">
+													<div class="d-flex justify-content-start" style="white-space: pre-line; font-family: 'daddyFont'; font-size: 20px;">
 														${productList[status.index].productDetail}
 													</div>
 													<br><br>

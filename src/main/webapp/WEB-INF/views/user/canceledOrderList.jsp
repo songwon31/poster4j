@@ -32,7 +32,7 @@
 						<div class="order-item-status" style="color: red;">${canceledOrder.canceledOrderCategory}</div>
 					</c:if>
 					<c:if test="${canceledOrder.canceledOrderCategory.equals('교환')}">
-						<div class="order-item-status" style=" color: yellow;">${canceledOrder.canceledOrderCategory}</div>
+						<div class="order-item-status" style=" color: #ffcc00;">${canceledOrder.canceledOrderCategory}</div>
 					</c:if>
 					<c:if test="${canceledOrder.canceledOrderCategory.equals('발송 전 취소')}">
 						<div class="order-item-status" style="">${canceledOrder.canceledOrderCategory}</div>
@@ -42,18 +42,26 @@
 		</c:forEach>
 	</div>
 	<div class="pagination">
-		<a class="text-dark" href="orderList?pageNo=1">first</a>
-		<c:if test="${pager.groupNo>1}">
-			<a class="text-dark" href="orderList?pageNo=${pager.startPageNo-1}">prev</a>
-		</c:if>
-		<c:forEach var="i" begin="${pager.startPageNo}"
-			end="${pager.endPageNo}">
-			<a class="text-dark" href="orderList?pageNo=${i}">${i}</a>
-		</c:forEach>
-		<c:if test="${pager.groupNo<pager.totalGroupNo}">
-			<a class="text-dark" href="orderList?pageNo=${pager.endPageNo+1}">next</a>
-		</c:if>
-		<a class="text-dark" href="orderList?pageNo=${pager.totalPageNo}">last</a>
+		<div colspan="12" class="text-center">
+			<div>
+				<a class="text-dark mr-2" href="canceledOrderList?pageNo=1" style="font-weight:600;">first</a>
+				<c:if test="${pager.groupNo>1}">
+					<a class="text-dark mr-2" href="canceledOrderList?pageNo=${pager.startPageNo-1}" style="font-weight:600;">prev</a>
+				</c:if>
+				<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+					<c:if test="${pager.pageNo != i}">
+						<a class="text-dark" href="canceledOrderList?pageNo=${i}" style="font-weight:600;">${i}</a>
+					</c:if>
+					<c:if test="${pager.pageNo == i}">
+						<a class="text-dark" href="canceledOrderList?pageNo=${i}" style="font-weight:600;">${i}</a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${pager.groupNo<pager.totalGroupNo}">
+					<a class="text-dark mr-2" href="canceledOrderList?pageNo=${pager.endPageNo+1}" style="font-weight:600;">next</a>
+				</c:if>
+				<a class="text-dark mr-2" href="canceledOrderList?pageNo=${pager.totalPageNo}" style="font-weight:600;">last</a>
+			</div>
+		</div>
 	</div>
 </div>
 

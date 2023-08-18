@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+@font-face {
+  font-family: 'daddyFont';
+  src: url('나눔손글씨 아빠글씨.ttf') format('truetype')
+}
+
 #main-poster {
 	height: 100vh !important;
 }
@@ -14,7 +19,7 @@
 	background-position: center;
 	background-size: cover;
 	/* background-image: url("//postershop.kr/web/product/medium/202106/ca652c60857299dcbeb554c77a0f07c3.png"); */
-	box-shadow: rgba(0, 0, 0, 0.3) 11px 35px 21px 0px;
+	/* box-shadow: rgba(0, 0, 0, 0.4) 13px 38px 24px 0px; */
 }
 
 @media ( max-width :768px){

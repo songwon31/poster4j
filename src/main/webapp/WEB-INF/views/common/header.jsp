@@ -15,12 +15,15 @@
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 		
+		
 		<!-- 공통 스타일 설정을 위한 css -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
 		
 		<!-- 아이콘 라이브러리  -->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+				
 	</head>
 	<body style="width:100%; height:100%;">
 		<c:if test="${customerLogin.customerId == 'admin'}">

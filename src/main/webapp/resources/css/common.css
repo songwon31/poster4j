@@ -1,10 +1,20 @@
 @charset "UTF-8";
 
+@font-face {
+  font-family: 'font';
+  src: url('나눔손글씨 바른정신.ttf') format('truetype')
+}
+
+@font-face {
+  font-family: 'daddyFont';
+  src: url('나눔손글씨  아빠글씨.ttf') format('truetype')
+}
+
 *{
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Montserrat','Noto Sans KR', sans-serif; 
 	font-style: normal;
 	line-height: 1.1;
-	font-weight: 500;
+	font-weight: 400;
 	font-size: 13px;
 }
  
