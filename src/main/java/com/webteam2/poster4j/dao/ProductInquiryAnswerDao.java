@@ -9,4 +9,6 @@ public interface ProductInquiryAnswerDao {
 	public int insertAnswer(ProductInquiryAnswer productInquiryAnswer);
 	public String selectAnswerById(int productInquiryId);
 	public int updateAnswer(ProductInquiryAnswer productInquiryAnswer);
+	public ProductInquiryAnswer selectProductInquiryAnswer(int productInquiryId);
+	
 }

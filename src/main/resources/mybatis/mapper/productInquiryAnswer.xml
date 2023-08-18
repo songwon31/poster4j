@@ -12,6 +12,12 @@
 		where product_inquiry_id = #{productInquiryId}
 	</select>
 	
+	<select id="selectProductInquiryAnswer" parameterType="int" resultType="ProductInquiryAnswer">
+		select product_inquiry_id, product_inquiry_answer_content, product_inquiry_answer_date
+		from product_inquiry_answer
+		where product_inquiry_id = #{productInquiryId}
+	</select>
+	
 	<update id="updateAnswer" parameterType="ProductInquiryAnswer">
 		update product_inquiry_answer set product_inquiry_answer_content=#{productInquiryAnswerContent}, product_inquiry_answer_date=#{productInquiryAnswerDate}
 		where product_inquiry_id=#{productInquiryId}

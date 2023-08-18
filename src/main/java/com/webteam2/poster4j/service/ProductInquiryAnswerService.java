@@ -6,4 +6,5 @@ public interface ProductInquiryAnswerService {
 	public int registerAnswer(ProductInquiryAnswer productInquiryAnswer);
 	public String getAnswerById(int productInquiryId);
 	public int editAnswer(ProductInquiryAnswer productInquiryAnswer);
+	public ProductInquiryAnswer getProductInquiryAnswer(int productInquiryId);
 }

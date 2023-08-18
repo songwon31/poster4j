@@ -9,10 +9,8 @@
 	href="${pageContext.request.contextPath}/resources/css/productDetailPageStyle.css" />
 
 <%-- 아이콘 라이브러리 --%>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <script>
 	//선택된 아이템 리스트 인덱싱을 위한 배열
@@ -144,7 +142,7 @@
 				</div>
 			</c:forEach>
 			<%-- 페이지 번호 --%>
-			<div class="d-flex">
+			<div class="d-flex justify-content-center mt-3">
 				<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=1">first</a>
 				<c:if test="${reviewPager.groupNo>1}">
 					<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=${reviewPager.startPageNo-1}">prev</a>
@@ -167,41 +165,57 @@
 		</div>
 		
 		<%-- QNA 게시판 --%>
-		<table id="qnaBoard">
-			<h3 id="qnawBoardTitle">QNA</h3>
+		<div id="qnaBoard">
+			<h3 id="qnaBoardTitle">Q&A</h3>
+			<div class="qnaBoardHead row">
+				<div class="col-8">질문</div>
+				<div class="col-2">작성자</div>
+				<div class="col-2">작성일</div>
+			</div>
+			<%-- 해당 상품문의 가져오기 --%>
 			<c:forEach var="productInquiry" items="${productInquiries}">
-				<tr class="qnaBoardItem">
-					<td>${productInquiry.productInquiryContent}</td>
-					<td>${productInquiry.customerId}</td>
-					<td>${productInquiry.productInquiryDate}</td>
-					<td></td>
-					<td>
-						<c:if test="${productInquiry.productInquiryAnswered==TRUE}">YES</c:if>
-						<c:if test="${productInquiry.productInquiryAnswered==FALSE}">NO</c:if>
-					</td>
-				</tr>
+				<div class="qnaBoardItem row">
+					<div class="col-8">${productInquiry.productInquiryContent}</div>
+					<div class="col-2">${productInquiry.customerId}</div>
+					<div class="col-2"><fmt:formatDate value="${productInquiry.productInquiryDate}" pattern="yyyy-MM-dd" /></div>
+				</div>
+					<%-- 문의답변이 있을 경우 가져오기 --%>
+					<c:if test="${productInquiry.productInquiryAnswered=='TRUE'}">
+						<c:forEach var="entry" items="${answeredInquiries}">
+							<c:if test="${productInquiry.productInquiryId==entry.key}">
+								<div class="d-flex qnaBoardItem answer row">
+					                <div class="col-8">
+										<i class="material-icons" style="font-size: 15px; color: white; background-color: black; padding: 1px;">subdirectory_arrow_right</i>
+					                	${entry.value.getProductInquiryAnswerContent()}
+					                </div>
+					                <div class="col-2">poster4j</div>
+									<div class="col-2"><fmt:formatDate value="${entry.value.getProductInquiryAnswerDate()}" pattern="yyyy-MM-dd" /></div>
+					            </div>
+							</c:if>
+				        </c:forEach>
+					</c:if>
 			</c:forEach>
-		</table>
-		<%-- 페이지 번호 --%>
-		<div class="d-flex">
-			<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=1">first</a>
-			<c:if test="${qnaPager.groupNo>1}">
-				<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=${qnaPager.startPageNo-1}">prev</a>
-			</c:if>
-			
-			<c:forEach var="i" begin="${qnaPager.startPageNo}" end="${qnaPager.endPageNo}">
-				<c:if test="${qnaPager.pageNo != i}">
-					<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px;" href="getReviewList?pageNo=${i}">${i}</a>
+			<%-- 페이지 번호 --%>
+			<div class="d-flex justify-content-center mt-3">
+				<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=1">first</a>
+				<c:if test="${qnaPager.groupNo>1}">
+					<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=${qnaPager.startPageNo-1}">prev</a>
 				</c:if>
-				<c:if test="${qnaPager.pageNo == i}">
-					<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px; text-decoration:underline;" href="getReviewList?pageNo=${i}">${i}</a>
+				
+				<c:forEach var="i" begin="${qnaPager.startPageNo}" end="${qnaPager.endPageNo}">
+					<c:if test="${qnaPager.pageNo != i}">
+						<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px;" href="getReviewList?pageNo=${i}">${i}</a>
+					</c:if>
+					<c:if test="${qnaPager.pageNo == i}">
+						<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px; text-decoration:underline;" href="getReviewList?pageNo=${i}">${i}</a>
+					</c:if>
+				</c:forEach>
+				
+				<c:if test="${qnaPager.groupNo<qnaPager.totalGroupNo}">
+					<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${qnaPager.endPageNo+1}">next</a>
 				</c:if>
-			</c:forEach>
-			
-			<c:if test="${qnaPager.groupNo<qnaPager.totalGroupNo}">
-				<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${qnaPager.endPageNo+1}">next</a>
-			</c:if>
-			<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${qnaPager.totalPageNo}">last</a>
+				<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${qnaPager.totalPageNo}">last</a>
+			</div>
 		</div>
 	</div>
 </div>

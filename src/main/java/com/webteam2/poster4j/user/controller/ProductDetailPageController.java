@@ -2,6 +2,7 @@ package com.webteam2.poster4j.user.controller;
 
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -25,10 +26,12 @@ import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
 import com.webteam2.poster4j.dto.ProductInquiry;
+import com.webteam2.poster4j.dto.ProductInquiryAnswer;
 import com.webteam2.poster4j.dto.Review;
 import com.webteam2.poster4j.dto.ReviewImage;
 import com.webteam2.poster4j.service.CartService;
 import com.webteam2.poster4j.service.ProductImageService;
+import com.webteam2.poster4j.service.ProductInquiryAnswerService;
 import com.webteam2.poster4j.service.ProductInquiryService;
 import com.webteam2.poster4j.service.ProductService;
 import com.webteam2.poster4j.service.ReviewImageService;
@@ -51,6 +54,8 @@ public class ProductDetailPageController {
 	ReviewImageService reviewImageService;
 	@Resource
 	ProductInquiryService productInquiryService;
+	@Resource
+	ProductInquiryAnswerService productInquiryAnswerService;
 	
 	@GetMapping("/productDetail")
 	public String productDetail(@RequestParam(value="productId")int productId,
@@ -112,7 +117,7 @@ public class ProductDetailPageController {
 		
 		//리뷰 이미지 리스트 가져오기
 		List<ReviewImage> reviewImages = new ArrayList<>();
-		for(Review review: reviews) {
+		for(Review review : reviews) {
 			List<ReviewImage> reviewList = reviewImageService.getReviewImageList(review.getOrderId(), review.getProductId(), review.getOptionSize(), review.getOptionFrame());
 			reviewImages.addAll(reviewList);
 		}
@@ -129,13 +134,21 @@ public class ProductDetailPageController {
 		int totalQnaNum = productInquiryService.getEachProductInquiryNum(productId);
 		Pager qnaPager = new Pager(5, 5, totalQnaNum, intPageNo);
 		
-		log.info(""+ totalQnaNum);
-		log.info(""+ qnaPager);
-		
 		List<ProductInquiry> productInquiries = productInquiryService.getListWithProductIdPager(productId, qnaPager);
 		
 		model.addAttribute("qnaPager", qnaPager);
 		model.addAttribute("productInquiries", productInquiries);
+		
+		//문의 답변
+		HashMap<Integer, ProductInquiryAnswer> answeredInquiries = new HashMap<>();
+		for(ProductInquiry productInquiry : productInquiries) {
+			Integer id = productInquiry.getProductInquiryId();
+			ProductInquiryAnswer answer = productInquiryAnswerService.getProductInquiryAnswer(id);
+			if(answer != null) {
+				answeredInquiries.put(id, answer);
+			}
+		}
+		model.addAttribute("answeredInquiries",answeredInquiries);
 		
 		return "user/productDetailPage";
 	}

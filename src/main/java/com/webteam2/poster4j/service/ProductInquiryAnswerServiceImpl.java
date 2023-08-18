@@ -26,4 +26,9 @@ public class ProductInquiryAnswerServiceImpl implements ProductInquiryAnswerServ
 	public int editAnswer(ProductInquiryAnswer productInquiryAnswer) {
 		return productInquiryAnswerDao.updateAnswer(productInquiryAnswer);
 	}
+
+	@Override
+	public ProductInquiryAnswer getProductInquiryAnswer(int productInquiryId) {
+		return productInquiryAnswerDao.selectProductInquiryAnswer(productInquiryId);
+	}
 }
