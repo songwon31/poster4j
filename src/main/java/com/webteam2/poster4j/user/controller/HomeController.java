@@ -41,8 +41,6 @@ public class HomeController {
 		productBoardSearch.makeEmptyToNull();
 		ProductBoardSearch pastProductBoardSearch = (ProductBoardSearch)session.getAttribute("productBoardSearch");
 		
-		log.info("productBoardSearch: " + productBoardSearch);
-		
 		if (!productBoardSearch.equals(pastProductBoardSearch)) {
 			session.setAttribute("productBoardSearch", productBoardSearch);
 			pageNo = "1";

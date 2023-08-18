@@ -60,6 +60,50 @@ public class CustomerServiceImpl implements CustomerService {
 	public void logout(String customerId) {
 		//만약 DB에 로그인 정보가 저장되어 있다면, 삭제하는 코드를 작성
 	}
+	
+	
+	@Override
+	public int modifyCustomerName(Customer customer) {
+		return customerDao.updateCustomerName(customer);
+	}
+	
+	@Override
+	public int modifyCustomerTelno(Customer customer) {
+		return customerDao.updateCustomerTelno(customer);
+	}
+	
+	@Override
+	public int modifyCustomerEmail(Customer customer) {
+		return customerDao.updateCustomerEmail(customer);
+	}
+	
+	@Override
+	public int modifyCustomerPassword(Customer customer) {
+		return customerDao.updateCustomerPassword(customer);
+	}
+	
+	
 
+	@Override
+	public int checkSmsAgree(Customer customer) {
+		return customerDao.updateSmsAgreeTrue(customer);
+	}
+	
+	@Override
+	public int uncheckSmsAgree(Customer customer) {
+		return customerDao.updateSmsAgreeFalse(customer);
+	}
+	
+	@Override
+	public int checkEmailAgree(Customer customer) {
+		return customerDao.updateEmailAgreeTrue(customer);
+	}
+	
+	@Override
+	public int uncheckEmailAgree(Customer customer) {
+		return customerDao.updateEmailAgreeFalse(customer);
+	}
+	
+	
 	
 }

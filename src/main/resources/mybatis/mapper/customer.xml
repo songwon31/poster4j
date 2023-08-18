@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.webteam2.poster4j.dao.CustomerDao">
 	<select id="selectById" parameterType="String" resultType="Customer">
-		select customer_id, customer_name, customer_password, customer_telno
+		select customer_id, customer_name, customer_password, customer_telno, customer_email,
+			customer_sms_agree, customer_email_agree
 		from customer
 		where customer_id = #{customerId}
 	</select>
@@ -11,5 +12,42 @@
 		values(#{customerId}, #{customerPassword}, #{customerName}, #{customerTelno}, #{customerEmail}, 
 		#{customerTermAgree, jdbcType=VARCHAR}, #{customerInfoAgree, jdbcType=VARCHAR}, #{customerSmsAgree ,jdbcType=VARCHAR}, #{customerEmailAgree ,jdbcType=VARCHAR}, 'TRUE')
 	</insert>
+	
+	<update id="updateCustomerName"  parameterType="Customer">
+		update customer set customer_name = #{customerName}
+		where customer_id=#{customerId}
+	</update>
+	
+	<update id="updateCustomerTelno"  parameterType="Customer">
+		update customer set customer_telno = #{customerTelno}
+		where customer_id=#{customerId}
+	</update>
+	
+	<update id="updateCustomerEmail"  parameterType="Customer">
+		update customer set customer_email = #{customerEmail}
+		where customer_id=#{customerId}
+	</update>
+	
+	<update id="updateCustomerPassword"  parameterType="Customer">
+		update customer set customer_password = #{customerPassword}
+		where customer_id=#{customerId}
+	</update>
+	
+	<update id="updateSmsAgreeTrue"  parameterType="Customer">
+		update customer set customer_sms_agree = 'TRUE'
+		where customer_id=#{customerId}
+	</update>
+	<update id="updateSmsAgreeFalse"  parameterType="Customer">
+		update customer set customer_sms_agree = 'FALSE'
+		where customer_id=#{customerId}
+	</update>
+	<update id="updateEmailAgreeTrue"  parameterType="Customer">
+		update customer set customer_email_agree = 'TRUE'
+		where customer_id=#{customerId}
+	</update>
+	<update id="updateEmailAgreeFalse"  parameterType="Customer">
+		update customer set customer_email_agree = 'FALSE'
+		where customer_id=#{customerId}
+	</update>
 </mapper>
 

@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+input[type=checkbox] {
+	accent-color: black;
+	vertical-align: middle;
+}
+
 #container {
 	font-size: 12px;
     line-height: 1.6;
@@ -16,7 +21,6 @@
     line-height: 1.6;
     color: #666;
     margin: 0;
-    min-height: 900px;
     padding: 50px;
     background-color: #fff;
 }
@@ -48,6 +52,7 @@
     text-align: left;
     white-space: nowrap;
     width: 100px;
+    font-weight: 600;
 }
 
 .usermodify-table td {
@@ -55,9 +60,10 @@
     padding: 14px 30px;
     border-bottom: 1px solid #ddd;
     border-left: 1px solid #ddd;
+    
 }
 
-.usermodify-table input {
+.usermodify-table input[type=text] {
 	border-spacing: 0;
     border-collapse: collapse;
     color: inherit;

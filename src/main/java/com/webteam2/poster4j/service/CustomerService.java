@@ -20,4 +20,14 @@ public interface CustomerService {
 	public LoginResult login(Customer customer);
 	public void logout(String customerId);
 
+	public int modifyCustomerName(Customer customer);
+	public int modifyCustomerTelno(Customer customer);
+	public int modifyCustomerEmail(Customer customer);
+	public int modifyCustomerPassword(Customer customer);
+	
+	public int checkSmsAgree(Customer customer);
+	public int uncheckSmsAgree(Customer customer);
+	public int checkEmailAgree(Customer customer);
+	public int uncheckEmailAgree(Customer customer);
+
 }
