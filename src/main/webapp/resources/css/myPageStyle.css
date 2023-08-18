@@ -13,10 +13,10 @@ li {
 
 .myPageList li {
 	margin-bottom: 20px;
+	text-decoration: none;
 }
 
 .myPageList li a {
 	color: black;
 	font-size: 36px;
-	text-decoration: none;
 }
