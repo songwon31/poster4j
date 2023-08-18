@@ -1,14 +1,162 @@
 @charset "UTF-8";
 
-#period {
+
+
+#contents{
+	margin-top: 100px;
+}
+
+.order-list-wrapper {
+	margin: 0 auto;
+	max-width: 1080px;
+	padding: 30px;
+}
+
+.order-list-title {
+	font-size: 24px;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+.order-list-filter {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.order-status-filter,
+.period-link {
+	border: 1px solid #ccc;
+	padding: 5px 10px;
+	margin-right: 10px;
+	background-color: #fff;
+}
+
+.order-list-items {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(px, 1fr));
+	grid-gap: 20px;
+}
+
+.order-item {
+	border: 1px solid #ddd;
+	padding: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	background-color: #fff;
 	
 }
 
+.order-item img {
+	max-width: 100%;
+}
 
 
- /* 화면 크기에 따라 너비 조절 */
+.order-item-title {
+	font-size: 20px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: bold;
+	margin: 10px 0;
+}
+
+.order-item-price {
+	font-size: 16px;
+	color: #007bff;
+	margin-bottom: 10px;
+}
+
+.order-item-status {
+	font-size: 18px;
+	color: #28a745;
+	margin-bottom: 10px;
+}
+
+.pagination {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+.pagination a {
+	margin: 0 5px;
+}
+
+.pagination a.active {
+	color: #007bff;
+	font-weight: bold;
+}
+
+.order-period-filter > a{
+	color: #000000;
+}
+
+.order-date{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.productImage{
+	box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.9); /* 가로, 세로, 흐림 정도, 색상 */
+  	transition: box-shadow 0.3s ease-in-out; /* 호버 시 부드러운 변화 */
+  	transform: scale(1);
+}
+
+.productImage:hover {
+	 box-shadow: 0px 10px 20px rgba(0, 0, 0, 1.0); /* 호버 시 그림자 효과 강화 */
+	 transform: scale(1.1);
+}
+
+/* 기본 버튼 스타일 */
+.btn {
+	padding: 8px 16px;
+	font-size: 14px;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+	border-radius: 0;
+}
+
+/* 기본 버튼에 호버 시 스타일 변경 */
+.btn:hover {
+  background-color: black;
+  color: white;
+}
+
+/* 더 많은 스타일을 위해 클래스 추가 */
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid black;
+  color: black;
+}
+
+.btn-outline:hover {
+  background-color: black;
+  color: white;
+}
+
+/* 더 큰 버튼 스타일 */
+.btn-large {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+.btn-large:hover {
+  background-color: black;
+  color: white;
+}
+
 @media (max-width: 768px) {
-	.table {
-	    width: auto; /* 작은 화면에서는 너비를 자동으로 조절 */
-	}
+    .button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .d-flex-column {
+        max-width: none;
+    }
+}
+
+.buttonDetail{
+	display: flex;
+	justify-content: space-between;
 }

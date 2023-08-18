@@ -20,7 +20,7 @@
 		
 		<!-- 아이콘 라이브러리  -->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
 	</head>
 	<body style="width:100%; height:100%;">
 		<c:if test="${customerLogin.customerId == 'admin'}">

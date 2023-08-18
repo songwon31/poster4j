@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+/* Custom Styles */
+.order-list-wrapper {
+	padding: 50px 0;
+}
+
+.order-list-title {
+	font-size: 28px;
+	font-weight: bold;
+	margin-bottom: 30px;
+}
+
+.order-list-items {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+.order-item {
+	background-color: #f5f5f5;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	flex-basis: calc(33.33% - 20px);
+	margin-bottom: 20px;
+}
+
+.order-date {
+	font-weight: bold;
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+.order-item-details {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	font-size: 14px;
+}
+
+.order-pagination {
+	display: flex;
+	justify-content: center;
+	margin-top: 30px;
+}
+
+.order-pagination a {
+	text-decoration: none;
+	color: #333;
+	font-weight: bold;
+	margin: 0 10px;
+}
+
+.order-pagination a:hover {
+	color: #555;
+}

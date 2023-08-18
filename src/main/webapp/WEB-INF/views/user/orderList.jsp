@@ -1,6 +1,121 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/orderListStyle.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap">
+ 
+<div id="wrapper" class="order-list-wrapper">
+	<div id="container" class="container">
+		<div id="contents">
+			<h1 class="order-list-title">ORDER</h1>
+			<div class="order-list-filter">
+				<select class="order-status-filter">
+					<option>전체 주문처리상태</option>
+					<option value="입금전">입금전</option>
+					<option value="배송준비중">배송준비중</option>
+					<option value="배송중">배송중</option>
+	 				<option value="배송완료">배송완료</option>
+	 				<option value="취소">취소</option>
+	 				<option value="교환">교환</option>
+	 				<option value="반품">반품</option>
+				</select>
+				<div class="order-period-filter">
+					<a href="#" class="period-link">Today</a>
+					<a href="#" class="period-link">Week</a>
+					<a href="#" class="period-link">Month</a>
+					<a href="#" class="period-link">3 Month</a>
+				</div>
+			</div>
+			<div class="order-list-items">
+				<c:forEach var="buyItem" items="${buyItemList}" varStatus="status">
+						<c:forEach var="orderDetail" items="${buyItem.orderDetail}" varStatus="detailStatus">
+							<c:forEach var="product" items="${buyItem.product}" varStatus="productStatus">
+								<c:if test="${detailStatus.index==productStatus.index}">
+									<c:forEach var="productImage" items="${buyItem.productImage}" varStatus="imageStatus">
+										<c:if test="${productStatus.index==imageStatus.index}">
+											<div class="order-item">
+												<div class="">
+													<form id="form" method="get" action="writeReview">
+														<input type= hidden name="orderId" value="${orderDetail.orderId}">
+														<input type= hidden name="productId" value="${orderDetail.productId}">
+														<input type= hidden name="productName" value="${product.productName}">
+														<input type= hidden name="productTheme" value="${product.productTheme}">
+														<input type= hidden name="optionSize" value="${orderDetail.optionSize}">
+														<input type= hidden name="optionFrame" value="${orderDetail.optionFrame}">
+														<input type= hidden name="orderDetailStatus" value="${orderDetail.orderDetailStatus}">
+													
+														<div class="order-date">
+															${buyItem.order.convertedOrderDate} 주문 <span>Order_No.${orderDetail.orderId}</span>
+														</div>
+														<div class="d-flex row my-4 mx-2 p-3 justify-content-center">
+															<div class="productImage justify-content-center" style="width: 170px">
+																<a href="productDetail?productId=${orderDetail.productId}"><img class="orderProductImage" alt="" src="data:image/jpeg;base64, ${productImage}" width="100%;"></a>
+															</div>
+															<div class="mx-5 py-4"  style="width: 300px; display: flex; flex-direction: column; justify-content: space-between;">
+																<div>
+													          		<div class="order-item-title"><span style="font-size: 20px">[${product.productTheme}]</span><br>${product.productName}<br><span>[옵션: ${orderDetail.optionSize} / ${orderDetail.optionFrame}]</span></div>
+																</div>
+																<div>
+																	<div class="order-item-quantity">수량: ${orderDetail.orderDetailQuantity}개</div>
+													            	<div class="order-item-price mt-2">KRW <fmt:formatNumber value="${orderDetail.orderDetailPrice}" pattern="#,###" /> </div>
+																	<div class="order-item-status">${orderDetail.orderDetailStatus}</div>
+																</div>
+															</div>
+															<div class="button" style="max-width: 200px; display: flex; flex-direction: column; justify-content: space-between;">
+														    	<div>
+															    	<div>
+																        <button id="writeReviewBtn" type="submit" class="writeReview btn my-2" style="border: 1px solid">리뷰 작성</button>
+															    	</div>
+															    	<div>
+																        <a id="updateReviewBtn" href="updateReview?orderId=${orderDetail.orderId}&productId=${orderDetail.productId}&optionSize=${orderDetail.optionSize}&optionFrame=${orderDetail.optionFrame}" class="updateReview btn my-2" style="border: 1px solid">리뷰 수정</a>
+															    	</div>
+															    	<div>
+																        <a id="deleteReviewBtn" href="deleteReview?orderId=${orderDetail.orderId}&productId=${orderDetail.productId}&optionSize=${orderDetail.optionSize}&optionFrame=${orderDetail.optionFrame}" class="updateReview btn my-2" style="border: 1px solid">리뷰 삭제</a>
+															    	</div>
+														    	</div>
+														    	<div style="width:150px">
+															        <a href="javascript:void(0)" class="btn btn-dark my-2 px-3" onclick="cancelOrder(${orderDetail.orderId}, ${orderDetail.productId}, '${orderDetail.optionSize}', '${orderDetail.optionFrame}')" style="width:100%">취소</a>
+														    	</div>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</c:if>
+									</c:forEach>
+								</c:if>
+							</c:forEach>
+						</c:forEach>
+				</c:forEach>
+			</div>
+			<div class="pagination">
+				<div colspan="12" class="text-center">
+					<div>
+						<a class="text-dark mr-2" href="orderList?pageNo=1" style="font-weight:600;">first</a>
+						<c:if test="${pager.groupNo>1}">
+							<a class="text-dark mr-2" href="orderList?pageNo=${pager.startPageNo-1}" style="font-weight:600;">prev</a>
+						</c:if>
+						<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+							<c:if test="${pager.pageNo != i}">
+								<a class="text-dark" href="orderList?pageNo=${i}" style="font-weight:600;">${i}</a>
+							</c:if>
+							<c:if test="${pager.pageNo == i}">
+								<a class="text-dark" href="orderList?pageNo=${i}" style="font-weight:600;">${i}</a>
+							</c:if>
+						</c:forEach>
+						<c:if test="${pager.groupNo<pager.totalGroupNo}">
+							<a class="text-dark mr-2" href="orderList?pageNo=${pager.endPageNo+1}" style="font-weight:600;">next</a>
+						</c:if>
+						<a class="text-dark mr-2" href="orderList?pageNo=${pager.totalPageNo}" style="font-weight:600;">last</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script>
 	 $(init);
@@ -19,123 +134,5 @@
 	}
  
 </script>
-
-
-<div id="wrapper" style="margin: 0 auto; min-height: calc(100vh - 393px);">
-	<div id="container" class="container-fluid" style="margin: 100px 0;  max-width: 100%;">
-		 <div id="contents" class="row">
-		 	<div class="d-flex flex-column" action="">
-		 		<div style="text-align: center;">
-		 			<select class="m-2" style="border: 0; border-bottom: 1px solid;">
-		 				<option>전체 주문처리상태</option>
-		 				<option value="입금전">입금전</option>
-		 				<option value="배송준비중">배송준비중</option>
-		 				<option value="배송중">배송중</option>
-		 				<option value="배송완료">배송완료</option>
-		 				<option value="취소">취소</option>
-		 				<option value="교환">교환</option>
-		 				<option value="반품">반품</option>
-		 			</select>
-		 		</div>
-		 		<div id="period" class="text-center">
-		 			<span><a href="#" class="btn">Today</a></span>
-		 			<span><a href="#" class="btn">Week</a></span>
-		 			<span><a href="#" class="btn">Month</a></span>
-		 			<span><a href="#" class="btn">3 Month</a></span>
-		 		</div>
-		 		<div class="container-fluid table-responsive mt-3" style="width: 100%">
-			 		<table border="1" style="width: 100%">
-			 			<colgroup>
-							<col style="width:135px;">
-							<col style="width:93px;">
-							<col style="width:400px;">
-							<col style="width:61px;">
-							<col style="width:111px;">
-							<col style="width:111px;">
-							<col style="width:111px;">
-						</colgroup>
-						<thead>
-							<tr>
-								<th scope="col">주문일자<br>[주문번호]</th>
-						        <th scope="col">이미지</th>
-						        <th scope="col">상품정보</th>
-						        <th scope="col">수량</th>
-						        <th scope="col">상품구매금액</th>
-						        <th scope="col">주문처리상태</th>
-						        <th scope="col">취소/교환/반품</th>
-							</tr>
-						</thead>
-						<tbody class="center displaynone">
-							<c:forEach var="buyItem" items="${buyItemList}" varStatus="status">
-								<c:forEach var="orderDetail" items="${buyItem.orderDetail}" varStatus="detailStatus">
-									<c:forEach var="product" items="${buyItem.product}" varStatus="productStatus">
-										<c:if test="${detailStatus.index==productStatus.index}">
-											<c:forEach var="productImage" items="${buyItem.productImage}" varStatus="imageStatus">
-												<c:if test="${productStatus.index==imageStatus.index}">
-													<tr class="">
-														<form id="form" method="get" action="writeReview">
-															<input type= hidden name="orderId" value="${orderDetail.orderId}">
-															<input type= hidden name="productId" value="${orderDetail.productId}">
-															<input type= hidden name="productName" value="${product.productName}">
-															<input type= hidden name="productTheme" value="${product.productTheme}">
-															<input type= hidden name="optionSize" value="${orderDetail.optionSize}">
-															<input type= hidden name="optionFrame" value="${orderDetail.optionFrame}">
-															<input type= hidden name="orderDetailStatus" value="${orderDetail.orderDetailStatus}">
-															
-															<td class="orderDate orderNo">
-																<span class="convertedOrderDate">${buyItem.order.convertedOrderDate}</span><br>[${orderDetail.orderId}]
-															</td>
-															<td class="productImage">
-																<img alt="" src="data:image/jpeg;base64, ${productImage}" width="100%">
-															</td>
-												          	<td class="productInfo">[${product.productTheme}]${product.productName}<br>[옵션:${orderDetail.optionSize}/${orderDetail.optionFrame}]</td>
-															<td class="productQuantity">${orderDetail.orderDetailQuantity}</td>
-												            <td class="purchasePrice">${orderDetail.orderDetailPrice}</td>
-															<td class="orderStatus">${orderDetail.orderDetailStatus}</td>
-															<td class="cancel Exchange re">
-																<a href="javascript:void(0)" class="btn btn-dark" onclick = "cancelOrder(${orderDetail.orderId}, ${orderDetail.productId}, '${orderDetail.optionSize}', '${orderDetail.optionFrame}')">취소</a><br>
-																<button id="writeReviewBtn" type="submit" class="writeReview btn btn-light" style="border: 1px solid">리뷰 작성</button>
-																<a id="updateReviewBtn" href="updateReview?orderId=${orderDetail.orderId}&productId=${orderDetail.productId}&optionSize=${orderDetail.optionSize}&optionFrame=${orderDetail.optionFrame}" class="updateReview btn btn-light" style="border: 1px solid">리뷰 수정</a>
-																<a id="deleteReviewBtn" href="deleteReview?orderId=${orderDetail.orderId}&productId=${orderDetail.productId}&optionSize=${orderDetail.optionSize}&optionFrame=${orderDetail.optionFrame}" class="updateReview btn btn-light" style="border: 1px solid">리뷰 삭제</a>
-															</td>
-														</form>
-													</tr>
-												</c:if>
-											</c:forEach>
-										</c:if>
-									</c:forEach>
-								</c:forEach>
-							</c:forEach>
-							<tr>
-								<td colspan="12" class="text-center">
-									<div>
-										<a class="btn btn-outline-primary btn-sm" href="orderList?pageNo=1">처음</a>
-										<c:if test="${pager.groupNo>1}">
-											<a class="btn btn-outline-info btn-sm" href="orderList?pageNo=${pager.startPageNo-1}">이전</a>
-										</c:if>
-								
-										<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-											<c:if test="${pager.pageNo != i}">
-												<a class="btn btn-outline-success btn-sm" href="orderList?pageNo=${i}">${i}</a>
-											</c:if>
-											<c:if test="${pager.pageNo == i}">
-												<a class="btn btn-danger btn-sm" href="orderList?pageNo=${i}">${i}</a>
-											</c:if>
-										</c:forEach>
-								
-										<c:if test="${pager.groupNo<pager.totalGroupNo}">
-											<a class="btn btn-outline-info btn-sm" href="orderList?pageNo=${pager.endPageNo+1}">다음</a>
-										</c:if>
-										<a class="btn btn-outline-primary btn-sm" href="orderList?pageNo=${pager.totalPageNo}">맨끝</a>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-		 		</div>
-		 	</div>
-		 </div>
-	</div>
-</div>
-
+ 
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
