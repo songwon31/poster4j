@@ -183,7 +183,7 @@
 					<ul id="productList">
 						<c:forEach var="image" items="${convertedImages}" varStatus="status" begin="0" end="20">
 							<li>
-								<a class="totalProduct" href="javascript:void(0)" onclick="">
+								<a class="totalProduct" href="javascript:void(0)" onclick="" style="text-decoration:none;">
 									<div class="thumbnail">
 										<img class="imgOnList mb-3" alt="123" src="data:image/jpeg;base64, ${image}">
 										<div class="productDetail">
