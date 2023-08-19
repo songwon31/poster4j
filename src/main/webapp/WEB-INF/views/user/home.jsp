@@ -170,7 +170,7 @@
 <div id="wrapper">
 	<div id="container">
 		<!-- 메인 포스터 -->
-		<div id="main-poster" class="container-fluid" style="background-color: #F4F4F4; " >
+		<div id="main-poster" class="container-fluid" style="background-color: #F4F4F4; background-image: url('${pageContext.request.contextPath}/resources/images/main5.jpg'); " >
 			<div id="frame" style="background-image: url('data:image/jpeg;base64, ${randomImage}');">
 				<img id="frame-image" alt="프레임" src="${pageContext.request.contextPath}/resources/images/frame.png" width="450px" height="630px;">
 			</div>
@@ -220,7 +220,7 @@
 													<div class="currentProductId" style="display:none">${productList[status.index].productId}</div>
 													<div class="d-flex justify-content-start" style="font-size:16px;">${productList[status.index].productName}</div>
 													<br>
-													<div class="d-flex justify-content-start" style="white-space: pre-line; font-family: 'daddyFont'; font-size: 20px;">
+													<div class="d-flex justify-content-start" style="white-space: pre-line; line-height: 1.3">
 														${productList[status.index].productDetail}
 													</div>
 													<br><br>

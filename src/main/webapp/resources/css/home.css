@@ -9,6 +9,7 @@
 	height: 100vh !important;
 }
 
+
 #frame {
 	position: absolute;
 	top: 50%;
@@ -21,6 +22,8 @@
 	/* background-image: url("//postershop.kr/web/product/medium/202106/ca652c60857299dcbeb554c77a0f07c3.png"); */
 	/* box-shadow: rgba(0, 0, 0, 0.4) 13px 38px 24px 0px; */
 }
+
+
 
 @media ( max-width :768px){
 	#frame-image {
