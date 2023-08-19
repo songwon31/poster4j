@@ -13,14 +13,14 @@
 	
 	var entireHtml = '<li><a style="visibility:hidden;" href="javascript:void(0)" onclick="">0</a></li>';
 	var themeHtml = '';
-	themeHtml += '<li><a href="?productTheme=wave&productArtist=&pageNo=1" id="wave">wave</a></li>';
-	themeHtml += '<li><a href="?productTheme=forest&productArtist=&pageNo=1" id="forest">forest</a></li>';
-	themeHtml += '<li><a href="?productTheme=window&productArtist=&pageNo=1" id="window">window</a></li>';
-	themeHtml += '<li><a href="?productTheme=life&productArtist=&pageNo=1" id="life">life</a></li>';
+	themeHtml += '<li><a href="?productTheme=wave&productArtist=&pageNo=1#menuArea" id="wave">wave</a></li>';
+	themeHtml += '<li><a href="?productTheme=forest&productArtist=&pageNo=1#menuArea" id="forest">forest</a></li>';
+	themeHtml += '<li><a href="?productTheme=window&productArtist=&pageNo=1#menuArea" id="window">window</a></li>';
+	themeHtml += '<li><a href="?productTheme=life&productArtist=&pageNo=1#menuArea" id="life">life</a></li>';
 	var artistHtml = '';
-	artistHtml += '<li><a href="?productTheme=&productArtist=유래혁&pageNo=1" id="유래혁">유래혁</a></li>';
-	artistHtml += '<li><a href="?productTheme=&productArtist=문예진&pageNo=1" id="문예진">문예진</a></li>';
-	artistHtml += '<li><a href="?productTheme=&productArtist=other&pageNo=1" id="other">other</a></li>';
+	artistHtml += '<li><a href="?productTheme=&productArtist=유래혁&pageNo=1#menuArea" id="유래혁">유래혁</a></li>';
+	artistHtml += '<li><a href="?productTheme=&productArtist=문예진&pageNo=1#menuArea" id="문예진">문예진</a></li>';
+	artistHtml += '<li><a href="?productTheme=&productArtist=other&pageNo=1#menuArea" id="other">other</a></li>';
 		
 	
 	function init() {
@@ -198,7 +198,7 @@
 				<div id="menuArea">
 					<div id="mainCategory">
 						<h2>
-							<span><a id="entire" href="?productTheme=&productArtist=&pageNo=1">전체</a></span>
+							<span><a id="entire" href="?productTheme=&productArtist=&pageNo=1#menuArea">전체</a></span>
 							<span><a id="theme" href="javascript:void(0)" onclick="selectTheme(); return false;">테마</a></span>
 							<span><a id="artist" href="javascript:void(0)" onclick="selectArtist(); return false;">아티스트</a></span>
 						</h2>
@@ -248,12 +248,12 @@
 					<a class="text-dark mr-2" style="font-weight:600;" 
 					   href="?productTheme=${productBoardSearch.productTheme}&
 							productArtist=${productBoardSearch.productArtist}&
-							pageNo=1">first</a>
+							pageNo=1#menuArea">first</a>
 					<c:if test="${pager.groupNo>1}">
 						<a class="text-dark mr-2" style="font-weight:600;" 
 						   href="?productTheme=${productBoardSearch.productTheme}&
 								productArtist=${productBoardSearch.productArtist}&
-								pageNo=${pager.startPageNo-1}">prev</a>
+								pageNo=${pager.startPageNo-1}#menuArea">prev</a>
 					</c:if>
 					
 					<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
@@ -261,13 +261,13 @@
 							<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px;" 
 							   href="?productTheme=${productBoardSearch.productTheme}&
 									productArtist=${productBoardSearch.productArtist}&
-									pageNo=${i}">${i}</a>
+									pageNo=${i}#menuArea">${i}</a>
 						</c:if>
 						<c:if test="${pager.pageNo == i}">
 							<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px; text-decoration:underline;" 
 							   href="?productTheme=${productBoardSearch.productTheme}&
 									productArtist=${productBoardSearch.productArtist}&
-									pageNo=${i}">${i}</a>
+									pageNo=${i}#menuArea">${i}</a>
 						</c:if>
 					</c:forEach>
 								
@@ -275,12 +275,12 @@
 						<a class="text-dark ml-2" style="font-weight:600;" 
 						   href="?productTheme=${productBoardSearch.productTheme}&
 								productArtist=${productBoardSearch.productArtist}&
-								pageNo=${pager.endPageNo+1}">next</a>
+								pageNo=${pager.endPageNo+1}#menuArea">next</a>
 					</c:if>
 					<a class="text-dark ml-2" style="font-weight:600;" 
 					   href="?productTheme=${productBoardSearch.productTheme}&
 							productArtist=${productBoardSearch.productArtist}&
-							pageNo=${pager.totalPageNo}">last</a>
+							pageNo=${pager.totalPageNo}#menuArea">last</a>
 				</div>
 			</div>
 		</div>
