@@ -5,41 +5,61 @@
 
 <!-- home 스타일 설정을 위한 css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/home.css">
-<!-- Loading 화면 코드 시작 -->
 
 <script type="text/javascript">
-	 $(window).on('load', function () {
-	      $("#load").hide();
-	 });
-	</script>
+
+$(function() {
+	var isCurtainOpen = false;
+	$("#main-poster").click(function(){
+	    if(!isCurtainOpen) {
+	        $("#curtain1").animate({width:800},1000);
+	        $("#curtain2").animate({width:800},1000);
+	        isCurtainOpen = true;
+	    } else {
+	        $("#curtain1").animate({width:100},1000);
+	        $("#curtain2").animate({width:100},1000);
+	        isCurtainOpen = false;
+	    }
+	});
+});
+</script>
+
+<!-- Loading 화면 코드 시작 -->
+<script type="text/javascript">
+ $(window).on('load', function () {
+      $("#load").hide();
+ });
+</script>
 	<style type="text/css">
-	#load {
-	   width: 100%;
-	   height: 100%;
-	   top: 0;
-	   left: 0;
-	   position: fixed;
-	   display: block;
-	  /*  opacity: 0.8; */
-	   background: white;
-	   z-index: 99;
-	   text-align: center;
-	}
-	
-	#load > img {
-	   position: absolute;
-	   top: 50%;
-	   left: 50%;
-	   z-index: 100;
-	}
+#load {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: block;
+	/*  opacity: 0.8; */
+	background: white;
+	z-index: 99;
+	text-align: center;
+}
+
+#load>img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 100;
+}
 </style>
 
-<div id="load">
-   <img src="${pageContext.request.contextPath}/resources/images/spinner.gif" style="background-color: white;" alt="loading">
-</div>
-<!-- Loading 화면 코드 종료-->
+	<div id="load">
+		<img
+			src="${pageContext.request.contextPath}/resources/images/spinner.gif"
+			style="background-color: white;" alt="loading">
+	</div>
+	<!-- Loading 화면 코드 종료-->
 
-<script>
+	<script>
 	$(init);
 	
 	var currentMainCategory = '${currentMainCategory}';
@@ -81,7 +101,7 @@
 			console.log("shadowX:  " + ceilShadowX);
 			console.log("shadowY:  " + ceilShadowY);
 			
-			$frame.css("box-shadow", "rgba(0, 0, 0, 0.6) " + ceilShadowX + "px " + ceilShadowY + "px 20px"  );
+			$frame.css("box-shadow", "rgba(0, 0, 0, 0.6) " + ceilShadowX + "px " + ceilShadowY + "px 20px");
 			
 		});
 		
@@ -199,17 +219,22 @@
 	} */
 </script>
 
-<%-- home.jsp의 중앙내용 --%>
-<div id="wrapper">
-	<div id="container">
-		<!-- 메인 포스터 -->
-		<div id="main-poster" class="container-fluid" style="background-color: #F4F4F4; background-image: url('${pageContext.request.contextPath}/resources/images/main5.jpg'); " >
-			<div id="frame" style="background-image: url('data:image/jpeg;base64, ${randomImage}');">
-				<img id="frame-image" alt="프레임" src="${pageContext.request.contextPath}/resources/images/frame.png" width="450px" height="630px;">
+	<%-- home.jsp의 중앙내용 --%>
+	<div id="wrapper">
+		<div id="container">
+			<!-- 메인 포스터 -->
+			<div id="main-poster" class="container-fluid d-flex justify-content-between" style="background-color: #F4F4F4; background-image: url('${pageContext.request.contextPath}/resources/images/main5.jpg'); padding: 0px;">
+				<img src="${pageContext.request.contextPath}/resources/images/white-curtain.png" id="curtain1" style="width: 800px; height: 100%; z-index: 10; opacity: 0.9;">
+				<img src="${pageContext.request.contextPath}/resources/images/white-curtain.png" id="curtain2" style="width: 800px; height: 100%; z-index: 10; opacity: 0.9;">
+				<div id="frame"
+					style="background-image: url('data:image/jpeg;base64, ${randomImage}');">
+					<img id="frame-image" alt="프레임"
+						src="${pageContext.request.contextPath}/resources/images/frame.png"
+						width="450px" height="630px;">
+				</div>
 			</div>
-		</div>
-		<!-- 감성 글귀-->
-		<!-- <div style="min-height: 542px; display:flex; padding-left: 30px; padding-right: 30px;">
+			<!-- 감성 글귀-->
+			<!-- <div style="min-height: 542px; display:flex; padding-left: 30px; padding-right: 30px;">
 			<div id="wrap">
 				<span class="mb-3" style="display: block; font-size: 72px; font-weight: 600; line-height: 1.1">poster</span>
 				<span class="mb-3" style="display: block; font-size: 72px; word-spacing: -10px;">the most beautiful tool</span>
@@ -217,107 +242,122 @@
 				<span class="mb-3" style="display: block; font-size: 72px; text-align: right;">&copy;2023</span>
 			</div>
 		</div> -->
-		<!-- 슬로건 -->
-		<%--<div id="slogan" style="padding: 42px 13px 100px;"> 
+			<!-- 슬로건 -->
+			<%--<div id="slogan" style="padding: 42px 13px 100px;"> 
 			<h2 style="text-align: center; ">
 				<span style="display: block; font-weight: 600; font-size: 17px; ">Journey</span>
 				<span style="display: block; font-weight: 500; font-size: 17px; word-spacing: -3px;">in my room</span>
 			</h2>
 		</div> --%>
-		
-		<!-- 포스터 목록 -->
-		<div>
-			<div id="contents" style="display: d-none" onscroll="SetPosition()">
-				<div id="menuArea">
-					<div id="mainCategory">
-						<h2>
-							<span><a id="entire" href="?productTheme=&productArtist=&pageNo=1#menuArea">전체</a></span>
-							<span><a id="theme" href="javascript:void(0)" onclick="selectTheme(); return false;">테마</a></span>
-							<span><a id="artist" href="javascript:void(0)" onclick="selectArtist(); return false;">아티스트</a></span>
-						</h2>
+
+			<!-- 포스터 목록 -->
+			<div>
+				<div id="contents" style="display: d-none" onscroll="SetPosition()">
+					<div id="menuArea">
+						<div id="mainCategory">
+							<h2>
+								<span><a id="entire"
+									href="?productTheme=&productArtist=&pageNo=1#menuArea">전체</a></span> <span><a
+									id="theme" href="javascript:void(0)"
+									onclick="selectTheme(); return false;">테마</a></span> <span><a
+									id="artist" href="javascript:void(0)"
+									onclick="selectArtist(); return false;">아티스트</a></span>
+							</h2>
+						</div>
+						<ul id="subCategory">
+
+						</ul>
 					</div>
-					<ul id="subCategory">
-						
-					</ul>
-				</div>
-				<div>
-					<ul id="productList">
-						<c:forEach var="image" items="${convertedImages}" varStatus="status" begin="0" end="20">
-							<li>
-								<a class="totalProduct" href="javascript:void(0)" onclick="" style="text-decoration:none;">
-									<div class="thumbnail">
-										<img class="imgOnList mb-3" alt="123" src="data:image/jpeg;base64, ${image}">
-										<div class="productDetail">
-											<div class="productDetailDiv" style="display:block;">
-												<div class="productDetailDiv2">
-													<div class="currentProductId" style="display:none">${productList[status.index].productId}</div>
-													<div class="d-flex justify-content-start" style="font-size:16px;">${productList[status.index].productName}</div>
-													<br>
-													<div class="d-flex justify-content-start" style="white-space: pre-line; line-height: 1.3">
-														${productList[status.index].productDetail}
+					<div>
+						<ul id="productList">
+							<c:forEach var="image" items="${convertedImages}"
+								varStatus="status" begin="0" end="20">
+								<li><a class="totalProduct" href="javascript:void(0)"
+									onclick="" style="text-decoration: none;">
+										<div class="thumbnail">
+											<img class="imgOnList mb-3" alt="123"
+												src="data:image/jpeg;base64, ${image}">
+											<div class="productDetail">
+												<div class="productDetailDiv" style="display: block;">
+													<div class="productDetailDiv2">
+														<div class="currentProductId" style="display: none">${productList[status.index].productId}</div>
+														<div class="d-flex justify-content-start"
+															style="font-size: 16px;">${productList[status.index].productName}</div>
+														<br>
+														<div class="d-flex justify-content-start"
+															style="white-space: pre-line; line-height: 1.3">
+															${productList[status.index].productDetail}</div>
+														<br>
+														<br>
+														<c:if
+															test="${productList[status.index].productDiscountRate > 0}">
+															<div class="d-flex justify-content-end"
+																style="text-decoration: line-through;">KRW:
+																${productList[status.index].productPrice}</div>
+															<div class="d-flex justify-content-end">KRW:
+																${(productList[status.index].productPrice * (1.0 - productList[status.index].productDiscountRate)).intValue()}</div>
+														</c:if>
+														<c:if
+															test="${productList[status.index].productDiscountRate == 0}">
+															<div class="d-flex justify-content-end" style="">KRW:
+																${productList[status.index].productPrice}</div>
+														</c:if>
 													</div>
-													<br><br>
-													<c:if test="${productList[status.index].productDiscountRate > 0}">
-														<div class="d-flex justify-content-end" style="text-decoration: line-through;">KRW: ${productList[status.index].productPrice}</div>
-														<div class="d-flex justify-content-end">KRW: ${(productList[status.index].productPrice * (1.0 - productList[status.index].productDiscountRate)).intValue()}</div>
-													</c:if>
-													<c:if test="${productList[status.index].productDiscountRate == 0}">
-														<div class="d-flex justify-content-end" style="">KRW: ${productList[status.index].productPrice}</div>
-													</c:if>
 												</div>
 											</div>
+											<span> <span
+												style="text-decoration: none; color: black;">[${productList[status.index].productTheme}]
+											</span> <span style="text-decoration: none; color: black;">${productList[status.index].productName}</span>
+											</span>
 										</div>
-										<span>
-											<span style="text-decoration:none; color:black;">[${productList[status.index].productTheme}] </span>
-											<span style="text-decoration:none; color:black;">${productList[status.index].productName}</span>
-										</span>
-									</div>
-								</a>
-							</li>
-						</c:forEach>
-					</ul>
-				</div>
-				<div class="d-flex justify-content-center">
-					<a class="text-dark mr-2" style="font-weight:600;" 
-					   href="?productTheme=${productBoardSearch.productTheme}&
+								</a></li>
+							</c:forEach>
+						</ul>
+					</div>
+					<div class="d-flex justify-content-center">
+						<a class="text-dark mr-2" style="font-weight: 600;"
+							href="?productTheme=${productBoardSearch.productTheme}&
 							productArtist=${productBoardSearch.productArtist}&
 							pageNo=1#menuArea">first</a>
-					<c:if test="${pager.groupNo>1}">
-						<a class="text-dark mr-2" style="font-weight:600;" 
-						   href="?productTheme=${productBoardSearch.productTheme}&
+						<c:if test="${pager.groupNo>1}">
+							<a class="text-dark mr-2" style="font-weight: 600;"
+								href="?productTheme=${productBoardSearch.productTheme}&
 								productArtist=${productBoardSearch.productArtist}&
 								pageNo=${pager.startPageNo-1}#menuArea">prev</a>
-					</c:if>
-					
-					<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-						<c:if test="${pager.pageNo != i}">
-							<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px;" 
-							   href="?productTheme=${productBoardSearch.productTheme}&
+						</c:if>
+
+						<c:forEach var="i" begin="${pager.startPageNo}"
+							end="${pager.endPageNo}">
+							<c:if test="${pager.pageNo != i}">
+								<a class="text-dark"
+									style="font-weight: 600; padding: 0 2px 0 2px;"
+									href="?productTheme=${productBoardSearch.productTheme}&
 									productArtist=${productBoardSearch.productArtist}&
 									pageNo=${i}#menuArea">${i}</a>
-						</c:if>
-						<c:if test="${pager.pageNo == i}">
-							<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px; text-decoration:underline;" 
-							   href="?productTheme=${productBoardSearch.productTheme}&
+							</c:if>
+							<c:if test="${pager.pageNo == i}">
+								<a class="text-dark"
+									style="font-weight: 600; padding: 0 2px 0 2px; text-decoration: underline;"
+									href="?productTheme=${productBoardSearch.productTheme}&
 									productArtist=${productBoardSearch.productArtist}&
 									pageNo=${i}#menuArea">${i}</a>
-						</c:if>
-					</c:forEach>
-								
-					<c:if test="${pager.groupNo<pager.totalGroupNo}">
-						<a class="text-dark ml-2" style="font-weight:600;" 
-						   href="?productTheme=${productBoardSearch.productTheme}&
+							</c:if>
+						</c:forEach>
+
+						<c:if test="${pager.groupNo<pager.totalGroupNo}">
+							<a class="text-dark ml-2" style="font-weight: 600;"
+								href="?productTheme=${productBoardSearch.productTheme}&
 								productArtist=${productBoardSearch.productArtist}&
 								pageNo=${pager.endPageNo+1}#menuArea">next</a>
-					</c:if>
-					<a class="text-dark ml-2" style="font-weight:600;" 
-					   href="?productTheme=${productBoardSearch.productTheme}&
+						</c:if>
+						<a class="text-dark ml-2" style="font-weight: 600;"
+							href="?productTheme=${productBoardSearch.productTheme}&
 							productArtist=${productBoardSearch.productArtist}&
 							pageNo=${pager.totalPageNo}#menuArea">last</a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>

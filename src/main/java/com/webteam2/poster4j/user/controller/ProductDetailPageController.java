@@ -29,6 +29,7 @@ import com.webteam2.poster4j.dto.ProductInquiry;
 import com.webteam2.poster4j.dto.ProductInquiryAnswer;
 import com.webteam2.poster4j.dto.Review;
 import com.webteam2.poster4j.dto.ReviewImage;
+import com.webteam2.poster4j.interceptor.Login;
 import com.webteam2.poster4j.service.CartService;
 import com.webteam2.poster4j.service.ProductImageService;
 import com.webteam2.poster4j.service.ProductInquiryAnswerService;
@@ -58,7 +59,7 @@ public class ProductDetailPageController {
 	ProductInquiryAnswerService productInquiryAnswerService;
 	
 	@GetMapping("/productDetail")
-	public String productDetail(@RequestParam(value="productId")int productId,
+	public String productDetail(@RequestParam("productId")int productId,
 						String pageNo, Model model, HttpSession session) {
 		//대표 이미지 가져오기
 		ProductImage productImage = productImageService.getImage(productId);
@@ -214,4 +215,37 @@ public class ProductDetailPageController {
 	public String getReviewList(String pageNo, Model model, HttpSession session) {
 		return "user/productDetailPage";
    }
+	
+	@GetMapping("/writeQna")
+	@Login
+	public String writeQnaForm(HttpSession session, Model model,
+					@RequestParam("productId")int productId,
+					@RequestParam("productName")String productName,
+					ProductImage productImage) {
+		Customer customer = (Customer)session.getAttribute("customerLogin");
+		if(customer == null) {
+			return "redirect:/login";
+		}
+		
+		ProductInquiry productInquiry = new ProductInquiry();
+		
+		productInquiry.setCustomerId(customer.getCustomerId());
+		productInquiry.setProductId(productId);
+		
+		model.addAttribute("qnaProduct", productName);
+		
+		//대표 이미지 가져오기
+		//ProductImage representImage = model.getAttribute("convertedImage");
+		
+		return "user/writeQnaForm";
+	}
+	
+	@PostMapping("/writeQna")
+	@Login
+	public String writeQna(@RequestParam("productId")int productId, ProductInquiry productInquiry, Model model, HttpSession session) {
+		productInquiryService.writeProductInquiry(productInquiry);
+		
+		return "productDetailPage?productId=" + productId;
+	}
+	
 }

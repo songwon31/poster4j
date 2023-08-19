@@ -49,4 +49,9 @@ public class ProductInquiryServiceImpl implements ProductInquiryService {
 		List<ProductInquiry> qnaList = productInquiryDao.selectWithProductIdPager(productId, pager);
 		return qnaList;
 	}
+
+	@Override
+	public void writeProductInquiry(ProductInquiry productInquiry) {
+		productInquiryDao.insertProductInquiry(productInquiry);		
+	}
 }

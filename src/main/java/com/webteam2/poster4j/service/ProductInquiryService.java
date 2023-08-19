@@ -12,4 +12,5 @@ public interface ProductInquiryService {
 	public int setAnsweredTrue(int productInquiryId);
 	public String getContentById(int productInquiryId);
 	public int getEachProductInquiryNum(int productId);
+	public void writeProductInquiry(ProductInquiry productInquiry);
 }

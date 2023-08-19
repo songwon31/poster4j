@@ -141,8 +141,8 @@
 					<div class="mt-3"><fmt:formatDate value="${review.reviewWrittenDate}" pattern="yyyy-MM-dd" /></div>
 				</div>
 			</c:forEach>
-			<%-- 페이지 번호 --%>
-			<div class="d-flex justify-content-center mt-3">
+			<%-- 리뷰 게시판 페이지 번호 --%>
+			<div class="d-flex justify-content-center mt-5">
 				<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=1">first</a>
 				<c:if test="${reviewPager.groupNo>1}">
 					<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=${reviewPager.startPageNo-1}">prev</a>
@@ -195,7 +195,11 @@
 				        </c:forEach>
 					</c:if>
 			</c:forEach>
-			<%-- 페이지 번호 --%>
+			<%-- 문의 글쓰기 --%>
+			<div>
+				<a class="btn writeBtn" href="writeQna">상품문의</a>
+			</div>
+			<%-- 문의 게시판 페이지 번호 --%>
 			<div class="d-flex justify-content-center mt-3">
 				<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=1">first</a>
 				<c:if test="${qnaPager.groupNo>1}">

@@ -43,6 +43,11 @@
 	</select>
 	
 	<insert id="insertProductInquiry" parameterType="ProductInquiry">
+		<!--
+		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
+	         select seq_bno.nextval from dual 
+	      </selectKey>
+		-->
 		insert into product_inquiry (productInquiry_id, customer_id, product_id, product_inquiry_content, product_inquiry_date, product_inquiry_answered)
 		values(#{productInquiryId}, #{customerId}, #{productId}, #{productInquiryContent}, #{productInquiryDate}, #{productInquiryAnswered})
 	</insert>
