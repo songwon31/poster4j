@@ -25,5 +25,6 @@ public interface ProductDao {
 	public List<Product> selectAll();
 	public List<Integer> selectAllProductId();
 	public List<Product> selectById(int productId);
+	public List<Product> selectWithoutLife(ProductBoardSearch productBoardSearch);
 	
 }

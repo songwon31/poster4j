@@ -214,4 +214,17 @@
 		where product_id = #{productId}
 	</select>
 	
+	<select id="selectWithoutLife" parameterType="ProductBoardSearch" resultType="Product">
+		select *
+		from (
+			select *
+			from product
+			where product_theme NOT IN ('life')
+		)
+		where rownum <![CDATA[<=]]> 10
+		<!-- select *
+		from product
+		where product_theme NOT IN ('life') -->
+	</select>
+	
 </mapper>

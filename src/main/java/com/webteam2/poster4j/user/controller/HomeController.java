@@ -72,6 +72,7 @@ public class HomeController {
 		List<Product> productList = productService.getSearchedProductList(productBoardSearch, pager);
 		model.addAttribute("productList", productList);
 
+		
 		List<Integer> productIds = new ArrayList<Integer>();
 		for (Product product : productList) {
 			productIds.add(product.getProductId());
@@ -86,11 +87,28 @@ public class HomeController {
 			}
 		}
 		model.addAttribute("convertedImages", convertedImages);
-
+		
+		//메인페이지 메인포스터
+		List<Product> mainProductList = productService.getListWithoutLife(productBoardSearch);
+		List<Integer> productIdsWithoutLife = new ArrayList<>();
+		
+		for(Product productWithoutLife : mainProductList) {
+			productIdsWithoutLife.add(productWithoutLife.getProductId());
+		}
+		
+		List<String> convertedImagesWithoutLife = new ArrayList<String>();
+		for(Integer productIdWithoutLife : productIdsWithoutLife) {
+			List<ProductImage> productImagesWithoutLife = productImageService.getOrderProductImageList(productIdWithoutLife);
+			for(ProductImage productImageWithoutLife : productImagesWithoutLife) {
+				String base64Img = Base64.getEncoder().encodeToString(productImageWithoutLife.getProductImageSource());
+				convertedImagesWithoutLife.add(base64Img);
+			}
+		}
+		
 		
 		//랜덤으로 이미지 불러오기
-		int randomIndex = new Random().nextInt(convertedImages.size());
-		String randomProductImage = convertedImages.get(randomIndex);
+		int randomIndex = new Random().nextInt(convertedImagesWithoutLife.size());
+		String randomProductImage = convertedImagesWithoutLife.get(randomIndex);
 		
 		model.addAttribute("randomImage", randomProductImage);
 		

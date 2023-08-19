@@ -82,4 +82,9 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getListById(int productId) {
 		return productDao.selectById(productId);
 	}
+	
+	@Override
+	public List<Product> getListWithoutLife(ProductBoardSearch productBoardSearch) {
+		return productDao.selectWithoutLife(productBoardSearch);
+	}
 }

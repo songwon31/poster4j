@@ -106,24 +106,27 @@ function deleteValue(){
 	}
 	else{
 		var check = confirm("정말 삭제하시겠습니까?");
-	}
-	$.ajax({
-		url: url,
-		type : 'POST',
-		traditional : true,
-		data : {
-			checkboxArr : checkboxArr
-		},
-		success: function(data){
-			if(data = 1){
-				alert("삭제 성공");
-				location.replace("${pageContext.request.contextPath}/addressList");
-			}
-			else{
-				alert("삭제 실패");
-			}
+		
+		if(check){
+			$.ajax({
+				url: url,
+				type : 'POST',
+				traditional : true,
+				data : {
+					checkboxArr : checkboxArr
+				},
+				success: function(data){
+					if(data = 1){
+						alert("배송지가 삭제되었습니다.");
+						location.replace("${pageContext.request.contextPath}/addressList");
+					}
+					else{
+						alert("삭제 실패");
+					}
+				}
+			})
 		}
-	})
+	}
 }
 
 </script>
