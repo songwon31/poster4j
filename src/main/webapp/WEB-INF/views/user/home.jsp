@@ -16,7 +16,7 @@
 	themeHtml += '<li><a href="?productTheme=wave&productArtist=&pageNo=1" id="wave">wave</a></li>';
 	themeHtml += '<li><a href="?productTheme=forest&productArtist=&pageNo=1" id="forest">forest</a></li>';
 	themeHtml += '<li><a href="?productTheme=window&productArtist=&pageNo=1" id="window">window</a></li>';
-	themeHtml += '<li><a href="?productTheme=life&productArtist=&pageNo=1" id=life">life</a></li>';
+	themeHtml += '<li><a href="?productTheme=life&productArtist=&pageNo=1" id="life">life</a></li>';
 	var artistHtml = '';
 	artistHtml += '<li><a href="?productTheme=&productArtist=유래혁&pageNo=1" id="유래혁">유래혁</a></li>';
 	artistHtml += '<li><a href="?productTheme=&productArtist=문예진&pageNo=1" id="문예진">문예진</a></li>';
