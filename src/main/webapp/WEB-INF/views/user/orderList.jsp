@@ -92,7 +92,7 @@
 				</c:forEach>
 			</div>
 			<div class="pagination">
-				<div colspan="12" class="text-center">
+				<div class="text-center">
 					<div>
 						<a class="text-dark mr-2" href="orderList?pageNo=1" style="font-weight:600;">first</a>
 						<c:if test="${pager.groupNo>1}">

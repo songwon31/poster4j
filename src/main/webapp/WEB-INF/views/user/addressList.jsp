@@ -3,71 +3,70 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/addressListStyle.css">
 
 <div id="addressList" style="margin: 0 auto">
 	<div style="margin-top: 200px; min-width: 1080px;">
-		<table class="table">
-			<thead class="border">
+		<div class="title">
+			ADDRESS
+		</div>
+		<table class="table mt-4">
+			<tbody>
 				<tr>
-					<th scope="col"><input id="selectAll" type="checkbox"></th>
+					<th scope="col"><input id="selectAll" type="checkbox"><label for="selectAll"></label></th>
 					<th scope="col">배송지명</th>
 					<th scope="col">수령인</th>
 					<th scope="col">휴대전화</th>
 					<th scope="col">주소</th>
 					<th scope="col">수정</th>
 				</tr>
-			</thead>
-			<tbody>
 				<c:forEach var="receiver" items="${receivers}">
 					<tr>
 						<th scope="row">
 							<form action="">
 								<%-- <input type="hidden" name="receiverId" value="${receiver.receiverId}"/> --%>
-								<input type="checkbox" name="checkbox" value="${receiver.receiverId}">
+								<input class="check" type="checkbox" name="checkbox" value="${receiver.receiverId}">
+								<label for="check"></label>
 							</form>
 							
 						</th>
 						<td scope="row">${receiver.receiverName}</td>
 						<td>${receiver.receiverPersonName}</td>
 						<td>${receiver.receiverTelno}</td>
-						<td>[${receiver.receiverZip}][${receiver.receiverAddress}] [${receiver.receiverAddressDetail}]</td>
-						<td>
-							<form class="form-inline" method="get" action="changeAddress">
+						<td>[${receiver.receiverZip}]${receiver.receiverAddress} ${receiver.receiverAddressDetail}</td>
+						<form class="form-inline" method="get" action="changeAddress">
+							<td>
 								<a type="submit" class="btn btn-dark btn-sm ml-2" href="updateAddressRegister?receiverId=${receiver.receiverId}">수정</a>
-							</form>
-						</td>
+							</td>
+						</form>
 					</tr>
 				</c:forEach>
-				
-				<tr>
-					<td colspan="12" class="text-center">
-						<div>
-							<a class="btn btn-outline-primary btn-sm" href="addressList?pageNo=1">처음</a>
-							<c:if test="${pager.groupNo>1}">
-								<a class="btn btn-outline-info btn-sm" href="addressList?pageNo=${pager.startPageNo-1}">이전</a>
-							</c:if>
-					
-							<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-								<c:if test="${pager.pageNo != i}">
-									<a class="btn btn-outline-success btn-sm" href="addressList?pageNo=${i}">${i}</a>
-								</c:if>
-								<c:if test="${pager.pageNo == i}">
-									<a class="btn btn-danger btn-sm" href="addressList?pageNo=${i}">${i}</a>
-								</c:if>
-							</c:forEach>
-					
-							<c:if test="${pager.groupNo<pager.totalGroupNo}">
-								<a class="btn btn-outline-info btn-sm" href="addressList?pageNo=${pager.endPageNo+1}">다음</a>
-							</c:if>
-							<a class="btn btn-outline-primary btn-sm" href="addressList?pageNo=${pager.totalPageNo}">맨끝</a>
-						</div>
-					</td>
-				</tr>
 			</tbody>
 		</table>
-		<div style="text-align: center;">
-			<span><a class="btn btn-dark" onclick="deleteValue()">선택 주소록 삭제</a></span>
+		<div class="pagination" style="display: flex; justify-content: center;">
+			<div class="text-center">
+				<div>
+					<a class="text-dark mr-2" href="addressList?pageNo=1" style="font-weight:600;">first</a>
+					<c:if test="${pager.groupNo>1}">
+						<a class="text-dark mr-2" href="addressList?pageNo=${pager.startPageNo-1}" style="font-weight:600;">prev</a>
+					</c:if>
+					<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+						<c:if test="${pager.pageNo != i}">
+							<a class="text-dark" href="addressList?pageNo=${i}" style="font-weight:600;">${i}</a>
+						</c:if>
+						<c:if test="${pager.pageNo == i}">
+							<a class="text-dark" href="addressList?pageNo=${i}" style="font-weight:600;">${i}</a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${pager.groupNo<pager.totalGroupNo}">
+						<a class="text-dark mr-2" href="addressList?pageNo=${pager.endPageNo+1}" style="font-weight:600;">next</a>
+					</c:if>
+					<a class="text-dark mr-2" href="addressList?pageNo=${pager.totalPageNo}" style="font-weight:600;">last</a>
+				</div>
+			</div>
+		</div>
+		<div style="text-align: center; margin-top: 30px;">
+			<span><a class="btn btn-light" onclick="deleteValue()">선택 주소록 삭제</a></span>
 			<span><a class="btn btn-dark" href="${pageContext.request.contextPath}/addressRegister">배송지등록</a></span>
 		</div>
 	</div>
