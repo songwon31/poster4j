@@ -66,7 +66,7 @@ public class HomeController {
 		session.setAttribute("pageNo", String.valueOf(pageNo));
 		
 		int totalSearchedProductNum = productService.getTotalSearchedProductNum(productBoardSearch);
-		Pager pager = new Pager(10, 5, totalSearchedProductNum, intPageNo);
+		Pager pager = new Pager(9, 5, totalSearchedProductNum, intPageNo);
 		model.addAttribute("pager", pager);
 		
 		List<Product> productList = productService.getSearchedProductList(productBoardSearch, pager);
