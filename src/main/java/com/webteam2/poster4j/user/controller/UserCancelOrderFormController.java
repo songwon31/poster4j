@@ -28,7 +28,7 @@ public class UserCancelOrderFormController {
 	public String cancelOrderForm (int orderId, int productId, 
 			@RequestParam(value="optionSize", required=false)String optionSize, 
 			@RequestParam(value="optionFrame", required=false)String optionFrame, Model model) {
-			log.info("1");
+		log.info("1");
 		model.addAttribute("orderId", orderId);
 		model.addAttribute("productId", productId);
 		model.addAttribute("optionSize", optionSize);

@@ -5,6 +5,40 @@
 
 <!-- home 스타일 설정을 위한 css -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/home.css">
+<!-- Loading 화면 코드 시작 -->
+
+<script type="text/javascript">
+	 $(window).on('load', function () {
+	      $("#load").hide();
+	 });
+	</script>
+	<style type="text/css">
+	#load {
+	   width: 100%;
+	   height: 100%;
+	   top: 0;
+	   left: 0;
+	   position: fixed;
+	   display: block;
+	  /*  opacity: 0.8; */
+	   background: white;
+	   z-index: 99;
+	   text-align: center;
+	}
+	
+	#load > img {
+	   position: absolute;
+	   top: 50%;
+	   left: 50%;
+	   z-index: 100;
+	}
+</style>
+
+<div id="load">
+   <img src="${pageContext.request.contextPath}/resources/images/spinner.gif" style="background-color: white;" alt="loading">
+</div>
+<!-- Loading 화면 코드 종료-->
+
 <script>
 	$(init);
 	
@@ -24,7 +58,6 @@
 		
 	
 	function init() {
-
 		const $frame = $("#frame");
 
 		$(document).on("mousemove", function(e) {
@@ -194,7 +227,7 @@
 		
 		<!-- 포스터 목록 -->
 		<div>
-			<div id="contents" style="display:none;" onscroll="SetPosition()">
+			<div id="contents" style="display: d-none" onscroll="SetPosition()">
 				<div id="menuArea">
 					<div id="mainCategory">
 						<h2>

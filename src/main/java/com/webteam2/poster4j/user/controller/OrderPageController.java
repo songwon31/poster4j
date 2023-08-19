@@ -163,6 +163,6 @@ public class OrderPageController {
 			cartService.removeItem(order.getCustomerId(), orderDetail.getProductId(), orderDetail.getOptionSize(), orderDetail.getOptionFrame());
 		}
 		
-		return "redirect:/cart";
+		return "redirect:/orderList";
 	}
 }
