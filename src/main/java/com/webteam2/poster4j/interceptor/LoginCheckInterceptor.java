@@ -15,8 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginCheckInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		log.info("실행");
-		
 		//요청 처리 메소드에 @Login이 붙어 있는지 확인
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
 		Login login = handlerMethod.getMethodAnnotation(Login.class);
@@ -29,7 +27,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 			if(customer != null) {
 				return true;
 			} else {
-				response.sendRedirect(request.getContextPath() + "/user/login");
+				response.sendRedirect(request.getContextPath() + "/login");
 				return false;
 			}
 		} else {
