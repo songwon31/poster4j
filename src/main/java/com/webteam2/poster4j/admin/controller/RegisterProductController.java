@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
+import com.webteam2.poster4j.interceptor.Auth;
+import com.webteam2.poster4j.interceptor.Auth.Role;
 import com.webteam2.poster4j.service.ProductImageService;
 import com.webteam2.poster4j.service.ProductService;
 
@@ -30,6 +32,7 @@ public class RegisterProductController {
 	ProductImageService productImageService;
 	
 	@RequestMapping("/registerProductForm")
+	@Auth(Role.ADMIN)
 	public String registerProductForm (@RequestParam(value="quit", required=false, defaultValue="0") int quit, Model model) {
 		if (quit == -1) {
 			model.addAttribute("quit", quit);
@@ -38,6 +41,7 @@ public class RegisterProductController {
 	}
 	
 	@PostMapping("/register") 
+	@Auth(Role.ADMIN)
 	public String register(HttpServletRequest request, HttpSession session,
 			@RequestParam(value="productName")String productName,
 			@RequestParam(value="productPrice")int productPrice,

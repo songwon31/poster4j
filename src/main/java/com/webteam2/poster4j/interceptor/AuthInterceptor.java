@@ -20,8 +20,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 		HandlerMethod handlerMethod = (HandlerMethod)handler;
 		Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
 		
-		HttpSession session = request.getSession();
-		Customer customer = (Customer) session.getAttribute("customerLogin");
+		
 		
 		if (auth == null) {
 			//@Auth가 안 붙어있을 경우
@@ -29,12 +28,23 @@ public class AuthInterceptor implements HandlerInterceptor {
 		} else {
 			//@Auth가 붙어 있을 경우
 			if (auth.value() == Role.ADMIN) {
+				HttpSession session = request.getSession();
+				Customer customer = (Customer) session.getAttribute("customerLogin");
+				
+				//로그인 여부 검사
+				if (customer == null) {
+					response.sendRedirect(request.getContextPath() + "/login");
+					return false;
+				}
+				
 				//로그인 사용자가 관리자 권한을 가지고 있는지 검사
 				boolean isAdmin = false;
+				if (customer.getCustomerId().equals("admin")) {
+					isAdmin = true;
+				}
 				if (isAdmin) {
 					return true;
 				} else {
-					log.info("관리자 권한이 필요함");
 					response.sendRedirect(request.getContextPath());
 				}
 			} else {

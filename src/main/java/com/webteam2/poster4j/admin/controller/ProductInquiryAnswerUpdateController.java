@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webteam2.poster4j.dto.ProductInquiryAnswer;
+import com.webteam2.poster4j.interceptor.Auth;
+import com.webteam2.poster4j.interceptor.Auth.Role;
 import com.webteam2.poster4j.service.ProductInquiryAnswerService;
 import com.webteam2.poster4j.service.ProductInquiryService;
 
@@ -25,6 +27,7 @@ public class ProductInquiryAnswerUpdateController {
 	ProductInquiryAnswerService productInquiryAnswerService;
 	
 	@RequestMapping("/productInquiryAnswerUpdateForm")
+	@Auth(Role.ADMIN)
 	public String orderInquiryAnswerForm (int productInquiryId, String productInquiryContent, Model model) {
 		model.addAttribute("productInquiryId", productInquiryId);
 		model.addAttribute("productInquiryContent", productInquiryContent);
@@ -35,6 +38,7 @@ public class ProductInquiryAnswerUpdateController {
 	}
 	
 	@PostMapping("/productInquiryAnswerUpdate")
+	@Auth(Role.ADMIN)
 	public String orderInquiryAnswerUpdate (ProductInquiryAnswer productInquiryAnswer) {
 		productInquiryAnswer.setProductInquiryAnswerDate(new Date());
 		productInquiryAnswerService.editAnswer(productInquiryAnswer);

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webteam2.poster4j.dto.CanceledOrder;
 import com.webteam2.poster4j.dto.Pager;
+import com.webteam2.poster4j.interceptor.Auth;
+import com.webteam2.poster4j.interceptor.Auth.Role;
 import com.webteam2.poster4j.service.CanceledOrderService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,7 @@ public class CanceledOrderBoardController {
 	CanceledOrderService canceledOrderService;
 	
 	@RequestMapping("/canceledOrderBoard")
+	@Auth(Role.ADMIN)
 	public String productBoard(String pageNo, Model model, HttpSession session) 
 	{
 		// 브라우저에서 pageNo가 넘어오지 않았을 경우
@@ -51,6 +54,7 @@ public class CanceledOrderBoardController {
 	}
 	
 	@RequestMapping("processCanceledOrder")
+	@Auth(Role.ADMIN)
 	public String processCanceledOrder(int orderId, int productId) {
 		canceledOrderService.registerCmptnDate(orderId, productId, new Date());
 		

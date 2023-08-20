@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webteam2.poster4j.dto.OrderDetail;
 import com.webteam2.poster4j.dto.Pager;
+import com.webteam2.poster4j.interceptor.Auth;
+import com.webteam2.poster4j.interceptor.Auth.Role;
 import com.webteam2.poster4j.service.OrderDetailService;
 import com.webteam2.poster4j.service.OrderTService;
 import com.webteam2.poster4j.service.ProductService;
@@ -33,6 +35,7 @@ public class OrderBoardController {
 	OrderTService orderTService;
 	
 	@RequestMapping("/orderBoard")
+	@Auth(Role.ADMIN)
 	public String orderBoard(
 			@RequestParam(value="category", required=false) String category, 
 			@RequestParam(value="content", required=false) String content, 
@@ -121,6 +124,7 @@ public class OrderBoardController {
 	}
 	
 	@GetMapping("/changeOrderStatus")
+	@Auth(Role.ADMIN)
 	public String changeOrderStatus (int orderId, int productId, String optionSize, String optionFrame, String orderStatus) {
 		orderDetailService.changeOrderDetailStatus(orderId, productId, optionSize, optionFrame, orderStatus);
 		return "redirect:/admin/orderBoard";

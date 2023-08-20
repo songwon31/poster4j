@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductBoardSearch;
+import com.webteam2.poster4j.interceptor.Auth;
+import com.webteam2.poster4j.interceptor.Auth.Role;
 import com.webteam2.poster4j.service.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +28,7 @@ public class ProductBoardController {
 	ProductService productService;
 	
 	@RequestMapping("/productBoard")
+	@Auth(Role.ADMIN)
 	public String productBoard(ProductBoardSearch productBoardSearch, String pageNo, Model model, HttpSession session) {
 		productBoardSearch.makeEmptyToNull();
 		
@@ -63,12 +66,14 @@ public class ProductBoardController {
 	}
 	
 	@GetMapping("/removeSearch")
+	@Auth(Role.ADMIN)
 	public String removeSearch(HttpSession session) {
 		session.removeAttribute("productBoardSearch");
 		return "redirect:/admin/productBoard";
 	}
 	
 	@GetMapping("/deleteProduct")
+	@Auth(Role.ADMIN)
 	public String deleteProduct(int productId) {
 		productService.deleteById(productId);
 		return "redirect:/admin/productBoard";

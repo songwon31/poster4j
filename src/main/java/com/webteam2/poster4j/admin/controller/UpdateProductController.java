@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
+import com.webteam2.poster4j.interceptor.Auth;
+import com.webteam2.poster4j.interceptor.Auth.Role;
 import com.webteam2.poster4j.service.ProductImageService;
 import com.webteam2.poster4j.service.ProductService;
 
@@ -28,6 +30,7 @@ public class UpdateProductController {
 	ProductImageService productImageService;
 	
 	@RequestMapping("/updateProductForm")
+	@Auth(Role.ADMIN)
 	public String updateProductForm (int productId, Model model) {
 		if (productId != -1) {
 			Product product = productService.getOneProduct(productId);
@@ -40,6 +43,7 @@ public class UpdateProductController {
 	}
 	
 	@PostMapping("/update") 
+	@Auth(Role.ADMIN)
 	public String update(
 			@RequestParam(value="productId")int productId,
 			@RequestParam(value="productName")String productName,

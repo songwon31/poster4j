@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webteam2.poster4j.dto.CanceledOrder;
+import com.webteam2.poster4j.interceptor.Auth;
+import com.webteam2.poster4j.interceptor.Auth.Role;
 import com.webteam2.poster4j.service.CanceledOrderService;
 import com.webteam2.poster4j.service.OrderDetailService;
 
@@ -26,6 +28,7 @@ public class AdminCancelOrderController {
 	CanceledOrderService canceledOrderService;
 	
 	@RequestMapping("/adminCancelOrderForm")
+	@Auth(Role.ADMIN)
 	public String updateProductForm (int orderId, int productId, 
 			@RequestParam(value="optionSize", required=false)String optionSize, 
 			@RequestParam(value="optionFrame", required=false)String optionFrame, Model model) {
@@ -37,9 +40,11 @@ public class AdminCancelOrderController {
 	}
 	
 	@PostMapping("/cancelOrder")
+	@Auth(Role.ADMIN)
 	public String cancelOrder(
 			@RequestParam("orderId") int orderId,
-			@RequestParam("productId") int productId,
+			@RequestParam("productId") int
+			productId,
 			@RequestParam(value="optionSize", required=false)String optionSize, 
 			@RequestParam(value="optionFrame", required=false)String optionFrame,
 			@RequestParam("cancelCategory") String cancelCategory,
