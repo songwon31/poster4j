@@ -87,4 +87,9 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getListWithoutLife(ProductBoardSearch productBoardSearch) {
 		return productDao.selectWithoutLife(productBoardSearch);
 	}
+
+	@Override
+	public String getNameById(int productId) {
+		return productDao.selectNameById(productId);
+	}
 }

@@ -30,6 +30,12 @@
 		select product_price
 		from product
 		where product_id = #{productId}
+	</select>
+	
+	<select id="selectNameById" parameterType="int" resultType="String">
+		select product_name
+		from product
+		where product_id = #{productId}
 	</select> 
 	
 	<select id="count" resultType="int">

@@ -13,6 +13,7 @@ import com.webteam2.poster4j.dto.ProductBoardSearch;
 public interface ProductDao {
 	public List<Product> selectByPage(Pager pager);
 	public int selectPriceById(int productId);
+	public String selectNameById(int productId);
 	public int count();
 	public int insertProduct(Product product);
 	public Product selectAllById(int productId);

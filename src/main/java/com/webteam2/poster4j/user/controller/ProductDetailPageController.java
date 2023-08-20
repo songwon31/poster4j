@@ -2,6 +2,7 @@ package com.webteam2.poster4j.user.controller;
 
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -215,37 +216,40 @@ public class ProductDetailPageController {
 	public String getReviewList(String pageNo, Model model, HttpSession session) {
 		return "user/productDetailPage";
    }
-	
-	@GetMapping("/writeQna")
+		
+	@GetMapping("/writeQnaForm")
 	@Login
-	public String writeQnaForm(HttpSession session, Model model,
-					@RequestParam("productId")int productId,
-					@RequestParam("productName")String productName,
-					ProductImage productImage) {
-		Customer customer = (Customer)session.getAttribute("customerLogin");
-		if(customer == null) {
-			return "redirect:/login";
-		}
+	public String writeQnaForm(@RequestParam("productId")int productId, Model model) {
+		//QNA 대상 상품명 가져오기
+		String productName = productService.getNameById(productId);
 		
-		ProductInquiry productInquiry = new ProductInquiry();
+		//QNA 대상 이미지 가져오기
+		ProductImage productImage = productImageService.getImage(productId);
+		String convertedImage = Base64.getEncoder().encodeToString(productImage.getProductImageSource());
 		
-		productInquiry.setCustomerId(customer.getCustomerId());
-		productInquiry.setProductId(productId);
-		
-		model.addAttribute("qnaProduct", productName);
-		
-		//대표 이미지 가져오기
-		//ProductImage representImage = model.getAttribute("convertedImage");
+		model.addAttribute("productId", productId);
+		model.addAttribute("productName", productName);
+		model.addAttribute("convertedImage", convertedImage);
 		
 		return "user/writeQnaForm";
 	}
 	
 	@PostMapping("/writeQna")
 	@Login
-	public String writeQna(@RequestParam("productId")int productId, ProductInquiry productInquiry, Model model, HttpSession session) {
-		productInquiryService.writeProductInquiry(productInquiry);
+	public String writeQna(@RequestParam("productId")int productId,
+					ProductInquiry productInquiry,
+					HttpSession session) {
+		Customer customer = (Customer)session.getAttribute("customerLogin");
+		ProductInquiry dbProductInquiry = new ProductInquiry();
 		
-		return "productDetailPage?productId=" + productId;
+		dbProductInquiry.setCustomerId(customer.getCustomerId());
+		dbProductInquiry.setProductId(productId);
+		dbProductInquiry.setProductInquiryContent(productInquiry.getProductInquiryContent());
+		dbProductInquiry.setProductInquiryDate(new Date());
+		
+		productInquiryService.writeProductInquiry(dbProductInquiry);
+		
+		return "redirect:/productDetail?productId=" + productId + "#qnaBoard";
 	}
 	
 }

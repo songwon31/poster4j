@@ -16,5 +16,5 @@ public interface ProductInquiryDao {
 	public int updateAnsweredToTrue(int productInquiryId);
 	public String selectContentById(int productInquiryId);
 	public int countEachProductInquiry(int productId);
-	public ProductInquiry insertProductInquiry(ProductInquiry productInquiry);
+	public void insertProductInquiry(ProductInquiry productInquiry);
 }

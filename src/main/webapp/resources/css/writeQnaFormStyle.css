@@ -39,16 +39,15 @@ body {
     align-items: center;
     margin-bottom: 20px;
     padding: 10px;
-    background-color: #f8f9fa;
-}
-
-.product-details {
-    margin-left: 15px;
 }
 
 .product-name {
     font-size: 2em;
     color: #333;
+}
+
+#qnaProductImage {
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
 }
 
 .product-option {

@@ -4,9 +4,8 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-<%-- 공통 스타일 설정을 위한  css--%>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/productDetailPageStyle.css" />
+<%-- 스타일 설정을 위한  css--%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/productDetailPageStyle.css" />
 
 <%-- 아이콘 라이브러리 --%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,8 +17,19 @@
 	
 	//선택된 아이템 총가격
 	var totalPrice = 0;
+	
+	//Loading 화면
+	 $(window).on('load', function () {
+	      $("#load").hide();
+	 });
 </script>
 
+<%-- Loading 화면 --%>
+<div id="load">
+	<img src="${pageContext.request.contextPath}/resources/images/spinner.gif" style="background-color: white;" alt="loading">
+</div>
+
+<%-- productDetailPage --%>
 <div class="wrapper">
 	<div class="productDetailContent d-flex flex-column align-items-center">
 		<div class="productWrapper d-flex justify-content-center row">
@@ -141,6 +151,7 @@
 					<div class="mt-3"><fmt:formatDate value="${review.reviewWrittenDate}" pattern="yyyy-MM-dd" /></div>
 				</div>
 			</c:forEach>
+			
 			<%-- 리뷰 게시판 페이지 번호 --%>
 			<div class="d-flex justify-content-center mt-5">
 				<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=1">first</a>
@@ -172,6 +183,7 @@
 				<div class="col-2">작성자</div>
 				<div class="col-2">작성일</div>
 			</div>
+			
 			<%-- 해당 상품문의 가져오기 --%>
 			<c:forEach var="productInquiry" items="${productInquiries}">
 				<div class="qnaBoardItem row">
@@ -179,26 +191,29 @@
 					<div class="col-2">${productInquiry.customerId}</div>
 					<div class="col-2"><fmt:formatDate value="${productInquiry.productInquiryDate}" pattern="yyyy-MM-dd" /></div>
 				</div>
-					<%-- 문의답변이 있을 경우 가져오기 --%>
-					<c:if test="${productInquiry.productInquiryAnswered=='TRUE'}">
-						<c:forEach var="entry" items="${answeredInquiries}">
-							<c:if test="${productInquiry.productInquiryId==entry.key}">
-								<div class="d-flex qnaBoardItem answer row">
-					                <div class="col-8">
-										<i class="material-icons" style="font-size: 15px; color: white; background-color: black; padding: 1px;">subdirectory_arrow_right</i>
-					                	${entry.value.getProductInquiryAnswerContent()}
-					                </div>
-					                <div class="col-2">poster4j</div>
-									<div class="col-2"><fmt:formatDate value="${entry.value.getProductInquiryAnswerDate()}" pattern="yyyy-MM-dd" /></div>
-					            </div>
-							</c:if>
-				        </c:forEach>
-					</c:if>
+				
+				<%-- 문의답변이 있을 경우 가져오기 --%>
+				<c:if test="${productInquiry.productInquiryAnswered=='TRUE'}">
+					<c:forEach var="entry" items="${answeredInquiries}">
+						<c:if test="${productInquiry.productInquiryId==entry.key}">
+							<div class="d-flex qnaBoardItem answer row">
+				                <div class="col-8">
+									<i class="material-icons" style="font-size: 15px; color: white; background-color: black; padding: 1px;">subdirectory_arrow_right</i>
+				                	${entry.value.getProductInquiryAnswerContent()}
+				                </div>
+				                <div class="col-2">poster4j</div>
+								<div class="col-2"><fmt:formatDate value="${entry.value.getProductInquiryAnswerDate()}" pattern="yyyy-MM-dd" /></div>
+				            </div>
+						</c:if>
+			        </c:forEach>
+				</c:if>
 			</c:forEach>
+			
 			<%-- 문의 글쓰기 --%>
 			<div>
-				<a class="btn writeBtn" href="writeQna">상품문의</a>
+				<a class="btn writeBtn" href="writeQnaForm">상품문의</a>
 			</div>
+			
 			<%-- 문의 게시판 페이지 번호 --%>
 			<div class="d-flex justify-content-center mt-3">
 				<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=1">first</a>
@@ -295,8 +310,8 @@
 						html += '<tr id="tr' + index + '">';
 						html += '	<form id="selectedItemForm" method="POST">';
 						html += '		<td>';
-						html += '			<p>';
-						html += '				${product.productName}';
+						html += '			<p style="margin-bottom: 0;">';
+						html += '				<span>${product.productName}</span>';
 						html += '				<input type="hidden" id="productId' + index + '" name="orderItemList[' + index + '].productId" value="${product.productId}">';
 						html += '				<input  class="productSize" type="hidden" id="productSize' + index + '" name="orderItemList[' + index + '].productSize" value="' + selectedSize + '">';
 						html += '				<span>' + $("select[name=selectSize] option:selected").val() + '</span>';
@@ -470,6 +485,12 @@
 			}
 		});
 	}
+	
+	//상품문의 게시글 쓰기
+	$(".writeBtn").click(function() {
+		var productId = ${product.productId};
+		$(".writeBtn").attr("href",'writeQnaForm?productId=' + productId);
+	});
 </script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
