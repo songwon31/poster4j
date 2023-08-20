@@ -10,6 +10,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/cart/**"/>
+			<mvc:mapping path="/writeQnaForm/**"/>
 			<bean class="com.webteam2.poster4j.interceptor.LoginCheckInterceptor"/>
 		</mvc:interceptor>
 	

@@ -40,6 +40,7 @@ import com.webteam2.poster4j.service.ReviewImageService;
 import com.webteam2.poster4j.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
+import oracle.jdbc.logging.annotations.Log;
 
 @Slf4j
 @Controller
@@ -235,7 +236,6 @@ public class ProductDetailPageController {
 	}
 	
 	@PostMapping("/writeQna")
-	@Login
 	public String writeQna(@RequestParam("productId")int productId,
 					ProductInquiry productInquiry,
 					HttpSession session) {

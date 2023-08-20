@@ -430,6 +430,12 @@
 				}
 				//선택된 아이템 리스트 인덱싱을 위한 배열 초기화
 				check = [];
+			},
+			error: function(xhr, status, error) {
+			    alert("로그인 후 장바구니 담기가 가능합니다.");
+				
+			    //로그인 페이지로 이동
+			    location.href = "login";
 			}
 		});
 	}
@@ -482,6 +488,12 @@
 				}
 				document.body.appendChild(form);
 				form.submit();
+			},
+			error: function(xhr, status, error) {
+			    alert("로그인 후 주문이 가능합니다.");
+				
+			    //로그인 페이지로 이동
+			    location.href = "login";
 			}
 		});
 	}
