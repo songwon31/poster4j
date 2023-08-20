@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.webteam2.poster4j.dto.Customer;
 import com.webteam2.poster4j.interceptor.Auth.Role;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 		Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
 		
 		HttpSession session = request.getSession();
+		Customer customer = (Customer) session.getAttribute("customerLogin");
 		
 		
 		if (auth == null) {
