@@ -104,6 +104,9 @@
 					<a class="eventBtn btn px-5 py-2" href="javascript:void(0)" onclick="addCart();return false;">Add to Cart</a>
 					<a class="eventBtn btn ml-2 px-5 py-2" href="javascript:void(0)" onclick="orderNow();return false;">Order Now</a>
 				</div>
+				<div class="toast">
+					<div class="toast-body">장바구니에 상품이 담겼습니다.</div>
+				</div>
 			</div>
 		</div>
 
@@ -401,7 +404,7 @@
 	}
 	
 	//장바구니에 담기
-	function addCart() {
+	function addCart() {		
 		var orderItemList = new Array();
 		for (let i = 0; i < check.length; i++) {
 			if (check[i]) {
@@ -422,6 +425,9 @@
 			contentType: "application/json",
 		    data: JSON.stringify(orderItemList),
 			success : function(data) {
+				//toast 보여주기
+				$('.toast').toast('show');
+				
 				//장바구니에 담은 아이템들 다 지워주기
 				for (let i = 0; i < check.length; i++) {
 					if (check[i]) {
