@@ -19,11 +19,11 @@
 	<!-- DB에서 receiver_enabled가 true인 값 가져옴 -->
 	<select id="selectByPage" parameterType="map"  resultType="Receiver">
 		<![CDATA[
-		select rnum, receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_enabled, receiver_person_name
+		select rnum, receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_enabled, receiver_person_name, receiver_address_type
 		from (
-			 select rownum as rnum, receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_enabled, receiver_person_name
+			 select rownum as rnum, receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_enabled, receiver_person_name, receiver_address_type
 			 from (
-			 	select receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_enabled, receiver_person_name
+			 	select receiver_id, receiver_name, receiver_zip, receiver_address, receiver_address_detail, receiver_telno, receiver_enabled, receiver_person_name, receiver_address_type
 			 	from receiver
 			 	where customer_id = #{customerId} and receiver_enabled = 'TRUE'
 			 	order by receiver_id desc
@@ -34,10 +34,10 @@
 		]]>
 	</select> 
 	
-	<select id="count" resultType="int">
+	<select id="count" parameterType="String" resultType="int">
 		select count(*) 
 		from receiver
-		where receiver_enabled = 'TRUE'
+		where customer_id = #{customerId} and receiver_enabled = 'TRUE'
 		
 	</select>
 	
@@ -58,7 +58,7 @@
 	
 	<update id="delete" parameterType="Receiver">
 		update receiver set receiver_enabled= 'FALSE'
-		where receiver_id=#{receiverId}
+		where receiver_id=#{receiverId} and receiver_address_type = 'OTHER'
 	</update>
 	
 	<!-- customerId로 고객의 기본 배송지 가져오기 -->

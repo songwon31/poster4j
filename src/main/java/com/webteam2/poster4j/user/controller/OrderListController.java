@@ -11,9 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webteam2.poster4j.dto.BuyItem;
 import com.webteam2.poster4j.dto.CanceledOrder;
@@ -23,11 +23,13 @@ import com.webteam2.poster4j.dto.OrderT;
 import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductImage;
+import com.webteam2.poster4j.dto.Review;
 import com.webteam2.poster4j.service.CanceledOrderService;
 import com.webteam2.poster4j.service.OrderDetailService;
 import com.webteam2.poster4j.service.OrderTService;
 import com.webteam2.poster4j.service.ProductImageService;
 import com.webteam2.poster4j.service.ProductService;
+import com.webteam2.poster4j.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,6 +46,8 @@ public class OrderListController {
 	ProductService productService;
 	@Resource
 	CanceledOrderService canceledOrderService;
+	@Resource
+	ReviewService reviewService;
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
@@ -82,6 +86,7 @@ public class OrderListController {
 		
 		List<BuyItem> buyItemList = new ArrayList<>();
 		
+		
 		for(int i=0; i<orderList.size(); i++) {
 			int orderId = orderList.get(i).getOrderId();
 			List<OrderDetail> newOrderDetailList = orderDetailService.getListNoPager(orderId);
@@ -101,6 +106,18 @@ public class OrderListController {
 				
 				productImageList.add(base64Img);
 				
+				try {
+					Review review = reviewService.getReview(orderId, productId, orderDetail.getOptionSize(), orderDetail.getOptionFrame());
+					if(review != null) {
+						boolean hasReview = true;
+						orderDetail.setHasReview(hasReview);
+					}else if(review == null) {
+						 boolean hasReview = false;
+						 orderDetail.setHasReview(hasReview);
+					}
+				}catch(Exception e){
+					
+				}
 			}
 			
 			Date orderDate = orderList.get(i).getOrderDate();
@@ -118,6 +135,7 @@ public class OrderListController {
 			buyItemList.add(buyItem);
 		}
 		
+		
 		model.addAttribute("buyItemList", buyItemList);
 		model.addAttribute("pager", pager);
 		
@@ -134,4 +152,11 @@ public class OrderListController {
 		
 		return "redirect:/orderList";
 	}
-}
+	
+	@GetMapping("/updateOrderList")
+	public String updateOrderList() {
+		return null;
+	}
+}	
+
+

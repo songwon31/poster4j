@@ -38,8 +38,8 @@ public class ReceiverServiceImpl implements ReceiverService {
 	}
 	
 	@Override
-	public int getTotalReceiverNum() {
-		int totalReceiverNum = receiverDao.count();
+	public int getTotalReceiverNum(String customerId) {
+		int totalReceiverNum = receiverDao.count(customerId);
 		return totalReceiverNum;
 	}
 	

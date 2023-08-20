@@ -30,7 +30,13 @@
 							</form>
 							
 						</th>
-						<td scope="row">${receiver.receiverName}</td>
+						<td scope="row">
+							<c:if test="${receiver.receiverAddressType.equals('DEFAULT')}">
+								<span>[기본]</span>
+							</c:if>
+							
+							<span>${receiver.receiverName}</span>
+						</td>
 						<td>${receiver.receiverPersonName}</td>
 						<td>${receiver.receiverTelno}</td>
 						<td>[${receiver.receiverZip}]${receiver.receiverAddress} ${receiver.receiverAddressDetail}</td>
@@ -94,6 +100,8 @@ function deleteValue(){
 	var url = "delete"; //Controller로 보내고자 하는 URL
 	var checkboxArr = new Array();
 	var list = $("input[name='checkbox']");
+	var hasDefaultReceiver = false;
+	
 	for (var i = 0; i < list.length; i++){
 		if(list[i].checked){ //선택되어 있으면 배열에 값을 저장
 			checkboxArr.push(list[i].value);

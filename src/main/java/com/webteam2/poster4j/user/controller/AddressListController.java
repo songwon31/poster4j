@@ -1,6 +1,6 @@
 package com.webteam2.poster4j.user.controller;
 
-import java.util.List;
+import java.util.List;	
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +35,6 @@ public class AddressListController {
 		}
 		
 		receiver.setCustomerId(customer.getCustomerId());
-		log.info(""+receiver.getCustomerId());
 		
 		// 브라우저에서 pageNo가 넘어오지 않았을 경우
 		if (pageNo == null) {
@@ -51,7 +50,7 @@ public class AddressListController {
 		// 세션에 PageNo를 저장
 		session.setAttribute("pageNo", String.valueOf(pageNo));
 
-		int totalReceiverNum = receiverService.getTotalReceiverNum();
+		int totalReceiverNum = receiverService.getTotalReceiverNum(customer.getCustomerId());
 		Pager pager = new Pager(5, 5, totalReceiverNum, intPageNo);
 
 		List<Receiver> list = receiverService.getList(pager, receiver.getCustomerId());
@@ -67,10 +66,14 @@ public class AddressListController {
 		String[] ajaxMsg = request.getParameterValues("checkboxArr");
 		int size = ajaxMsg.length;
 		for (int i = 0; i < size; i++) {
-			// log.info(ajaxMsg[i]);
 			int receiverId = Integer.parseInt(ajaxMsg[i]);
-			log.info("" + receiverId);
-			receiverService.delete(receiverId);
+			
+			Receiver receiver = receiverService.getBoard(receiverId);
+			if(!(receiver.getReceiverAddressType().equals("DEFAULT"))) {
+				receiverService.delete(receiverId);
+			}else {
+				//throw new DefaultReceiverDeleteException("기본배송지는 삭제할 수 없습니다.");
+			}
 		}
 		return "redirect:/addressList";
 	}

@@ -9,7 +9,7 @@ public interface ReceiverService {
 	public void register(Receiver receiver);
 	public void firstRegister(Receiver receiver);
 	public List<Receiver> getList(Pager pager, String customerId);
-	public int getTotalReceiverNum();
+	public int getTotalReceiverNum(String customerId);
 	public Receiver getBoard(int receiverId);
 	public void modify(Receiver receiver);
 	public void delete(int receiverId);

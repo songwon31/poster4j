@@ -46,7 +46,6 @@
 														<input type= hidden name="optionSize" value="${orderDetail.optionSize}">
 														<input type= hidden name="optionFrame" value="${orderDetail.optionFrame}">
 														<input type= hidden name="orderDetailStatus" value="${orderDetail.orderDetailStatus}">
-													
 														<div class="order-date">
 															${buyItem.order.convertedOrderDate} 주문 <span>Order_No.${orderDetail.orderId}</span>
 														</div>
@@ -66,15 +65,19 @@
 															</div>
 															<div class="button" style="max-width: 200px; display: flex; flex-direction: column; justify-content: space-between;">
 														    	<div>
-															    	<div>
-																        <button id="writeReviewBtn" type="submit" class="writeReview btn my-2" style="border: 1px solid">리뷰 작성</button>
-															    	</div>
-															    	<div>
-																        <a id="updateReviewBtn" href="updateReview?orderId=${orderDetail.orderId}&productId=${orderDetail.productId}&optionSize=${orderDetail.optionSize}&optionFrame=${orderDetail.optionFrame}" class="updateReview btn my-2" style="border: 1px solid">리뷰 수정</a>
-															    	</div>
-															    	<div>
-																        <a id="deleteReviewBtn" href="deleteReview?orderId=${orderDetail.orderId}&productId=${orderDetail.productId}&optionSize=${orderDetail.optionSize}&optionFrame=${orderDetail.optionFrame}" class="updateReview btn my-2" style="border: 1px solid">리뷰 삭제</a>
-															    	</div>
+														    		<c:if test="${orderDetail.hasReview == false}">
+																    	<div>
+																	        <button id="writeReviewBtn" type="submit" class="writeReview btn my-2" style="border: 1px solid">리뷰 작성</button>
+																    	</div>
+														    		</c:if>
+														    		<c:if test="${orderDetail.hasReview == true}">
+																    	<div>
+																	        <a id="updateReviewBtn" href="updateReview?orderId=${orderDetail.orderId}&productId=${orderDetail.productId}&optionSize=${orderDetail.optionSize}&optionFrame=${orderDetail.optionFrame}" class="updateReview btn my-2" style="border: 1px solid">리뷰 수정</a>
+																    	</div>
+																    	<div>
+																	        <a id="deleteReviewBtn" href="deleteReview?orderId=${orderDetail.orderId}&productId=${orderDetail.productId}&optionSize=${orderDetail.optionSize}&optionFrame=${orderDetail.optionFrame}" class="updateReview btn my-2" style="border: 1px solid">리뷰 삭제</a>
+																    	</div>
+														    		</c:if>
 														    	</div>
 														    	<div style="width:150px">
 															        <a href="javascript:void(0)" class="btn btn-dark my-2 px-3" onclick="cancelOrder(${orderDetail.orderId}, ${orderDetail.productId}, '${orderDetail.optionSize}', '${orderDetail.optionFrame}')" style="width:100%">취소</a>
@@ -121,8 +124,28 @@
 	 $(init);
 	 
 	 function init(){
+		 $(".order-status-filter").change(function(){
+			var selectedStatus = $(this).val();
+			updateOrderItems(selectedStatus);
+		 });
 	 }
 	 
+	function updateOrderItems(selectedStatus){
+		$.ajax({
+		 url: "updateOrderList",
+		 type: "GET",
+		 data: {
+			 selectedStatus: selectedStatus
+		 },
+		 success:function(data){
+			  $(".order-list-items").html(data);
+		 },
+		error: function() {
+			alert("주문 값 업데이트에 실패했습니다.");
+		   }
+		})
+	}
+	
 	function cancelOrder(orderId, productId, optionSize, optionFrame) {
 		var popupWidth = 600;
 		var popupHeight = 300;

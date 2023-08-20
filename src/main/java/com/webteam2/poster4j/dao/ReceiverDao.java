@@ -15,7 +15,7 @@ public interface ReceiverDao {
 	public int insertAddress(Receiver receiver);
 	public List<Receiver> selectByPage(@Param("pager")Pager pager, @Param("customerId") String customerId);
 	public int updateById(Receiver receiver);
-	public int count();
+	public int count(String CustomerId);
 	public int delete(int receiverId);
 	public Receiver selectByCustomerId(String customerId);
 	public List<Receiver> selectListByCustomerId(String customerId);

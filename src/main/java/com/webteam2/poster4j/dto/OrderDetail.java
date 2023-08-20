@@ -17,4 +17,5 @@ public class OrderDetail {
 	private String optionSize;
 	private String optionFrame;
 	private int orderDetailPrice;
+	private boolean hasReview = false;
 }
