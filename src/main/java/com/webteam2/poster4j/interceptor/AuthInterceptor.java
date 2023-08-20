@@ -23,7 +23,6 @@ public class AuthInterceptor implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 		Customer customer = (Customer) session.getAttribute("customerLogin");
 		
-		
 		if (auth == null) {
 			//@Auth가 안 붙어있을 경우
 			return true;
