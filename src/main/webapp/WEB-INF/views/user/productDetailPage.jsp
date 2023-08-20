@@ -254,7 +254,103 @@
 				if(selectedSize == null || selectedFrame == null || selectedSize == "--옵션을 선택해주세요--" || selectedFrame == "--옵션을 선택해주세요--") {
 					//alert("옵션을 선택해주세요.");
 				} else {
-					let isDuplicated = false;
+					//이미 있는 옵션인지 확인하기 위한 identifier
+				    var optionIdentifier = selectedSize + "-" + selectedFrame;
+				    var isDuplicate = false;
+				    var duplicatedItemIndex = 0;
+
+				    $("#selectedItemTable tr").each(function () {
+				        var rowIdentifier = $(this).attr("data-identifier");
+				        if (rowIdentifier === optionIdentifier) {
+				            isDuplicate = true;
+				            duplicatedItemIndex = $(this).attr("id");
+				            duplicatedItemIndex = parseInt(duplicatedItemIndex.replace(/[^0-9]/g, ""));
+				           	console.log(duplicatedItemIndex);
+				            return false;
+				        }
+				    });
+
+				    if (isDuplicate) {
+				    	//이미 선택한 옵션일 경우
+					    let duplicatedQuantityInput = $("#productQuantity" + duplicatedItemIndex);
+					    
+					    //수량추가
+					    let presentQuantity = parseInt(duplicatedQuantityInput.val());
+					    let newQuantity = duplicatedQuantityInput.val(presentQuantity + 1).val();
+					    
+					    //옵션별 총가격 계산
+					    var presentPrice = $("#selectedItemPrice" + duplicatedItemIndex).text();
+						var parsedPresentPrice = parseInt(presentPrice.replace(/[^0-9]/g, ""));
+						var optionItemPrice = (parsedPresentPrice/presentQuantity) * newQuantity;
+						
+						$("#selectedItemPrice" + duplicatedItemIndex).text(optionItemPrice.toLocaleString("ko-KR"));
+					    
+					    //선택된 아이템 총가격 계산
+					    //let selectedPrice = $("#selectedItemPrice" + duplicatedItemIndex).text();
+					    //let parsedSelectedPrice = parseInt(selectedPrice.replace(/[^0-9]/g, ""));
+					    totalPrice += parsedPresentPrice/presentQuantity;
+					    $("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
+				    } else {
+				    	//선택한 옵션이 새로운 옵션일 경우
+						let i = 0;
+						let index = 0;
+						if (check.length == 0) {
+							index = 0;
+							check.push(1);
+						} else {
+							for (i=0; i < check.length; ++i) {
+								if (check[i] == 0) {
+									index = i;
+								}
+							}
+							if (i == check.length) {
+								check.push(1);
+								index = i;
+							}
+						}
+	
+						var html = "";
+						html += '<tr id="tr' + index + '" data-identifier="' + optionIdentifier + '">';
+						html += '	<form id="selectedItemForm" method="POST">';
+						html += '		<td>';
+						html += '			<p style="margin-bottom: 0;">';
+						html += '				<span>${product.productName}</span>';
+						html += '				<input type="hidden" id="productId' + index + '" name="orderItemList[' + index + '].productId" value="${product.productId}">';
+						html += '				<input  class="productSize" type="hidden" id="productSize' + index + '" name="orderItemList[' + index + '].productSize" value="' + selectedSize + '">';
+						html += '				<span>' + $("select[name=selectSize] option:selected").val() + '</span>';
+						html += '				<input class="productFrame" type="hidden" id="productFrame' + index + '" name="orderItemList[' + index + '].productFrame" value="' + selectedFrame + '">';
+						html += '				<span>' + $("select[name=selectFrame] option:selected").val() + '</span>';
+						html += '			</p>';
+						html += '		</td>';
+						html += '		<td>';
+						html += '			<span>';
+						html += '				<a onclick="minusQuantity('+ index +')"><i class="fa fa-minus ml-5"></i></a>';
+						html += '				<input type="text" id="productQuantity' + index + '" name="orderItemList[' + index + '].productQuantity" size="1" min="1" style="text-align: center; border-bottom: none;" value=1>';
+						html += '				<a onclick="plusQuantity('+ index +')"><i class="fa fa-plus mr-5"></i></a>';
+						html += '			</span>';
+						html += '		</td>';
+						html += '		<td>';
+						html += '			<span id="selectedItemPrice' + index + '" class="selectedItemPrice mr-5"><fmt:formatNumber value="${discountedPrice}" pattern="#,###" /></span>';
+						html += '		</td>';
+						html += '		<td>';
+						html += '			<a href="javascript:void(0)" onclick="deleteSelectedItem('+ index +');return false;"><i class="material-icons" style="font-weight: bold; font-size: 18px;">clear</i></a>';
+						html += '		</td>';
+						html += '	</form>';
+						html += '</tr>';
+						
+						$("#selectedItemTable").append(html);
+						
+						//선택된 아이템 총가격 계산
+						let selectedPrice = $("#selectedItemPrice" + index).text();
+						let parsedSelectedPrice = parseInt(selectedPrice.replace(/[^0-9]/g, ""));
+						totalPrice += parsedSelectedPrice;
+						$("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
+						
+						index++;
+				    }
+
+					
+					/* let isDuplicated = false;
 					let duplicatedItemIndex = 0;
 					
 					//선택한 옵션이 이미 있는 옵션인지 조사
@@ -347,7 +443,7 @@
 						$("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
 						
 						index++;
-					}
+					}*/
 				}
 			}
 		});
