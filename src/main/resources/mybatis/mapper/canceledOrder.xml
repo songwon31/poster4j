@@ -5,8 +5,8 @@
 		select count(*) from canceled_order
 	</select>
 	
-	<select id="countTotalCanceledOrderByCustomerId" resultType="int">
-		select count(*) from canceled_order where customer_id = #{customerId}
+	<select id="countTotalCanceledOrderByOrderId" parameterType="int" resultType="int">
+		select count(*) from canceled_order where order_id = #{orderId}
 	</select>
 	
 	<select id="selectWithPager" parameterType="Pager" resultType="CanceledOrder">

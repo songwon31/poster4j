@@ -65,10 +65,15 @@ public class CanceledOrderListController {
 		// 세션에 PageNo를 저장
 		session.setAttribute("pageNo", String.valueOf(pageNo));
 		
-		int totalOrderNum = orderService.getTotalOrderTNumByCustomerId(customer.getCustomerId());
-		Pager pager = new Pager(5, 5, totalOrderNum, intPageNo);
 		
+		int totalCanceledOrderNum = 0;
 		List<OrderT> orderList = orderService.getOrderListById(customer.getCustomerId());
+		for(OrderT order: orderList) {
+			totalCanceledOrderNum += canceledOrderService.getTotalCanceledOrderNumByOrderId(order.getOrderId());
+		}
+
+		Pager pager = new Pager(5, 5, totalCanceledOrderNum, intPageNo);
+		
 		List<CanceledOrder> canceledOrderList  = new ArrayList<>();
 		List<OrderDetail> orderDetailList = new ArrayList<>();
 		List<Product> productList = new ArrayList<>();

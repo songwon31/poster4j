@@ -40,8 +40,8 @@ public class CanceledOrderServiceImpl implements CanceledOrderService {
 	}
 	
 	@Override
-	public int getTotalCanceledOrderNumByCustomerId(String customerId) {
-		return canceledOrderDao.countTotalCanceledOrderByCustomerId(customerId);
+	public int getTotalCanceledOrderNumByOrderId(int orderId) {
+		return canceledOrderDao.countTotalCanceledOrderByOrderId(orderId);
 	}
 	
 	@Override

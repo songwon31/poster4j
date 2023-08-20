@@ -31,12 +31,15 @@
 			</div>
 			<div class="order-list-items">
 				<c:forEach var="buyItem" items="${buyItemList}" varStatus="status">
+					<div class="order-item">
+						<div class="order-date">
+							${buyItem.order.convertedOrderDate} 주문 <span>Order_No.${buyItem.order.orderId}</span>
+						</div>
 						<c:forEach var="orderDetail" items="${buyItem.orderDetail}" varStatus="detailStatus">
 							<c:forEach var="product" items="${buyItem.product}" varStatus="productStatus">
 								<c:if test="${detailStatus.index==productStatus.index}">
 									<c:forEach var="productImage" items="${buyItem.productImage}" varStatus="imageStatus">
 										<c:if test="${productStatus.index==imageStatus.index}">
-											<div class="order-item">
 												<div class="">
 													<form id="form" method="get" action="writeReview">
 														<input type= hidden name="orderId" value="${orderDetail.orderId}">
@@ -46,12 +49,9 @@
 														<input type= hidden name="optionSize" value="${orderDetail.optionSize}">
 														<input type= hidden name="optionFrame" value="${orderDetail.optionFrame}">
 														<input type= hidden name="orderDetailStatus" value="${orderDetail.orderDetailStatus}">
-														<div class="order-date">
-															${buyItem.order.convertedOrderDate} 주문 <span>Order_No.${orderDetail.orderId}</span>
-														</div>
 														<div class="d-flex row my-4 mx-2 p-3 justify-content-center">
-															<div class="productImage justify-content-center" style="width: 170px">
-																<a href="productDetail?productId=${orderDetail.productId}"><img class="orderProductImage" alt="" src="data:image/jpeg;base64, ${productImage}" width="100%;"></a>
+															<div class="productImage justify-content-center" style="width: 170px; height: auto">
+																<a href="productDetail?productId=${orderDetail.productId}"><img class="orderProductImage" alt="" src="data:image/jpeg;base64, ${productImage}" width="100%" height="100%"></a>
 															</div>
 															<div class="mx-5 py-4"  style="width: 300px; display: flex; flex-direction: column; justify-content: space-between;">
 																<div>
@@ -66,8 +66,8 @@
 															<div class="button" style="max-width: 200px; display: flex; flex-direction: column; justify-content: space-between;">
 														    	<div>
 														    		<c:if test="${orderDetail.hasReview == false}">
-																    	<div>
-																	        <button id="writeReviewBtn" type="submit" class="writeReview btn my-2" style="border: 1px solid">리뷰 작성</button>
+																    	<div style="margin-top: 50px;">
+																	        <button id="writeReviewBtn" type="submit" class="writeReview btn my-2" style="border: 1px solid;">리뷰 작성</button>
 																    	</div>
 														    		</c:if>
 														    		<c:if test="${orderDetail.hasReview == true}">
@@ -86,12 +86,12 @@
 														</div>
 													</form>
 												</div>
-											</div>
 										</c:if>
 									</c:forEach>
 								</c:if>
 							</c:forEach>
 						</c:forEach>
+					</div>
 				</c:forEach>
 			</div>
 			<div class="pagination">

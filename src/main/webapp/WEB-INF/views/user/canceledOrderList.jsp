@@ -29,10 +29,10 @@
 						<div class="order-item-price mt-3">KRW <fmt:formatNumber value="${orderDetailList[status.index].orderDetailPrice}" pattern="#,###" /></div>
 					</div>
 					<c:if test="${canceledOrder.canceledOrderCategory.equals('반품')}">
-						<div class="order-item-status" style="color: red;">${canceledOrder.canceledOrderCategory}</div>
+						<div class="order-item-status" style="color: red; font-weight: bold;">${canceledOrder.canceledOrderCategory}</div>
 					</c:if>
 					<c:if test="${canceledOrder.canceledOrderCategory.equals('교환')}">
-						<div class="order-item-status" style=" color: #ffcc00;">${canceledOrder.canceledOrderCategory}</div>
+						<div class="order-item-status" style=" color: #ffcc00; font-weight: bold;">${canceledOrder.canceledOrderCategory}</div>
 					</c:if>
 					<c:if test="${canceledOrder.canceledOrderCategory.equals('발송 전 취소')}">
 						<div class="order-item-status" style="">${canceledOrder.canceledOrderCategory}</div>

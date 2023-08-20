@@ -16,5 +16,5 @@ public interface CanceledOrderDao {
 	public List<CanceledOrder> selectWithPagerAndId(@Param("pager")Pager pager, @Param("orderId")int orderId);
 	public int insertCanceledOrder(CanceledOrder canceledOrder);
 	public int updateCmptnDate(@Param("orderId") int orderId, @Param("productId") int productId, @Param("date") Date date);
-	public int countTotalCanceledOrderByCustomerId(String customerId);
+	public int countTotalCanceledOrderByOrderId(int orderId);
 }
