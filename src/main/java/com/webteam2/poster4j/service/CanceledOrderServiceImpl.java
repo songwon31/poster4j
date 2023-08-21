@@ -40,12 +40,17 @@ public class CanceledOrderServiceImpl implements CanceledOrderService {
 	}
 	
 	@Override
-	public int getTotalCanceledOrderNumByOrderId(int orderId) {
-		return canceledOrderDao.countTotalCanceledOrderByOrderId(orderId);
+	public int getTotalCanceledOrderNum2(int orderId, int productId, String optionSize, String optionFrame) {
+		return canceledOrderDao.countTotalCanceledOrder2(orderId, productId, optionSize, optionFrame);
 	}
 	
 	@Override
 	public List<CanceledOrder> getListWithPagerAndId(Pager pager, int orderId) {
 		return canceledOrderDao.selectWithPagerAndId(pager, orderId);
+	}
+	
+	@Override
+	public CanceledOrder getCanceledOrder(int orderId, int productId, String optionSize, String optionFrame, Pager pager) {
+		return canceledOrderDao.selectCanceledOrder(orderId, productId, optionSize, optionFrame, pager);
 	}
 }

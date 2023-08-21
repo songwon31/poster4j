@@ -66,40 +66,72 @@ public class CanceledOrderListController {
 		session.setAttribute("pageNo", String.valueOf(pageNo));
 		
 		
-		int totalCanceledOrderNum = 0;
 		List<OrderT> orderList = orderService.getOrderListById(customer.getCustomerId());
-		for(OrderT order: orderList) {
-			totalCanceledOrderNum += canceledOrderService.getTotalCanceledOrderNumByOrderId(order.getOrderId());
-		}
-
-		Pager pager = new Pager(5, 5, totalCanceledOrderNum, intPageNo);
-		
-		List<CanceledOrder> canceledOrderList  = new ArrayList<>();
 		List<OrderDetail> orderDetailList = new ArrayList<>();
+		List<CanceledOrder> canceledOrderList = new ArrayList<>();
 		List<Product> productList = new ArrayList<>();
 		List<String> productImageList = new ArrayList<>();
 		
-		for(OrderT order : orderList) {
-			int orderId = order.getOrderId();
-			List<CanceledOrder> canceledOrdersForOrder = canceledOrderService.getListWithPagerAndId(pager, orderId);
-			List<OrderDetail> orderDetailsForOrder = orderDetailService.getListNoPager(orderId);
-			for(OrderDetail orderDetail : orderDetailsForOrder) {
-				int productId = orderDetail.getProductId();
-				Product product = productService.getOneProduct(productId);
-				ProductImage productImage = productImageService.getRepresentProductImage(productId);
-				String base64Img = Base64.getEncoder().encodeToString(productImage.getProductImageSource());
-				
-				productList.add(product);
-				productImageList.add(base64Img);
-			}
+		for(OrderT order: orderList) {
 			
-			canceledOrderList.addAll(canceledOrdersForOrder);
+			
+			List<OrderDetail> orderDetailsForOrder = orderDetailService.getListNoPager(order.getOrderId());
+			
 			orderDetailList.addAll(orderDetailsForOrder);
 		}
 		
+		int totalCanceledOrderNum = 0;
+		
+		for(OrderDetail orderDetail: orderDetailList) {
+			int orderId = orderDetail.getOrderId();
+			int productId = orderDetail.getProductId();
+			String optionSize = orderDetail.getOptionSize();
+			String optionFrame = orderDetail.getOptionFrame();
+			
+			totalCanceledOrderNum += canceledOrderService.getTotalCanceledOrderNum2(orderId, productId, optionSize, optionFrame);
+		}
+		
+		log.info("num" + totalCanceledOrderNum);
+		
+		Pager pager = new Pager(5, 5, totalCanceledOrderNum, intPageNo);
+		
+		for(OrderDetail orderDetail : orderDetailList) {
+			int orderId = orderDetail.getOrderId();
+			int productId = orderDetail.getProductId();
+			String optionSize = orderDetail.getOptionSize();
+			String optionFrame = orderDetail.getOptionFrame();
+			
+			
+			CanceledOrder canceledOrder = canceledOrderService.getCanceledOrder(orderId, productId, optionSize, optionFrame, pager);
+			if(canceledOrder != null) {
+				canceledOrderList.add(canceledOrder);
+			}
+		}
+		
+		
+		List<OrderT> orderList2 = new ArrayList<>();
+		
+		for(CanceledOrder canceledOrder : canceledOrderList) {
+			int orderId = canceledOrder.getOrderId();
+			int productId = canceledOrder.getProductId();
+			
+			OrderT order = orderService.getOrderTById(orderId);
+			Product product = productService.getOneProduct(productId);
+			ProductImage productImage = productImageService.getRepresentProductImage(productId);
+			String base64Img = Base64.getEncoder().encodeToString(productImage.getProductImageSource());
+			
+			orderList2.add(order);
+			productList.add(product);
+			productImageList.add(base64Img);
+		}
+		
+			
+		log.info("" + canceledOrderList);
+		
+		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		
-		for(OrderT order : orderList) {
+		for(OrderT order : orderList2) {
 			Date orderDate = order.getOrderDate();
 			String formattedOrderDate = dateFormat.format(orderDate);
 			order.setConvertedOrderDate(formattedOrderDate);
@@ -112,7 +144,9 @@ public class CanceledOrderListController {
 			
 		}
 		
-		model.addAttribute("orderList", orderList);
+		//List<CanceledOrder> = 
+		
+		model.addAttribute("orderList", orderList2);
 		model.addAttribute("canceledOrderList", canceledOrderList);
 		model.addAttribute("orderDetailList", orderDetailList);
 		model.addAttribute("productList", productList);

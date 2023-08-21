@@ -16,11 +16,11 @@ import lombok.extern.slf4j.Slf4j;
 @ControllerAdvice
 @Slf4j
 public class ExceptionHandlers {
-	@ExceptionHandler
+	/*@ExceptionHandler
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public String exception500(Exception e) {
 		return "error/500error";
-	}
+	}*/
 	
 	@ExceptionHandler(NoHandlerFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)

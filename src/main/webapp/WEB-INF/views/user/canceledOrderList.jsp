@@ -9,13 +9,12 @@
 <div class="order-list-wrapper">
 	<h1 class="order-list-title">CANCELED ORDER</h1>
 	<div class="order-list-items">
-		<c:forEach var="canceledOrder" items="${canceledOrderList}"
-			varStatus="status">
+		<c:forEach var="canceledOrder" items="${canceledOrderList}" varStatus="status">
 			<div class="order-item">
 				<div class="date mt-3" >
 					<div class="canceled-order-date">취소접수일: <span class="date-content">${canceledOrder.formattedCanceledOrderReqDate}</span></div>
 					<div class="order-date">주문일: <span class="date-content">${orderList[status.index].convertedOrderDate}</span></div>
-					<div class="order-no">주문번호: <span class="date-content">${orderList[status.index].orderId}</span></div>
+					<div class="order-no">주문번호: <span class="date-content">${canceledOrder.orderId}</span></div>
 				</div>
 				<div class="order-item-details d-flex container">
 					<div class="productImage ml-3" style="width: 170px;"><img alt="" src="data:image/jpeg;base64, ${productImageList[status.index]}" width="100%"></div>
@@ -42,26 +41,26 @@
 		</c:forEach>
 	</div>
 	<div class="pagination">
-		<div colspan="12" class="text-center">
-			<div>
-				<a class="text-dark mr-2" href="canceledOrderList?pageNo=1" style="font-weight:600;">first</a>
-				<c:if test="${pager.groupNo>1}">
-					<a class="text-dark mr-2" href="canceledOrderList?pageNo=${pager.startPageNo-1}" style="font-weight:600;">prev</a>
-				</c:if>
-				<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
-					<c:if test="${pager.pageNo != i}">
-						<a class="text-dark" href="canceledOrderList?pageNo=${i}" style="font-weight:600;">${i}</a>
-					</c:if>
-					<c:if test="${pager.pageNo == i}">
-						<a class="text-dark" href="canceledOrderList?pageNo=${i}" style="font-weight:600;">${i}</a>
-					</c:if>
-				</c:forEach>
-				<c:if test="${pager.groupNo<pager.totalGroupNo}">
-					<a class="text-dark mr-2" href="canceledOrderList?pageNo=${pager.endPageNo+1}" style="font-weight:600;">next</a>
-				</c:if>
-				<a class="text-dark mr-2" href="canceledOrderList?pageNo=${pager.totalPageNo}" style="font-weight:600;">last</a>
-			</div>
-		</div>
+	    <div class="text-center">
+	        <div>
+	            <a class="text-dark mr-2" href="canceledOrderList?pageNo=1" style="font-weight:600;">first</a>
+	            <c:if test="${pager.groupNo>1}">
+	                <a class="text-dark mr-2" href="canceledOrderList?pageNo=${pager.startPageNo-1}" style="font-weight:600;">prev</a>
+	            </c:if>
+	            <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+	                <c:if test="${pager.pageNo != i}">
+	                    <a class="text-dark" href="canceledOrderList?pageNo=${i}" style="font-weight:600;">${i}</a>
+	                </c:if>
+	                <c:if test="${pager.pageNo == i}">
+	                    <a class="text-dark" href="canceledOrderList?pageNo=${i}" style="font-weight:600;">${i}</a>
+	                </c:if>
+	            </c:forEach>
+	            <c:if test="${pager.groupNo<pager.totalGroupNo}">
+	                <a class="text-dark mr-2" href="canceledOrderList?pageNo=${pager.endPageNo+1}" style="font-weight:600;">next</a>
+	            </c:if>
+	            <a class="text-dark mr-2" href="canceledOrderList?pageNo=${pager.totalPageNo}" style="font-weight:600;">last</a>
+	        </div>
+	    </div>
 	</div>
 </div>
 

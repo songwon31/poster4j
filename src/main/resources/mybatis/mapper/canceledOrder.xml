@@ -5,8 +5,8 @@
 		select count(*) from canceled_order
 	</select>
 	
-	<select id="countTotalCanceledOrderByOrderId" parameterType="int" resultType="int">
-		select count(*) from canceled_order where order_id = #{orderId}
+	<select id="countTotalCanceledOrder2" parameterType="map" resultType="int">
+		select count(*) from canceled_order where order_id=#{orderId} and product_id=#{productId} and option_size = #{optionSize} and option_frame = #{optionFrame}
 	</select>
 	
 	<select id="selectWithPager" parameterType="Pager" resultType="CanceledOrder">
@@ -53,4 +53,24 @@
 		update canceled_order set canceled_order_cmptn_date = #{date}
 		where order_id=#{orderId} and product_id=#{productId}
 	</update>
+	
+	<select id="selectCanceledOrder" parameterType="CanceledOrder" resultType="CanceledOrder">
+		<!-- select *
+		from canceled_order
+		where order_id=#{orderId} and product_id=#{productId} and option_size = #{optionSize} and option_frame = #{optionFrame} -->
+		<![CDATA[
+		select rnum, order_id, product_id, option_size, option_frame, canceled_order_category, canceled_order_reason, canceled_order_req_date, canceled_order_cmptn_date
+		from (
+		    select rownum as rnum, order_id, product_id, option_size, option_frame, canceled_order_category, canceled_order_reason, canceled_order_req_date, canceled_order_cmptn_date
+		    from (
+		        select order_id, product_id, option_size, option_frame, canceled_order_category, canceled_order_reason, canceled_order_req_date, canceled_order_cmptn_date
+		        from canceled_order
+		        where order_id=#{orderId} and product_id=#{productId} and option_size = #{optionSize} and option_frame = #{optionFrame}
+		        order by order_id desc
+		    )
+		    where rownum <= #{pager.endRowNo}
+		)
+		where rnum >= #{pager.startRowNo}
+		]]>
+	</select>
 </mapper>
