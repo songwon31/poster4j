@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
@@ -7,13 +9,19 @@
 <div class="wrapper">
 	<div class="joinContent d-flex justify-content-center">
 		<form method="post" action="join">
+			<c:if test="${error != null}">
+				<div class="alert alert-danger mb-2 form-control" style="line-height: 1;" role="alert">
+				  ${error}
+				</div>			
+			</c:if>
 			<table class="joinInputTable">
 				<tr class="joinInputGroup">
 					<td>
 						<label for="customerId" class="mr-4">ID</label>
 					</td>
 					<td>
-						<input type="text" name="customerId" class="form-control" value="">
+						<input type="text" name="customerId" class="form-control" value="${customer.customerId}">
+						<form:errors path="customer.customerId" cssClass="text-danger d-flex" />
 						<span>(영문소문자/숫자, 4~16자)</span>
 					</td>
 				</tr>
@@ -22,8 +30,10 @@
 						<label for="customerPassword" class="mr-4">Password</label>
 					</td>
 					<td>
-						<input type="password" name="customerPassword" class="form-control" value="">
+						<input type="password" name="customerPassword" class="form-control">
+						<form:errors path="customer.customerPassword" cssClass="text-danger d-flex" />
 						<span>(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자)</span>
+						
 					</td>
 				</tr>
 				<tr class="joinInputGroup">
@@ -31,7 +41,7 @@
 						<label for="customerPasswordCheck" class="mr-4">PW Check</label>
 					</td>
 					<td>
-						<input type="password" name="customerPasswordCheck" class="form-control" value="">
+						<input type="password" name="customerPasswordCheck" class="form-control">
 					</td>
 				</tr>
 				<tr class="joinInputGroup">
@@ -39,7 +49,7 @@
 						<label for="customerName" class="mr-4">Name</label>
 					</td>
 					<td>
-						<input type="text" name="customerName" class="form-control" value="">
+						<input type="text" name="customerName" class="form-control" value="${customer.customerName}">
 					</td>
 				</tr>
 				<tr class="joinInputGroup">
@@ -48,11 +58,11 @@
 					</td>
 					<td>
 						<div class="zipGroup row no-gutters" >
-							<input type="text" id="receiverZip" name="receiverZip" class="col-9" placeholder="우편번호" value="">
+							<input type="text" id="receiverZip" name="receiverZip" class="col-9" placeholder="우편번호" value="${receiverZip}">
 							<input class="btn btn-sm btn-dark col-3" onclick="execDaumPostcode()" value="우편번호 찾기"/>
 						</div>
-						<input type="text" id="receiverAddress" name="receiverAddress" class="form-control" placeholder="기본주소" value="">
-						<input type="text" id="receiverAddressDetail" name="receiverAddressDetail" class="form-control" placeholder="나머지 주소(선택 입력 가능)" value="">
+						<input type="text" id="receiverAddress" name="receiverAddress" class="form-control" placeholder="기본주소" value="${receiverAddress}">
+						<input type="text" id="receiverAddressDetail" name="receiverAddressDetail" class="form-control" placeholder="나머지 주소(선택 입력 가능)" value="${receiverAddressDetail}">
 					</td>
 				</tr>
 				<tr class="joinInputGroup">
@@ -60,7 +70,8 @@
 						<label for="customerTelno" class="mr-4">Tel</label>
 					</td>
 					<td>
-						<input type="text" name="customerTelno" class="form-control" value="">
+						<input type="text" name="customerTelno" class="form-control" value="${customer.customerTelno}">
+						<form:errors path="customer.customerTelno" cssClass="text-danger d-flex" />
 					</td>
 				</tr>
 				<tr class="joinInputGroup">
@@ -68,7 +79,8 @@
 						<label for="customerEmail" class="mr-4">E-mail</label>
 					</td>
 					<td>
-						<input type="text" name="customerEmail" class="form-control" value="">
+						<input type="text" name="customerEmail" class="form-control" value="${customer.customerEmail}">
+						<form:errors path="customer.customerEmail" cssClass="text-danger d-flex" />
 					</td>
 				</tr>
 			</table>

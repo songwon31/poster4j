@@ -163,22 +163,22 @@
 			<div class="d-flex justify-content-center mt-5">
 				<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=1">first</a>
 				<c:if test="${reviewPager.groupNo>1}">
-					<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=${reviewPager.startPageNo-1}">prev</a>
+					<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=${reviewPager.startPageNo-1}#reviewBoard">prev</a>
 				</c:if>
 				
 				<c:forEach var="i" begin="${reviewPager.startPageNo}" end="${reviewPager.endPageNo}">
 					<c:if test="${reviewPager.pageNo != i}">
-						<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px;" href="getReviewList?pageNo=${i}">${i}</a>
+						<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px;" href="getReviewList?pageNo=${i}#reviewBoard">${i}</a>
 					</c:if>
 					<c:if test="${reviewPager.pageNo == i}">
-						<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px; text-decoration:underline;" href="getReviewList?pageNo=${i}">${i}</a>
+						<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px; text-decoration:underline;" href="getReviewList?pageNo=${i}#reviewBoard">${i}</a>
 					</c:if>
 				</c:forEach>
 				
 				<c:if test="${reviewPager.groupNo<reviewPager.totalGroupNo}">
-					<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${reviewPager.endPageNo+1}">next</a>
+					<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${reviewPager.endPageNo+1}#reviewBoard">next</a>
 				</c:if>
-				<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${reviewPager.totalPageNo}">last</a>
+				<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${reviewPager.totalPageNo}#reviewBoard">last</a>
 			</div>
 		</div>
 		
@@ -225,22 +225,22 @@
 			<div class="d-flex justify-content-center mt-3">
 				<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=1">first</a>
 				<c:if test="${qnaPager.groupNo>1}">
-					<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=${qnaPager.startPageNo-1}">prev</a>
+					<a class="text-dark mr-2" style="font-weight:600;"  href="getReviewList?pageNo=${qnaPager.startPageNo-1}#qnaBoard">prev</a>
 				</c:if>
 				
 				<c:forEach var="i" begin="${qnaPager.startPageNo}" end="${qnaPager.endPageNo}">
 					<c:if test="${qnaPager.pageNo != i}">
-						<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px;" href="getReviewList?pageNo=${i}">${i}</a>
+						<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px;" href="getReviewList?pageNo=${i}#qnaBoard">${i}</a>
 					</c:if>
 					<c:if test="${qnaPager.pageNo == i}">
-						<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px; text-decoration:underline;" href="getReviewList?pageNo=${i}">${i}</a>
+						<a class="text-dark" style="font-weight:600; padding:0 2px 0 2px; text-decoration:underline;" href="getReviewList?pageNo=${i}#qnaBoard">${i}</a>
 					</c:if>
 				</c:forEach>
 				
 				<c:if test="${qnaPager.groupNo<qnaPager.totalGroupNo}">
-					<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${qnaPager.endPageNo+1}">next</a>
+					<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${qnaPager.endPageNo+1}#qnaBoard">next</a>
 				</c:if>
-				<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${qnaPager.totalPageNo}">last</a>
+				<a class="text-dark ml-2" style="font-weight:600;" href="getReviewList?pageNo=${qnaPager.totalPageNo}#qnaBoard">last</a>
 			</div>
 		</div>
 	</div>

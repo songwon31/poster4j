@@ -1,12 +1,14 @@
 package com.webteam2.poster4j.user.controller;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,6 +17,7 @@ import com.webteam2.poster4j.dto.Receiver;
 import com.webteam2.poster4j.service.CustomerService;
 import com.webteam2.poster4j.service.CustomerService.JoinResult;
 import com.webteam2.poster4j.service.ReceiverService;
+import com.webteam2.poster4j.validator.JoinValidator;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,13 +35,27 @@ public class JoinPageController {
 		return "user/joinForm";
 	}
 	
+	@InitBinder("customer")
+	public void JoinValidator(WebDataBinder binder) {
+		binder.setValidator(new JoinValidator());
+	}
+	
 	@PostMapping("/join")
-	public String join(Customer customer, Model model,
+	public String join(
+					@Valid Customer customer,
+					Errors errors,
+					Model model,
 					@RequestParam(value="customerPasswordCheck") String customerPasswordCheck,
 					@RequestParam(value="receiverZip") String receiverZip,
 					@RequestParam(value="receiverAddress") String receiverAddress,
 					@RequestParam(value="receiverAddressDetail", required=false) String receiverAddressDetail
 					) {
+		//errors.rejectValue가 한번이라도 호출되었다면 hasErrors는 true를 리턴
+		if(errors.hasErrors()) {
+			//폼으로 다시 돌려보내기
+			return "user/joinForm";
+		}
+		
 		//체크박스에 체크가 되어있지 않을 경우 값 저장
 		if(customer.getCustomerTermAgree() == null) {
 			customer.setCustomerTermAgree("FALSE");
@@ -53,26 +70,19 @@ public class JoinPageController {
 			customer.setCustomerEmailAgree("FALSE");
 		}
 		
-		JoinResult result = customerService.join(customer);
+		JoinResult result = customerService.join(customer, customerPasswordCheck);
 		
-		//비밀번호 확인을 위한 PasswordEncoder
-		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
 		//아이디 중복체크
 		if(result == JoinResult.FAIL_DUPLICATED_MID) {
 			String idError = "이미 사용중인 아이디입니다.";
 			model.addAttribute("error", idError);
 			return "user/joinForm";
-		} /*else if(!passwordEncoder.matches(customer.getCustomerPassword(), passwordEncoder.encode(customerPasswordCheck))) {
+		} else if(result == JoinResult.FAIL_PASSWORD_CHECK) {
 			//비밀번호 확인이 비밀번호와 일치하지 않을 경우
-			log.info("입력하신 비밀번호가 일치하지 않습니다.");
-			String pwError = "입력하신 비밀번호가 일치하지 않습니다.";
-			model.addAttribute("error", pwError);
+			String pwCheckError = "입력하신 비밀번호와 비밀번호 확인이 일치하지 않습니다.";
+			model.addAttribute("error", pwCheckError);
 			return "user/joinForm";
-		}*/ else {
-			//비밀번호 확인이 비밀번호와 일치하는 경우
-			customerService.join(customer);
-			
+		} else {
 			//receiver 객체에 데이터 저장
 			Receiver receiver = new Receiver();
 			receiver.setCustomerId(customer.getCustomerId());

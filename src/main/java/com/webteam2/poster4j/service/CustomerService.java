@@ -12,11 +12,12 @@ public interface CustomerService {
 	
 	public enum JoinResult{
 		SUCCESS,
-		FAIL_DUPLICATED_MID
+		FAIL_DUPLICATED_MID,
+		FAIL_PASSWORD_CHECK
 	}
 
 	public Customer getList(String customerId);
-	public JoinResult join(Customer customer);
+	public JoinResult join(Customer customer, String customerPasswordCheck);
 	public LoginResult login(Customer customer);
 	public void logout(String customerId);
 

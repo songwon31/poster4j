@@ -135,7 +135,7 @@ public class ProductDetailPageController {
 		
 		//해당 상품의 문의게시판
 		int totalQnaNum = productInquiryService.getEachProductInquiryNum(productId);
-		Pager qnaPager = new Pager(5, 5, totalQnaNum, intPageNo);
+		Pager qnaPager = new Pager(3, 5, totalQnaNum, intPageNo);
 		
 		List<ProductInquiry> productInquiries = productInquiryService.getListWithProductIdPager(productId, qnaPager);
 		
