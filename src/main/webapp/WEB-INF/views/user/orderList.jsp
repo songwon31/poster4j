@@ -66,9 +66,11 @@
 															<div class="button" style="max-width: 200px; display: flex; flex-direction: column; justify-content: space-between;">
 														    	<div>
 														    		<c:if test="${orderDetail.hasReview == false}">
-																    	<div style="margin-top: 50px;">
-																	        <button id="writeReviewBtn" type="submit" class="writeReview btn my-2" style="border: 1px solid;">리뷰 작성</button>
-																    	</div>
+														    			<c:if test="${orderDetail.orderDetailStatus.equals('배송완료')}">
+																	    	<div style="margin-top: 50px;">
+																		        <button id="writeReviewBtn" type="submit" class="writeReview btn my-2" style="border: 1px solid;">리뷰 작성</button>
+																	    	</div>
+														    			</c:if>
 														    		</c:if>
 														    		<c:if test="${orderDetail.hasReview == true}">
 																    	<div>
