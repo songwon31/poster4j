@@ -1,5 +1,7 @@
 package com.webteam2.poster4j.validator;
 
+import java.util.regex.Pattern;
+
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -32,8 +34,37 @@ public class ReceiverValidator implements Validator {
 		String receiverName = receiver.getReceiverName();
 		
 		if(receiverName == null || receiverName.equals("")) {
-			errors.rejectValue("receiverName", "errors.receivername.required", "필수 입력(D)");
-			log.info("이거 되나요");
+			errors.rejectValue("receiverName", "errors.receiverName.required");
 		}
+		
+		String receiverPersonName = receiver.getReceiverPersonName();
+		
+		if(receiverPersonName == null || receiverPersonName.equals("")) {
+			errors.rejectValue("receiverPersonName", "errors.receiverPersonName.required");
+		}
+		
+		String receiverZip = receiver.getReceiverZip();
+		
+		if(receiverZip == null || receiverZip.equals("")) {
+			errors.rejectValue("receiverZip", "errors.receiverZip.required");
+		}
+		
+		String receiverAddress = receiver.getReceiverAddress();
+		
+		if(receiverAddress == null || receiverAddress.equals("")) {
+			errors.rejectValue("receiverAddress", "errors.receiverAddress.required");
+		}
+		
+		String receiverTelno = receiver.getReceiverTelno();
+				
+		if(receiverTelno == null || receiverTelno.equals("")) {
+			errors.rejectValue("receiverTelno", "errors.receiverTelno.required");
+		}else {
+          String regExp = "(010|011)-[0-9]{3,4}-[0-9]{4}";
+          boolean result = Pattern.matches(regExp, receiverTelno);
+          if(result == false) {
+             errors.rejectValue("receiverTelno", "errors.receiverTelno.invalid", "형식에 맞지 않음(D)");
+          }
+       }
 	}
 }

@@ -8,23 +8,24 @@
 
 <div class="wrapper" style="margin: 0 auto; width: 350px; font-size: 13px;">
 	<div style="margin-top: 200px;">
-		<form method="post" action="addressRegister" style="font-size: 13px;">
+		<form id="receiver" method="post" action="addressRegister" style="font-size: 13px;">
 			<table class="getInputTable">
 				<tr class="addressRegisterInputGroup">
 					<td>
 						<label for="shipAddressName" class="mr-4">배송지명</label>
 					</td>
 					<td>
-						<input type="text" name="receiverName" class="form-control" value="" style="width: 270px;">
+						<input type="text" name="receiverName" class="form-control" value="${receiver.receiverName}" style="width: 270px;">
 						<form:errors cssClass="text-danger" path="receiver.receiverName" />
 					</td>
 				</tr>	
 				<tr class="addressRegisterInputGroup">
 					<td>
-						<label for="receiverPersonName" class="mr-4">성명</label>
+						<label for="receiverPersonName" class="mr-4" >성명</label>
 					</td>
 					<td>
-						<input type="text" name="receiverPersonName" class="form-control" value="">
+						<input type="text" name="receiverPersonName" class="form-control" value="${receiver.receiverPersonName}">
+						<form:errors cssClass="text-danger" path="receiver.receiverPersonName" />
 					</td>
 				</tr>
 				<tr class="addressRegisterInputGroup">
@@ -32,10 +33,12 @@
 						<label for="receiverAddress" class="mr-4">주소</label>
 					</td>
 					<td>
-						<input type="text" id="postcode" name="receiverZip" class="form-control" placeholder="우편번호" value="" style="font-size: 13px; width:200px; display: inline;">
+						<input type="text" id="postcode" name="receiverZip" class="form-control" placeholder="우편번호" value="${receiver.receiverZip}" style="font-size: 13px; width:200px; display: inline;">
 						<input class="btn" type="button" onclick="execDaumPostcode()" value="Search" style="border: 1px solid; border-radius: 0"><br>
-						<input type="text" id="address" name="receiverAddress" class="form-control" placeholder="기본주소" value="">
-						<input type="text" id="detailAddress" name="receiverAddressDetail" class="form-control" placeholder="나머지 주소(선택 입력 가능)" value="">
+						<div><form:errors cssClass="text-danger" path="receiver.receiverZip" /></div>
+						<input type="text" id="address" name="receiverAddress" class="form-control" placeholder="기본주소" value="${receiver.receiverAddress}">
+						<form:errors cssClass="text-danger" path="receiver.receiverAddress" />
+						<input type="text" id="detailAddress" name="receiverAddressDetail" class="form-control" placeholder="나머지 주소(선택 입력 가능)" value="${receiver.receiverAddressDetail}">
 					</td>
 				</tr>
 				<tr class="addressRegisterInputGroup">
@@ -43,7 +46,8 @@
 						<label for="customerTelno" class="mr-4">휴대전화</label>
 					</td>
 					<td>
-						<input type="text" name="receiverTelno" class="form-control" value="">
+						<input type="text" name="receiverTelno" class="form-control" value="${receiver.receiverTelno}">
+						<form:errors cssClass="text-danger" path="receiver.receiverTelno" />
 					</td>
 				</tr>
 			</table>
@@ -53,7 +57,7 @@
 					<input class="btn btn-dark btn-sm mt-3" type="submit" value="등록"/>
 				</span>
 				<span >
-					<input class="btn btn-dark btn-sm mt-3" type="submit" value="취소"/>
+					<a href="addressList" class="btn btn-dark btn-sm mt-3" type="button">취소</a>
 				</span>
 			</div>
 		</form>

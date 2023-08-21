@@ -1,10 +1,11 @@
 package com.webteam2.poster4j.user.controller;
 	
-import javax.annotation.Resource;	
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,8 +40,12 @@ public class AddressRegisterController {
 	
 	
 	@PostMapping("/addressRegister")
-	public String AddressRegister(@Valid Receiver receiver, HttpSession session, Errors errors) {
+	public String AddressRegister(HttpSession session, @Valid Receiver receiver, Errors errors) {
 		log.info("배송지 등록 폼 전송");
+		if (errors.hasErrors()) {
+			log.info("이게문젠가");
+			return "user/addressRegisterForm";
+		}
 		
 		Customer customer = (Customer)session.getAttribute("customerLogin");
 		if (customer == null) {
@@ -49,15 +54,12 @@ public class AddressRegisterController {
 		}
 		
 		log.info("param1: " + receiver.getReceiverName());
+		// errors.rejectValue(...)가 한 번이라도 호출되었다면 hasErrors()는 true를 리턴
+		
 		
 		receiver.setCustomerId(customer.getCustomerId());
 		receiverService.register(receiver);
 		
-		// errors.rejectValue(...)가 한 번이라도 호출되었다면 hasErrors()는 true를 리턴
-		if (errors.hasErrors()) {
-			log.info("이게문젠가");
-			return "user/addressRegisterForm";
-		}
 		
 		
 		return "redirect:/addressList";
