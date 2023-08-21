@@ -1,6 +1,6 @@
 package com.webteam2.poster4j.user.controller;
-
-import javax.annotation.Resource;
+	
+import javax.annotation.Resource;	
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -31,7 +31,8 @@ public class AddressRegisterController {
 		return "user/addressRegisterForm";
 	}
 	
-	@InitBinder("/addressRegister")
+	
+	@InitBinder("receiver")
 	public void ReceiverValidator(WebDataBinder binder) {
 		binder.setValidator(new ReceiverValidator());
 	}
@@ -47,14 +48,18 @@ public class AddressRegisterController {
 			return "redirect:/login"; // 로그인 페이지로 리다이렉트
 		}
 		
+		log.info("param1: " + receiver.getReceiverName());
+		
+		receiver.setCustomerId(customer.getCustomerId());
+		receiverService.register(receiver);
+		
 		// errors.rejectValue(...)가 한 번이라도 호출되었다면 hasErrors()는 true를 리턴
 		if (errors.hasErrors()) {
+			log.info("이게문젠가");
 			return "user/addressRegisterForm";
 		}
 		
-		receiver.setCustomerId(customer.getCustomerId());
 		
-		receiverService.register(receiver);
 		return "redirect:/addressList";
 	}
 }

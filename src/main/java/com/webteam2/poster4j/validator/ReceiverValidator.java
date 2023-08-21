@@ -30,8 +30,10 @@ public class ReceiverValidator implements Validator {
 		
 		//receiverName 검사
 		String receiverName = receiver.getReceiverName();
+		
 		if(receiverName == null || receiverName.equals("")) {
-			errors.rejectValue("receiverName", "errors.form.required", "필수 입력(D)");
+			errors.rejectValue("receiverName", "errors.receivername.required", "필수 입력(D)");
+			log.info("이거 되나요");
 		}
 	}
 }

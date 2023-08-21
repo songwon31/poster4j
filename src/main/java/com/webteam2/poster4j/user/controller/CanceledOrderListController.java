@@ -141,10 +141,8 @@ public class CanceledOrderListController {
 			Date canceledOrderReqDate = canceledOrder.getCanceledOrderReqDate();
 			String formattedDate = dateFormat.format(canceledOrderReqDate);
 			canceledOrder.setFormattedCanceledOrderReqDate(formattedDate);
-			
 		}
 		
-		//List<CanceledOrder> = 
 		
 		model.addAttribute("orderList", orderList2);
 		model.addAttribute("canceledOrderList", canceledOrderList);
