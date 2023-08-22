@@ -3,19 +3,34 @@ package com.webteam2.poster4j.dto;
 import lombok.Data;
 
 @Data
-public class ProductBoardSearch {
-	private Integer productId;
+public class ProductBoardSearchForm {
+	private String productId;
 	private String productName;
-	private Integer productPriceStart;
-	private Integer productPriceEnd;
-	private Double productDiscountRateStart;
-	private Double productDiscountRateEnd;
+	private String productPriceStart;
+	private String productPriceEnd;
+	private String productDiscountRateStart;
+	private String productDiscountRateEnd;
 	private String productTheme;
 	private String productArtist;
 	
 	public void makeEmptyToNull() {
+		if (productId=="") {
+			productId = null;
+		}
 		if (productName=="") {
 			productName = null;
+		}
+		if (productPriceStart=="") {
+			productPriceStart = null;
+		}
+		if (productPriceEnd=="") {
+			productPriceEnd = null;
+		}
+		if (productDiscountRateStart=="") {
+			productDiscountRateStart = null;
+		}
+		if (productDiscountRateEnd=="") {
+			productDiscountRateEnd = null;
 		}
 		if (productTheme=="") {
 			productTheme = null;
@@ -42,7 +57,7 @@ public class ProductBoardSearch {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ProductBoardSearch other = (ProductBoardSearch) obj;
+		ProductBoardSearchForm other = (ProductBoardSearchForm) obj;
 		
 		// 이전에도 검색 내용이 없었고, 현재도 없는 경우
 		if (this.isNull() && other.isNull()) {
@@ -109,58 +124,6 @@ public class ProductBoardSearch {
 		}
 		*/
 		return true;
-	}
-	
-	public void getDataForm(ProductBoardSearchForm productBoardSearchForm) {
-		if (productBoardSearchForm.getProductId() != null) {
-			this.productId = Integer.parseInt(productBoardSearchForm.getProductId());
-		} else {
-			this.productId = null;
-		}
-		
-		if (productBoardSearchForm.getProductName() != null) {
-			this.productName = productBoardSearchForm.getProductName();
-		} else {
-			this.productName = null;
-		}
-		
-		if (productBoardSearchForm.getProductPriceStart() != null) {
-			this.productPriceStart = Integer.parseInt(productBoardSearchForm.getProductPriceStart());
-		} else {
-			this.productPriceStart = null;
-		}
-		
-		if (productBoardSearchForm.getProductPriceEnd() != null) {
-			this.productPriceEnd = Integer.parseInt(productBoardSearchForm.getProductPriceEnd());
-		} else {
-			this.productPriceEnd = null;
-		}
-		
-		if (productBoardSearchForm.getProductDiscountRateStart() != null) {
-			this.productDiscountRateStart = Double.parseDouble(productBoardSearchForm.getProductDiscountRateStart());
-		} else {
-			this.productDiscountRateStart = null;
-		}
-		
-		if (productBoardSearchForm.getProductDiscountRateEnd() != null) {
-			this.productDiscountRateEnd = Double.parseDouble(productBoardSearchForm.getProductDiscountRateEnd());
-		} else {
-			this.productDiscountRateEnd = null;
-		}
-		
-		if (productBoardSearchForm.getProductTheme() != null) {
-			this.productTheme = productBoardSearchForm.getProductTheme();
-		} else {
-			this.productTheme = null;
-		}
-		
-		if (productBoardSearchForm.getProductArtist() != null) {
-			this.productArtist = productBoardSearchForm.getProductArtist();
-		} else {
-			this.productArtist = null;
-		}
-		
-		
 	}
 
 

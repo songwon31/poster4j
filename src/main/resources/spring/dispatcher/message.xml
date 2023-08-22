@@ -13,6 +13,7 @@
 			<list>
 				<value>message.join</value>
 				<value>message.receiver</value>
+				<value>message.productSearch</value>
 			</list>
 		</property>
 	</bean>

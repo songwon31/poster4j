@@ -4,19 +4,24 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Product;
 import com.webteam2.poster4j.dto.ProductBoardSearch;
+import com.webteam2.poster4j.dto.ProductBoardSearchForm;
 import com.webteam2.poster4j.interceptor.Auth;
 import com.webteam2.poster4j.interceptor.Auth.Role;
 import com.webteam2.poster4j.service.ProductService;
+import com.webteam2.poster4j.validator.ProductSearchValidator;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,20 +32,24 @@ public class ProductBoardController {
 	@Resource
 	ProductService productService;
 	
+	@InitBinder("productBoardSearchForm")
+	public void ProductBoardSearchFormValidator(WebDataBinder binder) {
+		binder.setValidator(new ProductSearchValidator());
+	}
+	
 	@RequestMapping("/productBoard")
 	@Auth(Role.ADMIN)
-	public String productBoard(ProductBoardSearch productBoardSearch, String pageNo, Model model, HttpSession session) {
-		productBoardSearch.makeEmptyToNull();
+	public String productBoard(Model model, HttpSession session, @Valid ProductBoardSearchForm productBoardSearchForm, Errors errors, String pageNo) {
+		if (errors.hasErrors()) {
+			log.info("here");
+			return "admin/productBoard";
+		}
 		
-		ProductBoardSearch pastProductBoardSearch = (ProductBoardSearch)session.getAttribute("productBoardSearch");
-		/*
-		log.info("productBoardSearch: " + productBoardSearch);
-		log.info("pastProductBoardSearch: " + pastProductBoardSearch);
-		log.info("isEqual: " + productBoardSearch.equals(pastProductBoardSearch));
-		log.info("");
-		*/
-		if (!productBoardSearch.equals(pastProductBoardSearch)) {
-			session.setAttribute("productBoardSearch", productBoardSearch);
+		productBoardSearchForm.makeEmptyToNull();
+		ProductBoardSearchForm pastProductBoardSearchForm = (ProductBoardSearchForm)session.getAttribute("productBoardSearchForm");
+
+		if (!productBoardSearchForm.equals(pastProductBoardSearchForm)) {
+			session.setAttribute("productBoardSearchForm", productBoardSearchForm);
 			pageNo = "1";
 		}
 		
@@ -53,7 +62,8 @@ public class ProductBoardController {
 		int intPageNo = Integer.parseInt(pageNo);
 		session.setAttribute("pageNo", String.valueOf(pageNo));
 		
-		
+		ProductBoardSearch productBoardSearch = new ProductBoardSearch();
+		productBoardSearch.getDataForm(productBoardSearchForm);
 		
 		int totalSearchedProductNum = productService.getTotalSearchedProductNum(productBoardSearch);
 		Pager pager = new Pager(10, 5, totalSearchedProductNum, intPageNo);

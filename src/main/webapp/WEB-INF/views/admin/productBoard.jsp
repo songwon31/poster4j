@@ -1,50 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-
-<script>
-	$(init);
-	
-	function init() {
-		$("#productBoardSearchForm").bind("submit", function (event) {
-			
-			let productId = $("#productId").val();
-			let productName = $("#productName").val();
-			let productPriceStart = $("#productPriceStart").val();
-			let productPriceEnd = $("#productPriceEnd").val();
-			let productDiscountRateStart = $("#productDiscountRateStart").val();
-			let productDiscountRateEnd = $("#productDiscountRateEnd").val();
-			
-			let isValid = true;
-			let numPattern = /^[0-9]+$/;
-			
-			if (productId.trim() != "" && !numPattern.test(productId.trim())) {
-				isValid = false;
-				alert("ID는 숫자로 입력해주세요.")
-			} else if (productPriceStart.trim() != "" && !numPattern.test(productPriceStart.trim())) {
-				isValid = false;
-				alert("판매가 범위는 숫자로 입력해주세요.")
-			} else if (productPriceEnd.trim() != "" && !numPattern.test(productPriceEnd.trim())) {
-				isValid = false;
-				alert("판매가 범위는 숫자로 입력해주세요.")
-			} else if (productDiscountRateStart.trim() != "" && !numPattern.test(productDiscountRateStart.trim())) {
-				isValid = false;
-				alert("할인율 범위는 숫자로 입력해주세요.")
-			} else if (productDiscountRateEnd.trim() != "" && !numPattern.test(productDiscountRateEnd.trim())) {
-				isValid = false;
-				alert("할인율 범위는 숫자로 입력해주세요.")
-			}
-
-		    // 유효성 검사가 실패하면 제출 이벤트를 취소합니다.
-		    if (!isValid) {
-		        event.preventDefault();
-		    }
-		})
-	}
-	
-</script>
 
 <div class="container-fluid flex-grow-1" style="margin-top:80px;">
 	<div class="col">
@@ -60,47 +19,58 @@
 						<div class="input-group row justify-content-center mb-2" style="width: 100%">
 							<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">ID</span>
 							<input type="text" id="productId" name="productId" class="form-control-sm" style="width:80%;" 
-								   placeholder="상품ID를 입력하세요" value="${productBoardSearch.productId}"/>
+								   placeholder="상품ID를 입력하세요" value="${productBoardSearchForm.productId}"/>
+						</div>
+						<div>
+							<form:errors style="font-size:12px;" cssClass="text-danger d-flex align-items-center" path="productBoardSearchForm.productId" />
 						</div>
 						
 						<div class="input-group row justify-content-center mb-2" style="width: 100%">
 							<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">상품명</span>
 							<input type="text" id="productName" name="productName" class="form-control-sm" style="width:80%;" 
-								   placeholder="상품명을 입력하세요" value="${productBoardSearch.productName}"/>
+								   placeholder="상품명을 입력하세요" value="${productBoardSearchForm.productName}"/>
 						</div>
 						
 						<div class="input-group row justify-content-center mb-2" style="width: 100%">
 							<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">판매가</span>
 							<input type="text" id="productPriceStart" name="productPriceStart" class="form-control-sm" style="width:30%;"
-								   value="${productBoardSearch.productPriceStart}"/>
+									value="${productBoardSearchForm.productPriceStart}"/>
 							<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 5%"> </span>
 							<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 15%">~</span>
 							<input type="text" id="productPriceEnd" name="productPriceEnd" class="form-control-sm" style="width:30%;"
-										 value="${productBoardSearch.productPriceEnd}"/>
+									value="${productBoardSearchForm.productPriceEnd}"/>
+						</div>
+						<div>
+							<div><form:errors style="font-size:12px;" cssClass="text-danger d-flex align-items-center" path="productBoardSearchForm.productPriceStart"/></div>
+							<div><form:errors style="font-size:12px;" cssClass="text-danger d-flex align-items-center" path="productBoardSearchForm.productPriceEnd" /></div>
 						</div>
 						
 						<div class="input-group row justify-content-center mb-2" style="width: 100%">
 							<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">할인율</span>
 							<input type="text" id="productDiscountRateStart" name="productDiscountRateStart" class="form-control-sm" style="width:30%;"
-								   value="${productBoardSearch.productDiscountRateStart}"/>
+								   value="${productBoardSearchForm.productDiscountRateStart}"/>
 							<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 5%"> </span>
 							<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 15%">~</span>
 							<input type="text" id="productDiscountRateEnd" name="productDiscountRateEnd" class="form-control-sm" style="width:30%;"
-								   value="${productBoardSearch.productDiscountRateEnd}"/>
+								   value="${productBoardSearchForm.productDiscountRateEnd}"/>
+						</div>
+						<div>
+							<div><form:errors style="font-size:12px;" cssClass="text-danger d-flex align-items-center" path="productBoardSearchForm.productDiscountRateStart" /></div>
+							<div><form:errors style="font-size:12px;" cssClass="text-danger d-flex align-items-center" path="productBoardSearchForm.productDiscountRateEnd" /></div>
 						</div>
 						
 						<div class="input-group row justify-content-center mb-2" style="width: 100%">
 							<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">테마</span>
 							<select id="productTheme" name="productTheme" class="form-control-sm" style="width:80%">
 								<option value="">테마 선택</option>
-								<c:if test='${productBoardSearch.productTheme == "wave"}'><option value="wave" selected>wave</option></c:if>
-								<c:if test='${productBoardSearch.productTheme != "wave"}'><option value="wave">wave</option></c:if>
-								<c:if test='${productBoardSearch.productTheme == "forest"}'><option value="forest" selected>forest</option></c:if>
-								<c:if test='${productBoardSearch.productTheme != "forest"}'><option value="forest">forest</option></c:if>
-								<c:if test='${productBoardSearch.productTheme == "window"}'><option value="window" selected>window</option></c:if>
-								<c:if test='${productBoardSearch.productTheme != "window"}'><option value="window">window</option></c:if>
-								<c:if test='${productBoardSearch.productTheme == "life"}'><option value="life" selected>life</option></c:if>
-								<c:if test='${productBoardSearch.productTheme != "life"}'><option value="life">life</option></c:if>
+								<c:if test='${productBoardSearchForm.productTheme == "wave"}'><option value="wave" selected>wave</option></c:if>
+								<c:if test='${productBoardSearchForm.productTheme != "wave"}'><option value="wave">wave</option></c:if>
+								<c:if test='${productBoardSearchForm.productTheme == "forest"}'><option value="forest" selected>forest</option></c:if>
+								<c:if test='${productBoardSearchForm.productTheme != "forest"}'><option value="forest">forest</option></c:if>
+								<c:if test='${productBoardSearchForm.productTheme == "window"}'><option value="window" selected>window</option></c:if>
+								<c:if test='${productBoardSearchForm.productTheme != "window"}'><option value="window">window</option></c:if>
+								<c:if test='${productBoardSearchForm.productTheme == "life"}'><option value="life" selected>life</option></c:if>
+								<c:if test='${productBoardSearchForm.productTheme != "life"}'><option value="life">life</option></c:if>
 							</select>
 						</div>
 						
@@ -108,12 +78,12 @@
 							<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">작가</span>
 							<select id="productArtist" name="productArtist" class="form-control-sm" style="width:80%">
 								<option value="">아티스트 선택</option>
-								<c:if test='${productBoardSearch.productArtist == "유래혁"}'><option value="유래혁" selected>유래혁</option></c:if>
-								<c:if test='${productBoardSearch.productArtist != "유래혁"}'><option value="유래혁">유래혁</option></c:if>
-								<c:if test='${productBoardSearch.productArtist == "문예진"}'><option value="문예진" selected>문예진</option></c:if>
-								<c:if test='${productBoardSearch.productArtist != "문예진"}'><option value="문예진">문예진</option></c:if>
-								<c:if test='${productBoardSearch.productArtist == "other"}'><option value="other" selected>other</option></c:if>
-								<c:if test='${productBoardSearch.productArtist != "other"}'><option value="other">other</option></c:if>
+								<c:if test='${productBoardSearchForm.productArtist == "유래혁"}'><option value="유래혁" selected>유래혁</option></c:if>
+								<c:if test='${productBoardSearchForm.productArtist != "유래혁"}'><option value="유래혁">유래혁</option></c:if>
+								<c:if test='${productBoardSearchForm.productArtist == "문예진"}'><option value="문예진" selected>문예진</option></c:if>
+								<c:if test='${productBoardSearchForm.productArtist != "문예진"}'><option value="문예진">문예진</option></c:if>
+								<c:if test='${productBoardSearchForm.productArtist == "other"}'><option value="other" selected>other</option></c:if>
+								<c:if test='${productBoardSearchForm.productArtist != "other"}'><option value="other">other</option></c:if>
 							</select>
 						</div>
 						
@@ -222,71 +192,71 @@
 				<tr>
 					<td colspan="12" class="text-center" style="border:none;">
 						<div>
-							<a class="btn btn-outline-primary btn-sm" href="productBoard?productId=${productBoardSearch.productId}&
-																			productName=${productBoardSearch.productName}&
-																			productPriceStart=${productBoardSearch.productPriceStart}&
-																			productPriceEnd=${productBoardSearch.productPriceEnd}&
-																			productDiscountRateStart=${productBoardSearch.productDiscountRateStart}&
-																			productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
-																			productTheme=${productBoardSearch.productTheme}&
-																			productArtist=${productBoardSearch.productArtist}&
+							<a class="btn btn-outline-primary btn-sm" href="productBoard?productId=${productBoardSearchForm.productId}&
+																			productName=${productBoardSearchForm.productName}&
+																			productPriceStart=${productBoardSearchForm.productPriceStart}&
+																			productPriceEnd=${productBoardSearchForm.productPriceEnd}&
+																			productDiscountRateStart=${productBoardSearchForm.productDiscountRateStart}&
+																			productDiscountRateEnd=${productBoardSearchForm.productDiscountRateEnd}&
+																			productTheme=${productBoardSearchForm.productTheme}&
+																			productArtist=${productBoardSearchForm.productArtist}&
 																			pageNo=1">처음</a>
 							<c:if test="${pager.groupNo>1}">
-								<a class="btn btn-outline-info btn-sm" href="productBoard?productId=${productBoardSearch.productId}&
-																			productName=${productBoardSearch.productName}&
-																			productPriceStart=${productBoardSearch.productPriceStart}&
-																			productPriceEnd=${productBoardSearch.productPriceEnd}&
-																			productDiscountRateStart=${productBoardSearch.productDiscountRateStart}&
-																			productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
-																			productTheme=${productBoardSearch.productTheme}&
-																			productArtist=${productBoardSearch.productArtist}&
+								<a class="btn btn-outline-info btn-sm" href="productBoard?productId=${productBoardSearchForm.productId}&
+																			productName=${productBoardSearchForm.productName}&
+																			productPriceStart=${productBoardSearchForm.productPriceStart}&
+																			productPriceEnd=${productBoardSearchForm.productPriceEnd}&
+																			productDiscountRateStart=${productBoardSearchForm.productDiscountRateStart}&
+																			productDiscountRateEnd=${productBoardSearchForm.productDiscountRateEnd}&
+																			productTheme=${productBoardSearchForm.productTheme}&
+																			productArtist=${productBoardSearchForm.productArtist}&
 																			pageNo=${pager.startPageNo-1}">이전</a>
 							</c:if>
 							
 							<c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 								<c:if test="${pager.pageNo != i}">
-									<a class="btn btn-outline-success btn-sm" href="productBoard?productId=${productBoardSearch.productId}&
-																			productName=${productBoardSearch.productName}&
-																			productPriceStart=${productBoardSearch.productPriceStart}&
-																			productPriceEnd=${productBoardSearch.productPriceEnd}&
-																			productDiscountRateStart=${productBoardSearch.productDiscountRateStart}&
-																			productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
-																			productTheme=${productBoardSearch.productTheme}&
-																			productArtist=${productBoardSearch.productArtist}&
+									<a class="btn btn-outline-success btn-sm" href="productBoard?productId=${productBoardSearchForm.productId}&
+																			productName=${productBoardSearchForm.productName}&
+																			productPriceStart=${productBoardSearchForm.productPriceStart}&
+																			productPriceEnd=${productBoardSearchForm.productPriceEnd}&
+																			productDiscountRateStart=${productBoardSearchForm.productDiscountRateStart}&
+																			productDiscountRateEnd=${productBoardSearchForm.productDiscountRateEnd}&
+																			productTheme=${productBoardSearchForm.productTheme}&
+																			productArtist=${productBoardSearchForm.productArtist}&
 																			pageNo=${i}">${i}</a>
 								</c:if>
 								<c:if test="${pager.pageNo == i}">
-									<a class="btn btn-danger btn-sm" href="productBoard?productId=${productBoardSearch.productId}&
-																			productName=${productBoardSearch.productName}&
-																			productPriceStart=${productBoardSearch.productPriceStart}&
-																			productPriceEnd=${productBoardSearch.productPriceEnd}&
-																			productDiscountRateStart=${productBoardSearch.productDiscountRateStart}&
-																			productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
-																			productTheme=${productBoardSearch.productTheme}&
-																			productArtist=${productBoardSearch.productArtist}&
+									<a class="btn btn-danger btn-sm" href="productBoard?productId=${productBoardSearchForm.productId}&
+																			productName=${productBoardSearchForm.productName}&
+																			productPriceStart=${productBoardSearchForm.productPriceStart}&
+																			productPriceEnd=${productBoardSearchForm.productPriceEnd}&
+																			productDiscountRateStart=${productBoardSearchForm.productDiscountRateStart}&
+																			productDiscountRateEnd=${productBoardSearchForm.productDiscountRateEnd}&
+																			productTheme=${productBoardSearchForm.productTheme}&
+																			productArtist=${productBoardSearchForm.productArtist}&
 																			pageNo=${i}">${i}</a>
 								</c:if>
 							</c:forEach>
 							
 							<c:if test="${pager.groupNo<pager.totalGroupNo}">
-								<a class="btn btn-outline-info btn-sm" href="productBoard?productId=${productBoardSearch.productId}&
-																			productName=${productBoardSearch.productName}&
-																			productPriceStart=${productBoardSearch.productPriceStart}&
-																			productPriceEnd=${productBoardSearch.productPriceEnd}&
-																			productDiscountRateStart=${productBoardSearch.productDiscountRateStart}&
-																			productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
-																			productTheme=${productBoardSearch.productTheme}&
-																			productArtist=${productBoardSearch.productArtist}&
+								<a class="btn btn-outline-info btn-sm" href="productBoard?productId=${productBoardSearchForm.productId}&
+																			productName=${productBoardSearchForm.productName}&
+																			productPriceStart=${productBoardSearchForm.productPriceStart}&
+																			productPriceEnd=${productBoardSearchForm.productPriceEnd}&
+																			productDiscountRateStart=${productBoardSearchForm.productDiscountRateStart}&
+																			productDiscountRateEnd=${productBoardSearchForm.productDiscountRateEnd}&
+																			productTheme=${productBoardSearchForm.productTheme}&
+																			productArtist=${productBoardSearchForm.productArtist}&
 																			pageNo=${pager.endPageNo+1}">다음</a>
 							</c:if>
-							<a class="btn btn-outline-primary btn-sm" href="productBoard?productId=${productBoardSearch.productId}&
-																			productName=${productBoardSearch.productName}&
-																			productPriceStart=${productBoardSearch.productPriceStart}&
-																			productPriceEnd=${productBoardSearch.productPriceEnd}&
-																			productDiscountRateStart=${productBoardSearch.productDiscountRateStart}&
-																			productDiscountRateEnd=${productBoardSearch.productDiscountRateEnd}&
-																			productTheme=${productBoardSearch.productTheme}&
-																			productArtist=${productBoardSearch.productArtist}&
+							<a class="btn btn-outline-primary btn-sm" href="productBoard?productId=${productBoardSearchForm.productId}&
+																			productName=${productBoardSearchForm.productName}&
+																			productPriceStart=${productBoardSearchForm.productPriceStart}&
+																			productPriceEnd=${productBoardSearchForm.productPriceEnd}&
+																			productDiscountRateStart=${productBoardSearchForm.productDiscountRateStart}&
+																			productDiscountRateEnd=${productBoardSearchForm.productDiscountRateEnd}&
+																			productTheme=${productBoardSearchForm.productTheme}&
+																			productArtist=${productBoardSearchForm.productArtist}&
 																			pageNo=${pager.totalPageNo}">맨끝</a>
 						</div>
 					</td>
