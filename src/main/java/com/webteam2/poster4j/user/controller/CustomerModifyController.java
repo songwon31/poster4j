@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -134,9 +135,11 @@ public class CustomerModifyController {
 		session.setAttribute("customerLogin", customer);
 	}
 	
-	@PostMapping("/customerWithdrawal")
+	@RequestMapping("/customerWithdrawal")
 	@Login
-	public String customerWithdrawal(Customer customer) {
+	public String customerWithdrawal(String customerId, HttpSession session) {
+		session.removeAttribute("customerLogin");
+		customerService.withdrawal(customerId);
 		
 		return "redirect:/";
 	}

@@ -179,6 +179,12 @@
 	                </tr>
                 </tbody>
             </table>
+            <div class="delete">
+            	<form method="get" action="customerWithdrawal">
+            		<input type="hidden" name="customerId" value="${customer.customerId}">
+            		<span><button onclick="goHome();" class="btn btn-dark" style="border-radius:0px">회원탈퇴</button></span>
+            	</form>
+            </div>
 			<div class="foot">
 				<span><button onclick="goHome();" class="btn btn-dark" style="border-radius:0px">홈으로</button></span>
 			</div>

@@ -30,5 +30,7 @@ public interface CustomerService {
 	public int uncheckSmsAgree(Customer customer);
 	public int checkEmailAgree(Customer customer);
 	public int uncheckEmailAgree(Customer customer);
+	
+	public int withdrawal(String customerId);
 
 }

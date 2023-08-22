@@ -77,6 +77,16 @@ input[type=checkbox] {
     width: 200px;
 }
 
+.delete {
+    font-size: 12px;
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
+    padding: 0;
+    margin-top: 5px;
+    text-align: right;
+}
+
 .foot {
     font-size: 12px;
     line-height: 1.6;

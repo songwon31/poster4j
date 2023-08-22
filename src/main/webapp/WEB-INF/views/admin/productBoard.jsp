@@ -4,6 +4,48 @@
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
+<script>
+	$(init);
+	
+	function init() {
+		$("#productBoardSearchForm").bind("submit", function (event) {
+			
+			let productId = $("#productId").val();
+			let productName = $("#productName").val();
+			let productPriceStart = $("#productPriceStart").val();
+			let productPriceEnd = $("#productPriceEnd").val();
+			let productDiscountRateStart = $("#productDiscountRateStart").val();
+			let productDiscountRateEnd = $("#productDiscountRateEnd").val();
+			
+			let isValid = true;
+			let numPattern = /^[0-9]+$/;
+			
+			if (productId.trim() != "" && !numPattern.test(productId.trim())) {
+				isValid = false;
+				alert("ID는 숫자로 입력해주세요.")
+			} else if (productPriceStart.trim() != "" && !numPattern.test(productPriceStart.trim())) {
+				isValid = false;
+				alert("판매가 범위는 숫자로 입력해주세요.")
+			} else if (productPriceEnd.trim() != "" && !numPattern.test(productPriceEnd.trim())) {
+				isValid = false;
+				alert("판매가 범위는 숫자로 입력해주세요.")
+			} else if (productDiscountRateStart.trim() != "" && !numPattern.test(productDiscountRateStart.trim())) {
+				isValid = false;
+				alert("할인율 범위는 숫자로 입력해주세요.")
+			} else if (productDiscountRateEnd.trim() != "" && !numPattern.test(productDiscountRateEnd.trim())) {
+				isValid = false;
+				alert("할인율 범위는 숫자로 입력해주세요.")
+			}
+
+		    // 유효성 검사가 실패하면 제출 이벤트를 취소합니다.
+		    if (!isValid) {
+		        event.preventDefault();
+		    }
+		})
+	}
+	
+</script>
+
 <div class="container-fluid flex-grow-1" style="margin-top:80px;">
 	<div class="col">
 		<div class="py-2 px-4">
@@ -13,7 +55,7 @@
 			<div class="d-flex flex-column justify-content-center">
 				<div class="d-flex justify-content-center py-4" style="font-weight:bold; font-size: 15px;">상품 검색</div>
 				<div class="d-flex justify-content-center py-3" style="border: 5px solid #e8e8e8;">
-					<form method="get" action="productBoard" class="row justify-content-center" style="width: 300px">
+					<form id="productBoardSearchForm" method="get" action="productBoard" class="row justify-content-center" style="width: 300px">
 					
 						<div class="input-group row justify-content-center mb-2" style="width: 100%">
 							<span class="align-self-center pr-3 d-flex justify-content-center" style="font-weight:bold; width: 20%">ID</span>

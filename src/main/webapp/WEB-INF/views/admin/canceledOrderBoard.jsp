@@ -25,13 +25,13 @@
 					<tr>
 						<td class="align-middle" scope="row" style="width:10px;"><span class="d-flex justify-content-center">${canceledOrder.orderId}</span></td>
 						<td class="align-middle" style="width:10px;"><span class="d-flex justify-content-center">${canceledOrder.productId}</span></td>
-						<c:if test='${canceledOrder.canceledOrderCategory == "cancelBeforeSend"}'>
-							<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">취소</span></td>
+						<c:if test='${canceledOrder.canceledOrderCategory == "발송 전 취소"}'>
+							<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">발송 전 취소</span></td>
 						</c:if>
-						<c:if test='${canceledOrder.canceledOrderCategory == "exchange"}'>
+						<c:if test='${canceledOrder.canceledOrderCategory == "교환"}'>
 							<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">교환</span></td>
 						</c:if>
-						<c:if test='${canceledOrder.canceledOrderCategory == "return"}'>
+						<c:if test='${canceledOrder.canceledOrderCategory == "반품"}'>
 							<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">반품</span></td>
 						</c:if>
 						<td class="align-middle" style="width:50px;"><span class="d-flex justify-content-center">${canceledOrder.canceledOrderReason}</span></td>

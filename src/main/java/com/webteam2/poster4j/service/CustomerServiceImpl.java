@@ -112,6 +112,9 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerDao.updateEmailAgreeFalse(customer);
 	}
 	
-	
+	@Override
+	public int withdrawal(String customerId) {
+		return customerDao.deleteCustomer(customerId);
+	}
 	
 }

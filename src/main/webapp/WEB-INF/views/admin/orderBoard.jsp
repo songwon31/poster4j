@@ -8,7 +8,7 @@
 	<div class="col">
 		<div class="py-2 px-4">
 			<div style="font-size: 20px">주문 목록</div>
-			<div class="mt-1">
+			<div class="mt-3">
 				<form class="form-inline" method="get" action="orderBoard">
 					<div class="form-group">
 						<label for="category"></label> 

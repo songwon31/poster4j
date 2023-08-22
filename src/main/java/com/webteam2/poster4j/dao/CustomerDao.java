@@ -19,4 +19,6 @@ public interface CustomerDao {
 	public int updateSmsAgreeFalse(Customer customer);
 	public int updateEmailAgreeTrue(Customer customer);
 	public int updateEmailAgreeFalse(Customer customer);
+	
+	public int deleteCustomer(String customerId);
 }

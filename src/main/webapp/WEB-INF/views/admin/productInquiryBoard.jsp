@@ -7,7 +7,7 @@
 <div class="container-fluid flex-grow-1" style="margin-top:80px;">
 	<div class="col">
 		<div class="py-2 px-4">
-			<div style="font-size: 20px">주문 문의</div>
+			<div style="font-size: 20px">상품 문의</div>
 		</div>
 		<table class="table">
 			<thead>
@@ -23,7 +23,7 @@
 				<c:forEach var="productInquiry" items="${productInquiryList}" varStatus="status">
 					<tr>
 						<td class="align-middle" scope="row" style="width:10px;"><span class="d-flex justify-content-center">${productInquiry.productId}</span></td>
-						<td class="align-middle" style="width:10px;"><span class="d-flex justify-content-center">${productInquiry.productId}</span></td>
+						<td class="align-middle" style="width:10px;"><span class="d-flex justify-content-center">${productInquiry.customerId}</span></td>
 						<td class="align-middle" style="width:30px;"><span class="d-flex justify-content-center">${productInquiry.productInquiryContent}</span></td>
 						<td class="align-middle" style="width:50px;"><span class="d-flex justify-content-center"><fmt:formatDate value="${productInquiry.productInquiryDate}" pattern="yyyy-MM-dd"/></span></td>
 						<c:if test='${productInquiry.productInquiryAnswered == "FALSE"}'>
