@@ -54,6 +54,26 @@
 		delete from customer where customer_id=#{customerId}
 	</delete>
 	
+	<select id="countTotalCustomerNum" resultType="int">
+		select count(*) from customer
+	</select>
+	
+	<select id="selectCustomerListByPager" parameterType="Pager" resultType="Customer">
+		<![CDATA[
+		select rnum, customer_id, customer_password, customer_name, customer_telno, customer_email, customer_term_agree, customer_info_agree, customer_sms_agree, customer_email_agree
+		from (
+		    select rownum as rnum, customer_id, customer_password, customer_name, customer_telno, customer_email, customer_term_agree, customer_info_agree, customer_sms_agree, customer_email_agree
+		    from (
+		        select customer_id, customer_password, customer_name, customer_telno, customer_email, customer_term_agree, customer_info_agree, customer_sms_agree, customer_email_agree
+		        from customer
+		        order by customer_id asc
+		    )
+		    where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
+	</select>
+	
 	
 </mapper>
 

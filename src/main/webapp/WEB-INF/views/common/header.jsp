@@ -42,8 +42,8 @@
 						   class="text-decoration-none text-dark">취소/교환/반품 목록</a>
 					</li>
 					<li class="list-group-item border-bottom border-dark">
-						<a href="${pageContext.request.contextPath}/admin/orderInquiryBoard" 
-						   class="text-decoration-none text-dark">배송 문의 목록</a>
+						<a href="${pageContext.request.contextPath}/admin/customerBoard" 
+						   class="text-decoration-none text-dark">고객 목록</a>
 					</li>
 					<li class="list-group-item border-bottom border-dark">
 						<a href="${pageContext.request.contextPath}/admin/productInquiryBoard" 

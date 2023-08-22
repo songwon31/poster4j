@@ -1,9 +1,11 @@
 package com.webteam2.poster4j.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import com.webteam2.poster4j.dto.Customer;
+import com.webteam2.poster4j.dto.Pager;
 
 @Mapper
 public interface CustomerDao {
@@ -21,4 +23,7 @@ public interface CustomerDao {
 	public int updateEmailAgreeFalse(Customer customer);
 	
 	public int deleteCustomer(String customerId);
+	
+	public int countTotalCustomerNum();
+	public List<Customer> selectCustomerListByPager(Pager pager);
 }

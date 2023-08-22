@@ -1,5 +1,7 @@
 package com.webteam2.poster4j.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.webteam2.poster4j.dao.CustomerDao;
 import com.webteam2.poster4j.dao.ReceiverDao;
 import com.webteam2.poster4j.dto.Customer;
+import com.webteam2.poster4j.dto.Pager;
 import com.webteam2.poster4j.dto.Receiver;
 
 import lombok.extern.slf4j.Slf4j;
@@ -115,6 +118,15 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public int withdrawal(String customerId) {
 		return customerDao.deleteCustomer(customerId);
+	}
+	
+	@Override
+	public int getTotalCustomerNum() {
+		return customerDao.countTotalCustomerNum();
+	}
+	@Override
+	public List<Customer> getList(Pager pager) {
+		return customerDao.selectCustomerListByPager(pager);
 	}
 	
 }
