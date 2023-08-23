@@ -12,21 +12,12 @@
 		<div id="contents">
 			<h1 class="order-list-title">ORDER</h1>
 			<div class="order-list-filter">
-				<select class="order-status-filter">
-					<option>전체 주문처리상태</option>
-					<option value="입금전">입금전</option>
-					<option value="배송준비중">배송준비중</option>
-					<option value="배송중">배송중</option>
-	 				<option value="배송완료">배송완료</option>
-	 				<option value="취소">취소</option>
-	 				<option value="교환">교환</option>
-	 				<option value="반품">반품</option>
-				</select>
-				<div class="order-period-filter">
-					<a href="#" class="period-link">Today</a>
+				<div class="order-period-filter" style="text-align: right;">
+					<!-- <a href="#" class="period-link">Today</a>
 					<a href="#" class="period-link">Week</a>
 					<a href="#" class="period-link">Month</a>
-					<a href="#" class="period-link">3 Month</a>
+					<a href="#" class="period-link">3 Month</a> -->
+					<a href="canceledOrderList" class="period-link">취소 목록으로 가기</a>
 				</div>
 			</div>
 			<div class="order-list-items">
