@@ -38,7 +38,7 @@ public class JoinValidator implements Validator {
 		if(customerPassword == null || customerPassword.equals("")) {
 			errors.rejectValue("customerPassword", "errors.customerPassword.required", "필수 입력(D)");
 		} else {
-			String regExp = "^(?=(?:.*?[A-Za-z]){2,})(?=(?:.*?[0-9]){2,})(?=(?:.*?[#?!@$%^&*-]){2,}).{8,16}$";
+			String regExp = "^(?=(?:.*?[A-Za-z]))(?=(?:.*?[0-9]))(?=(?:.*?[#?!@$%^&*-])).{8,16}$";
 			boolean result = Pattern.matches(regExp, customerPassword);
 			if(result == false) {
 				errors.rejectValue("customerPassword", "errors.customerPassword.format", "비밀번호 형식에 맞지 않음(D)");
@@ -67,6 +67,18 @@ public class JoinValidator implements Validator {
 			if(result == false) {
 				errors.rejectValue("customerEmail", "errors.customerEmail.format", "이메일 형식에 맞지 않음(D)");
 			}
+		}
+		
+		//customerTermAgree 검사
+		String customerTermAgree = customer.getCustomerTermAgree();
+		if(customerTermAgree == null || customerTermAgree.equals("")) {
+			errors.rejectValue("customerTermAgree", "errors.customerTermAgree.required", "필수 입력(D)");
+		}
+		
+		//customerInfoAgree 검사
+		String customerInfoAgree = customer.getCustomerInfoAgree();
+		if(customerInfoAgree == null || customerInfoAgree.equals("")) {
+			errors.rejectValue("customerInfoAgree", "errors.customerInfoAgree.required", "필수 입력(D)");
 		}
 	}
 }

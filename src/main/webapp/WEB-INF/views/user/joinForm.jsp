@@ -129,6 +129,9 @@
 						<label for="customerTermAgree">동의함</label>
 					</span>
 				</div>
+				<div class="agreeError">
+					<form:errors path="customer.customerTermAgree" cssClass="text-danger d-flex" />
+				</div>
 			</div>
 			<%-- 필수 개인정보 동의 --%>
 			<div class="agreement d-flex flex-column">
@@ -149,6 +152,9 @@
 						<input type="checkbox" id="customerInfoAgree" name="customerInfoAgree" value="TRUE"/>
 						<label for="customerInfoAgree">동의함</label>
 					</span>
+				</div>
+				<div class="agreeError">
+					<form:errors path="customer.customerInfoAgree" cssClass="text-danger d-flex" />
 				</div>
 			</div>
 			<%-- 선택 쇼핑정보 동의 --%>
