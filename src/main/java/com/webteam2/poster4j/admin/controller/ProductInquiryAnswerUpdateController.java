@@ -28,7 +28,7 @@ public class ProductInquiryAnswerUpdateController {
 	
 	@RequestMapping("/productInquiryAnswerUpdateForm")
 	@Auth(Role.ADMIN)
-	public String orderInquiryAnswerForm (int productInquiryId, String productInquiryContent, Model model) {
+	public String productInquiryAnswerUpdateForm (int productInquiryId, String productInquiryContent, Model model) {
 		model.addAttribute("productInquiryId", productInquiryId);
 		model.addAttribute("productInquiryContent", productInquiryContent);
 		String originalAnswer = productInquiryAnswerService.getAnswerById(productInquiryId);
@@ -39,7 +39,7 @@ public class ProductInquiryAnswerUpdateController {
 	
 	@PostMapping("/productInquiryAnswerUpdate")
 	@Auth(Role.ADMIN)
-	public String orderInquiryAnswerUpdate (ProductInquiryAnswer productInquiryAnswer) {
+	public String productInquiryAnswerUpdate (ProductInquiryAnswer productInquiryAnswer) {
 		productInquiryAnswer.setProductInquiryAnswerDate(new Date());
 		productInquiryAnswerService.editAnswer(productInquiryAnswer);
 		

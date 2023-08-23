@@ -27,7 +27,7 @@ public class CanceledOrderBoardController {
 	
 	@RequestMapping("/canceledOrderBoard")
 	@Auth(Role.ADMIN)
-	public String productBoard(String pageNo, Model model, HttpSession session) 
+	public String canceledOrderBoard(String pageNo, Model model, HttpSession session) 
 	{
 		// 브라우저에서 pageNo가 넘어오지 않았을 경우
 		if (pageNo == null) {

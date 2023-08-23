@@ -36,7 +36,7 @@ public class ProductInquiryAnswerController {
 	
 	@RequestMapping("/productInquiryAnswer")
 	@Auth(Role.ADMIN)
-	public String orderInquiryAnswer(int productInquiryId, String answer) {
+	public String productInquiryAnswer(int productInquiryId, String answer) {
 		ProductInquiryAnswer productInquiryAnswer = new ProductInquiryAnswer();
 		productInquiryAnswer.setProductInquiryId(productInquiryId);
 		productInquiryAnswer.setProductInquiryAnswerContent(answer);

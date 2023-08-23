@@ -29,7 +29,7 @@ public class AdminCancelOrderController {
 	
 	@RequestMapping("/adminCancelOrderForm")
 	@Auth(Role.ADMIN)
-	public String updateProductForm (int orderId, int productId, 
+	public String adminCancelOrderForm (int orderId, int productId, 
 			@RequestParam(value="optionSize", required=false)String optionSize, 
 			@RequestParam(value="optionFrame", required=false)String optionFrame, Model model) {
 		model.addAttribute("orderId", orderId);
