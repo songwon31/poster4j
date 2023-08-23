@@ -61,8 +61,8 @@ public class AddressListController {
 		return "user/addressList";
 	}
 
-	@PostMapping("/delete")
-	public String ajaxTest(HttpServletRequest request) {
+	@PostMapping("/deleteReceiver")
+	public String deleteReceiver(HttpServletRequest request) {
 		String[] ajaxMsg = request.getParameterValues("checkboxArr");
 		int size = ajaxMsg.length;
 		for (int i = 0; i < size; i++) {

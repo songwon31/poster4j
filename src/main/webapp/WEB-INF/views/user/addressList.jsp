@@ -97,7 +97,7 @@ $(function(){
 
 
 function deleteValue(){
-	var url = "delete"; //Controller로 보내고자 하는 URL
+	var url = "deleteReceiver"; //Controller로 보내고자 하는 URL
 	var checkboxArr = new Array();
 	var list = $("input[name='checkbox']");
 	var hasDefaultReceiver = false;

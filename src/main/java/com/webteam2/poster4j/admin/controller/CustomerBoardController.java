@@ -29,7 +29,7 @@ public class CustomerBoardController {
 	
 	@RequestMapping("/customerBoard")
 	@Auth(Role.ADMIN)
-	public String orderBoard(String pageNo, Model model, HttpSession session) {	
+	public String customerBoard(String pageNo, Model model, HttpSession session) {	
 		
 		// 브라우저에서 pageNo가 넘어오지 않았을 경우
 		if (pageNo == null) {
