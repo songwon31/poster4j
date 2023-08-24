@@ -184,7 +184,9 @@
 												<div class="currentProductId" style="display:none">${productList[status.index].productId}</div>
 												<div class="d-flex justify-content-start" style="font-size:18px;">${productList[status.index].productName}</div>
 												<br>
-												<div class="d-flex justify-content-start" style="">${productList[status.index].productDetail}</div>
+												<div class="d-flex justify-content-start"
+															style="white-space: pre-line; line-height: 1.3">
+															${productList[status.index].productDetail}</div>
 												<br><br>
 												<c:if test="${productList[status.index].productDiscountRate > 0}">
 													<div class="d-flex justify-content-end" style="text-decoration: line-through;">KRW: ${productList[status.index].productPrice}</div>

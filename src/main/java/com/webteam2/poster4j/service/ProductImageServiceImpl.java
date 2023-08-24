@@ -59,7 +59,6 @@ public class ProductImageServiceImpl implements ProductImageService {
 	
 	@Override
 	public List<ProductImage> getHomeList() {
-		// TODO Auto-generated method stub
 		return productImageDao.selectHomeList();
 	}
 }
