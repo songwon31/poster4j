@@ -22,7 +22,7 @@ public class ChangeReceiverController {
 	ReceiverService receiverService;
 	
 	@RequestMapping("/changeReceiverForm")
-	public String registerProductForm (Model model, HttpSession session) {
+	public String changeReceiverForm (Model model, HttpSession session) {
 		Customer customer = (Customer)session.getAttribute("customerLogin");
 		List<Receiver> receiverList = receiverService.getListByCustomerId(customer.getCustomerId());
 		model.addAttribute("receiverList", receiverList);

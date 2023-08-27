@@ -72,7 +72,7 @@ public class UpdateProductController {
 		
 		ProductImage productImage = new ProductImage();
 		productImage.setProductId(product.getProductId());
-		productImage.setProductImageCtgry("represent");
+		productImage.setProductImageCtgry("REPRESENT");
 		MultipartFile mf = representImage;
 		productImage.setProductImageName(mf.getOriginalFilename());
 		productImage.setProductImageType(mf.getContentType());
@@ -83,7 +83,7 @@ public class UpdateProductController {
 		for (MultipartFile mfd : detailImages) {
 			ProductImage detailProductImage = new ProductImage();
 			detailProductImage.setProductId(product.getProductId());
-			detailProductImage.setProductImageCtgry("detail");
+			detailProductImage.setProductImageCtgry("DETAIL");
 			detailProductImage.setProductImageName(mfd.getOriginalFilename());
 			detailProductImage.setProductImageType(mfd.getContentType());
 			detailProductImage.setProductImageSource(mfd.getBytes());

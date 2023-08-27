@@ -43,7 +43,7 @@ public class ProductInquiryAnswerUpdateController {
 		productInquiryAnswer.setProductInquiryAnswerDate(new Date());
 		productInquiryAnswerService.editAnswer(productInquiryAnswer);
 		
-		return "redirect:/admin/orderInquiryAnswerUpdateForm?orderInquiryId=-1";
+		return "redirect:/admin/productInquiryAnswerUpdateForm?productInquiryId=-1";
 	}
 	
 }
