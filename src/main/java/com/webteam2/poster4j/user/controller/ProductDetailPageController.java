@@ -162,28 +162,6 @@ public class ProductDetailPageController {
 			OrderItem orderItem,
 			HttpSession session) {
 		
-		/*
-		//orderItemList가 없을 경우, 새로 생성해서 저장
-		if(orderItemList == null) {
-			orderItemList = new ArrayList<OrderItem>();
-			session.setAttribute("orderItemList", orderItemList);
-		}
-		
-		//orderItemList에 해당 아이템이 있는 지 조사
-		boolean exist = false;
-		for(OrderItem item : orderItemList) {
-			if(item.getProductId()==orderItem.getProductId()) {
-				item.setProductQuantity(item.getProductQuantity() + orderItem.getProductQuantity());
-				exist = true;
-			}
-		}
-		
-		//orderItemList에 없는 새로운 아이템일 경우
-		if(exist == false) {
-			orderItemList.add(orderItem);
-		}
-		*/
-		
 		return "success";
 	}
 	

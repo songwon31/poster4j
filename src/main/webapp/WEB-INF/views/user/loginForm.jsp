@@ -7,6 +7,11 @@
 <div class="wrapper">
 	<div class="loginContent d-flex justify-content-center">
 		<form method="post" action="login">
+			<c:if test="${error != null}">
+				<div class="alert alert-danger mb-2 form-control" style="line-height: 1;" role="alert">
+				  ${error}
+				</div>			
+			</c:if>
 			<table class="loginInputTable mb-3">
 				<tr class="loginInputGroup">
 					<td>

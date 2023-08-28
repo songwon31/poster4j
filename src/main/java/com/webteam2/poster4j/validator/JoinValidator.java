@@ -33,6 +33,12 @@ public class JoinValidator implements Validator {
 			errors.rejectValue("customerId", "errors.customerId.maxlength",new Object[] {16}, "최대 16자 입력(D)");
 		}
 		
+		//customerName 검사
+		String customerName = customer.getCustomerName();
+		if(customerName == null || customerName.equals("")) {
+			errors.rejectValue("customerName", "errors.customerName.required", "필수 입력(D)");
+		}
+		
 		//customerPassword 검사
 		String customerPassword = customer.getCustomerPassword();
 		if(customerPassword == null || customerPassword.equals("")) {

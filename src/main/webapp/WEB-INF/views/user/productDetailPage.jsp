@@ -275,24 +275,19 @@
 				    });
 
 				    if (isDuplicate) {
-				    	//이미 선택한 옵션일 경우
+					    //이미 선택한 옵션일 경우 수량추가
 					    let duplicatedQuantityInput = $("#productQuantity" + duplicatedItemIndex);
-					    
-					    //수량추가
 					    let presentQuantity = parseInt(duplicatedQuantityInput.val());
 					    let newQuantity = duplicatedQuantityInput.val(presentQuantity + 1).val();
-					    
-					    //옵션별 총가격 계산
-					    var presentPrice = $("#selectedItemPrice" + duplicatedItemIndex).text();
-						var parsedPresentPrice = parseInt(presentPrice.replace(/[^0-9]/g, ""));
-						var optionItemPrice = (parsedPresentPrice/presentQuantity) * newQuantity;
+
+					    var presentPrice = parseInt($("#selectedItemPrice" + duplicatedItemIndex).text().replace(/[^0-9]/g, ""));
 						
+					    //옵션별 총가격 계산
+						var optionItemPrice = (presentPrice/presentQuantity) * newQuantity;
 						$("#selectedItemPrice" + duplicatedItemIndex).text(optionItemPrice.toLocaleString("ko-KR"));
 					    
 					    //선택된 아이템 총가격 계산
-					    //let selectedPrice = $("#selectedItemPrice" + duplicatedItemIndex).text();
-					    //let parsedSelectedPrice = parseInt(selectedPrice.replace(/[^0-9]/g, ""));
-					    totalPrice += parsedPresentPrice/presentQuantity;
+					    totalPrice += presentPrice/presentQuantity;
 					    $("#totalPrice").text(totalPrice.toLocaleString("ko-KR"));
 				    } else {
 				    	//선택한 옵션이 새로운 옵션일 경우
@@ -343,6 +338,23 @@
 						html += '</tr>';
 						
 						$("#selectedItemTable").append(html);
+						
+						//size별 가격계산 
+					    var finalPrice = parseInt($("#selectedItemPrice" + index).text().replace(/[^0-9]/g, ""));
+						
+						if(selectedSize == "420 x 594mm") {
+							finalPrice = finalPrice + 7000;
+							$("#selectedItemPrice" + index).text(finalPrice.toLocaleString("ko-KR"));
+						} else if(selectedSize == "500 x 700mm") {
+							finalPrice = finalPrice + 12000;
+							$("#selectedItemPrice" + index).text(finalPrice.toLocaleString("ko-KR"));
+						}
+						
+						//frame 추가시 가격계산
+						if(selectedFrame != "선택안함"){
+							finalPrice = finalPrice + 29000;
+							$("#selectedItemPrice" + index).text(finalPrice.toLocaleString("ko-KR"));
+						}
 						
 						//선택된 아이템 총가격 계산
 						let selectedPrice = $("#selectedItemPrice" + index).text();

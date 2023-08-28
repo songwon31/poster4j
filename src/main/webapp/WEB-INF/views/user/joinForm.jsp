@@ -32,7 +32,7 @@
 					<td>
 						<input type="password" name="customerPassword" class="form-control">
 						<form:errors path="customer.customerPassword" cssClass="text-danger d-flex" />
-						<span>(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 8자~16자)</span>
+						<span>(영문 대소문자/숫자/특수문자를 포함하여 조합, 8자~16자)</span>
 						
 					</td>
 				</tr>
@@ -50,6 +50,7 @@
 					</td>
 					<td>
 						<input type="text" name="customerName" class="form-control" value="${customer.customerName}">
+						<form:errors path="customer.customerName" cssClass="text-danger d-flex" />
 					</td>
 				</tr>
 				<tr class="joinInputGroup">
